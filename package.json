@@ -1,6 +1,6 @@
 {
   "name": "opencode-autognosis",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Transforms OpenCode agents into 'miniature engineers' with deep codebase awareness. Includes fast structural search (ast-grep), instant symbol navigation (ctags), and a disciplined 'Plan → Execute → Patch' workflow.",
   "type": "module",
   "exports": {
