@@ -1,0 +1,13 @@
+description = "Initialize or check the Autognosis environment"
+
+# The command executes the tool via the agent
+# Or it can just be a prompt that calls the tool
+prompt = """
+Please run the autognosis_init tool with the following arguments:
+mode = "{{mode}}"
+token = "{{token}}"
+"""
+
+[parameters]
+mode = { type = "string", description = "The mode to run in (plan or apply)", default = "plan" }
+token = { type = "string", description = "The confirmation token for apply mode" }
