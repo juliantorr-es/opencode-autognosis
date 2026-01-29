@@ -1,6 +1,6 @@
 {
   "name": "opencode-autognosis",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Transforms OpenCode agents into 'miniature engineers' with deep codebase awareness. Includes fast structural search (ast-grep), instant symbol navigation (ctags), and a disciplined 'Plan → Execute → Patch' workflow.",
   "type": "module",
   "main": "dist/index.js",
@@ -19,10 +19,11 @@
     "type": "plugin",
     "hooks": []
   },
-  "dependencies": {},
   "devDependencies": {
     "@opencode-ai/plugin": "^1.0.162",
+    "@opencode-ai/sdk": "^1.1.40",
     "@types/node": "^20.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "zod": "^4.3.6"
   }
 }
