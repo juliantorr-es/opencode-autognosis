@@ -1,0 +1,9 @@
+{
+  "patterns": [
+    {
+      "name": "todo_comments",
+      "pattern": "TODO:",
+      "description": "Find TODO comments"
+    }
+  ]
+}
