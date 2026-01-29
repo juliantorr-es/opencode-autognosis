@@ -3,19 +3,32 @@ import { systemTools } from "./system-tools.js";
 export default function plugin() {
   const tools = systemTools();
   
+  const initExecutor = async (args: any) => {
+    return await tools.autognosis_init.execute(args || {});
+  };
+
   return {
     tools: {
       ...tools,
+      // Some versions might look for tools with slashes
+      "/autognosis_init": {
+        ...tools.autognosis_init,
+        execute: initExecutor
+      }
     },
-    // Registering the slash command to point to the tool execution
+    // Common keys for slash command registration
     commands: {
       autognosis_init: {
         description: "Initialize or check the Autognosis environment",
-        execute: async (args: any, context: any) => {
-          // This calls the tool implementation directly
-          return await tools.autognosis_init.execute(args || {});
-        }
+        execute: initExecutor
       }
-    }
+    },
+    slashCommands: [
+      {
+        name: "autognosis_init",
+        description: "Initialize or check the Autognosis environment",
+        execute: initExecutor
+      }
+    ]
   };
 }
