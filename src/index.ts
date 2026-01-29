@@ -7,27 +7,34 @@ export default function plugin() {
     return await tools.autognosis_init.execute(args || {});
   };
 
+  const initMetadata = {
+    name: "autognosis_init",
+    description: "Initialize or check the Autognosis environment",
+    parameters: tools.autognosis_init.parameters,
+    execute: initExecutor
+  };
+
   return {
     tools: {
       ...tools,
-      // Some versions might look for tools with slashes
-      "/autognosis_init": {
-        ...tools.autognosis_init,
-        execute: initExecutor
-      }
+      // Attempting as a tool with a slash prefix
+      "/autognosis_init": initMetadata
     },
-    // Common keys for slash command registration
+    // Pattern 1: Object-based commands
     commands: {
-      autognosis_init: {
-        description: "Initialize or check the Autognosis environment",
-        execute: initExecutor
-      }
+      autognosis_init: initMetadata
     },
-    slashCommands: [
+    // Pattern 2: Array-based commands
+    slashCommands: [initMetadata],
+    // Pattern 3: Chat-specific commands
+    chatCommands: {
+      autognosis_init: initMetadata
+    },
+    // Pattern 4: Intentions (common in some agent frameworks)
+    intentions: [
       {
-        name: "autognosis_init",
-        description: "Initialize or check the Autognosis environment",
-        execute: initExecutor
+        ...initMetadata,
+        intent: "initialize_autognosis"
       }
     ]
   };
