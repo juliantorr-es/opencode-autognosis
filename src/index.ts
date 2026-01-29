@@ -1,41 +1,100 @@
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { z } from "zod";
 import { systemTools } from "./system-tools.js";
 
-export default function plugin() {
+async function main() {
+  const server = new McpServer({
+    name: "opencode-autognosis",
+    version: "0.1.3",
+  });
+
   const tools = systemTools();
-  
-  const initExecutor = async (args: any) => {
-    return await tools.autognosis_init.execute(args || {});
-  };
 
-  const initMetadata = {
-    name: "autognosis_init",
-    description: "Initialize or check the Autognosis environment",
-    parameters: tools.autognosis_init.parameters,
-    execute: initExecutor
-  };
-
-  return {
-    tools: {
-      ...tools,
-      // Attempting as a tool with a slash prefix
-      "/autognosis_init": initMetadata
-    },
-    // Pattern 1: Object-based commands
-    commands: {
-      autognosis_init: initMetadata
-    },
-    // Pattern 2: Array-based commands
-    slashCommands: [initMetadata],
-    // Pattern 3: Chat-specific commands
-    chatCommands: {
-      autognosis_init: initMetadata
-    },
-    // Pattern 4: Intentions (common in some agent frameworks)
-    intentions: [
+  // Helper to wrap our existing tool execution into MCP format
+  const wrapTool = (toolName: string, zodSchema: any) => {
+    server.registerTool(
+      toolName,
       {
-        ...initMetadata,
-        intent: "initialize_autognosis"
+        description: (tools as any)[toolName].description,
+        inputSchema: zodSchema,
+      },
+      async (args: any) => {
+        try {
+          const result = await (tools as any)[toolName].execute(args);
+          return {
+            content: [{ type: "text" as const, text: typeof result === 'string' ? result : JSON.stringify(result, null, 2) }],
+          };
+        } catch (error: any) {
+          return {
+            content: [{ type: "text" as const, text: `Error: ${error.message}` }],
+            isError: true,
+          };
+        }
       }
-    ]
+    );
   };
+
+  // Register tools with proper Zod schemas
+  wrapTool("autognosis_init", z.object({
+    mode: z.enum(["plan", "apply"]).optional().default("plan"),
+    token: z.string().optional()
+  }).shape);
+
+  wrapTool("fast_search", z.object({
+    query: z.string(),
+    mode: z.enum(["filename", "content"]).optional().default("filename"),
+    path: z.string().optional()
+  }).shape);
+
+  wrapTool("structural_search", z.object({
+    pattern: z.string(),
+    path: z.string().optional(),
+    plan_id: z.string().optional()
+  }).shape);
+
+  wrapTool("read_slice", z.object({
+    file: z.string(),
+    start_line: z.number(),
+    end_line: z.number(),
+    plan_id: z.string().optional()
+  }).shape);
+
+  wrapTool("symbol_query", z.object({
+    symbol: z.string()
+  }).shape);
+
+  wrapTool("jump_to_symbol", z.object({
+    symbol: z.string(),
+    plan_id: z.string().optional()
+  }).shape);
+
+  wrapTool("brief_fix_loop", z.object({
+    symbol: z.string(),
+    intent: z.string()
+  }).shape);
+
+  wrapTool("prepare_patch", z.object({
+    plan_id: z.string().optional(),
+    message: z.string()
+  }).shape);
+
+  wrapTool("validate_patch", z.object({
+    patch_path: z.string(),
+    timeout_ms: z.number().optional()
+  }).shape);
+
+  wrapTool("finalize_plan", z.object({
+    plan_id: z.string(),
+    outcome: z.string()
+  }).shape);
+
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
+  console.error("Autognosis MCP Server running on stdio");
 }
+
+main().catch((error) => {
+  console.error("Fatal error in main():", error);
+  process.exit(1);
+});
