@@ -4,6 +4,7 @@ import { createRequire } from "node:module";
 import { tool } from "@opencode-ai/plugin";
 import type { ChunkCard } from "./chunk-cards.js";
 import { ollama, DEFAULT_EMBEDDING_MODEL } from "./services/ollama.js";
+import { mlxService } from "./services/mlx.js";
 
 const require = createRequire(import.meta.url);
 const PROJECT_ROOT = process.cwd();
@@ -188,7 +189,11 @@ export class CodeGraphDB {
   }
 
   private async processEmbeddingQueue() {
-    if (!(await ollama.isRunning())) return;
+    const useMLX = await mlxService.checkAvailability();
+    const useOllama = !useMLX && (await ollama.isRunning());
+
+    if (!useMLX && !useOllama) return;
+
     const task = this.db.prepare(`
       SELECT chunk_id, text_to_embed, retries 
       FROM embedding_queue 
@@ -201,7 +206,10 @@ export class CodeGraphDB {
     this.db.prepare("UPDATE embedding_queue SET status = 'processing' WHERE chunk_id = ?").run(task.chunk_id);
 
     try {
-      const vector = await ollama.getEmbedding(task.text_to_embed);
+      const vector = useMLX 
+        ? await mlxService.getEmbedding(task.text_to_embed)
+        : await ollama.getEmbedding(task.text_to_embed);
+
       if (vector.length > 0) {
         const buffer = Buffer.from(new Float32Array(vector).buffer);
         const updateChunk = this.db.prepare("UPDATE chunks SET embedding = ? WHERE id = ?");
@@ -366,23 +374,31 @@ export function getDb(): CodeGraphDB {
 export function graphTools(): { [key: string]: any } {
   return {
     autognosis_setup_ai: tool({
-        description: "Configure local AI capabilities (Ollama) in the background.",
-        args: { model: tool.schema.string().optional().default(DEFAULT_EMBEDDING_MODEL) },
-        async execute({ model }) {
+        description: "Configure local AI capabilities (Ollama or MLX) in the background.",
+        args: { 
+            provider: tool.schema.enum(["ollama", "mlx"]).optional().default("ollama").describe("AI Provider to use"),
+            model: tool.schema.string().optional().describe("Model name (optional override)")
+        },
+        async execute({ provider, model }) {
             const jobId = `job-setup-ai-${Date.now()}`;
-            getDb().createJob(jobId, "setup", { model });
+            getDb().createJob(jobId, "setup", { provider, model });
             (async () => {
                 try {
                     getDb().updateJob(jobId, { status: "running", progress: 10 });
-                    if (!(await ollama.isInstalled())) await ollama.install();
-                    getDb().updateJob(jobId, { progress: 40 });
-                    await ollama.startServer();
-                    getDb().updateJob(jobId, { progress: 60 });
-                    await ollama.pullModel(model);
-                    getDb().updateJob(jobId, { status: "completed", progress: 100, result: `Model ${model} is ready.` });
+                    if (provider === "mlx") {
+                        await mlxService.setup();
+                        getDb().updateJob(jobId, { status: "completed", progress: 100, result: "MLX is ready." });
+                    } else {
+                        if (!(await ollama.isInstalled())) await ollama.install();
+                        getDb().updateJob(jobId, { progress: 40 });
+                        await ollama.startServer();
+                        getDb().updateJob(jobId, { progress: 60 });
+                        await ollama.pullModel(model || DEFAULT_EMBEDDING_MODEL);
+                        getDb().updateJob(jobId, { status: "completed", progress: 100, result: `Ollama (${model || DEFAULT_EMBEDDING_MODEL}) is ready.` });
+                    }
                 } catch (error: any) { getDb().updateJob(jobId, { status: "failed", error: error.message }); }
             })();
-            return JSON.stringify({ status: "STARTED", message: "AI Setup started in background.", job_id: jobId, instruction: "Use graph_background_status to check progress." }, null, 2);
+            return JSON.stringify({ status: "STARTED", message: `AI Setup (${provider}) started in background.`, job_id: jobId, instruction: "Use graph_background_status to check progress." }, null, 2);
         }
     }),
     graph_semantic_search: tool({
