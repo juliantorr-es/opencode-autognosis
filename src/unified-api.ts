@@ -1,0 +1,167 @@
+import { tool } from "@opencode-ai/plugin";
+import { systemTools } from "./system-tools.js";
+import { activeSetTools } from "./activeset.js";
+import { chunkCardsTools } from "./chunk-cards.js";
+import { moduleSummariesTools } from "./module-summaries.js";
+import { performanceTools } from "./performance-optimization.js";
+import { graphTools } from "./database.js";
+
+// Aggregate all internal tools
+const internal = {
+  ...systemTools(),
+  ...activeSetTools(),
+  ...chunkCardsTools(),
+  ...moduleSummariesTools(),
+  ...performanceTools(),
+  ...graphTools(),
+};
+
+export function unifiedTools(): { [key: string]: any } {
+  return {
+    code_search: tool({
+      description: "Search the codebase using various engines (filename, content, symbol, or semantic/vector).",
+      args: {
+        query: tool.schema.string().describe("Search query"),
+        mode: tool.schema.enum(["filename", "content", "symbol", "semantic"]).optional().default("filename").describe("Search strategy"),
+        path: tool.schema.string().optional().default(".").describe("Root path for search"),
+        limit: tool.schema.number().optional().default(10).describe("Max results"),
+        plan_id: tool.schema.string().optional()
+      },
+      async execute(args) {
+        switch (args.mode) {
+          case "content": return internal.fast_search.execute({ ...args, mode: "content" });
+          case "symbol": return internal.graph_search_symbols.execute({ query: args.query });
+          case "semantic": return internal.graph_semantic_search.execute({ query: args.query, limit: args.limit });
+          default: return internal.fast_search.execute({ ...args, mode: "filename" });
+        }
+      }
+    }),
+
+    code_analyze: tool({
+      description: "Perform structural analysis on files or modules. Generates summaries, API maps, and impact reports.",
+      args: {
+        target: tool.schema.string().describe("File path or module ID"),
+        mode: tool.schema.enum(["summary", "api", "invariant", "module", "impact", "reasoning"]).optional().default("summary"),
+        force: tool.schema.boolean().optional().default(false),
+        plan_id: tool.schema.string().optional()
+      },
+      async execute(args) {
+        switch (args.mode) {
+          case "module": return internal.module_synthesize.execute({ file_path: args.target, force_resynthesize: args.force });
+          case "impact": return internal.brief_fix_loop.execute({ symbol: args.target, intent: "impact_analysis" });
+          case "reasoning": return internal.module_hierarchical_reasoning.execute({ module_id: args.target });
+          default: return internal.chunk_create_card.execute({ file_path: args.target, chunk_type: args.mode as any, force_recreate: args.force });
+        }
+      }
+    }),
+
+    code_context: tool({
+      description: "Manage working memory (ActiveSets). Limits context window usage by loading/unloading specific chunks.",
+      args: {
+        action: tool.schema.enum(["create", "load", "add", "remove", "status", "list", "close"]),
+        target: tool.schema.string().optional().describe("ActiveSet ID or Chunk IDs (comma separated)"),
+        name: tool.schema.string().optional().describe("Name for new ActiveSet"),
+        plan_id: tool.schema.string().optional()
+      },
+      async execute(args) {
+        const chunk_ids = args.target?.split(',').map(s => s.trim());
+        switch (args.action) {
+          case "create": return internal.activeset_create.execute({ name: args.name || "Context", chunk_ids });
+          case "load": return internal.activeset_load.execute({ set_id: args.target! });
+          case "add": return internal.activeset_add_chunks.execute({ chunk_ids: chunk_ids! });
+          case "remove": return internal.activeset_remove_chunks.execute({ chunk_ids: chunk_ids! });
+          case "list": return internal.activeset_list.execute({});
+          case "close": return internal.activeset_close.execute({});
+          default: return internal.activeset_get_current.execute({});
+        }
+      }
+    }),
+
+    code_read: tool({
+      description: "Precise reading of symbols or file slices. Follows the current plan.",
+      args: {
+        symbol: tool.schema.string().optional().describe("Symbol to jump to"),
+        file: tool.schema.string().optional().describe("File path to read"),
+        start_line: tool.schema.number().optional(),
+        end_line: tool.schema.number().optional(),
+        plan_id: tool.schema.string().optional()
+      },
+      async execute(args) {
+        if (args.symbol) return internal.jump_to_symbol.execute({ symbol: args.symbol, plan_id: args.plan_id });
+        if (args.file && args.start_line && args.end_line) {
+          return internal.read_slice.execute({ file: args.file, start_line: args.start_line, end_line: args.end_line, plan_id: args.plan_id });
+        }
+        throw new Error("Either 'symbol' or 'file' with line range must be provided.");
+      }
+    }),
+
+    code_propose: tool({
+      description: "Plan and propose changes. Generates worklists, diffs, and validates them.",
+      args: {
+        action: tool.schema.enum(["plan", "patch", "validate", "finalize"]),
+        symbol: tool.schema.string().optional().describe("Locus symbol for plan"),
+        intent: tool.schema.string().optional().describe("Work intent (e.g. refactor)"),
+        message: tool.schema.string().optional().describe("Commit message for patch"),
+        patch_path: tool.schema.string().optional().describe("Path to .diff file"),
+        plan_id: tool.schema.string().optional(),
+        outcome: tool.schema.string().optional()
+      },
+      async execute(args) {
+        switch (args.action) {
+          case "plan": return internal.brief_fix_loop.execute({ symbol: args.symbol!, intent: args.intent! });
+          case "patch": return internal.prepare_patch.execute({ message: args.message!, plan_id: args.plan_id });
+          case "validate": return internal.validate_patch.execute({ patch_path: args.patch_path!, plan_id: args.plan_id });
+          case "finalize": return internal.finalize_plan.execute({ plan_id: args.plan_id!, outcome: args.outcome! });
+        }
+      }
+    }),
+
+    code_status: tool({
+      description: "Monitor system health, background jobs, and plan metrics.",
+      args: {
+        mode: tool.schema.enum(["stats", "hot_files", "jobs", "plan"]).optional().default("stats"),
+        job_id: tool.schema.string().optional(),
+        plan_id: tool.schema.string().optional(),
+        path: tool.schema.string().optional().default("")
+      },
+      async execute(args) {
+        switch (args.mode) {
+          case "hot_files": return internal.journal_query_hot_files.execute({ path_prefix: args.path });
+          case "jobs": return internal.graph_background_status.execute({ job_id: args.job_id });
+          case "plan": return internal.graph_get_plan_metrics.execute({ plan_id: args.plan_id! });
+          default: return internal.graph_stats.execute({});
+        }
+      }
+    }),
+
+    code_setup: tool({
+      description: "One-time setup and maintenance tasks (AI, Git Journal, Indexing).",
+      args: {
+        action: tool.schema.enum(["init", "ai", "index", "journal"]),
+        model: tool.schema.string().optional().describe("AI Model name"),
+        limit: tool.schema.number().optional().describe("History limit")
+      },
+      async execute(args) {
+        switch (args.action) {
+          case "ai": return internal.autognosis_setup_ai.execute({ model: args.model });
+          case "index": return internal.perf_incremental_index.execute({ background: true });
+          case "journal": return internal.journal_build.execute({ limit: args.limit });
+          default: return internal.autognosis_init.execute({ mode: "apply", token: "adhoc" }); // Simplified
+        }
+      }
+    }),
+
+    internal_call: tool({
+      description: "Advanced access to specialized internal tools. Use only when unified tools are insufficient.",
+      args: {
+        tool_name: tool.schema.string().describe("Internal tool name"),
+        args: tool.schema.any().describe("Arguments for the internal tool")
+      },
+      async execute({ tool_name, args }) {
+        const target = (internal as any)[tool_name];
+        if (!target) throw new Error(`Internal tool '${tool_name}' not found.`);
+        return target.execute(args);
+      }
+    })
+  };
+}
