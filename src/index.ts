@@ -2,26 +2,32 @@ import { unifiedTools } from "./unified-api.js";
 import { loadWorkingMemory, loadActiveSet } from "./activeset.js";
 import { tui } from "./services/tui.js";
 import { codeWatcher } from "./services/watcher.js";
+import { Logger } from "./services/logger.js";
 
 export const AutognosisPlugin = async ({ client }: any) => {
-  // Initialize TUI service for progress streaming
-  tui.setClient(client);
+  try {
+    // Initialize TUI service for progress streaming
+    tui.setClient(client);
 
-  // Start live file watcher
-  codeWatcher.start();
+    // Start live file watcher
+    try {
+        codeWatcher.start();
+    } catch (e) {
+        Logger.log("Main", "Failed to start watcher", e);
+    }
 
-  return {
-    tool: {
-      ...unifiedTools(),
-    },
+    return {
+      tool: {
+        ...unifiedTools(),
+      },
 
-    "experimental.session.compacting": async (input: { sessionID: string }, output: { context: string[] }) => {
-      try {
-        const memory = await loadWorkingMemory();
-        if (memory.current_set) {
-          const activeSet = await loadActiveSet(memory.current_set);
-          if (activeSet) {
-            const stateBlock = `
+      "experimental.session.compacting": async (input: { sessionID: string }, output: { context: string[] }) => {
+        try {
+          const memory = await loadWorkingMemory();
+          if (memory.current_set) {
+            const activeSet = await loadActiveSet(memory.current_set);
+            if (activeSet) {
+              const stateBlock = `
 [AUTOGNOSIS CONTEXT PRESERVATION]
 ActiveSet ID: ${activeSet.id}
 ActiveSet Name: ${activeSet.name}
@@ -31,14 +37,24 @@ Metadata: ${JSON.stringify(activeSet.metadata)}
 
 The agent is currently focused on these files and symbols. Ensure the summary reflects this active working memory state.
 `;
-            output.context.push(stateBlock);
+              output.context.push(stateBlock);
+            }
           }
+        } catch (error) {
+          // Fail silently during compaction to avoid breaking the core session
         }
-      } catch (error) {
-        // Fail silently during compaction to avoid breaking the core session
       }
-    }
-  };
+    };
+  } catch (criticalError) {
+    Logger.log("CRITICAL", "Plugin failed to initialize", criticalError);
+    return {
+        tool: {
+            autognosis_status: {
+                execute: async () => `Autognosis is in emergency mode due to a crash: ${criticalError}`
+            }
+        }
+    };
+  }
 };
 
 export default AutognosisPlugin;
