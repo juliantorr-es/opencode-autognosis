@@ -7,6 +7,7 @@ import { promisify } from "node:util";
 import * as crypto from "node:crypto";
 import { Logger } from "./services/logger.js";
 import { getDb } from "./database.js";
+import { tui } from "./services/tui.js";
 
 const execAsync = promisify(exec);
 const PROJECT_ROOT = process.cwd();
@@ -314,10 +315,13 @@ export function systemTools(): { [key: string]: any } {
         // Spawn background worker
         (async () => {
             getDb().updateJob(jobId, { status: "running", progress: 10 });
+            await tui.showProgress("Patch Validation", 10, "Creating temporary worktree...");
+            
             const tempWorktree = path.join(PROJECT_ROOT, ".opencode", "temp-" + jobId);
             try {
                 await runCmd(`git worktree add -d "${tempWorktree}"`);
                 getDb().updateJob(jobId, { progress: 30 });
+                await tui.showProgress("Patch Validation", 30, "Applying diff...");
                 
                 const content = await fs.readFile(patch_path, "utf-8");
                 const parts = content.split('\n\n');
@@ -328,6 +332,7 @@ export function systemTools(): { [key: string]: any } {
                 const { error: applyError } = await runCmd(`git apply "${tempDiff}"`, tempWorktree);
                 if (applyError) throw new Error(`Apply failed: ${applyError.message}`);
                 getDb().updateJob(jobId, { progress: 60 });
+                await tui.showProgress("Patch Validation", 60, "Running build verification...");
                 
                 let buildStatus = "SKIPPED";
                 if (fsSync.existsSync(path.join(tempWorktree, "package.json"))) {
@@ -343,8 +348,10 @@ export function systemTools(): { [key: string]: any } {
                     progress: 100, 
                     result: JSON.stringify({ apply: "OK", build: buildStatus }) 
                 });
+                await tui.showSuccess("Validation Complete", `Apply: OK, Build: ${buildStatus}`);
             } catch (error: any) {
                 getDb().updateJob(jobId, { status: "failed", error: error.message });
+                await tui.showError("Validation Failed", error.message);
             } finally {
                 try {
                     await runCmd(`git worktree remove -f "${tempWorktree}"`);

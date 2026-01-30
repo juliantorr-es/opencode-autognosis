@@ -21,6 +21,7 @@ import {
   type ChunkCard
 } from "./chunk-cards.js";
 import { Logger } from "./services/logger.js";
+import { tui } from "./services/tui.js";
 
 const execAsync = promisify(exec);
 const PROJECT_ROOT = process.cwd();
@@ -854,8 +855,12 @@ async function runBackgroundIndexing(taskId: string, indexingState: IndexingStat
       
       // Update progress periodically
       if (processed % 5 === 0 || processed === total) {
-        task.progress = Math.round((processed / total) * 100);
+        const progress = Math.round((processed / total) * 100);
+        task.progress = progress;
         await fs.writeFile(taskPath, JSON.stringify(task, null, 2));
+        
+        // Stream to TUI
+        await tui.showProgress("Codebase Indexing", progress, `Processing: ${file}`);
       }
     }
     
@@ -864,6 +869,7 @@ async function runBackgroundIndexing(taskId: string, indexingState: IndexingStat
     task.completed_at = new Date().toISOString();
     task.progress = 100;
     await fs.writeFile(taskPath, JSON.stringify(task, null, 2));
+    await tui.showSuccess("Indexing Complete", `Processed ${total} files.`);
     
   } catch (error) {
     // Update task with error

@@ -5,6 +5,7 @@ import { tool } from "@opencode-ai/plugin";
 import type { ChunkCard } from "./chunk-cards.js";
 import { ollama, DEFAULT_EMBEDDING_MODEL } from "./services/ollama.js";
 import { mlxService } from "./services/mlx.js";
+import { tui } from "./services/tui.js";
 
 const require = createRequire(import.meta.url);
 const PROJECT_ROOT = process.cwd();
@@ -385,18 +386,30 @@ export function graphTools(): { [key: string]: any } {
             (async () => {
                 try {
                     getDb().updateJob(jobId, { status: "running", progress: 10 });
+                    await tui.showProgress("AI Setup", 10, `Initializing ${provider}...`);
+                    
                     if (provider === "mlx") {
                         await mlxService.setup();
                         getDb().updateJob(jobId, { status: "completed", progress: 100, result: "MLX is ready." });
+                        await tui.showSuccess("AI Setup Complete", "MLX backend is ready.");
                     } else {
-                        if (!(await ollama.isInstalled())) await ollama.install();
+                        if (!(await ollama.isInstalled())) {
+                            await tui.showProgress("AI Setup", 20, "Downloading Ollama...");
+                            await ollama.install();
+                        }
                         getDb().updateJob(jobId, { progress: 40 });
+                        await tui.showProgress("AI Setup", 40, "Starting Ollama server...");
                         await ollama.startServer();
                         getDb().updateJob(jobId, { progress: 60 });
+                        await tui.showProgress("AI Setup", 60, `Pulling model: ${model || DEFAULT_EMBEDDING_MODEL}...`);
                         await ollama.pullModel(model || DEFAULT_EMBEDDING_MODEL);
                         getDb().updateJob(jobId, { status: "completed", progress: 100, result: `Ollama (${model || DEFAULT_EMBEDDING_MODEL}) is ready.` });
+                        await tui.showSuccess("AI Setup Complete", `Ollama (${model || DEFAULT_EMBEDDING_MODEL}) is ready.`);
                     }
-                } catch (error: any) { getDb().updateJob(jobId, { status: "failed", error: error.message }); }
+                } catch (error: any) { 
+                    getDb().updateJob(jobId, { status: "failed", error: error.message });
+                    await tui.showError("AI Setup Failed", error.message);
+                }
             })();
             return JSON.stringify({ status: "STARTED", message: `AI Setup (${provider}) started in background.`, job_id: jobId, instruction: "Use graph_background_status to check progress." }, null, 2);
         }

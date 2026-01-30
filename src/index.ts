@@ -1,7 +1,11 @@
 import { unifiedTools } from "./unified-api.js";
 import { loadWorkingMemory, loadActiveSet } from "./activeset.js";
+import { tui } from "./services/tui.js";
 
-export const AutognosisPlugin = async () => {
+export const AutognosisPlugin = async ({ client }: any) => {
+  // Initialize TUI service for progress streaming
+  tui.setClient(client);
+
   return {
     tool: {
       ...unifiedTools(),
