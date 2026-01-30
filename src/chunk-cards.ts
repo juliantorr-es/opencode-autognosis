@@ -5,11 +5,12 @@ import * as fsSync from "node:fs";
 import * as path from "node:path";
 import { promisify } from "node:util";
 import * as crypto from "node:crypto";
+import ts from "typescript";
 
 const execAsync = promisify(exec);
 const PROJECT_ROOT = process.cwd();
 const OPENCODE_DIR = path.join(PROJECT_ROOT, ".opencode");
-const CHUNK_DIR = path.join(OPENCODE_DIR, "chunks");
+export const CHUNK_DIR = path.join(OPENCODE_DIR, "chunks");
 const CACHE_DIR = path.join(OPENCODE_DIR, "cache");
 
 // Internal logging
@@ -21,7 +22,7 @@ function log(message: string, data?: unknown) {
 // TYPES AND INTERFACES
 // =============================================================================
 
-interface ChunkCard {
+export interface ChunkCard {
   id: string;
   file_path: string;
   chunk_type: "summary" | "api" | "invariant";
@@ -87,15 +88,15 @@ async function runCmd(cmd: string, cwd: string = PROJECT_ROOT, timeoutMs: number
   }
 }
 
-async function ensureChunkDir() {
+export async function ensureChunkDir() {
   await fs.mkdir(CHUNK_DIR, { recursive: true });
 }
 
-function calculateHash(content: string): string {
+export function calculateHash(content: string): string {
   return crypto.createHash('sha256').update(content).digest('hex');
 }
 
-function calculateComplexity(content: string): number {
+export function calculateComplexity(content: string): number {
   // Simple complexity calculation based on code metrics
   const lines = content.split('\n').length;
   const cyclomaticComplexity = (content.match(/\b(if|while|for|switch|case|catch)\b/g) || []).length;
@@ -106,9 +107,27 @@ function calculateComplexity(content: string): number {
   return Math.min(100, (lines * 0.1) + (cyclomaticComplexity * 5) + (nestingDepth * 2));
 }
 
-function extractSymbols(content: string): string[] {
+export function extractSymbols(content: string, filePath: string = ''): string[] {
   // Extract function names, class names, and variable names
   const symbols: string[] = [];
+
+  if (filePath) {
+      const ext = path.extname(filePath);
+      if (ext === '.cpp' || ext === '.c' || ext === '.h' || ext === '.hpp' || ext === '.cc') {
+          const funcs = extractFunctionsCpp(content);
+          const classes = extractClassesCpp(content);
+          symbols.push(...funcs.map(f => f.name));
+          symbols.push(...classes.map(c => c.name));
+          return symbols;
+      }
+      if (ext === '.swift') {
+          const funcs = extractFunctionsSwift(content);
+          const classes = extractClassesSwift(content);
+          symbols.push(...funcs.map(f => f.name));
+          symbols.push(...classes.map(c => c.name));
+          return symbols;
+      }
+  }
   
   // Functions
   const functionMatches = content.match(/(?:function|const|let|var)\s+(\w+)\s*=/g);
@@ -179,18 +198,21 @@ export function chunkCardsTools(): { [key: string]: any } {
           if (!sourceContent) {
             sourceContent = await fs.readFile(file_path, 'utf-8');
           }
+
+          // Parse AST for JS/TS files
+          const ast = parseFileAST(file_path, sourceContent);
           
           // Generate chunk content based on type
           let chunkContent = "";
           switch (chunk_type) {
             case "summary":
-              chunkContent = await generateSummaryChunk(sourceContent, file_path);
+              chunkContent = await generateSummaryChunk(sourceContent, file_path, ast);
               break;
             case "api":
-              chunkContent = await generateApiChunk(sourceContent, file_path);
+              chunkContent = await generateApiChunk(sourceContent, file_path, ast);
               break;
             case "invariant":
-              chunkContent = await generateInvariantChunk(sourceContent, file_path);
+              chunkContent = await generateInvariantChunk(sourceContent, file_path, ast);
               break;
           }
           
@@ -204,8 +226,8 @@ export function chunkCardsTools(): { [key: string]: any } {
               created_at: new Date().toISOString(),
               updated_at: new Date().toISOString(),
               hash: calculateHash(chunkContent),
-              dependencies: await extractDependencies(sourceContent),
-              symbols: extractSymbols(sourceContent),
+              dependencies: await extractDependencies(sourceContent, ast, file_path),
+              symbols: extractSymbolsFromAST(ast, sourceContent) || extractSymbols(sourceContent, file_path),
               complexity_score: calculateComplexity(sourceContent)
             }
           };
@@ -389,16 +411,36 @@ export function chunkCardsTools(): { [key: string]: any } {
 // CHUNK GENERATION HELPERS
 // =============================================================================
 
-async function generateSummaryChunk(content: string, filePath: string): Promise<string> {
+export async function generateSummaryChunk(content: string, filePath: string, ast: ts.SourceFile | null): Promise<string> {
   const lines = content.split('\n');
   const fileName = path.basename(filePath);
   const fileExtension = path.extname(filePath);
   
   // Extract key information
-  const functions = extractFunctions(content);
-  const classes = extractClasses(content);
-  const imports = extractImports(content);
-  const exports = extractExports(content);
+  let functions: FunctionInfo[] = [];
+  let classes: ClassInfo[] = [];
+  let imports: string[] = [];
+  let exports: string[] = [];
+
+  if (ast) {
+     functions = extractFunctionsFromAST(ast);
+     classes = extractClassesFromAST(ast);
+     imports = extractImportsFromAST(ast);
+     exports = extractExportsFromAST(ast);
+  } else if (fileExtension === '.cpp' || fileExtension === '.c' || fileExtension === '.h' || fileExtension === '.hpp' || fileExtension === '.cc') {
+     functions = extractFunctionsCpp(content);
+     classes = extractClassesCpp(content);
+     imports = extractImportsCpp(content);
+  } else if (fileExtension === '.swift') {
+     functions = extractFunctionsSwift(content);
+     classes = extractClassesSwift(content);
+     imports = extractImportsSwift(content);
+  } else {
+     functions = extractFunctions(content);
+     classes = extractClasses(content);
+     imports = extractImports(content);
+     exports = extractExports(content);
+  }
   
   const summary = `# Summary: ${fileName}
 
@@ -435,11 +477,33 @@ ${extractNotes(content)}`;
   return summary;
 }
 
-async function generateApiChunk(content: string, filePath: string): Promise<string> {
-  const functions = extractFunctions(content);
-  const classes = extractClasses(content);
-  const interfaces = extractInterfaces(content);
-  const types = extractTypes(content);
+export async function generateApiChunk(content: string, filePath: string, ast: ts.SourceFile | null): Promise<string> {
+  let functions: FunctionInfo[] = [];
+  let classes: ClassInfo[] = [];
+  let interfaces: InterfaceInfo[] = [];
+  let types: TypeInfo[] = [];
+
+  const fileExtension = path.extname(filePath);
+
+  if (ast) {
+     functions = extractFunctionsFromAST(ast);
+     classes = extractClassesFromAST(ast);
+     interfaces = extractInterfacesFromAST(ast);
+     types = extractTypesFromAST(ast);
+  } else if (fileExtension === '.cpp' || fileExtension === '.c' || fileExtension === '.h' || fileExtension === '.hpp' || fileExtension === '.cc') {
+     functions = extractFunctionsCpp(content);
+     classes = extractClassesCpp(content);
+     // C++ interfaces/types logic is complex, skipping for now
+  } else if (fileExtension === '.swift') {
+     functions = extractFunctionsSwift(content);
+     classes = extractClassesSwift(content);
+     // Swift protocols could map to interfaces
+  } else {
+     functions = extractFunctions(content);
+     classes = extractClasses(content);
+     interfaces = extractInterfaces(content);
+     types = extractTypes(content);
+  }
   
   const api = `# API Surface: ${path.basename(filePath)}
 
@@ -495,7 +559,7 @@ ${type.description}
   return api;
 }
 
-async function generateInvariantChunk(content: string, filePath: string): Promise<string> {
+export async function generateInvariantChunk(content: string, filePath: string, ast: ts.SourceFile | null): Promise<string> {
   const invariants = extractInvariants(content);
   const constraints = extractConstraints(content);
   const assumptions = extractAssumptions(content);
@@ -708,34 +772,87 @@ function extractTypeDescription(content: string, typeName: string): string {
 }
 
 function extractInvariants(content: string): Array<{ name: string; description: string }> {
-  // Extract invariants from comments and code
-  return [];
+  const invariants: Array<{ name: string; description: string }> = [];
+  // Look for validation checks that throw errors
+  const throwMatches = content.match(/if\s*\(([^)]+)\)\s*throw\s*new\s*Error\(([^)]+)\)/g);
+  if (throwMatches) {
+     throwMatches.forEach(m => {
+        invariants.push({ name: "Validation Check", description: m });
+     });
+  }
+  // Look for assert calls
+  const assertMatches = content.match(/assert\(([^,]+)(?:,\s*["']([^"']+)["'])?\)/g);
+  if (assertMatches) {
+    assertMatches.forEach(m => {
+        invariants.push({ name: "Assertion", description: m });
+     });
+  }
+  return invariants;
 }
 
 function extractConstraints(content: string): Array<{ name: string; description: string }> {
-  // Extract constraints from comments and code
-  return [];
+   const constraints: Array<{ name: string; description: string }> = [];
+   // Look for UPPERCASE constants which usually denote limits/config
+   const constMatches = content.match(/const\s+([A-Z_][A-Z0-9_]*)\s*=\s*([^;]+)/g);
+   if (constMatches) {
+      constMatches.forEach(m => {
+         const parts = m.split('=');
+         constraints.push({ name: parts[0].replace('const', '').trim(), description: parts[1].trim() });
+      });
+   }
+   return constraints;
 }
 
 function extractAssumptions(content: string): Array<{ name: string; description: string }> {
-  // Extract assumptions from comments and code
-  return [];
+  const assumptions: Array<{ name: string; description: string }> = [];
+  // Look for comments indicating assumptions
+  const commentMatches = content.match(/\/\/\s*(TODO|FIXME|ASSUME|NOTE):\s*(.+)/g);
+  if (commentMatches) {
+     commentMatches.forEach(m => {
+        assumptions.push({ name: "Code Annotation", description: m.replace(/\/\/\s*/, '').trim() });
+     });
+  }
+  return assumptions;
 }
 
 function extractStateManagement(content: string): string {
-  return "State management analysis not implemented";
+  const patterns = [];
+  if (content.includes('useState')) patterns.push("React useState hook");
+  if (content.includes('useReducer')) patterns.push("React useReducer hook");
+  if (content.includes('this.state')) patterns.push("Class component state");
+  if (content.includes('redux') || content.includes('dispatch')) patterns.push("Redux/Flux pattern");
+  if (content.includes('mobx') || content.includes('observable')) patterns.push("MobX pattern");
+  
+  return patterns.length > 0 ? `Detected patterns: ${patterns.join(', ')}` : "No explicit state management patterns detected";
 }
 
 function extractErrorHandling(content: string): string {
-  return "Error handling analysis not implemented";
+  const tryCount = (content.match(/try\s*\{/g) || []).length;
+  const catchCount = (content.match(/catch\s*(\(|{)/g) || []).length;
+  const throwCount = (content.match(/throw\s+new\s+Error/g) || []).length;
+  
+  if (tryCount === 0 && throwCount === 0) return "No explicit error handling patterns detected";
+  
+  return `Error handling metrics: ${tryCount} try-catch blocks, ${throwCount} throw statements`;
 }
 
 function extractPerformanceConsiderations(content: string): string {
-  return "Performance considerations not analyzed";
+  const patterns = [];
+  if (content.includes('useMemo')) patterns.push("Uses React.useMemo");
+  if (content.includes('useCallback')) patterns.push("Uses React.useCallback");
+  if (content.match(/await\s+Promise\.all/)) patterns.push("Uses parallel execution (Promise.all)");
+  if (content.match(/for\s*\(.*;.*;.*\)/)) patterns.push("Contains explicit loops");
+  
+  return patterns.length > 0 ? `Performance patterns: ${patterns.join(', ')}` : "No obvious performance optimization patterns detected";
 }
 
 function extractSecurityConsiderations(content: string): string {
-  return "Security considerations not analyzed";
+  const risks = [];
+  if (content.includes('innerHTML')) risks.push("Potential XSS risk (innerHTML usage)");
+  if (content.includes('eval(')) risks.push("Critical security risk (eval usage)");
+  if (content.includes('dangerouslySetInnerHTML')) risks.push("Explicit React XSS risk");
+  
+  return risks.length > 0 ? `Security alerts: ${risks.join(', ')}` : "No obvious security risks detected via static analysis";
 }
 
 function getFileTypeDescription(extension: string): string {
@@ -754,7 +871,317 @@ function getFileTypeDescription(extension: string): string {
   return descriptions[extension] || 'Unknown file type';
 }
 
-async function extractDependencies(content: string): Promise<string[]> {
+export async function extractDependencies(content: string, ast: ts.SourceFile | null = null, filePath: string = ''): Promise<string[]> {
   // Extract dependency information from imports
+  if (ast) {
+    return extractImportsFromAST(ast);
+  }
+  
+  if (filePath) {
+      const ext = path.extname(filePath);
+      if (ext === '.cpp' || ext === '.c' || ext === '.h' || ext === '.hpp' || ext === '.cc') {
+          return extractImportsCpp(content);
+      }
+      if (ext === '.swift') {
+          return extractImportsSwift(content);
+      }
+  }
+  
   return extractImports(content);
+}
+
+// =============================================================================
+// AST EXTRACTION HELPERS
+// =============================================================================
+
+export function parseFileAST(filePath: string, content: string): ts.SourceFile | null {
+  if (filePath.endsWith('.ts') || filePath.endsWith('.tsx') || filePath.endsWith('.js') || filePath.endsWith('.jsx')) {
+    return ts.createSourceFile(
+      filePath,
+      content,
+      ts.ScriptTarget.Latest,
+      true
+    );
+  }
+  return null;
+}
+
+function extractFunctionsFromAST(sourceFile: ts.SourceFile): FunctionInfo[] {
+  const functions: FunctionInfo[] = [];
+
+  function visit(node: ts.Node) {
+    if (ts.isFunctionDeclaration(node) && node.name) {
+      functions.push({
+        name: node.name.text,
+        signature: node.getText(sourceFile).split('{')[0].trim(),
+        isExported: isNodeExported(node),
+        params: node.parameters.map(p => ({
+          name: p.name.getText(sourceFile),
+          type: p.type ? p.type.getText(sourceFile) : 'any',
+          description: ''
+        })),
+        returns: node.type ? node.type.getText(sourceFile) : 'void',
+        description: getJSDocDescription(node, sourceFile)
+      });
+    }
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+  return functions;
+}
+
+function extractClassesFromAST(sourceFile: ts.SourceFile): ClassInfo[] {
+  const classes: ClassInfo[] = [];
+
+  function visit(node: ts.Node) {
+    if (ts.isClassDeclaration(node) && node.name) {
+      const methods: Array<{ name: string; signature: string }> = [];
+      const properties: Array<{ name: string; type: string }> = [];
+      
+      node.members.forEach(member => {
+        if (ts.isMethodDeclaration(member) && member.name) {
+          methods.push({
+            name: member.name.getText(sourceFile),
+            signature: member.getText(sourceFile).split('{')[0].trim()
+          });
+        } else if (ts.isPropertyDeclaration(member) && member.name) {
+          properties.push({
+            name: member.name.getText(sourceFile),
+            type: member.type ? member.type.getText(sourceFile) : 'any'
+          });
+        }
+      });
+
+      classes.push({
+        name: node.name.text,
+        signature: node.getText(sourceFile).split('{')[0].trim(),
+        extends: node.heritageClauses?.find(h => h.token === ts.SyntaxKind.ExtendsKeyword)?.types[0].expression.getText(sourceFile) || null,
+        description: getJSDocDescription(node, sourceFile),
+        methods,
+        properties
+      });
+    }
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+  return classes;
+}
+
+function extractInterfacesFromAST(sourceFile: ts.SourceFile): InterfaceInfo[] {
+  const interfaces: InterfaceInfo[] = [];
+
+  function visit(node: ts.Node) {
+    if (ts.isInterfaceDeclaration(node)) {
+      interfaces.push({
+        name: node.name.text,
+        signature: node.getText(sourceFile).split('{')[0].trim(),
+        description: getJSDocDescription(node, sourceFile)
+      });
+    }
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+  return interfaces;
+}
+
+function extractTypesFromAST(sourceFile: ts.SourceFile): TypeInfo[] {
+  const types: TypeInfo[] = [];
+
+  function visit(node: ts.Node) {
+    if (ts.isTypeAliasDeclaration(node)) {
+      types.push({
+        name: node.name.text,
+        signature: node.getText(sourceFile).split('=')[0].trim(),
+        description: getJSDocDescription(node, sourceFile)
+      });
+    }
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+  return types;
+}
+
+function extractImportsFromAST(sourceFile: ts.SourceFile): string[] {
+  const imports: string[] = [];
+  
+  function visit(node: ts.Node) {
+    if (ts.isImportDeclaration(node)) {
+      const moduleSpecifier = node.moduleSpecifier;
+      if (ts.isStringLiteral(moduleSpecifier)) {
+        imports.push(moduleSpecifier.text);
+      }
+    }
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+  return imports;
+}
+
+function extractExportsFromAST(sourceFile: ts.SourceFile): string[] {
+  const exports: string[] = [];
+
+  function visit(node: ts.Node) {
+    if (isNodeExported(node)) {
+      if ((ts.isFunctionDeclaration(node) || ts.isClassDeclaration(node) || ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node)) && node.name) {
+        exports.push(node.name.text);
+      } else if (ts.isVariableStatement(node)) {
+        node.declarationList.declarations.forEach(decl => {
+          if (ts.isIdentifier(decl.name)) {
+            exports.push(decl.name.text);
+          }
+        });
+      }
+    }
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+  return exports;
+}
+
+export function extractSymbolsFromAST(sourceFile: ts.SourceFile | null, content: string): string[] | null {
+  if (!sourceFile) return null;
+  const symbols: string[] = [];
+  
+  function visit(node: ts.Node) {
+    if ((ts.isFunctionDeclaration(node) || ts.isClassDeclaration(node) || ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node)) && node.name) {
+      symbols.push(node.name.text);
+    } else if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name)) {
+      symbols.push(node.name.text);
+    }
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+  return symbols;
+}
+
+function isNodeExported(node: ts.Node): boolean {
+  return (
+    (ts.getCombinedModifierFlags(node as ts.Declaration) & ts.ModifierFlags.Export) !== 0 ||
+    (!!node.parent && node.parent.kind === ts.SyntaxKind.SourceFile && ts.isExportAssignment(node))
+  );
+}
+
+function getJSDocDescription(node: ts.Node, sourceFile: ts.SourceFile): string {
+  const jsDocTags = (node as any).jsDoc;
+  if (jsDocTags && jsDocTags.length > 0) {
+    return jsDocTags[0].comment || "Documented in JSDoc";
+  }
+  return "No documentation found";
+}
+
+// =============================================================================
+// C++ EXTRACTION HELPERS
+// =============================================================================
+
+function extractFunctionsCpp(content: string): FunctionInfo[] {
+  const functions: FunctionInfo[] = [];
+  // Regex for C++ functions: returnType name(params) {
+  // Simplistic approximation
+  const regex = /((?:[\w:<>_]+\s+)+)(\w+)\s*\(([^)]*)\)\s*(?:const|noexcept|override|final)*\s*\{/g;
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    const returnType = match[1].trim();
+    // Skip if it looks like a control structure
+    if (['if', 'for', 'while', 'switch', 'catch'].includes(match[2])) continue;
+    
+    functions.push({
+      name: match[2],
+      signature: `${returnType} ${match[2]}(${match[3]})`,
+      isExported: true, // Assuming public/header
+      params: match[3].split(',').filter(Boolean).map(p => {
+        const parts = p.trim().split(/\s+/);
+        const name = parts.pop() || '';
+        return { name, type: parts.join(' '), description: '' };
+      }),
+      returns: returnType,
+      description: "C++ Function"
+    });
+  }
+  return functions;
+}
+
+function extractClassesCpp(content: string): ClassInfo[] {
+  const classes: ClassInfo[] = [];
+  const regex = /(class|struct)\s+(\w+)(?:\s*:\s*(?:public|private|protected)\s+([^{]+))?\s*\{/g;
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    classes.push({
+      name: match[2],
+      signature: match[0].trim(),
+      extends: match[3] ? match[3].trim() : null,
+      description: `C++ ${match[1]}`,
+      methods: [], // Deep parsing requires more complex logic
+      properties: []
+    });
+  }
+  return classes;
+}
+
+function extractImportsCpp(content: string): string[] {
+  const imports: string[] = [];
+  const regex = /#include\s*[<"]([^>"]+)[>"]/g;
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    imports.push(match[1]);
+  }
+  return imports;
+}
+
+// =============================================================================
+// SWIFT EXTRACTION HELPERS
+// =============================================================================
+
+function extractFunctionsSwift(content: string): FunctionInfo[] {
+  const functions: FunctionInfo[] = [];
+  // Regex for Swift functions: func name(params) -> ReturnType {
+  const regex = /(?:public|private|internal|fileprivate|open)?\s*func\s+(\w+)\s*\(([^)]*)\)(?:\s*->\s*([^{]+))?\s*\{/g;
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    functions.push({
+      name: match[1],
+      signature: match[0].split('{')[0].trim(),
+      isExported: !match[0].includes('private') && !match[0].includes('fileprivate'),
+      params: match[2].split(',').filter(Boolean).map(p => {
+         const parts = p.trim().split(':');
+         return { name: parts[0].trim(), type: parts[1]?.trim() || 'Any', description: '' };
+      }),
+      returns: match[3]?.trim() || 'Void',
+      description: "Swift Function"
+    });
+  }
+  return functions;
+}
+
+function extractClassesSwift(content: string): ClassInfo[] {
+  const classes: ClassInfo[] = [];
+  const regex = /(?:public|private|internal|fileprivate|open)?\s*(class|struct|enum|extension|protocol)\s+(\w+)(?:\s*:\s*([^{]+))?\s*\{/g;
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    classes.push({
+      name: match[2],
+      signature: match[0].trim(),
+      extends: match[3] ? match[3].trim() : null,
+      description: `Swift ${match[1]}`,
+      methods: [],
+      properties: []
+    });
+  }
+  return classes;
+}
+
+function extractImportsSwift(content: string): string[] {
+  const imports: string[] = [];
+  const regex = /import\s+(\w+)/g;
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    imports.push(match[1]);
+  }
+  return imports;
 }

@@ -5,6 +5,20 @@ import * as fsSync from "node:fs";
 import * as path from "node:path";
 import { promisify } from "node:util";
 import * as crypto from "node:crypto";
+import { 
+  CHUNK_DIR, 
+  ensureChunkDir, 
+  calculateHash, 
+  calculateComplexity, 
+  parseFileAST,
+  generateSummaryChunk,
+  generateApiChunk,
+  generateInvariantChunk,
+  extractDependencies,
+  extractSymbolsFromAST,
+  extractSymbols,
+  type ChunkCard
+} from "./chunk-cards.js";
 
 const execAsync = promisify(exec);
 const PROJECT_ROOT = process.cwd();
@@ -719,10 +733,45 @@ async function getAllSourceFiles(): Promise<string[]> {
 }
 
 async function indexFile(filePath: string): Promise<void> {
-  // Simplified indexing - would create chunk cards, analyze symbols, etc.
-  // For now, just touch the file to update its timestamp
-  const stats = await fs.stat(filePath);
-  // Indexing logic would go here
+  try {
+    const content = await fs.readFile(filePath, 'utf-8');
+    await ensureChunkDir();
+    
+    const ast = parseFileAST(filePath, content);
+    const chunkTypes = ["summary", "api", "invariant"] as const;
+    
+    // Generate file hash for ID consistency
+    const fileHash = calculateHash(filePath);
+
+    for (const chunkType of chunkTypes) {
+      const cardId = `${path.basename(filePath)}-${chunkType}-${fileHash.slice(0, 8)}`;
+      const cardPath = path.join(CHUNK_DIR, `${cardId}.json`);
+      
+      let chunkContent = "";
+      if (chunkType === "summary") chunkContent = await generateSummaryChunk(content, filePath, ast);
+      else if (chunkType === "api") chunkContent = await generateApiChunk(content, filePath, ast);
+      else if (chunkType === "invariant") chunkContent = await generateInvariantChunk(content, filePath, ast);
+      
+      const chunkCard: ChunkCard = {
+        id: cardId,
+        file_path: filePath,
+        chunk_type: chunkType,
+        content: chunkContent,
+        metadata: {
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          hash: calculateHash(chunkContent),
+          dependencies: await extractDependencies(content, ast, filePath),
+          symbols: extractSymbolsFromAST(ast, content) || extractSymbols(content, filePath),
+          complexity_score: calculateComplexity(content)
+        }
+      };
+      
+      await fs.writeFile(cardPath, JSON.stringify(chunkCard, null, 2));
+    }
+  } catch (error) {
+    log(`Failed to index file ${filePath}`, error);
+  }
 }
 
 async function runBackgroundIndexing(taskId: string, indexingState: IndexingState): Promise<void> {
@@ -735,11 +784,67 @@ async function runBackgroundIndexing(taskId: string, indexingState: IndexingStat
     task.started_at = new Date().toISOString();
     await fs.writeFile(taskPath, JSON.stringify(task, null, 2));
     
-    // Simulate background indexing work
-    for (let i = 0; i < 10; i++) {
-      task.progress = (i + 1) * 10;
+    // Determine files to index
+    const force_full = task.metadata?.force_full || false;
+    let filesToIndex: string[] = [];
+    
+    if (force_full) {
+      filesToIndex = await getAllSourceFiles();
+    } else {
+      // For incremental, we try to use git diff. If that fails or returns empty,
+      // we might default to all files or just recent ones. For robustness here:
+      try {
+        const { stdout: gitDiff } = await runCmd(`git diff --name-only --since="${indexingState.last_indexed}"`);
+        const changedFiles = gitDiff.split('\n').filter(Boolean);
+        if (changedFiles.length > 0) {
+          filesToIndex = changedFiles;
+        } else {
+           // If no changes detected by git, maybe we don't need to do anything?
+           // But if forced or state is stale, maybe we should.
+           // For background task simplicity, if not full, and no git changes, we index nothing or check simple timestamps.
+           // Let's rely on getAllSourceFiles filtering if we wanted robust check.
+           // Here, we'll just check timestamps of all source files against last_indexed.
+           const allFiles = await getAllSourceFiles();
+           filesToIndex = [];
+           for (const f of allFiles) {
+              const fp = path.join(PROJECT_ROOT, f);
+              if (fsSync.existsSync(fp)) {
+                 const stats = await fs.stat(fp);
+                 if (stats.mtime.toISOString() > indexingState.last_indexed) {
+                   filesToIndex.push(f);
+                 }
+              }
+           }
+        }
+      } catch (e) {
+        // Fallback to full scan if git fails
+        filesToIndex = await getAllSourceFiles();
+      }
+    }
+
+    const total = filesToIndex.length;
+    let processed = 0;
+
+    if (total === 0) {
+      task.progress = 100;
+      task.status = "completed";
+      task.completed_at = new Date().toISOString();
       await fs.writeFile(taskPath, JSON.stringify(task, null, 2));
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      return;
+    }
+
+    for (const file of filesToIndex) {
+      const filePath = path.join(PROJECT_ROOT, file);
+      if (fsSync.existsSync(filePath)) {
+        await indexFile(filePath);
+      }
+      processed++;
+      
+      // Update progress periodically
+      if (processed % 5 === 0 || processed === total) {
+        task.progress = Math.round((processed / total) * 100);
+        await fs.writeFile(taskPath, JSON.stringify(task, null, 2));
+      }
     }
     
     // Complete task
@@ -751,11 +856,17 @@ async function runBackgroundIndexing(taskId: string, indexingState: IndexingStat
   } catch (error) {
     // Update task with error
     const taskPath = path.join(PERF_DIR, `${taskId}.json`);
-    const task = JSON.parse(await fs.readFile(taskPath, 'utf-8'));
-    task.status = "failed";
-    task.error = error instanceof Error ? error.message : `${error}`;
-    task.completed_at = new Date().toISOString();
-    await fs.writeFile(taskPath, JSON.stringify(task, null, 2));
+    try {
+        if (fsSync.existsSync(taskPath)) {
+            const task = JSON.parse(await fs.readFile(taskPath, 'utf-8'));
+            task.status = "failed";
+            task.error = error instanceof Error ? error.message : `${error}`;
+            task.completed_at = new Date().toISOString();
+            await fs.writeFile(taskPath, JSON.stringify(task, null, 2));
+        }
+    } catch (writeError) {
+        console.error("Failed to update task error state", writeError);
+    }
   }
 }
 

@@ -6,9 +6,9 @@ import { activeSetTools } from "./activeset.js";
 import { moduleSummariesTools } from "./module-summaries.js";
 import { performanceTools } from "./performance-optimization.js";
 
-export default function plugin(): { tools: { [key: string]: any } } {
+export const AutognosisPlugin = async () => {
   return {
-    tools: {
+    tool: {
       ...systemTools(),
       ...gitWorktreeTools(),
       ...testingTools(),
@@ -18,4 +18,6 @@ export default function plugin(): { tools: { [key: string]: any } } {
       ...performanceTools(),
     },
   };
-}
+};
+
+export default AutognosisPlugin;
