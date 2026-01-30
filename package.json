@@ -1,7 +1,7 @@
 {
   "name": "opencode-autognosis",
-  "version": "1.0.1",
-  "description": "Transforms OpenCode agents into 'miniature engineers' with deep codebase awareness. Includes fast structural search (ast-grep), instant symbol navigation (ctags), and a disciplined 'Plan → Execute → Patch' workflow.",
+  "version": "2.0.0",
+  "description": "Advanced RAG-powered codebase awareness for OpenCode agents. Features Chunk Cards synthesis, hierarchical reasoning, ActiveSet working memory, and performance optimization for enterprise-scale repositories.",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,9 +15,33 @@
     "build": "tsc -p tsconfig.json",
     "prepublishOnly": "npm run build"
   },
+  "keywords": [
+    "opencode",
+    "rag",
+    "code-analysis",
+    "chunking",
+    "agent",
+    "codebase",
+    "synthesis",
+    "reasoning"
+  ],
   "opencode": {
     "type": "plugin",
-    "hooks": []
+    "hooks": [],
+    "capabilities": [
+      "chunk-cards",
+      "hierarchical-reasoning",
+      "activeset-management",
+      "module-summaries",
+      "performance-optimization",
+      "incremental-indexing",
+      "background-processing",
+      "memory-management"
+    ],
+    "compatibility": {
+      "min_opencode_version": "1.0.162",
+      "node_version": ">=18.0.0"
+    }
   },
   "devDependencies": {
     "@opencode-ai/plugin": "^1.0.162",
