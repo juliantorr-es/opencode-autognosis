@@ -62,7 +62,7 @@ function calculateContextUsage(chunks: string[]): number {
   return chunks.length * 100; // Assume 100 tokens per chunk
 }
 
-async function loadActiveSet(setId: string): Promise<ActiveSet | null> {
+export async function loadActiveSet(setId: string): Promise<ActiveSet | null> {
   try {
     const setPath = path.join(ACTIVESET_DIR, `${setId}.json`);
     if (!fsSync.existsSync(setPath)) {
@@ -81,7 +81,7 @@ async function saveActiveSet(activeSet: ActiveSet): Promise<void> {
   await fs.writeFile(setPath, JSON.stringify(activeSet, null, 2));
 }
 
-async function loadWorkingMemory(): Promise<WorkingMemory> {
+export async function loadWorkingMemory(): Promise<WorkingMemory> {
   const memoryPath = path.join(ACTIVESET_DIR, "working-memory.json");
   
   try {
