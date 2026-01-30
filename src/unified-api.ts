@@ -104,10 +104,27 @@ export function unifiedTools(): { [key: string]: any } {
   const wrap = (toolName: string, config: any) => {
       const originalExecute = config.execute;
       config.execute = async (args: any) => {
-          const res = await originalExecute(args);
-          // Only attempt chaining if original call was successful (heuristic)
-          if (res.includes('"status": "ERROR"') || res.includes('"status": "FAILED"')) return res;
-          return runWithContracts(toolName, args.action || args.mode, args, res, api);
+          try {
+              let res = await originalExecute(args);
+              
+              // 1. Settling Delay: Give the TUI state machine time to finish 'submission' 
+              // before we return a massive result that triggers highlighting.
+              await new Promise(r => setTimeout(r, 50));
+
+              // 2. Truncation: Prevent the highlighting engine from crashing on massive outputs.
+              if (res.length > 50000) {
+                  res = res.slice(0, 50000) + "\n\n... [RESULT TRUNCATED BY AUTOGNOSIS FOR TUI STABILITY]";
+              }
+
+              // 3. Contract Chaining
+              if (!res.includes('"status": "ERROR"') && !res.includes('"status": "FAILED"')) {
+                  res = await runWithContracts(toolName, args.action || args.mode, args, res, api);
+              }
+
+              return res;
+          } catch (e: any) {
+              return JSON.stringify({ status: "ERROR", message: String(e) });
+          }
       };
       return tool(config);
   };

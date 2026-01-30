@@ -1,7 +1,7 @@
 export class TUIService {
   private client: any;
   private lastUpdate: number = 0;
-  private readonly THROTTLE_MS = 500; // Minimum time between toasts
+  private readonly THROTTLE_MS = 800; // Increased cooldown for higher stability
   private queue: Array<() => Promise<void>> = [];
   private isProcessing: boolean = false;
 
@@ -14,7 +14,8 @@ export class TUIService {
    */
   private async enqueue(task: () => Promise<void>) {
     this.queue.push(task);
-    this.processQueue();
+    // Don't await the queue processing to keep the tool execution fast
+    this.processQueue().catch(() => {});
   }
 
   private async processQueue() {
@@ -22,6 +23,11 @@ export class TUIService {
     this.isProcessing = true;
 
     while (this.queue.length > 0) {
+      if (!this.client || !this.client.tui) {
+          this.queue = [];
+          break;
+      }
+
       const task = this.queue.shift();
       if (!task) continue;
 
@@ -30,15 +36,15 @@ export class TUIService {
       if (wait > 0) await new Promise(r => setTimeout(r, wait));
 
       try {
-        // Final safety check: Give the TUI a few ms to breathe before the call
-        await new Promise(r => setTimeout(r, 50));
+        // Final safety check: Give the TUI state machine time to settle
+        await new Promise(r => setTimeout(r, 100));
         await task();
         this.lastUpdate = Date.now();
       } catch (e: any) {
-        // Silence "destroyed" errors as they are expected during session teardown
-        if (e.message?.includes("destroyed") || e.message?.includes("invalid channel")) {
-            // Drop remaining queue if channel is dead
+        const msg = e.message || String(e);
+        if (msg.includes("destroyed") || msg.includes("invalid channel") || msg.includes("closed")) {
             this.queue = [];
+            this.client = null; // Invalidate stale client
             break;
         }
       }
@@ -51,31 +57,37 @@ export class TUIService {
     if (!this.client || !this.client.tui) return;
 
     this.enqueue(async () => {
-      await this.client.tui.showToast({
-        body: {
-          title: `[${progress}%] ${title}`,
-          message,
-          variant: "info"
-        }
-      });
+      if (this.client?.tui) {
+        await this.client.tui.showToast({
+          body: {
+            title: `[${progress}%] ${title}`,
+            message,
+            variant: "info"
+          }
+        });
+      }
     });
   }
 
   async showSuccess(title: string, message: string) {
     if (!this.client || !this.client.tui) return;
     this.enqueue(async () => {
-      await this.client.tui.showToast({
-        body: { title, message, variant: "success" }
-      });
+      if (this.client?.tui) {
+        await this.client.tui.showToast({
+          body: { title, message, variant: "success" }
+        });
+      }
     });
   }
 
   async showError(title: string, message: string) {
     if (!this.client || !this.client.tui) return;
     this.enqueue(async () => {
-      await this.client.tui.showToast({
-        body: { title, message, variant: "error" }
-      });
+      if (this.client?.tui) {
+        await this.client.tui.showToast({
+          body: { title, message, variant: "error" }
+        });
+      }
     });
   }
 }
