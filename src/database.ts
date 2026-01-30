@@ -157,8 +157,11 @@ export class CodeGraphDB {
         author TEXT,
         message TEXT,
         topic TEXT,
-        symbol_id TEXT, -- Optional link to a code symbol
-        embedding BLOB, -- For semantic search on the blackboard
+        symbol_id TEXT,
+        git_hash TEXT, -- Version of code when note was made
+        is_archived BOOLEAN DEFAULT 0,
+        is_pinned BOOLEAN DEFAULT 0,
+        embedding BLOB,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
       );
 
@@ -233,20 +236,59 @@ export class CodeGraphDB {
     return this.db.prepare("SELECT * FROM background_jobs ORDER BY created_at DESC LIMIT ?").all(limit);
   }
 
-  public postToBlackboard(author: string, message: string, topic: string = 'general', symbolId?: string) {
+  public postToBlackboard(author: string, message: string, topic: string = 'general', symbolId?: string, isPinned: boolean = false) {
+    // Get current git hash for contextual verification
+    let currentHash = "unknown";
+    try {
+        const { execSync } = require("node:child_process");
+        currentHash = execSync("git rev-parse --short HEAD", { encoding: "utf-8" }).trim();
+    } catch {}
+
     const insert = this.db.prepare(`
-      INSERT INTO blackboard (author, message, topic, symbol_id)
-      VALUES (?, ?, ?, ?)
+      INSERT INTO blackboard (author, message, topic, symbol_id, git_hash, is_pinned)
+      VALUES (?, ?, ?, ?, ?, ?)
       RETURNING id
     `);
     
-    const res = insert.get(author, message, topic, symbolId || null) as { id: number };
+    const res = insert.get(author, message, topic, symbolId || null, currentHash, isPinned ? 1 : 0) as { id: number };
     
-    // Queue for embedding (blackboard search)
     this.db.prepare(`
       INSERT INTO embedding_queue (chunk_id, text_to_embed)
       VALUES (?, ?)
     `).run(`blackboard-${res.id}`, `${topic.toUpperCase()}: ${message}`);
+  }
+
+  public getGraffiti(symbolId: string, limit: number = 3) {
+    // Automatically archive notes older than 7 days that aren't pinned
+    this.db.prepare(`
+        UPDATE blackboard 
+        SET is_archived = 1 
+        WHERE is_pinned = 0 
+        AND timestamp < datetime('now', '-7 days')
+    `).run();
+
+    return this.db.prepare(`
+      SELECT author, message, timestamp, git_hash, is_pinned
+      FROM blackboard 
+      WHERE symbol_id = ? 
+      AND is_archived = 0
+      ORDER BY is_pinned DESC, timestamp DESC
+      LIMIT ?
+    `).all(symbolId, limit);
+  }
+
+  public archiveGraffiti(symbolId: string) {
+    this.db.prepare(`
+      UPDATE blackboard 
+      SET is_archived = 1 
+      WHERE symbol_id = ? AND is_pinned = 0
+    `).run(symbolId);
+  }
+
+  public pinGraffiti(id: number, pinned: boolean = true) {
+    this.db.prepare(`
+      UPDATE blackboard SET is_pinned = ? WHERE id = ?
+    `).run(pinned ? 1 : 0, id);
   }
 
   public readBlackboard(topic?: string, limit: number = 10) {
@@ -258,15 +300,6 @@ export class CodeGraphDB {
     return this.db.prepare(`
       SELECT * FROM blackboard ORDER BY timestamp DESC LIMIT ?
     `).all(limit);
-  }
-
-  public getGraffiti(symbolId: string) {
-    return this.db.prepare(`
-      SELECT author, message, timestamp 
-      FROM blackboard 
-      WHERE symbol_id = ? 
-      ORDER BY timestamp DESC
-    `).all(symbolId);
   }
 
   public acquireLock(resourceId: string, agentName: string, ttlSeconds: number = 300) {

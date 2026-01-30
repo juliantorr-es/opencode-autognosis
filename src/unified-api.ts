@@ -132,7 +132,7 @@ export function unifiedTools(): { [key: string]: any } {
     }),
 
     code_read: tool({
-      description: "Precise reading of symbols or file slices. Follows current plan. Checks for locks and returns graffiti.",
+      description: "Precise reading of symbols or file slices. Follows current plan. Checks for locks and returns historical graffiti.",
       args: {
         symbol: tool.schema.string().optional().describe("Symbol to jump to"),
         file: tool.schema.string().optional().describe("File path to read"),
@@ -145,7 +145,24 @@ export function unifiedTools(): { [key: string]: any } {
         if (resourceId) {
             getDb().logAccess(resourceId, args.plan_id);
             const lock = getDb().isLocked(resourceId);
-            const graffiti = getDb().getGraffiti(resourceId);
+            
+            // Smart History Housekeeping
+            const graffiti = getDb().getGraffiti(resourceId, 3); // Limit to top 3 recent/pinned notes
+            
+            // Contextual Verification: Get current hash
+            let currentHash = "";
+            try {
+                const { execSync } = await import("node:child_process");
+                currentHash = execSync("git rev-parse --short HEAD", { encoding: "utf-8" }).trim();
+            } catch {}
+
+            const verifiedGraffiti = graffiti.map((g: any) => ({
+                author: g.author,
+                message: g.message,
+                timestamp: g.timestamp,
+                status: g.git_hash !== currentHash ? "LEGACY (Potentially Outdated)" : "CURRENT",
+                is_pinned: !!g.is_pinned
+            }));
             
             let result: any;
             if (args.symbol) {
@@ -159,7 +176,7 @@ export function unifiedTools(): { [key: string]: any } {
                 ...parsed,
                 coordination: {
                     lock_status: lock ? `LOCKED by ${lock.owner_agent}` : "FREE",
-                    graffiti: graffiti.length > 0 ? graffiti : undefined
+                    historical_notes: verifiedGraffiti.length > 0 ? verifiedGraffiti : undefined
                 }
             }, null, 2);
         }
@@ -187,25 +204,22 @@ export function unifiedTools(): { [key: string]: any } {
               return internal.brief_fix_loop.execute({ symbol: args.symbol!, intent: args.intent! });
           }
           case "patch": {
-              // 1. Check for locks on all changed files
-              const { stdout: diff } = await (internal as any).runCmd("git diff");
               const { stdout: files } = await (internal as any).runCmd("git diff --name-only");
               const changedFiles = files.split('\n').filter(Boolean);
               
               for (const file of changedFiles) {
                   const lock = getDb().isLocked(file);
                   if (lock && lock.owner_agent !== agentName) {
-                      return JSON.stringify({ status: "COLLISION_PREVENTED", message: `File ${file} is locked by ${lock.owner_agent}. Use 'code_status' to investigate.` });
+                      return JSON.stringify({ status: "COLLISION_PREVENTED", message: `File ${file} is locked by ${lock.owner_agent}.` });
                   }
               }
 
-              // 2. Run Policy Engine
+              const { stdout: diff } = await (internal as any).runCmd("git diff");
               const violations = policyEngine.checkDiff(diff);
               if (violations.some(v => v.severity === "error")) {
                   return JSON.stringify({ status: "POLICY_VIOLATION", violations, message: "Patch rejected by policy engine." }, null, 2);
               }
 
-              // 3. Prepare patch and record intent
               const res = await internal.prepare_patch.execute({ message: args.message!, plan_id: args.plan_id });
               const json = JSON.parse(res);
               if (json.status === "SUCCESS") {
@@ -239,12 +253,13 @@ export function unifiedTools(): { [key: string]: any } {
     }),
 
     code_status: tool({
-      description: "Monitor system health, background jobs, Multi-Agent Blackboard, and Resource Locks.",
+      description: "Monitor system health, Multi-Agent Blackboard, and Resource Locks.",
       args: {
         mode: tool.schema.enum(["stats", "hot_files", "jobs", "plan", "doctor", "blackboard", "locks"]).optional().default("stats"),
-        action: tool.schema.enum(["post", "read", "lock", "unlock"]).optional(),
+        action: tool.schema.enum(["post", "read", "lock", "unlock", "archive", "pin"]).optional(),
         topic: tool.schema.string().optional().default("general"),
-        target: tool.schema.string().optional().describe("Resource ID (file/symbol) for locks or Symbol ID for graffiti"),
+        target: tool.schema.string().optional().describe("Resource ID (file/symbol) or Note ID"),
+        pinned: tool.schema.boolean().optional().default(false),
         message: tool.schema.string().optional(),
         job_id: tool.schema.string().optional(),
         plan_id: tool.schema.string().optional(),
@@ -264,8 +279,14 @@ export function unifiedTools(): { [key: string]: any } {
           }
           case "blackboard": {
               if (args.action === "post") {
-                  getDb().postToBlackboard(agentName, args.message!, args.topic, args.target);
+                  getDb().postToBlackboard(agentName, args.message!, args.topic, args.target, args.pinned);
                   return JSON.stringify({ status: "SUCCESS", message: "Posted to blackboard." });
+              } else if (args.action === "archive") {
+                  getDb().archiveGraffiti(args.target!);
+                  return JSON.stringify({ status: "SUCCESS", message: `Archived notes for ${args.target}` });
+              } else if (args.action === "pin") {
+                  getDb().pinGraffiti(parseInt(args.target!, 10), true);
+                  return JSON.stringify({ status: "SUCCESS", message: `Pinned note ${args.target}` });
               }
               return JSON.stringify({ status: "SUCCESS", entries: getDb().readBlackboard(args.topic) });
           }
