@@ -552,31 +552,38 @@ export function performanceTools(): { [key: string]: any } {
       description: "Check status of background tasks and operations.",
       args: {
         task_id: tool.schema.string().optional().describe("Specific task ID to check"),
-        task_type: tool.schema.enum(["indexing", "caching", "cleanup", "analysis"]).optional().describe("Filter by task type")
+        task_type: tool.schema.enum(["indexing", "caching", "cleanup", "analysis", "validation", "setup"]).optional().describe("Filter by task type")
       },
       async execute({ task_id, task_type }) {
         log("Tool call: perf_background_status", { task_id, task_type });
         
         try {
-          await ensurePerfDirs();
-          
-          const files = await fs.readdir(PERF_DIR);
           const tasks = [];
           
+          // 1. Check DB Jobs
+          if (task_id) {
+              const job = getDb().getJob(task_id);
+              if (job) tasks.push(job);
+          } else {
+              const dbJobs = getDb().listJobs(task_type as string, 10);
+              tasks.push(...dbJobs);
+          }
+
+          // 2. Check File-based tasks
+          await ensurePerfDirs();
+          const files = await fs.readdir(PERF_DIR);
           for (const file of files) {
             if (file.startsWith('task-') && file.endsWith('.json')) {
               try {
                 const taskPath = path.join(PERF_DIR, file);
                 const task = JSON.parse(await fs.readFile(taskPath, 'utf-8'));
-                
-                // Apply filters
                 if (task_id && task.id !== task_id) continue;
                 if (task_type && task.type !== task_type) continue;
-                
-                tasks.push(task);
-              } catch (error) {
-                // Skip corrupted files
-              }
+                // Avoid duplication if already in DB (shouldn't happen with new ID scheme)
+                if (!tasks.some(t => t.id === task.id)) {
+                    tasks.push(task);
+                }
+              } catch (error) {}
             }
           }
           

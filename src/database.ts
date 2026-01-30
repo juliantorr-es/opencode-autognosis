@@ -70,14 +70,80 @@ export class CodeGraphDB {
         FOREIGN KEY(source_chunk_id) REFERENCES chunks(id) ON DELETE CASCADE
       );
 
+      CREATE TABLE IF NOT EXISTS commits (
+        hash TEXT PRIMARY KEY,
+        author TEXT,
+        date DATETIME,
+        message TEXT,
+        files_touched TEXT -- JSON array of paths
+      );
+
+      CREATE TABLE IF NOT EXISTS plan_ledger (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        plan_id TEXT,
+        tool_name TEXT,
+        args TEXT,
+        is_on_plan BOOLEAN,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+      );
+
+      CREATE TABLE IF NOT EXISTS background_jobs (
+        id TEXT PRIMARY KEY,
+        type TEXT, -- 'validation', 'setup', 'indexing'
+        status TEXT DEFAULT 'pending', -- pending, running, completed, failed
+        progress INTEGER DEFAULT 0,
+        result TEXT,
+        error TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      );
+
       -- Indexes for performance
       CREATE INDEX IF NOT EXISTS idx_files_path ON files(path);
       CREATE INDEX IF NOT EXISTS idx_symbols_name ON symbols(name);
       CREATE INDEX IF NOT EXISTS idx_dependencies_target ON dependencies(target_path);
+      CREATE INDEX IF NOT EXISTS idx_ledger_plan ON plan_ledger(plan_id);
+      CREATE INDEX IF NOT EXISTS idx_jobs_status ON background_jobs(status);
     `);
 
     // Migrations
     try { this.db.exec("ALTER TABLE chunks ADD COLUMN embedding BLOB"); } catch {}
+  }
+
+  /**
+   * Background Job Management
+   */
+  public createJob(id: string, type: string, metadata?: any): void {
+    this.db.prepare(`
+      INSERT INTO background_jobs (id, type, status, progress, result)
+      VALUES (?, ?, 'pending', 0, ?)
+    `).run(id, type, metadata ? JSON.stringify(metadata) : null);
+  }
+
+  public updateJob(id: string, updates: { status?: string, progress?: number, result?: string, error?: string }): void {
+    const sets: string[] = [];
+    const params: any[] = [];
+    
+    if (updates.status) { sets.push("status = ?"); params.push(updates.status); }
+    if (updates.progress !== undefined) { sets.push("progress = ?"); params.push(updates.progress); }
+    if (updates.result) { sets.push("result = ?"); params.push(updates.result); }
+    if (updates.error) { sets.push("error = ?"); params.push(updates.error); }
+    
+    sets.push("updated_at = CURRENT_TIMESTAMP");
+    params.push(id);
+
+    this.db.prepare(`UPDATE background_jobs SET ${sets.join(", ")} WHERE id = ?`).run(...params);
+  }
+
+  public getJob(id: string) {
+    return this.db.prepare("SELECT * FROM background_jobs WHERE id = ?").get(id);
+  }
+
+  public listJobs(type?: string, limit: number = 10) {
+    if (type) {
+      return this.db.prepare("SELECT * FROM background_jobs WHERE type = ? ORDER BY created_at DESC LIMIT ?").all(type, limit);
+    }
+    return this.db.prepare("SELECT * FROM background_jobs ORDER BY created_at DESC LIMIT ?").all(limit);
   }
 
   private async startWorker() {
@@ -89,7 +155,7 @@ export class CodeGraphDB {
       try {
         await this.processEmbeddingQueue();
       } catch (e) {
-        // console.error("Worker error:", e);
+        // Log to file if needed, but avoid console to protect TUI
       }
     }, 5000); // Check every 5s
   }
@@ -133,10 +199,8 @@ export class CodeGraphDB {
       }
     } catch (error) {
       if (task.retries > 3) {
-        // Give up
         this.db.prepare("UPDATE embedding_queue SET status = 'failed' WHERE chunk_id = ?").run(task.chunk_id);
       } else {
-        // Retry
         this.db.prepare("UPDATE embedding_queue SET status = 'pending', retries = retries + 1 WHERE chunk_id = ?").run(task.chunk_id);
       }
     }
@@ -144,7 +208,6 @@ export class CodeGraphDB {
 
   /**
    * Syncs a ChunkCard (JSON) into the SQLite Index.
-   * This is an "Upsert" operation.
    */
   public ingestChunkCard(card: ChunkCard) {
     const insertFile = this.db.prepare(`
@@ -185,31 +248,21 @@ export class CodeGraphDB {
     const deleteOldDeps = this.db.prepare('DELETE FROM dependencies WHERE source_chunk_id = ?');
 
     const transaction = this.db.transaction(() => {
-      // 1. Upsert File
       const fileRes = insertFile.get(card.file_path, card.metadata.hash) as { id: number };
       const fileId = fileRes.id;
 
-      // 2. Upsert Chunk
-      insertChunk.run(
-        card.id,
-        fileId,
-        card.chunk_type,
-        card.metadata.complexity_score,
-        card.content.slice(0, 500) // Store preview
-      );
+      insertChunk.run(card.id, fileId, card.chunk_type, card.metadata.complexity_score, card.content.slice(0, 500));
 
-      // 3. Queue for Embedding
-      // Use the summary or content as the text to embed
-      const textToEmbed = `${card.chunk_type.toUpperCase()} for ${path.basename(card.file_path)}\n\n${card.content.slice(0, 2000)}`;
+      const textToEmbed = `${card.chunk_type.toUpperCase()} for ${path.basename(card.file_path)}
+
+${card.content.slice(0, 2000)}`;
       queueEmbedding.run(card.id, textToEmbed);
 
-      // 4. Replace Symbols
       deleteOldSymbols.run(card.id);
       for (const sym of card.metadata.symbols) {
         insertSymbol.run(card.id, sym);
       }
 
-      // 5. Replace Dependencies
       deleteOldDeps.run(card.id);
       for (const dep of card.metadata.dependencies) {
         insertDep.run(card.id, dep);
@@ -219,20 +272,69 @@ export class CodeGraphDB {
     transaction();
   }
 
-  /**
-   * Remove a card from the index
-   */
   public deleteChunkCard(cardId: string) {
     this.db.prepare('DELETE FROM chunks WHERE id = ?').run(cardId);
   }
 
-  // ===========================================================================
-  // QUERY METHODS
-  // ===========================================================================
+  public recordExecution(planId: string | undefined, toolName: string, args: any, isOnPlan: boolean) {
+    this.db.prepare(`
+      INSERT INTO plan_ledger (plan_id, tool_name, args, is_on_plan)
+      VALUES (?, ?, ?, ?)
+    `).run(planId || 'no-plan', toolName, JSON.stringify(args), isOnPlan ? 1 : 0);
+  }
+
+  public ingestCommits(commits: any[]) {
+    const insert = this.db.prepare(`
+      INSERT INTO commits (hash, author, date, message, files_touched)
+      VALUES (?, ?, ?, ?, ?)
+      ON CONFLICT(hash) DO NOTHING
+    `);
+
+    const transaction = this.db.transaction((data) => {
+      for (const c of data) {
+        insert.run(c.hash, c.author, c.date, c.message, JSON.stringify(c.files));
+      }
+    });
+    transaction(commits);
+  }
+
+  public getHotFiles(pathPrefix: string = '', limit: number = 10) {
+    const recent = this.db.prepare(`
+      SELECT files_touched FROM commits ORDER BY date DESC LIMIT 100
+    `).all() as { files_touched: string }[];
+
+    const counts: Record<string, number> = {};
+    for (const r of recent) {
+      try {
+        const files = JSON.parse(r.files_touched);
+        for (const f of files) {
+          if (f.startsWith(pathPrefix)) {
+            counts[f] = (counts[f] || 0) + 1;
+          }
+        }
+      } catch {}
+    }
+
+    return Object.entries(counts)
+      .map(([path, count]) => ({ path, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, limit);
+  }
+
+  public getPlanMetrics(planId: string) {
+    const total = this.db.prepare("SELECT COUNT(*) as c FROM plan_ledger WHERE plan_id = ?").get(planId) as { c: number };
+    const onPlan = this.db.prepare("SELECT COUNT(*) as c FROM plan_ledger WHERE plan_id = ? AND is_on_plan = 1").get(planId) as { c: number };
+    const offPlan = this.db.prepare("SELECT COUNT(*) as c FROM plan_ledger WHERE plan_id = ? AND is_on_plan = 0").get(planId) as { c: number };
+    
+    return {
+      total: total.c,
+      on_plan: onPlan.c,
+      off_plan: offPlan.c,
+      compliance: total.c > 0 ? Math.round((onPlan.c / total.c) * 100) : 100
+    };
+  }
 
   public findDependents(filePath: string): string[] {
-    // Find all chunks that depend on this file path
-    // Note: dependency paths might be relative or absolute, simplistic matching for now
     const query = this.db.prepare(`
       SELECT DISTINCT f.path 
       FROM files f
@@ -240,8 +342,6 @@ export class CodeGraphDB {
       JOIN dependencies d ON c.id = d.source_chunk_id
       WHERE d.target_path LIKE ? OR d.target_path = ?
     `);
-    
-    // Attempt to match exact path or likely relative imports (simplistic)
     const basename = path.basename(filePath);
     const results = query.all(`%/${basename}%`, basename) as { path: string }[];
     return results.map(r => r.path);
@@ -263,13 +363,9 @@ export class CodeGraphDB {
     if (!(await ollama.isRunning())) {
       throw new Error("Ollama is not running. Please run 'autognosis_setup_ai' first.");
     }
-
     const queryVec = await ollama.getEmbedding(query);
     if (queryVec.length === 0) return [];
 
-    // Get all embeddings from DB
-    // SQLite doesn't have vector math, so we fetch all and sort in JS
-    // Optimizations: In future, use sqlite-vec or filter by complexity/type first
     const chunks = this.db.prepare(`
       SELECT c.id, c.content_summary, c.type, f.path, c.embedding
       FROM chunks c
@@ -280,7 +376,7 @@ export class CodeGraphDB {
     const results = chunks.map(chunk => {
       const vector = new Float32Array(chunk.embedding.buffer, chunk.embedding.byteOffset, chunk.embedding.byteLength / 4);
       const similarity = this.cosineSimilarity(queryVec, vector);
-      return { ...chunk, similarity, embedding: undefined }; // Don't return blob
+      return { ...chunk, similarity, embedding: undefined };
     });
 
     results.sort((a, b) => b.similarity - a.similarity);
@@ -288,9 +384,7 @@ export class CodeGraphDB {
   }
 
   private cosineSimilarity(vecA: number[], vecB: Float32Array): number {
-    let dot = 0;
-    let normA = 0;
-    let normB = 0;
+    let dot = 0, normA = 0, normB = 0;
     for (let i = 0; i < vecA.length; i++) {
       dot += vecA[i] * vecB[i];
       normA += vecA[i] * vecA[i];
@@ -306,133 +400,141 @@ export class CodeGraphDB {
     const chunks = this.db.prepare('SELECT COUNT(*) as c FROM chunks').get() as { c: number };
     const embedded = this.db.prepare('SELECT COUNT(*) as c FROM chunks WHERE embedding IS NOT NULL').get() as { c: number };
     const queue = this.db.prepare("SELECT COUNT(*) as c FROM embedding_queue WHERE status = 'pending'").get() as { c: number };
-    
     return {
-      files: files.c,
-      chunks: chunks.c,
-      symbols: symbols.c,
-      dependencies: deps.c,
-      embeddings: {
-        completed: embedded.c,
-        pending: queue.c
-      }
+      files: files.c, chunks: chunks.c, symbols: symbols.c, dependencies: deps.c,
+      embeddings: { completed: embedded.c, pending: queue.c }
     };
   }
 }
 
-// Singleton instance for the plugin
 let dbInstance: CodeGraphDB | null = null;
-
 export function getDb(): CodeGraphDB {
-  if (!dbInstance) {
-    dbInstance = new CodeGraphDB();
-  }
+  if (!dbInstance) dbInstance = new CodeGraphDB();
   return dbInstance;
 }
 
 export function graphTools(): { [key: string]: any } {
   return {
     autognosis_setup_ai: tool({
-        description: "Configure local AI capabilities (Ollama). Checks installation, installs if needed, and pulls the embedding model.",
-        args: {
-            model: tool.schema.string().optional().default(DEFAULT_EMBEDDING_MODEL).describe("Embedding model to pull")
-        },
+        description: "Configure local AI capabilities (Ollama) in the background.",
+        args: { model: tool.schema.string().optional().default(DEFAULT_EMBEDDING_MODEL) },
         async execute({ model }) {
-            try {
-                const installed = await ollama.isInstalled();
-                let statusMsg = "Ollama is installed.";
-                
-                if (!installed) {
-                    statusMsg = await ollama.install();
-                }
-                
-                await ollama.startServer();
-                await ollama.pullModel(model);
-                
-                return JSON.stringify({
-                    status: "SUCCESS",
-                    message: `${statusMsg} Server is running. Model ${model} is ready.`,
-                    config: {
-                        model,
-                        base_url: "http://127.0.0.1:11434"
+            const jobId = `job-setup-ai-${Date.now()}`;
+            getDb().createJob(jobId, "setup", { model });
+
+            (async () => {
+                try {
+                    getDb().updateJob(jobId, { status: "running", progress: 10 });
+                    if (!(await ollama.isInstalled())) {
+                        await ollama.install();
                     }
-                }, null, 2);
-            } catch (error) {
-                return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2);
-            }
+                    getDb().updateJob(jobId, { progress: 40 });
+                    await ollama.startServer();
+                    getDb().updateJob(jobId, { progress: 60 });
+                    await ollama.pullModel(model);
+                    getDb().updateJob(jobId, { 
+                        status: "completed", 
+                        progress: 100, 
+                        result: `Model ${model} is ready.` 
+                    });
+                } catch (error: any) {
+                    getDb().updateJob(jobId, { status: "failed", error: error.message });
+                }
+            })();
+
+            return JSON.stringify({ 
+                status: "STARTED", 
+                message: "AI Setup started in background.", 
+                job_id: jobId,
+                instruction: "Use graph_background_status to check progress."
+            }, null, 2);
         }
     }),
-
     graph_semantic_search: tool({
-      description: "Search the codebase using natural language (Vector/Semantic Search). Requires AI setup.",
-      args: {
-        query: tool.schema.string().describe("Natural language query"),
-        limit: tool.schema.number().optional().default(10).describe("Max results")
-      },
+      description: "Search the codebase using natural language (Vector/Semantic Search).",
+      args: { query: tool.schema.string(), limit: tool.schema.number().optional().default(10) },
       async execute({ query, limit }) {
         try {
           const results = await getDb().semanticSearch(query, limit);
-          return JSON.stringify({
-            status: "SUCCESS",
-            query,
-            results
-          }, null, 2);
-        } catch (error) {
-          return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2);
-        }
+          return JSON.stringify({ status: "SUCCESS", query, results }, null, 2);
+        } catch (error) { return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2); }
       }
     }),
-
     graph_query_dependents: tool({
-      description: "Find all files that depend on a specific file (upstream impact analysis).",
-      args: {
-        file_path: tool.schema.string().describe("File path to analyze"),
-      },
+      description: "Find all files that depend on a specific file.",
+      args: { file_path: tool.schema.string() },
       async execute({ file_path }) {
         try {
           const dependents = getDb().findDependents(file_path);
-          return JSON.stringify({
-            status: "SUCCESS",
-            file_path,
-            dependents,
-            count: dependents.length
-          }, null, 2);
-        } catch (error) {
-          return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2);
-        }
+          return JSON.stringify({ status: "SUCCESS", file_path, dependents, count: dependents.length }, null, 2);
+        } catch (error) { return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2); }
       }
     }),
-
     graph_search_symbols: tool({
-      description: "Fast fuzzy search for symbols (functions, classes) across the entire codebase index.",
-      args: {
-        query: tool.schema.string().describe("Symbol name query"),
-      },
+      description: "Fast fuzzy search for symbols across the entire codebase index.",
+      args: { query: tool.schema.string() },
       async execute({ query }) {
         try {
           const results = getDb().searchSymbols(query);
-          return JSON.stringify({
-            status: "SUCCESS",
-            query,
-            results,
-            count: results.length
-          }, null, 2);
-        } catch (error) {
-          return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2);
-        }
+          return JSON.stringify({ status: "SUCCESS", query, results, count: results.length }, null, 2);
+        } catch (error) { return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2); }
       }
     }),
-    
     graph_stats: tool({
       description: "Get statistics about the Code Graph Index.",
       args: {},
       async execute() {
+        try { return JSON.stringify({ status: "SUCCESS", stats: getDb().getStats() }, null, 2); }
+        catch (error) { return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2); }
+      }
+    }),
+    journal_build: tool({
+      description: "Scan git history and populate the Change Journal.",
+      args: { limit: tool.schema.number().optional().default(100) },
+      async execute({ limit }) {
         try {
-          const stats = getDb().getStats();
-          return JSON.stringify({
-            status: "SUCCESS",
-            stats
-          }, null, 2);
+          const { execSync } = await import("node:child_process");
+          const logOut = execSync(`git log -n ${limit} --pretty=format:"%H|%an|%ad|%s" --date=iso`, { encoding: 'utf-8' });
+          const commits = logOut.split('\n').filter(Boolean).map(line => {
+            const [hash, author, date, message] = line.split('|');
+            const files = execSync(`git show --name-only --pretty="" ${hash}`, { encoding: 'utf-8' }).split('\n').filter(Boolean);
+            return { hash, author, date, message, files };
+          });
+          getDb().ingestCommits(commits);
+          return JSON.stringify({ status: "SUCCESS", message: `Ingested ${commits.length} commits.` }, null, 2);
+        } catch (error) { return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2); }
+      }
+    }),
+    journal_query_hot_files: tool({
+      description: "Query the Change Journal for frequently changed files.",
+      args: { path_prefix: tool.schema.string().optional().default(""), limit: tool.schema.number().optional().default(10) },
+      async execute({ path_prefix, limit }) {
+        try { return JSON.stringify({ status: "SUCCESS", hot_files: getDb().getHotFiles(path_prefix, limit) }, null, 2); }
+        catch (error) { return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2); }
+      }
+    }),
+    graph_get_plan_metrics: tool({
+      description: "Retrieve execution metrics for a specific plan ID.",
+      args: { plan_id: tool.schema.string() },
+      async execute({ plan_id }) {
+        try { return JSON.stringify({ status: "SUCCESS", plan_id, metrics: getDb().getPlanMetrics(plan_id) }, null, 2); }
+        catch (error) { return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2); }
+      }
+    }),
+
+    graph_background_status: tool({
+      description: "Check status of background tasks (validation, setup, indexing).",
+      args: { 
+        job_id: tool.schema.string().optional(),
+        type: tool.schema.enum(["validation", "setup", "indexing"]).optional(),
+        limit: tool.schema.number().optional().default(5)
+      },
+      async execute({ job_id, type, limit }) {
+        try {
+          if (job_id) {
+            return JSON.stringify({ status: "SUCCESS", job: getDb().getJob(job_id) }, null, 2);
+          }
+          return JSON.stringify({ status: "SUCCESS", jobs: getDb().listJobs(type, limit) }, null, 2);
         } catch (error) {
           return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2);
         }

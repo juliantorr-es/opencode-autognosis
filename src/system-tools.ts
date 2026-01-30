@@ -6,6 +6,7 @@ import * as path from "node:path";
 import { promisify } from "node:util";
 import * as crypto from "node:crypto";
 import { Logger } from "./services/logger.js";
+import { getDb } from "./database.js";
 
 const execAsync = promisify(exec);
 const PROJECT_ROOT = process.cwd();
@@ -98,7 +99,11 @@ async function maintainSymbolIndex() {
 // =============================================================================
 
 export function systemTools(): { [key: string]: any } {
-  let pendingInitToken: string | null = null; // State for init token
+  let pendingInitToken: string | null = null;
+
+  const record = (planId: string | undefined, tool: string, args: any) => {
+    getDb().recordExecution(planId, tool, args, !!planId);
+  };
 
   return {
     autognosis_init: tool({
@@ -109,6 +114,7 @@ export function systemTools(): { [key: string]: any } {
       },
       async execute({ mode, token }) {
         log("Tool call: autognosis_init", { mode });
+        record(undefined, "autognosis_init", { mode });
         if (mode === "plan") {
           const checks = { 
             rg: await checkBinary("rg"), 
@@ -143,10 +149,12 @@ export function systemTools(): { [key: string]: any } {
       args: {
         query: tool.schema.string(),
         mode: tool.schema.enum(["filename", "content"]).optional().default("filename"),
-        path: tool.schema.string().optional().default(".")
+        path: tool.schema.string().optional().default("."),
+        plan_id: tool.schema.string().optional().describe("Associated Plan ID")
       },
-      async execute({ query, mode, path: searchPath }) {
-        log("Tool call: fast_search", { query, mode, searchPath });
+      async execute({ query, mode, path: searchPath, plan_id }) {
+        log("Tool call: fast_search", { query, mode, searchPath, plan_id });
+        record(plan_id, "fast_search", { query, mode, searchPath });
         if (mode === "content") {
           if (!(await checkBinary("rg"))) return "Error: 'rg' not installed.";
           const { stdout } = await runCmd(`rg -n --column "${query}" "${searchPath}"`);
@@ -166,10 +174,12 @@ export function systemTools(): { [key: string]: any } {
       args: {
         file: tool.schema.string(),
         start_line: tool.schema.number(),
-        end_line: tool.schema.number()
+        end_line: tool.schema.number(),
+        plan_id: tool.schema.string().optional().describe("Associated Plan ID")
       },
-      async execute({ file, start_line, end_line }) {
-        log("Tool call: read_slice", { file, start_line, end_line });
+      async execute({ file, start_line, end_line, plan_id }) {
+        log("Tool call: read_slice", { file, start_line, end_line, plan_id });
+        record(plan_id, "read_slice", { file, start_line, end_line });
         const { stdout, stderr } = await runCmd(`sed -n '${start_line},${end_line}p;${end_line + 1}q' "${file}"`);
         if (stderr) return `Error: ${stderr}`;
         return JSON.stringify({ file, start_line, end_line, content: stdout }, null, 2);
@@ -179,10 +189,12 @@ export function systemTools(): { [key: string]: any } {
     symbol_query: tool({
       description: "Query the symbol index. Rebuilds automatically if stale.",
       args: {
-        symbol: tool.schema.string()
+        symbol: tool.schema.string(),
+        plan_id: tool.schema.string().optional().describe("Associated Plan ID")
       },
-      async execute({ symbol }) {
-        log("Tool call: symbol_query", { symbol });
+      async execute({ symbol, plan_id }) {
+        log("Tool call: symbol_query", { symbol, plan_id });
+        record(plan_id, "symbol_query", { symbol });
         const maint = await maintainSymbolIndex();
         if (maint.status === "unavailable") return JSON.stringify({ error: maint.reason });
         const tagsFile = path.join(CACHE_DIR, "tags");
@@ -194,10 +206,12 @@ export function systemTools(): { [key: string]: any } {
     jump_to_symbol: tool({
       description: "Jump to a symbol's definition by querying the index and reading the slice.",
       args: {
-        symbol: tool.schema.string()
+        symbol: tool.schema.string(),
+        plan_id: tool.schema.string().optional().describe("Associated Plan ID")
       },
-      async execute({ symbol }) {
-        log("Tool call: jump_to_symbol", { symbol });
+      async execute({ symbol, plan_id }) {
+        log("Tool call: jump_to_symbol", { symbol, plan_id });
+        record(plan_id, "jump_to_symbol", { symbol });
         const maint = await maintainSymbolIndex();
         if (maint.status !== "ok") return JSON.stringify({ error: maint.reason });
         const tagsFile = path.join(CACHE_DIR, "tags");
@@ -222,35 +236,129 @@ export function systemTools(): { [key: string]: any } {
       async execute({ symbol, intent }) {
         log("Tool call: brief_fix_loop", { symbol, intent });
         const planId = `plan-${Date.now()}`;
-        return JSON.stringify({ plan_id: planId, symbol, intent, status: "PLAN_GENERATED" }, null, 2);
+        record(planId, "brief_fix_loop", { symbol, intent });
+        
+        const maint = await maintainSymbolIndex();
+        const tagsFile = path.join(CACHE_DIR, "tags");
+        const { stdout: tagLine } = await runCmd(`grep -P "^${symbol}\t" "${tagsFile}" | head -n 1`);
+        const locusFile = tagLine ? tagLine.split('\t')[1] : null;
+        
+        let dependents: string[] = [];
+        let hotFiles: any[] = [];
+        if (locusFile) {
+            dependents = getDb().findDependents(locusFile);
+            hotFiles = getDb().getHotFiles('', 20);
+        }
+
+        const worklist = dependents.map(d => ({
+            file: d,
+            is_hot: hotFiles.some(h => h.path === d),
+            reason: "Dependency impact"
+        }));
+
+        return JSON.stringify({
+            plan_id: planId,
+            symbol,
+            intent,
+            locus: { file: locusFile },
+            worklist,
+            status: "PLAN_GENERATED",
+            metadata: { 
+                fingerprint: maint.status,
+                generated_at: new Date().toISOString()
+            }
+        }, null, 2);
       }
     }),
 
     prepare_patch: tool({
       description: "Generate a .diff artifact for the current changes.",
       args: {
-        message: tool.schema.string()
+        message: tool.schema.string(),
+        plan_id: tool.schema.string().optional().describe("Associated Plan ID")
       },
-      async execute({ message }) {
-        log("Tool call: prepare_patch", { message });
+      async execute({ message, plan_id }) {
+        log("Tool call: prepare_patch", { message, plan_id });
+        record(plan_id, "prepare_patch", { message });
         await ensureCache();
-        const patchPath = path.join(CACHE_DIR, `patch-${Date.now()}.diff`);
-        const { stdout } = await runCmd("git diff");
-        if (!stdout) return "No changes to patch.";
-        await fs.writeFile(patchPath, `// MSG: ${message}\n\n${stdout}`);
-        return `Patch saved to ${patchPath}`;
+        const patchId = `patch-${Date.now()}`;
+        const patchPath = path.join(CACHE_DIR, `${patchId}.diff`);
+        const { stdout: diff } = await runCmd("git diff");
+        if (!diff) return "No changes to patch.";
+        
+        const header = {
+            patch_id: patchId,
+            plan_id: plan_id || "adhoc",
+            message,
+            created_at: new Date().toISOString()
+        };
+        
+        await fs.writeFile(patchPath, `// PATCH_METADATA: ${JSON.stringify(header)}\n\n${diff}`);
+        return JSON.stringify({ status: "SUCCESS", patch_id: patchId, path: patchPath }, null, 2);
       }
     }),
 
     validate_patch: tool({
-      description: "Validate a patch by applying it in a fresh worktree.",
+      description: "Validate a patch by applying it in a fresh worktree and running build (Background Job).",
       args: {
-        patch_path: tool.schema.string()
+        patch_path: tool.schema.string(),
+        plan_id: tool.schema.string().optional().describe("Associated Plan ID")
       },
-      async execute({ patch_path }) {
-        log("Tool call: validate_patch", { patch_path });
-        const { error } = await runCmd(`git apply --check "${patch_path}"`);
-        return error ? `FAILED: ${error.message}` : "SUCCESS: Patch is valid against current HEAD.";
+      async execute({ patch_path, plan_id }) {
+        log("Tool call: validate_patch (background)", { patch_path, plan_id });
+        record(plan_id, "validate_patch", { patch_path });
+        
+        const jobId = `job-validate-${Date.now()}`;
+        getDb().createJob(jobId, "validation", { patch_path, plan_id });
+
+        // Spawn background worker
+        (async () => {
+            getDb().updateJob(jobId, { status: "running", progress: 10 });
+            const tempWorktree = path.join(PROJECT_ROOT, ".opencode", "temp-" + jobId);
+            try {
+                await runCmd(`git worktree add -d "${tempWorktree}"`);
+                getDb().updateJob(jobId, { progress: 30 });
+                
+                const content = await fs.readFile(patch_path, "utf-8");
+                const parts = content.split('\n\n');
+                const diffOnly = parts.length > 1 ? parts.slice(1).join('\n\n') : content;
+                const tempDiff = path.join(tempWorktree, "valid.diff");
+                await fs.writeFile(tempDiff, diffOnly);
+                
+                const { error: applyError } = await runCmd(`git apply "${tempDiff}"`, tempWorktree);
+                if (applyError) throw new Error(`Apply failed: ${applyError.message}`);
+                getDb().updateJob(jobId, { progress: 60 });
+                
+                let buildStatus = "SKIPPED";
+                if (fsSync.existsSync(path.join(tempWorktree, "package.json"))) {
+                    const { error: buildError } = await runCmd("npm run build", tempWorktree);
+                    buildStatus = buildError ? "FAILED" : "SUCCESS";
+                } else if (fsSync.existsSync(path.join(tempWorktree, "Package.swift"))) {
+                    const { error: buildError } = await runCmd("swift build", tempWorktree);
+                    buildStatus = buildError ? "FAILED" : "SUCCESS";
+                }
+                
+                getDb().updateJob(jobId, { 
+                    status: "completed", 
+                    progress: 100, 
+                    result: JSON.stringify({ apply: "OK", build: buildStatus }) 
+                });
+            } catch (error: any) {
+                getDb().updateJob(jobId, { status: "failed", error: error.message });
+            } finally {
+                try {
+                    await runCmd(`git worktree remove -f "${tempWorktree}"`);
+                    if (fsSync.existsSync(tempWorktree)) await fs.rm(tempWorktree, { recursive: true, force: true });
+                } catch (e) {}
+            }
+        })();
+
+        return JSON.stringify({ 
+            status: "STARTED", 
+            message: "Validation started in background.", 
+            job_id: jobId,
+            instruction: "Use perf_background_status to check progress."
+        }, null, 2);
       }
     }),
 
@@ -262,11 +370,19 @@ export function systemTools(): { [key: string]: any } {
       },
       async execute({ plan_id, outcome }) {
         log("Tool call: finalize_plan", { plan_id, outcome });
-        await ensureCache();
-        const report = { plan_id, outcome, time: new Date().toISOString() };
+        record(plan_id, "finalize_plan", { outcome });
+        
+        const metrics = getDb().getPlanMetrics(plan_id);
+        const report = { 
+            plan_id, 
+            outcome, 
+            metrics,
+            finished_at: new Date().toISOString() 
+        };
+        
         await fs.appendFile(path.join(CACHE_DIR, "gaps.jsonl"), JSON.stringify(report) + "\n");
         const deleted = await cleanCache();
-        return `Finalized. Cache hygiene: deleted ${deleted} old items.`;
+        return JSON.stringify({ status: "FINALIZED", report, cache_cleared: deleted }, null, 2);
       }
     })
   };
