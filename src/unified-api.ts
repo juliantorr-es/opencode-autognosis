@@ -40,14 +40,14 @@ async function updateBridgePrompt(plugins: string[]) {
     if (!fsSync.existsSync(bridgePath)) return "bridge.md not found at " + bridgePath;
 
     const toolsSection = `
-## Current Consolidated Tools (Autognosis v2.3)
+## Current Consolidated Tools (Autognosis v2.4)
 - code_search: Universal search (semantic, symbol, filename, content).
 - code_analyze: Deep structural analysis and impact reports.
-- code_context: Working memory (ActiveSet) management, LRU eviction, and Symbol Graffiti.
-- code_read: Precise symbol jumping and file slicing with Mutex Lock checks.
-- code_propose: Planning, patch generation, PR promotion, and Intent indexing.
-- code_status: System health, background jobs, Multi-Agent Blackboard, and Resource Locks.
-- code_setup: Environment initialization, AI setup, and Architectural Boundaries.
+- code_context: Working memory management and LRU eviction.
+- code_read: Precise reading with Mutex Lock checks and Graffiti retrieval.
+- code_propose: Planning, patching, validation, and PR promotion. Now features surgical test scoping.
+- code_status: Dashboard, background jobs, blackboard, and resource locks.
+- code_setup: Environment initialization and architectural boundaries.
 
 ## Other Detected Plugins
 ${plugins.filter(p => p !== "opencode-autognosis").map(p => `- ${p}`).join('\n')}
@@ -145,11 +145,8 @@ export function unifiedTools(): { [key: string]: any } {
         if (resourceId) {
             getDb().logAccess(resourceId, args.plan_id);
             const lock = getDb().isLocked(resourceId);
+            const graffiti = getDb().getGraffiti(resourceId, 3);
             
-            // Smart History Housekeeping
-            const graffiti = getDb().getGraffiti(resourceId, 3); // Limit to top 3 recent/pinned notes
-            
-            // Contextual Verification: Get current hash
             let currentHash = "";
             try {
                 const { execSync } = await import("node:child_process");
@@ -185,10 +182,10 @@ export function unifiedTools(): { [key: string]: any } {
     }),
 
     code_propose: tool({
-      description: "Plan, propose, and promote changes. Automatically handles coordination pulse and lock checks.",
+      description: "Plan, propose, and promote changes. Includes patch generation, surgical test scoping, and PR promotion.",
       args: {
         action: tool.schema.enum(["plan", "patch", "validate", "finalize", "promote"]),
-        symbol: tool.schema.string().optional(),
+        symbol: tool.schema.string().optional().describe("Locus symbol for plan"),
         intent: tool.schema.string().optional(),
         reasoning: tool.schema.string().optional(),
         message: tool.schema.string().optional(),
@@ -206,20 +203,17 @@ export function unifiedTools(): { [key: string]: any } {
           case "patch": {
               const { stdout: files } = await (internal as any).runCmd("git diff --name-only");
               const changedFiles = files.split('\n').filter(Boolean);
-              
               for (const file of changedFiles) {
                   const lock = getDb().isLocked(file);
                   if (lock && lock.owner_agent !== agentName) {
                       return JSON.stringify({ status: "COLLISION_PREVENTED", message: `File ${file} is locked by ${lock.owner_agent}.` });
                   }
               }
-
               const { stdout: diff } = await (internal as any).runCmd("git diff");
               const violations = policyEngine.checkDiff(diff);
               if (violations.some(v => v.severity === "error")) {
                   return JSON.stringify({ status: "POLICY_VIOLATION", violations, message: "Patch rejected by policy engine." }, null, 2);
               }
-
               const res = await internal.prepare_patch.execute({ message: args.message!, plan_id: args.plan_id });
               const json = JSON.parse(res);
               if (json.status === "SUCCESS") {
@@ -229,8 +223,28 @@ export function unifiedTools(): { [key: string]: any } {
               return res;
           }
           case "validate": {
-              getDb().postToBlackboard(agentName, `Validating patch ${args.patch_path}`, "pulse");
-              return internal.validate_patch.execute({ patch_path: args.patch_path!, plan_id: args.plan_id });
+              // 1. Arch Check
+              const { stdout: diff } = await (internal as any).runCmd("git diff --name-only");
+              const changedFiles = diff.split('\n').filter(Boolean);
+              for (const file of changedFiles) {
+                  const deps = await internal.extractDependencies.execute({ content: "", ast: null, filePath: file });
+                  const imports = JSON.parse(deps);
+                  for (const imp of imports) {
+                      const violation = getDb().checkArchViolation(file, imp);
+                      if (violation) return JSON.stringify({ status: "ARCH_VIOLATION", file, forbidden_import: imp, rule: violation }, null, 2);
+                  }
+              }
+              
+              // 2. Surgical Test Scoping
+              let focusTests: string[] = [];
+              if (args.symbol) {
+                  focusTests = getDb().findAffectedTests(args.symbol);
+              }
+
+              getDb().postToBlackboard(agentName, `Validating patch ${args.patch_path}. Scoped tests: ${focusTests.length}`, "pulse");
+              
+              // Call validation with scoped tests hint
+              return internal.validate_patch.execute({ patch_path: args.patch_path!, plan_id: args.plan_id, tests: focusTests });
           }
           case "promote": {
               const branch = args.branch || `autognosis-fix-${Date.now()}`;
@@ -253,12 +267,12 @@ export function unifiedTools(): { [key: string]: any } {
     }),
 
     code_status: tool({
-      description: "Monitor system health, Multi-Agent Blackboard, and Resource Locks.",
+      description: "Monitor system health, background jobs, Multi-Agent Blackboard, and Resource Locks.",
       args: {
-        mode: tool.schema.enum(["stats", "hot_files", "jobs", "plan", "doctor", "blackboard", "locks"]).optional().default("stats"),
+        mode: tool.schema.enum(["stats", "hot_files", "jobs", "plan", "doctor", "blackboard", "locks", "dashboard"]).optional().default("stats"),
         action: tool.schema.enum(["post", "read", "lock", "unlock", "archive", "pin"]).optional(),
         topic: tool.schema.string().optional().default("general"),
-        target: tool.schema.string().optional().describe("Resource ID (file/symbol) or Note ID"),
+        target: tool.schema.string().optional().describe("Resource ID or Note ID"),
         pinned: tool.schema.boolean().optional().default(false),
         message: tool.schema.string().optional(),
         job_id: tool.schema.string().optional(),
@@ -267,6 +281,28 @@ export function unifiedTools(): { [key: string]: any } {
       },
       async execute(args) {
         switch (args.mode) {
+          case "dashboard": {
+              const stats = getDb().getStats();
+              const locks = getDb().listLocks();
+              const jobs = getDb().listJobs();
+              const compliance = args.plan_id ? getDb().getPlanMetrics(args.plan_id) : null;
+              
+              let dashboard = `# Autognosis TUI Dashboard\n\n`;
+              dashboard += `## 📊 System Stats\n- Files: ${stats.files}\n- Chunks: ${stats.chunks}\n- Embedded: ${stats.embeddings.completed}/${stats.chunks}\n\n`;
+              
+              dashboard += `## 🔒 Active Locks\n`;
+              if (locks.length > 0) dashboard += locks.map((l:any) => `- ${l.resource_id} (${l.owner_agent})`).join('\n') + '\n\n';
+              else dashboard += "_No active locks._\n\n";
+              
+              dashboard += `## ⚙️ Recent Jobs\n`;
+              dashboard += jobs.map((j:any) => `- [${j.status.toUpperCase()}] ${j.type} (${j.progress}%)`).join('\n') + '\n\n';
+              
+              if (compliance) {
+                  dashboard += `## 📉 Plan Compliance (${args.plan_id})\n- Score: ${compliance.compliance}%\n- Total Calls: ${compliance.total}\n- Off-Plan: ${compliance.off_plan}\n`;
+              }
+              
+              return dashboard;
+          }
           case "locks": {
               if (args.action === "lock") {
                   getDb().acquireLock(args.target!, agentName);
@@ -305,14 +341,14 @@ export function unifiedTools(): { [key: string]: any } {
     }),
 
     code_setup: tool({
-      description: "Setup and maintenance tasks (AI, Git Journal, Indexing, Prompt Scouting, Arch Boundaries).",
+      description: "Setup tasks (AI, Git Journal, Indexing, Prompt Scouting, Arch Boundaries).",
       args: {
         action: tool.schema.enum(["init", "ai", "index", "journal", "scout", "arch_rule"]),
         provider: tool.schema.enum(["ollama", "mlx"]).optional().default("ollama"),
         model: tool.schema.string().optional(),
         limit: tool.schema.number().optional(),
-        source: tool.schema.string().optional().describe("Source target pattern"),
-        target: tool.schema.string().optional().describe("Target target pattern (forbidden)")
+        source: tool.schema.string().optional(),
+        target: tool.schema.string().optional()
       },
       async execute(args) {
         switch (args.action) {

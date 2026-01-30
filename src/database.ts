@@ -546,6 +546,31 @@ ${card.content.slice(0, 2000)}`;
     return stmt.all(`%${query}%`);
   }
 
+  public findAffectedTests(symbolName: string): string[] {
+    // Find all files that call this symbol and look like test files
+    const query = this.db.prepare(`
+      WITH RECURSIVE impact_tree(caller_chunk_id) AS (
+        -- Base case: chunks calling the symbol directly
+        SELECT caller_chunk_id FROM calls WHERE callee_name = ?
+        UNION
+        -- Recursive step: chunks calling chunks in the impact tree
+        SELECT c.caller_chunk_id 
+        FROM calls c
+        JOIN impact_tree it ON c.callee_name IN (
+          SELECT s.name FROM symbols s WHERE s.chunk_id = it.caller_chunk_id
+        )
+      )
+      SELECT DISTINCT f.path
+      FROM files f
+      JOIN chunks c ON f.id = c.file_id
+      JOIN impact_tree it ON c.id = it.caller_chunk_id
+      WHERE f.path LIKE '%.test.%' OR f.path LIKE '%Tests.%' OR f.path LIKE 'test_%'
+    `);
+    
+    const results = query.all(symbolName) as { path: string }[];
+    return results.map(r => r.path);
+  }
+
   public async semanticSearch(query: string, limit: number = 10): Promise<any[]> {
     if (!(await ollama.isRunning())) throw new Error("Ollama is not running.");
     const queryVec = await ollama.getEmbedding(query);
