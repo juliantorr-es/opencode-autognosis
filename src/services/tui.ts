@@ -6,7 +6,7 @@ export class TUIService {
   }
 
   async showProgress(title: string, progress: number, message: string) {
-    if (!this.client) return;
+    if (!this.client || !this.client.tui) return;
 
     try {
       await this.client.tui.showToast({
@@ -16,27 +16,35 @@ export class TUIService {
           variant: "info"
         }
       });
-    } catch (e) {
-      // Ignore if TUI not available
+    } catch (e: any) {
+      // Ignore "edit buff is destroyed" or similar Neovim/PTY cleanup errors
+      if (e.message?.includes("destroyed") || e.message?.includes("invalid channel")) {
+          return;
+      }
+      // Log other TUI errors silently
     }
   }
 
   async showSuccess(title: string, message: string) {
-    if (!this.client) return;
+    if (!this.client || !this.client.tui) return;
     try {
       await this.client.tui.showToast({
         body: { title, message, variant: "success" }
       });
-    } catch (e) {}
+    } catch (e: any) {
+        if (e.message?.includes("destroyed") || e.message?.includes("invalid channel")) return;
+    }
   }
 
   async showError(title: string, message: string) {
-    if (!this.client) return;
+    if (!this.client || !this.client.tui) return;
     try {
       await this.client.tui.showToast({
         body: { title, message, variant: "error" }
       });
-    } catch (e) {}
+    } catch (e: any) {
+        if (e.message?.includes("destroyed") || e.message?.includes("invalid channel")) return;
+    }
   }
 }
 
