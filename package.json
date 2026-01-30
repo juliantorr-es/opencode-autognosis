@@ -1,6 +1,6 @@
 {
   "name": "opencode-autognosis",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Advanced RAG-powered codebase awareness for OpenCode agents. Features Chunk Cards synthesis, hierarchical reasoning, ActiveSet working memory, and performance optimization for enterprise-scale repositories.",
   "type": "module",
   "main": "dist/index.js",
