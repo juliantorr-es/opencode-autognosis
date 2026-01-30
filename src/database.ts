@@ -196,6 +196,15 @@ export class CodeGraphDB {
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
       );
 
+      CREATE TABLE IF NOT EXISTS tool_contracts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        trigger_tool TEXT, -- e.g., 'code_propose'
+        trigger_action TEXT, -- e.g., 'patch'
+        target_tool TEXT,
+        target_args TEXT, -- JSON
+        condition_script TEXT -- Optional JS snippet to evaluate
+      );
+
       CREATE INDEX IF NOT EXISTS idx_files_path ON files(path);
       CREATE INDEX IF NOT EXISTS idx_symbols_name ON symbols(name);
       CREATE INDEX IF NOT EXISTS idx_dependencies_target ON dependencies(target_path);
@@ -227,6 +236,20 @@ export class CodeGraphDB {
 
   public getJob(id: string) {
     return this.db.prepare("SELECT * FROM background_jobs WHERE id = ?").get(id);
+  }
+
+  public registerContract(triggerTool: string, triggerAction: string, targetTool: string, targetArgs: any) {
+    this.db.prepare(`
+      INSERT INTO tool_contracts (trigger_tool, trigger_action, target_tool, target_args)
+      VALUES (?, ?, ?, ?)
+    `).run(triggerTool, triggerAction, targetTool, JSON.stringify(targetArgs));
+  }
+
+  public getContracts(triggerTool: string, triggerAction: string) {
+    return this.db.prepare(`
+      SELECT * FROM tool_contracts 
+      WHERE trigger_tool = ? AND (trigger_action = ? OR trigger_action IS NULL)
+    `).all(triggerTool, triggerAction) as any[];
   }
 
   public listJobs(type?: string, limit: number = 10) {

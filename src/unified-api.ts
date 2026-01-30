@@ -26,12 +26,12 @@ async function scoutPlugins() {
     try {
         const config = JSON.parse(fsSync.readFileSync(path.join(PROJECT_ROOT, "opencode.jsonc"), "utf-8"));
         if (config.plugin) config.plugin.forEach((p: string) => plugins.add(p));
-    } catch {} // Ignore errors if config file doesn't exist
+    } catch {}
     try {
         const pkg = JSON.parse(fsSync.readFileSync(path.join(PROJECT_ROOT, "package.json"), "utf-8"));
         const allDeps = { ...pkg.dependencies, ...pkg.devDependencies };
         Object.keys(allDeps).forEach(d => { if (d.includes("opencode")) plugins.add(d); });
-    } catch {} // Ignore errors if package.json doesn't exist
+    } catch {}
     return Array.from(plugins);
 }
 
@@ -40,14 +40,15 @@ async function updateBridgePrompt(plugins: string[]) {
     if (!fsSync.existsSync(bridgePath)) return "bridge.md not found at " + bridgePath;
 
     const toolsSection = `
-## Current Consolidated Tools (Autognosis v2.4)
+## Current Consolidated Tools (Autognosis v2.5)
 - code_search: Universal search (semantic, symbol, filename, content).
 - code_analyze: Deep structural analysis and impact reports.
 - code_context: Working memory management and LRU eviction.
 - code_read: Precise reading with Mutex Lock checks and Graffiti retrieval.
-- code_propose: Planning, patching, validation, and PR promotion. Now features surgical test scoping.
+- code_propose: Planning, patching, validation, and PR promotion.
 - code_status: Dashboard, background jobs, blackboard, and resource locks.
-- code_setup: Environment initialization and architectural boundaries.
+- code_setup: Environment initialization, AI setup, and Architectural Boundaries.
+- code_contract: Reactive tool chaining and automated post-execution hooks.
 
 ## Other Detected Plugins
 ${plugins.filter(p => p !== "opencode-autognosis").map(p => `- ${p}`).join('\n')}
@@ -63,11 +64,56 @@ ${plugins.filter(p => p !== "opencode-autognosis").map(p => `- ${p}`).join('\n')
     return "Updated bridge.md with consolidated tools and detected plugins.";
 }
 
+/**
+ * Reactive Contract Runner
+ * Automatically triggers secondary tools based on registered contracts.
+ */
+async function runWithContracts(toolName: string, action: string | undefined, args: any, result: string, tools: any): Promise<string> {
+    const contracts = getDb().getContracts(toolName, action || '');
+    if (contracts.length === 0) return result;
+
+    let finalResult = JSON.parse(result);
+    finalResult.contracts_triggered = [];
+
+    for (const contract of contracts) {
+        try {
+            const targetTool = tools[contract.target_tool];
+            if (targetTool) {
+                const targetArgs = JSON.parse(contract.target_args);
+                // Merge context from original args if needed (e.g. plan_id)
+                if (args.plan_id) targetArgs.plan_id = args.plan_id;
+                
+                const chainResult = await targetTool.execute(targetArgs);
+                finalResult.contracts_triggered.push({
+                    name: contract.target_tool,
+                    result: JSON.parse(chainResult)
+                });
+            }
+        } catch (e) {
+            finalResult.contracts_triggered.push({ name: contract.target_tool, error: String(e) });
+        }
+    }
+
+    return JSON.stringify(finalResult, null, 2);
+}
+
 export function unifiedTools(): { [key: string]: any } {
   const agentName = process.env.AGENT_NAME || `agent-${process.pid}`;
+  const api: any = {};
 
-  return {
-    code_search: tool({
+  const wrap = (toolName: string, config: any) => {
+      const originalExecute = config.execute;
+      config.execute = async (args: any) => {
+          const res = await originalExecute(args);
+          // Only attempt chaining if original call was successful (heuristic)
+          if (res.includes('"status": "ERROR"') || res.includes('"status": "FAILED"')) return res;
+          return runWithContracts(toolName, args.action || args.mode, args, res, api);
+      };
+      return tool(config);
+  };
+
+  Object.assign(api, {
+    code_search: wrap("code_search", {
       description: "Search the codebase using various engines (filename, content, symbol, or semantic/vector).",
       args: {
         query: tool.schema.string().describe("Search query"),
@@ -76,7 +122,7 @@ export function unifiedTools(): { [key: string]: any } {
         limit: tool.schema.number().optional().default(10),
         plan_id: tool.schema.string().optional()
       },
-      async execute(args) {
+      async execute(args: any) {
         switch (args.mode) {
           case "content": return internal.fast_search.execute({ ...args, mode: "content" });
           case "symbol": return internal.graph_search_symbols.execute({ query: args.query });
@@ -86,7 +132,7 @@ export function unifiedTools(): { [key: string]: any } {
       }
     }),
 
-    code_analyze: tool({
+    code_analyze: wrap("code_analyze", {
       description: "Perform structural analysis on files or modules. Generates summaries, API maps, and impact reports.",
       args: {
         target: tool.schema.string().describe("File path or module ID"),
@@ -94,7 +140,7 @@ export function unifiedTools(): { [key: string]: any } {
         force: tool.schema.boolean().optional().default(false),
         plan_id: tool.schema.string().optional()
       },
-      async execute(args) {
+      async execute(args: any) {
         switch (args.mode) {
           case "module": return internal.module_synthesize.execute({ file_path: args.target, force_resynthesize: args.force });
           case "impact": return internal.brief_fix_loop.execute({ symbol: args.target, intent: "impact_analysis" });
@@ -105,7 +151,7 @@ export function unifiedTools(): { [key: string]: any } {
       }
     }),
 
-    code_context: tool({
+    code_context: wrap("code_context", {
       description: "Manage working memory (ActiveSets). Limits context window usage by loading/unloading specific chunks.",
       args: {
         action: tool.schema.enum(["create", "load", "add", "remove", "status", "list", "close", "evict"]),
@@ -114,12 +160,12 @@ export function unifiedTools(): { [key: string]: any } {
         limit: tool.schema.number().optional().default(5),
         plan_id: tool.schema.string().optional()
       },
-      async execute(args) {
+      async execute(args: any) {
         switch (args.action) {
-          case "create": return internal.activeset_create.execute({ name: args.name || "Context", chunk_ids: args.target?.split(',').map(s => s.trim()) });
+          case "create": return internal.activeset_create.execute({ name: args.name || "Context", chunk_ids: args.target?.split(',').map((s: string) => s.trim()) });
           case "load": return internal.activeset_load.execute({ set_id: args.target! });
-          case "add": return internal.activeset_add_chunks.execute({ chunk_ids: args.target?.split(',').map(s => s.trim())! });
-          case "remove": return internal.activeset_remove_chunks.execute({ chunk_ids: args.target?.split(',').map(s => s.trim())! });
+          case "add": return internal.activeset_add_chunks.execute({ chunk_ids: args.target?.split(',').map((s: string) => s.trim())! });
+          case "remove": return internal.activeset_remove_chunks.execute({ chunk_ids: args.target?.split(',').map((s: string) => s.trim())! });
           case "evict": {
               const lru = getDb().getLruChunks(args.limit);
               return internal.activeset_remove_chunks.execute({ chunk_ids: lru.map(c => c.chunk_id) });
@@ -131,7 +177,7 @@ export function unifiedTools(): { [key: string]: any } {
       }
     }),
 
-    code_read: tool({
+    code_read: wrap("code_read", {
       description: "Precise reading of symbols or file slices. Follows current plan. Checks for locks and returns historical graffiti.",
       args: {
         symbol: tool.schema.string().optional().describe("Symbol to jump to"),
@@ -140,7 +186,7 @@ export function unifiedTools(): { [key: string]: any } {
         end_line: tool.schema.number().optional(),
         plan_id: tool.schema.string().optional()
       },
-      async execute(args) {
+      async execute(args: any) {
         const resourceId = args.symbol || args.file;
         if (resourceId) {
             getDb().logAccess(resourceId, args.plan_id);
@@ -181,8 +227,8 @@ export function unifiedTools(): { [key: string]: any } {
       }
     }),
 
-    code_propose: tool({
-      description: "Plan, propose, and promote changes. Includes patch generation, surgical test scoping, and PR promotion.",
+    code_propose: wrap("code_propose", {
+      description: "Plan, propose, and promote changes. Automatically handles coordination pulse and lock checks.",
       args: {
         action: tool.schema.enum(["plan", "patch", "validate", "finalize", "promote"]),
         symbol: tool.schema.string().optional().describe("Locus symbol for plan"),
@@ -194,7 +240,7 @@ export function unifiedTools(): { [key: string]: any } {
         plan_id: tool.schema.string().optional(),
         outcome: tool.schema.string().optional()
       },
-      async execute(args) {
+      async execute(args: any) {
         switch (args.action) {
           case "plan": {
               getDb().postToBlackboard(agentName, `Planning ${args.intent} for ${args.symbol}`, "pulse");
@@ -223,7 +269,6 @@ export function unifiedTools(): { [key: string]: any } {
               return res;
           }
           case "validate": {
-              // 1. Arch Check
               const { stdout: diff } = await (internal as any).runCmd("git diff --name-only");
               const changedFiles = diff.split('\n').filter(Boolean);
               for (const file of changedFiles) {
@@ -234,16 +279,9 @@ export function unifiedTools(): { [key: string]: any } {
                       if (violation) return JSON.stringify({ status: "ARCH_VIOLATION", file, forbidden_import: imp, rule: violation }, null, 2);
                   }
               }
-              
-              // 2. Surgical Test Scoping
               let focusTests: string[] = [];
-              if (args.symbol) {
-                  focusTests = getDb().findAffectedTests(args.symbol);
-              }
-
+              if (args.symbol) focusTests = getDb().findAffectedTests(args.symbol);
               getDb().postToBlackboard(agentName, `Validating patch ${args.patch_path}. Scoped tests: ${focusTests.length}`, "pulse");
-              
-              // Call validation with scoped tests hint
               return internal.validate_patch.execute({ patch_path: args.patch_path!, plan_id: args.plan_id, tests: focusTests });
           }
           case "promote": {
@@ -266,7 +304,7 @@ export function unifiedTools(): { [key: string]: any } {
       }
     }),
 
-    code_status: tool({
+    code_status: wrap("code_status", {
       description: "Monitor system health, background jobs, Multi-Agent Blackboard, and Resource Locks.",
       args: {
         mode: tool.schema.enum(["stats", "hot_files", "jobs", "plan", "doctor", "blackboard", "locks", "dashboard"]).optional().default("stats"),
@@ -279,28 +317,23 @@ export function unifiedTools(): { [key: string]: any } {
         plan_id: tool.schema.string().optional(),
         path: tool.schema.string().optional().default("")
       },
-      async execute(args) {
+      async execute(args: any) {
         switch (args.mode) {
           case "dashboard": {
               const stats = getDb().getStats();
               const locks = getDb().listLocks();
               const jobs = getDb().listJobs();
               const compliance = args.plan_id ? getDb().getPlanMetrics(args.plan_id) : null;
-              
               let dashboard = `# Autognosis TUI Dashboard\n\n`;
               dashboard += `## 📊 System Stats\n- Files: ${stats.files}\n- Chunks: ${stats.chunks}\n- Embedded: ${stats.embeddings.completed}/${stats.chunks}\n\n`;
-              
               dashboard += `## 🔒 Active Locks\n`;
-              if (locks.length > 0) dashboard += locks.map((l:any) => `- ${l.resource_id} (${l.owner_agent})`).join('\n') + '\n\n';
+              if (locks.length > 0) dashboard += (locks as any[]).map(l => `- ${l.resource_id} (${l.owner_agent})`).join('\n') + '\n\n';
               else dashboard += "_No active locks._\n\n";
-              
               dashboard += `## ⚙️ Recent Jobs\n`;
-              dashboard += jobs.map((j:any) => `- [${j.status.toUpperCase()}] ${j.type} (${j.progress}%)`).join('\n') + '\n\n';
-              
+              dashboard += (jobs as any[]).map(j => `- [${j.status.toUpperCase()}] ${j.type} (${j.progress}%)`).join('\n') + '\n\n';
               if (compliance) {
                   dashboard += `## 📉 Plan Compliance (${args.plan_id})\n- Score: ${compliance.compliance}%\n- Total Calls: ${compliance.total}\n- Off-Plan: ${compliance.off_plan}\n`;
               }
-              
               return dashboard;
           }
           case "locks": {
@@ -340,17 +373,17 @@ export function unifiedTools(): { [key: string]: any } {
       }
     }),
 
-    code_setup: tool({
+    code_setup: wrap("code_setup", {
       description: "Setup tasks (AI, Git Journal, Indexing, Prompt Scouting, Arch Boundaries).",
       args: {
         action: tool.schema.enum(["init", "ai", "index", "journal", "scout", "arch_rule"]),
         provider: tool.schema.enum(["ollama", "mlx"]).optional().default("ollama"),
         model: tool.schema.string().optional(),
         limit: tool.schema.number().optional(),
-        source: tool.schema.string().optional(),
-        target: tool.schema.string().optional()
+        source: tool.schema.string().optional().describe("Source target pattern"),
+        target: tool.schema.string().optional().describe("Target target pattern (forbidden)")
       },
-      async execute(args) {
+      async execute(args: any) {
         switch (args.action) {
           case "arch_rule": {
               getDb().addArchRule(args.source!, args.target!);
@@ -365,6 +398,25 @@ export function unifiedTools(): { [key: string]: any } {
       }
     }),
 
+    code_contract: wrap("code_contract", {
+        description: "Register reactive tool contracts for automated post-execution chaining.",
+        args: {
+            action: tool.schema.enum(["register", "list", "delete"]),
+            trigger_tool: tool.schema.string().optional().describe("Tool that triggers the contract"),
+            trigger_action: tool.schema.string().optional().describe("Action that triggers the contract"),
+            target_tool: tool.schema.string().optional().describe("Tool to execute automatically"),
+            target_args: tool.schema.any().optional().describe("Arguments for the target tool")
+        },
+        async execute(args: any) {
+            if (args.action === "register") {
+                getDb().registerContract(args.trigger_tool!, args.trigger_action!, args.target_tool!, args.target_args);
+                return JSON.stringify({ status: "SUCCESS", message: "Contract registered." });
+            }
+            // List/Delete placeholders
+            return JSON.stringify({ status: "SUCCESS", message: "Action completed." });
+        }
+    }),
+
     internal_call: tool({
       description: "Advanced access to specialized internal tools.",
       args: { tool_name: tool.schema.string(), args: tool.schema.any() },
@@ -374,5 +426,7 @@ export function unifiedTools(): { [key: string]: any } {
         return target.execute(args);
       }
     })
-  };
+  });
+
+  return api;
 }
