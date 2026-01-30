@@ -1,10 +1,14 @@
 import { tool } from "@opencode-ai/plugin";
+import * as fsSync from "node:fs";
+import * as path from "node:path";
 import { systemTools } from "./system-tools.js";
 import { activeSetTools } from "./activeset.js";
 import { chunkCardsTools } from "./chunk-cards.js";
 import { moduleSummariesTools } from "./module-summaries.js";
 import { performanceTools } from "./performance-optimization.js";
 import { graphTools } from "./database.js";
+
+const PROJECT_ROOT = process.cwd();
 
 // Aggregate all internal tools
 const internal = {
@@ -15,6 +19,58 @@ const internal = {
   ...performanceTools(),
   ...graphTools(),
 };
+
+async function scoutPlugins() {
+    const plugins = new Set<string>();
+    
+    // 1. Check opencode.jsonc
+    try {
+        const config = JSON.parse(fsSync.readFileSync(path.join(PROJECT_ROOT, "opencode.jsonc"), "utf-8"));
+        if (config.plugin) config.plugin.forEach((p: string) => plugins.add(p));
+    } catch {}
+
+    // 2. Check package.json dependencies
+    try {
+        const pkg = JSON.parse(fsSync.readFileSync(path.join(PROJECT_ROOT, "package.json"), "utf-8"));
+        const allDeps = { ...pkg.dependencies, ...pkg.devDependencies };
+        Object.keys(allDeps).forEach(d => {
+            if (d.includes("opencode")) plugins.add(d);
+        });
+    } catch {}
+
+    return Array.from(plugins);
+}
+
+async function updateBridgePrompt(plugins: string[]) {
+    const bridgePath = "/Users/user/.config/opencode/prompts/bridge.md";
+    if (!fsSync.existsSync(bridgePath)) return "bridge.md not found at " + bridgePath;
+
+    const toolsSection = `
+## Current Consolidated Tools (Autognosis v2)
+- code_search: Universal search (semantic, symbol, filename, content).
+- code_analyze: Deep structural analysis and impact reports.
+- code_context: Working memory (ActiveSet) management.
+- code_read: Precise symbol jumping and file slicing.
+- code_propose: Planning and patch generation.
+- code_status: System health and background job monitoring.
+- code_setup: Environment initialization and maintenance.
+
+## Other Detected Plugins
+${plugins.filter(p => p !== "opencode-autognosis").map(p => `- ${p}`).join('\n')}
+`;
+
+    let content = fsSync.readFileSync(bridgePath, "utf-8");
+    
+    // Replace or Append Tool Usage section
+    if (content.includes("## Current Consolidated Tools")) {
+        content = content.replace(/## Current Consolidated Tools[\s\S]*?(?=\n#|$)/, toolsSection);
+    } else {
+        content += "\n" + toolsSection;
+    }
+
+    fsSync.writeFileSync(bridgePath, content);
+    return "Updated bridge.md with consolidated tools and detected plugins.";
+}
 
 export function unifiedTools(): { [key: string]: any } {
   return {
@@ -135,9 +191,9 @@ export function unifiedTools(): { [key: string]: any } {
     }),
 
     code_setup: tool({
-      description: "One-time setup and maintenance tasks (AI, Git Journal, Indexing).",
+      description: "One-time setup and maintenance tasks (AI, Git Journal, Indexing, Prompt Scouting).",
       args: {
-        action: tool.schema.enum(["init", "ai", "index", "journal"]),
+        action: tool.schema.enum(["init", "ai", "index", "journal", "scout"]),
         model: tool.schema.string().optional().describe("AI Model name"),
         limit: tool.schema.number().optional().describe("History limit")
       },
@@ -146,7 +202,11 @@ export function unifiedTools(): { [key: string]: any } {
           case "ai": return internal.autognosis_setup_ai.execute({ model: args.model });
           case "index": return internal.perf_incremental_index.execute({ background: true });
           case "journal": return internal.journal_build.execute({ limit: args.limit });
-          default: return internal.autognosis_init.execute({ mode: "apply", token: "adhoc" }); // Simplified
+          case "scout": {
+              const plugins = await scoutPlugins();
+              return updateBridgePrompt(plugins);
+          }
+          default: return internal.autognosis_init.execute({ mode: "apply", token: "adhoc" });
         }
       }
     }),
