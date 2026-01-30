@@ -1,0 +1,38 @@
+{
+  "id": "index.ts-summary-ab6c18e7",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/hooks/auto-update-checker/index.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: index.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (6)\n- **debugLog**: No documentation found\n- **createAutoUpdateCheckerHook**: No documentation found\n- **runBackgroundUpdateCheck**: No documentation found\n- **showUpdateAvailableToast**: No documentation found\n- **showAutoUpdatedToast**: No documentation found\n- **showLocalDevToast**: No documentation found\n\n\n\n\n## Dependencies\n- ./types\n- ./checker\n- ./cache\n- ./constants\n- ../../plugin/debug\n\n## Exports\n- createAutoUpdateCheckerHook\n\n## Complexity Metrics\n- Lines of code: 175\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.892Z",
+    "updated_at": "2026-01-30T05:26:51.892Z",
+    "hash": "09a960298dc4b480f24de1aa215710d4423e1c379ef0f8ccd17e393b50f4c6d4",
+    "dependencies": [
+      "./types",
+      "./checker",
+      "./cache",
+      "./constants",
+      "../../plugin/debug"
+    ],
+    "symbols": [
+      "debugLog",
+      "PluginClient",
+      "SessionCreatedEvent",
+      "PluginEvent",
+      "createAutoUpdateCheckerHook",
+      "hasChecked",
+      "props",
+      "localDevVersion",
+      "runBackgroundUpdateCheck",
+      "pluginInfo",
+      "cachedVersion",
+      "currentVersion",
+      "latestVersion",
+      "updated",
+      "showUpdateAvailableToast",
+      "showAutoUpdatedToast",
+      "showLocalDevToast"
+    ],
+    "complexity_score": 100
+  }
+}

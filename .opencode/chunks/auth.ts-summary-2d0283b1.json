@@ -1,0 +1,26 @@
+{
+  "id": "auth.ts-summary-2d0283b1",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/auth.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: auth.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (5)\n- **isOAuthAuth**: No documentation found\n- **parseRefreshParts**: Splits a packed refresh string into its constituent refresh token and project IDs.\n- **formatRefreshParts**: Serializes refresh token parts into the stored string format.\n- **accessTokenExpired**: Determines whether an access token is expired or missing, with buffer for clock skew.\n- **calculateTokenExpiry**: Calculates absolute expiry timestamp based on a duration.\n\n\n\n\n## Dependencies\n- ./types\n\n## Exports\n- isOAuthAuth\n- parseRefreshParts\n- formatRefreshParts\n- accessTokenExpired\n- calculateTokenExpiry\n\n## Complexity Metrics\n- Lines of code: 53\n- Estimated complexity: 38.3/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.918Z",
+    "updated_at": "2026-01-30T05:26:51.918Z",
+    "hash": "9b6be2d7b1e66f965cd11353b85e06e9f2313fd4ad0f059fa0a1f53cdf32e246",
+    "dependencies": [
+      "./types"
+    ],
+    "symbols": [
+      "ACCESS_TOKEN_EXPIRY_BUFFER_MS",
+      "isOAuthAuth",
+      "parseRefreshParts",
+      "formatRefreshParts",
+      "projectSegment",
+      "base",
+      "accessTokenExpired",
+      "calculateTokenExpiry",
+      "seconds"
+    ],
+    "complexity_score": 38.3
+  }
+}

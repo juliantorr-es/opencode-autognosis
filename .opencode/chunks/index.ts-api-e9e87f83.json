@@ -1,0 +1,50 @@
+{
+  "id": "index.ts-api-e9e87f83",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/index.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: index.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.278Z",
+    "updated_at": "2026-01-30T05:26:52.278Z",
+    "hash": "4058bcc83ab9160ddde1a466359c3a85a9e5788d4c1c569966a39c7df6f42606",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "@opencode-ai/sdk",
+      "./lib/auth/auth.js",
+      "./lib/auth/browser.js",
+      "./lib/auth/server.js",
+      "./lib/config.js",
+      "./lib/constants.js",
+      "./lib/logger.js",
+      "./lib/request/fetch-helpers.js",
+      "./lib/types.js"
+    ],
+    "symbols": [
+      "OpenAIAuthPlugin",
+      "buildManualOAuthFlow",
+      "parsed",
+      "tokens",
+      "auth",
+      "decoded",
+      "accountId",
+      "providerConfig",
+      "userConfig",
+      "pluginConfig",
+      "codexMode",
+      "currentAuth",
+      "originalUrl",
+      "url",
+      "originalBody",
+      "isStreaming",
+      "transformation",
+      "requestInit",
+      "accessToken",
+      "headers",
+      "response",
+      "serverInfo",
+      "result",
+      "tokens"
+    ],
+    "complexity_score": 100
+  }
+}

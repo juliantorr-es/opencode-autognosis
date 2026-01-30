@@ -1,0 +1,25 @@
+{
+  "id": "jsonc.ts-invariant-9722c6ae",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/jsonc.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: jsonc.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.372Z",
+    "updated_at": "2026-01-30T05:26:52.372Z",
+    "hash": "92a792c105bf406de7e256b289993832913bfc70e0ae836b477dc648383e7be6",
+    "dependencies": [],
+    "symbols": [
+      "stripJsoncComments",
+      "result",
+      "i",
+      "inString",
+      "inSingleLineComment",
+      "inMultiLineComment",
+      "char",
+      "nextChar",
+      "backslashCount",
+      "j"
+    ],
+    "complexity_score": 100
+  }
+}

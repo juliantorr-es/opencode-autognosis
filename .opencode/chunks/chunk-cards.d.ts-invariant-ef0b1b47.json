@@ -1,0 +1,30 @@
+{
+  "id": "chunk-cards.d.ts-invariant-ef0b1b47",
+  "file_path": "/Users/user/opencode-autognosis/dist/chunk-cards.d.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: chunk-cards.d.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.790Z",
+    "updated_at": "2026-01-30T05:26:51.790Z",
+    "hash": "384ee4bfa479e1777b65a0cf399a476d586eed3c019e31f1ab443fd5b1751ffe",
+    "dependencies": [
+      "typescript"
+    ],
+    "symbols": [
+      "CHUNK_DIR",
+      "ChunkCard",
+      "ensureChunkDir",
+      "calculateHash",
+      "calculateComplexity",
+      "extractSymbols",
+      "chunkCardsTools",
+      "generateSummaryChunk",
+      "generateApiChunk",
+      "generateInvariantChunk",
+      "extractDependencies",
+      "parseFileAST",
+      "extractSymbolsFromAST"
+    ],
+    "complexity_score": 19
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "build-schema.ts-invariant-adb64af5",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/script/build-schema.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: build-schema.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.860Z",
+    "updated_at": "2026-01-30T05:26:51.860Z",
+    "hash": "6910eac89551240406fbaa63d4dd1bcc51da5a74db7a4b31e33207c2b36bf41e",
+    "dependencies": [
+      "node:fs",
+      "node:path",
+      "node:url",
+      "zod-to-json-schema",
+      "../src/plugin/config/schema.js"
+    ],
+    "symbols": [
+      "__dirname",
+      "outputPath",
+      "jsonSchema",
+      "envVarDescriptions",
+      "signatureCacheDescriptions",
+      "addDescriptions",
+      "props",
+      "cacheProps",
+      "definitions"
+    ],
+    "complexity_score": 88.6
+  }
+}

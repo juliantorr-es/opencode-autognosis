@@ -1,0 +1,17 @@
+{
+  "id": "errors.ts-summary-9811f328",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/errors.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: errors.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n### Classes (2)\n- **EmptyResponseError**: Custom error types for opencode-antigravity-auth plugin.\n\nPorted from LLM-API-Key-Proxy for robust error handling.\n- **ToolIdMismatchError**: Error thrown when tool ID matching fails and cannot be recovered.\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- EmptyResponseError\n- ToolIdMismatchError\n\n## Complexity Metrics\n- Lines of code: 55\n- Estimated complexity: 31.5/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.953Z",
+    "updated_at": "2026-01-30T05:26:51.953Z",
+    "hash": "f49fe036587e35fd85430bd53352b5e217702a9df58b1920a31d433a70b40a31",
+    "dependencies": [],
+    "symbols": [
+      "EmptyResponseError",
+      "ToolIdMismatchError"
+    ],
+    "complexity_score": 31.5
+  }
+}

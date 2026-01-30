@@ -1,0 +1,45 @@
+{
+  "id": "plugin-config.test.ts-api-fb2f010d",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/test/plugin-config.test.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: plugin-config.test.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.323Z",
+    "updated_at": "2026-01-30T05:26:52.323Z",
+    "hash": "e2be973b503910435978fc7dc7365dc3ada1bef28edbe3c19e2bef2df703428c",
+    "dependencies": [
+      "vitest",
+      "../lib/config.js",
+      "../lib/types.js",
+      "node:fs",
+      "node:os",
+      "node:path"
+    ],
+    "symbols": [
+      "actual",
+      "mockExistsSync",
+      "mockReadFileSync",
+      "originalEnv",
+      "config",
+      "config",
+      "config",
+      "consoleSpy",
+      "config",
+      "consoleSpy",
+      "config",
+      "config",
+      "result",
+      "config",
+      "result",
+      "config",
+      "result",
+      "config",
+      "result",
+      "config",
+      "result",
+      "config",
+      "result"
+    ],
+    "complexity_score": 29.400000000000002
+  }
+}

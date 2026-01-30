@@ -1,0 +1,50 @@
+{
+  "id": "index.ts-summary-e9e87f83",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/index.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: index.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- @opencode-ai/plugin\n- @opencode-ai/sdk\n- ./lib/auth/auth.js\n- ./lib/auth/browser.js\n- ./lib/auth/server.js\n- ./lib/config.js\n- ./lib/constants.js\n- ./lib/logger.js\n- ./lib/request/fetch-helpers.js\n- ./lib/types.js\n\n## Exports\n- OpenAIAuthPlugin\n\n## Complexity Metrics\n- Lines of code: 299\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.278Z",
+    "updated_at": "2026-01-30T05:26:52.278Z",
+    "hash": "5dabd85c05a63d21282efd13f0be8be0a698239fe83ba15df7a9ee1b5722258f",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "@opencode-ai/sdk",
+      "./lib/auth/auth.js",
+      "./lib/auth/browser.js",
+      "./lib/auth/server.js",
+      "./lib/config.js",
+      "./lib/constants.js",
+      "./lib/logger.js",
+      "./lib/request/fetch-helpers.js",
+      "./lib/types.js"
+    ],
+    "symbols": [
+      "OpenAIAuthPlugin",
+      "buildManualOAuthFlow",
+      "parsed",
+      "tokens",
+      "auth",
+      "decoded",
+      "accountId",
+      "providerConfig",
+      "userConfig",
+      "pluginConfig",
+      "codexMode",
+      "currentAuth",
+      "originalUrl",
+      "url",
+      "originalBody",
+      "isStreaming",
+      "transformation",
+      "requestInit",
+      "accessToken",
+      "headers",
+      "response",
+      "serverInfo",
+      "result",
+      "tokens"
+    ],
+    "complexity_score": 100
+  }
+}

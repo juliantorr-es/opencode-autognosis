@@ -1,0 +1,28 @@
+{
+  "id": "auth.ts-invariant-e5b63443",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/auth.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: auth.ts\n\n## Core Invariants\n\n\n## Constraints\n- **ACCESS_TOKEN_EXPIRY_BUFFER_MS**: 60 * 1000\n- **ACCOUNT_SEPARATOR**: \"||\"\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.197Z",
+    "updated_at": "2026-01-30T05:26:52.197Z",
+    "hash": "a0870baa918c6397932ea858af974a23756d5b374b30051a8722adfe3f6e4c55",
+    "dependencies": [
+      "./types"
+    ],
+    "symbols": [
+      "ACCESS_TOKEN_EXPIRY_BUFFER_MS",
+      "ACCOUNT_SEPARATOR",
+      "isOAuthAuth",
+      "parseRefreshParts",
+      "formatRefreshParts",
+      "projectSegment",
+      "base",
+      "accessTokenExpired",
+      "parseMultiAccountRefresh",
+      "accountStrings",
+      "formatMultiAccountRefresh"
+    ],
+    "complexity_score": 34.9
+  }
+}

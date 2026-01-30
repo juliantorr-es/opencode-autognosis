@@ -1,0 +1,32 @@
+{
+  "id": "response-handler.ts-invariant-fca35ca1",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/request/response-handler.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: response-handler.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 2 try-catch blocks, 1 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.305Z",
+    "updated_at": "2026-01-30T05:26:52.305Z",
+    "hash": "1e22717306aafd48cbe78149a63a68bcd1fa4280d1b61f4faecff5d23d9d9c17",
+    "dependencies": [
+      "../logger.js",
+      "../types.js"
+    ],
+    "symbols": [
+      "parseSseStream",
+      "lines",
+      "line",
+      "data",
+      "e",
+      "convertSseToJson",
+      "reader",
+      "decoder",
+      "fullText",
+      "finalResponse",
+      "jsonHeaders",
+      "error",
+      "ensureContentType",
+      "responseHeaders"
+    ],
+    "complexity_score": 95.2
+  }
+}

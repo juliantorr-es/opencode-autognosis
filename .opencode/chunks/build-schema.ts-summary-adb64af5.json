@@ -1,0 +1,30 @@
+{
+  "id": "build-schema.ts-summary-adb64af5",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/script/build-schema.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: build-schema.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **addDescriptions**: No documentation found\n\n\n\n\n## Dependencies\n- node:fs\n- node:path\n- node:url\n- zod-to-json-schema\n- ../src/plugin/config/schema.js\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 86\n- Estimated complexity: 88.6/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.859Z",
+    "updated_at": "2026-01-30T05:26:51.859Z",
+    "hash": "b0b511041853a3b13b1fd256eeece39946b9cbf8d26b51e5aade17a45b9841f2",
+    "dependencies": [
+      "node:fs",
+      "node:path",
+      "node:url",
+      "zod-to-json-schema",
+      "../src/plugin/config/schema.js"
+    ],
+    "symbols": [
+      "__dirname",
+      "outputPath",
+      "jsonSchema",
+      "envVarDescriptions",
+      "signatureCacheDescriptions",
+      "addDescriptions",
+      "props",
+      "cacheProps",
+      "definitions"
+    ],
+    "complexity_score": 88.6
+  }
+}

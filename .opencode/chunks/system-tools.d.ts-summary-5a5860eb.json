@@ -1,0 +1,16 @@
+{
+  "id": "system-tools.d.ts-summary-5a5860eb",
+  "file_path": "/Users/user/opencode-autognosis/dist/system-tools.d.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: system-tools.d.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **systemTools**: No documentation found\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- systemTools\n\n## Complexity Metrics\n- Lines of code: 4\n- Estimated complexity: 8.4/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.842Z",
+    "updated_at": "2026-01-30T05:26:51.842Z",
+    "hash": "576fbcb7374f68e860a0fa91e4ce77fd18c840f3125e3ee3640e4fac3d4f4bc7",
+    "dependencies": [],
+    "symbols": [
+      "systemTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "recovery.test.ts-invariant-bd7068d9",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/recovery.test.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: recovery.test.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.975Z",
+    "updated_at": "2026-01-30T05:26:51.975Z",
+    "hash": "ce7fe2bf3a6b377bf64796937f90961a41e933e7a0d401cbd66ef573cd308b48",
+    "dependencies": [
+      "vitest",
+      "./recovery"
+    ],
+    "symbols": [
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "promptTooLongPatterns",
+      "contextLengthPatterns",
+      "toolPairingPatterns"
+    ],
+    "complexity_score": 81
+  }
+}

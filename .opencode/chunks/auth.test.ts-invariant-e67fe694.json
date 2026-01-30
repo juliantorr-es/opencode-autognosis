@@ -1,0 +1,40 @@
+{
+  "id": "auth.test.ts-invariant-e67fe694",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/auth.test.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: auth.test.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.917Z",
+    "updated_at": "2026-01-30T05:26:51.917Z",
+    "hash": "e2b3ff11fc7d31f03f1e44255ee3f3b0fb14f105a35bd77908c4c6f92c99f24c",
+    "dependencies": [
+      "vitest",
+      "./auth",
+      "./types"
+    ],
+    "symbols": [
+      "auth",
+      "auth",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "original",
+      "formatted",
+      "parsed",
+      "auth",
+      "auth",
+      "auth",
+      "auth",
+      "auth",
+      "auth"
+    ],
+    "complexity_score": 46.6
+  }
+}

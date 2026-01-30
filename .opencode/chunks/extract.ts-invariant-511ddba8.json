@@ -1,0 +1,16 @@
+{
+  "id": "extract.ts-invariant-511ddba8",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/prompts/system/extract.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: extract.ts\n\n## Core Invariants\n\n\n## Constraints\n- **SYSTEM_PROMPT_EXTRACT**: `<system-reminder>\n<instruction name\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.166Z",
+    "updated_at": "2026-01-30T05:26:52.166Z",
+    "hash": "f894abe52397621dae0519daf8af1903f373ede901f7050a68b6218ee584f8f8",
+    "dependencies": [],
+    "symbols": [
+      "SYSTEM_PROMPT_EXTRACT"
+    ],
+    "complexity_score": 30.2
+  }
+}

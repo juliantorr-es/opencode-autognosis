@@ -1,0 +1,32 @@
+{
+  "id": "tool-schema-cache.ts-api-76a95540",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/tool-schema-cache.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: tool-schema-cache.ts\n\n## Public Functions\n\n### cacheToolSchemas\n```typescript\nexport function cacheToolSchemas(tools: any[] | undefined): void\n```\nCaches tool schemas from a request payload.\n\n**Parameters:**\n- `tools`: any[] | undefined - \n\n**Returns:** void\n\n\n### getParamType\n```typescript\nexport function getParamType(toolName: string, paramName: string): string | undefined\n```\nGets the expected type for a tool parameter.\n\n**Parameters:**\n- `toolName`: string - \n- `paramName`: string - \n\n**Returns:** string | undefined\n\n\n### clearToolSchemaCache\n```typescript\nexport function clearToolSchemaCache(): void\n```\nClears the tool schema cache.\n\n**Returns:** void\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n\n### SchemaInfo\n```typescript\nexport type SchemaInfo\n```\nInfo about a tool parameter schema.\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.249Z",
+    "updated_at": "2026-01-30T05:26:52.249Z",
+    "hash": "c3d60e34fb93ec5c204ec409abc008079a58c5c077bf0364bc6baea5b374bf1d",
+    "dependencies": [],
+    "symbols": [
+      "SchemaInfo",
+      "toolSchemaCache",
+      "sanitizeToolName",
+      "extractSchemaInfo",
+      "type",
+      "info",
+      "cacheToolSchemas",
+      "tool",
+      "funcDecls",
+      "funcDecl",
+      "originalName",
+      "sanitizedName",
+      "schema",
+      "properties",
+      "paramMap",
+      "getParamType",
+      "clearToolSchemaCache"
+    ],
+    "complexity_score": 100
+  }
+}

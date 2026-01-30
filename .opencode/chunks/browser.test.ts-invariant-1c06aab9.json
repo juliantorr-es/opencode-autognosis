@@ -1,0 +1,26 @@
+{
+  "id": "browser.test.ts-invariant-1c06aab9",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/test/browser.test.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: browser.test.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.314Z",
+    "updated_at": "2026-01-30T05:26:52.314Z",
+    "hash": "2bfce9b19c2281502b6c9bc22ce260ec85ca665297c65765bf0285de44716c20",
+    "dependencies": [
+      "vitest",
+      "../lib/auth/browser.js",
+      "../lib/constants.js"
+    ],
+    "symbols": [
+      "originalPlatform",
+      "originalPlatform",
+      "originalPlatform",
+      "originalPlatform",
+      "originalPlatform",
+      "originalPath",
+      "result"
+    ],
+    "complexity_score": 33.6
+  }
+}

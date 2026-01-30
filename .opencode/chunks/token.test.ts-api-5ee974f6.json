@@ -1,0 +1,28 @@
+{
+  "id": "token.test.ts-api-5ee974f6",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/token.test.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: token.test.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.246Z",
+    "updated_at": "2026-01-30T05:26:52.246Z",
+    "hash": "720c86250357cb85430b4af6fe0f7cc6e6036c93305747a7a2b324cabcd86b93",
+    "dependencies": [
+      "bun:test",
+      "../constants",
+      "./token",
+      "./types"
+    ],
+    "symbols": [
+      "baseAuth",
+      "createClient",
+      "client",
+      "fetchMock",
+      "result",
+      "client",
+      "fetchMock",
+      "result"
+    ],
+    "complexity_score": 27.1
+  }
+}

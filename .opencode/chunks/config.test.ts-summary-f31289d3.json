@@ -1,0 +1,45 @@
+{
+  "id": "config.test.ts-summary-f31289d3",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/test/config.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: config.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- vitest\n- ../lib/request/request-transformer.js\n- ../lib/types.js\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 152\n- Estimated complexity: 50.2/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.316Z",
+    "updated_at": "2026-01-30T05:26:52.316Z",
+    "hash": "ab470543587fe5d72a1095482fe9b8cd151c2c3faf1fd86dac6d1449cca5f760",
+    "dependencies": [
+      "vitest",
+      "../lib/request/request-transformer.js",
+      "../lib/types.js"
+    ],
+    "symbols": [
+      "providerConfig",
+      "userConfig",
+      "codexConfig",
+      "gpt5Config",
+      "emptyConfig",
+      "codexConfig",
+      "reasoningConfig",
+      "emptyConfig",
+      "defaultReasoning",
+      "nanoReasoning",
+      "codexMinimalConfig",
+      "codexMinimalReasoning",
+      "gpt5MinimalConfig",
+      "gpt5MinimalReasoning",
+      "highConfig",
+      "highReasoning",
+      "detailedConfig",
+      "detailedReasoning",
+      "codexMiniReasoning",
+      "minimal",
+      "low",
+      "high",
+      "miniReasoning",
+      "codexConfig",
+      "codexReasoning",
+      "gpt5Reasoning"
+    ],
+    "complexity_score": 50.2
+  }
+}

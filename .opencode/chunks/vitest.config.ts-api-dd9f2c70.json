@@ -1,0 +1,16 @@
+{
+  "id": "vitest.config.ts-api-dd9f2c70",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/vitest.config.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: vitest.config.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.337Z",
+    "updated_at": "2026-01-30T05:26:52.337Z",
+    "hash": "3b9326e2e54f607f570a91e828dec20fcf075fbcc5c9b9307954d82c44110565",
+    "dependencies": [
+      "vitest/config"
+    ],
+    "symbols": [],
+    "complexity_score": 14.5
+  }
+}

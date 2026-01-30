@@ -1,0 +1,23 @@
+{
+  "id": "logger.js-api-a4c756c0",
+  "file_path": "/Users/user/opencode-autognosis/dist/services/logger.js",
+  "chunk_type": "api",
+  "content": "# API Surface: logger.js\n\n## Public Functions\n\n### log\n```typescript\nexport function log(message, data)\n```\nNo documentation found\n\n**Parameters:**\n- `message`: any - \n- `data`: any - \n\n**Returns:** void\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.842Z",
+    "updated_at": "2026-01-30T05:26:51.842Z",
+    "hash": "cf769516207c701db4143ca0f192fa5928a4aa7a77ed0252b73f6b58f3749bc5",
+    "dependencies": [
+      "node:fs",
+      "node:os",
+      "node:path"
+    ],
+    "symbols": [
+      "LOG_FILE",
+      "log",
+      "timestamp",
+      "line"
+    ],
+    "complexity_score": 17.8
+  }
+}

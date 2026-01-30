@@ -1,0 +1,43 @@
+{
+  "id": "utils.ts-summary-206a0b92",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/ui/utils.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: utils.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (9)\n- **countDistillationTokens**: No documentation found\n- **formatExtracted**: No documentation found\n- **formatStatsHeader**: No documentation found\n- **formatTokenCount**: No documentation found\n- **truncate**: No documentation found\n- **shortenPath**: No documentation found\n- **shortenSinglePath**: No documentation found\n- **formatPrunedItemsList**: Formats a list of pruned items in the style: \"→ tool: parameter\"\n- **formatPruningResultForTool**: Formats a PruningResult into a human-readable string for the prune tool output.\n\n\n\n\n## Dependencies\n- ../state\n- ../messages/utils\n- ../strategies/utils\n\n## Exports\n- countDistillationTokens\n- formatExtracted\n- formatStatsHeader\n- formatTokenCount\n- truncate\n- shortenPath\n- formatPrunedItemsList\n- formatPruningResultForTool\n\n## Complexity Metrics\n- Lines of code: 117\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.185Z",
+    "updated_at": "2026-01-30T05:26:52.185Z",
+    "hash": "636f60114a0e827940a8fed0c190e9d38812b78a3a4cb534f0678b607690648d",
+    "dependencies": [
+      "../state",
+      "../messages/utils",
+      "../strategies/utils"
+    ],
+    "symbols": [
+      "countDistillationTokens",
+      "formatExtracted",
+      "result",
+      "finding",
+      "formatStatsHeader",
+      "totalTokensSavedStr",
+      "formatTokenCount",
+      "truncate",
+      "shortenPath",
+      "inPathMatch",
+      "prefix",
+      "pathPart",
+      "shortenedPath",
+      "shortenSinglePath",
+      "formatPrunedItemsList",
+      "lines",
+      "id",
+      "metadata",
+      "paramKey",
+      "displayKey",
+      "knownCount",
+      "unknownCount",
+      "formatPruningResultForTool",
+      "lines"
+    ],
+    "complexity_score": 100
+  }
+}

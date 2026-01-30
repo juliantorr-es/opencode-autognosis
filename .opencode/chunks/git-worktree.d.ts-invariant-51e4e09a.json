@@ -1,0 +1,16 @@
+{
+  "id": "git-worktree.d.ts-invariant-51e4e09a",
+  "file_path": "/Users/user/opencode-autognosis/dist/git-worktree.d.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: git-worktree.d.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.810Z",
+    "updated_at": "2026-01-30T05:26:51.810Z",
+    "hash": "e1c6e438eecdc50f02d9f6eb109eaf9b4339e371daf59263fa9bd275180ff9e0",
+    "dependencies": [],
+    "symbols": [
+      "gitWorktreeTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

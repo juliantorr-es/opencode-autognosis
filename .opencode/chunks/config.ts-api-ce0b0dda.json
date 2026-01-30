@@ -1,0 +1,35 @@
+{
+  "id": "config.ts-api-ce0b0dda",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/config.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: config.ts\n\n## Public Functions\n\n### isConfigured\n```typescript\nexport function isConfigured(): boolean\n```\nNo documentation found\n\n**Returns:** boolean\n\n\n## Classes\n\n\n## Interfaces\n\n### SupermemoryConfig\n```typescript\ninterface SupermemoryConfig\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.357Z",
+    "updated_at": "2026-01-30T05:26:52.357Z",
+    "hash": "f14f656f74cad2e57eb3796fc2e088b556c3dbb4339b842920438620ab74dd7d",
+    "dependencies": [
+      "node:fs",
+      "node:path",
+      "node:os",
+      "./services/jsonc.js"
+    ],
+    "symbols": [
+      "CONFIG_DIR",
+      "CONFIG_FILES",
+      "SupermemoryConfig",
+      "DEFAULT_KEYWORD_PATTERNS",
+      "DEFAULTS",
+      "isValidRegex",
+      "validateCompactionThreshold",
+      "loadConfig",
+      "path",
+      "content",
+      "json",
+      "fileConfig",
+      "SUPERMEMORY_API_KEY",
+      "CONFIG",
+      "isConfigured"
+    ],
+    "complexity_score": 57
+  }
+}

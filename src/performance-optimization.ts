@@ -5,6 +5,7 @@ import * as fsSync from "node:fs";
 import * as path from "node:path";
 import { promisify } from "node:util";
 import * as crypto from "node:crypto";
+import { getDb } from "./database.js";
 import { 
   CHUNK_DIR, 
   ensureChunkDir, 
@@ -19,6 +20,7 @@ import {
   extractSymbols,
   type ChunkCard
 } from "./chunk-cards.js";
+import { Logger } from "./services/logger.js";
 
 const execAsync = promisify(exec);
 const PROJECT_ROOT = process.cwd();
@@ -29,7 +31,7 @@ const METRICS_DIR = path.join(OPENCODE_DIR, "metrics");
 
 // Internal logging
 function log(message: string, data?: unknown) {
-  console.error(`[Performance] ${message}`, data || '');
+  Logger.log("Performance", message, data);
 }
 
 // =============================================================================
@@ -768,6 +770,9 @@ async function indexFile(filePath: string): Promise<void> {
       };
       
       await fs.writeFile(cardPath, JSON.stringify(chunkCard, null, 2));
+      
+      // Sync to SQLite Index
+      getDb().ingestChunkCard(chunkCard);
     }
   } catch (error) {
     log(`Failed to index file ${filePath}`, error);
@@ -865,7 +870,7 @@ async function runBackgroundIndexing(taskId: string, indexingState: IndexingStat
             await fs.writeFile(taskPath, JSON.stringify(task, null, 2));
         }
     } catch (writeError) {
-        console.error("Failed to update task error state", writeError);
+        log("Failed to update task error state", writeError);
     }
   }
 }

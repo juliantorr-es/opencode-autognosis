@@ -1,0 +1,37 @@
+{
+  "id": "constants.ts-invariant-74d4d9f4",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/constants.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: constants.ts\n\n## Core Invariants\n\n\n## Constraints\n- **ANTIGRAVITY_CLIENT_ID**: \"1071006060591-tmhssin2h21lcre235vtolojh4g403ep.apps.googleusercontent.com\"\n- **ANTIGRAVITY_CLIENT_SECRET**: \"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\"\n- **ANTIGRAVITY_CALLBACK_PORT**: 36742\n- **ANTIGRAVITY_REDIRECT_URI**: `http://localhost:${ANTIGRAVITY_CALLBACK_PORT}/oauth-callback`\n- **ANTIGRAVITY_USER_AGENT**: \"antigravity/1.11.5 windows/amd64\"\n- **ANTIGRAVITY_API_CLIENT**: \"google-cloud-sdk vscode_cloudshelleditor/0.1\"\n- **ANTIGRAVITY_CLIENT_METADATA**: '{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}'\n- **CODE_ASSIST_ENDPOINT_DAILY**: \"https://daily-cloudcode-pa.sandbox.googleapis.com\"\n- **CODE_ASSIST_ENDPOINT_AUTOPUSH**: \"https://autopush-cloudcode-pa.sandbox.googleapis.com\"\n- **CODE_ASSIST_ENDPOINT_PROD**: \"https://cloudcode-pa.googleapis.com\"\n- **CODE_ASSIST_ENDPOINT_FALLBACKS**: [\n  CODE_ASSIST_ENDPOINT_DAILY,\n  CODE_ASSIST_ENDPOINT_AUTOPUSH,\n  CODE_ASSIST_ENDPOINT_PROD,\n] as const\n- **CODE_ASSIST_ENDPOINT**: CODE_ASSIST_ENDPOINT_DAILY\n- **CODE_ASSIST_API_VERSION**: \"v1internal\"\n- **CODE_ASSIST_HEADERS**: {\n  \"User-Agent\": ANTIGRAVITY_USER_AGENT,\n  \"X-Goog-Api-Client\": ANTIGRAVITY_API_CLIENT,\n  \"Client-Metadata\": ANTIGRAVITY_CLIENT_METADATA,\n} as const\n- **ANTIGRAVITY_PROVIDER_ID**: \"google\"\n- **SEARCH_MODEL**: \"gemini-2.5-flash\"\n- **SEARCH_THINKING_BUDGET_FAST**: 4096\n- **SEARCH_THINKING_BUDGET_DEEP**: 16384\n- **SEARCH_TIMEOUT_MS**: 60 * 1000\n- **MAX_ACCOUNTS**: 10\n- **ENV_CONSOLE_LOG**: \"OPENCODE_ANTIGRAVITY_CONSOLE_LOG\"\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.191Z",
+    "updated_at": "2026-01-30T05:26:52.191Z",
+    "hash": "d02fad4ad4a33fbfc195f53671b8e9742f4616df964e0fb3e206b931dbba1cb8",
+    "dependencies": [],
+    "symbols": [
+      "ANTIGRAVITY_CLIENT_ID",
+      "ANTIGRAVITY_CLIENT_SECRET",
+      "ANTIGRAVITY_CALLBACK_PORT",
+      "ANTIGRAVITY_REDIRECT_URI",
+      "ANTIGRAVITY_SCOPES",
+      "ANTIGRAVITY_USER_AGENT",
+      "ANTIGRAVITY_API_CLIENT",
+      "ANTIGRAVITY_CLIENT_METADATA",
+      "CODE_ASSIST_ENDPOINT_DAILY",
+      "CODE_ASSIST_ENDPOINT_AUTOPUSH",
+      "CODE_ASSIST_ENDPOINT_PROD",
+      "CODE_ASSIST_ENDPOINT_FALLBACKS",
+      "CODE_ASSIST_ENDPOINT",
+      "CODE_ASSIST_API_VERSION",
+      "CODE_ASSIST_HEADERS",
+      "ANTIGRAVITY_PROVIDER_ID",
+      "SEARCH_MODEL",
+      "SEARCH_THINKING_BUDGET_FAST",
+      "SEARCH_THINKING_BUDGET_DEEP",
+      "SEARCH_TIMEOUT_MS",
+      "MAX_ACCOUNTS",
+      "ENV_CONSOLE_LOG"
+    ],
+    "complexity_score": 14.600000000000001
+  }
+}

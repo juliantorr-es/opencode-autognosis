@@ -1,0 +1,53 @@
+{
+  "id": "storage.ts-invariant-2cfaa09e",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/storage.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: storage.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 2 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.244Z",
+    "updated_at": "2026-01-30T05:26:52.244Z",
+    "hash": "ed04c2ae2625ed578c1c81d450888f9f01e0a038402faf4c428b0176b4d2b3d4",
+    "dependencies": [
+      "node:fs",
+      "node:path",
+      "node:os",
+      "./logger"
+    ],
+    "symbols": [
+      "log",
+      "ModelFamily",
+      "AccountTier",
+      "RateLimitState",
+      "AccountMetadataV1",
+      "AccountStorageV1",
+      "RateLimitStateV2",
+      "AccountMetadataV2",
+      "AccountStorageV2",
+      "AccountMetadata",
+      "AccountStorage",
+      "AnyAccountStorage",
+      "getDataDir",
+      "platform",
+      "xdgData",
+      "getStoragePath",
+      "migrateV1ToV2",
+      "rateLimitResetTimes",
+      "migrateV2ToV3",
+      "rateLimitResetTimes",
+      "loadAccounts",
+      "path",
+      "content",
+      "data",
+      "storage",
+      "v2",
+      "error",
+      "saveAccounts",
+      "path",
+      "content",
+      "error",
+      "migrateFromRefreshString",
+      "now"
+    ],
+    "complexity_score": 100
+  }
+}

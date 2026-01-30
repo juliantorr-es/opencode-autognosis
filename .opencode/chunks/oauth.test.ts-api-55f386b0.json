@@ -1,0 +1,27 @@
+{
+  "id": "oauth.test.ts-api-55f386b0",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/antigravity/oauth.test.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: oauth.test.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.187Z",
+    "updated_at": "2026-01-30T05:26:52.187Z",
+    "hash": "42e90adf878c9446bc3001674bfac63832c3e42dcebdc31b289aaaf1bf43c182",
+    "dependencies": [
+      "bun:test",
+      "./oauth"
+    ],
+    "symbols": [
+      "mockFetch",
+      "originalFetch",
+      "result",
+      "result",
+      "result",
+      "callCount",
+      "result",
+      "paidResult",
+      "freeResult"
+    ],
+    "complexity_score": 57.4
+  }
+}

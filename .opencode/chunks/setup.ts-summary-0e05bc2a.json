@@ -1,0 +1,48 @@
+{
+  "id": "setup.ts-summary-0e05bc2a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/tests/integration/setup.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: setup.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (9)\n- **createTestContext**: No documentation found\n- **dumpServerLogs**: No documentation found\n- **createSession**: No documentation found\n- **deleteSession**: No documentation found\n- **sendPrompt**: No documentation found\n- **getMessages**: No documentation found\n- **waitForIdle**: No documentation found\n- **extractTextFromMessages**: No documentation found\n- **extractTextFromParts**: No documentation found\n\n\n\n\n## Dependencies\n- @opencode-ai/sdk\n- node:fs\n- node:path\n- node:os\n\n## Exports\n- TestContext\n- TEST_MODELS\n- createTestContext\n- dumpServerLogs\n- createSession\n- deleteSession\n- sendPrompt\n- getMessages\n- waitForIdle\n- extractTextFromMessages\n- extractTextFromParts\n\n## Complexity Metrics\n- Lines of code: 140\n- Estimated complexity: 91/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.275Z",
+    "updated_at": "2026-01-30T05:26:52.275Z",
+    "hash": "1a6e4ab63ce61724f5d8b096ae34446a3dc5daeb1e430f985e285c093d974cf5",
+    "dependencies": [
+      "@opencode-ai/sdk",
+      "node:fs",
+      "node:path",
+      "node:os"
+    ],
+    "symbols": [
+      "TestContext",
+      "TEST_MODELS",
+      "createTestContext",
+      "dumpServerLogs",
+      "logDir",
+      "files",
+      "latestFile",
+      "latestLog",
+      "content",
+      "lines",
+      "err",
+      "createSession",
+      "result",
+      "deleteSession",
+      "sendPrompt",
+      "result",
+      "getMessages",
+      "result",
+      "waitForIdle",
+      "start",
+      "result",
+      "sessionStatus",
+      "extractTextFromMessages",
+      "text",
+      "msg",
+      "extractTextFromParts",
+      "text",
+      "part"
+    ],
+    "complexity_score": 91
+  }
+}

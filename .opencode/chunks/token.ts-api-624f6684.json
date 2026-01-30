@@ -1,0 +1,39 @@
+{
+  "id": "token.ts-api-624f6684",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/token.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: token.ts\n\n## Public Functions\n\n### refreshAccessToken\n```typescript\nexport async function refreshAccessToken(\n  auth: OAuthAuthDetails,\n  client: PluginClient,\n): Promise<OAuthAuthDetails | undefined>\n```\nRefreshes an Antigravity OAuth access token, updates persisted credentials, and handles revocation.\n\n**Parameters:**\n- `auth`: OAuthAuthDetails - \n- `client`: PluginClient - \n\n**Returns:** Promise<OAuthAuthDetails | undefined>\n\n\n## Classes\n\n\n## Interfaces\n\n### OAuthErrorPayload\n```typescript\ninterface OAuthErrorPayload\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.248Z",
+    "updated_at": "2026-01-30T05:26:52.248Z",
+    "hash": "f8d9fc2ca6b1d7666e9cbf82bfdec5932ba44ccc7c96b420a11354934cc1285f",
+    "dependencies": [
+      "../constants",
+      "./auth",
+      "./cache",
+      "./project",
+      "./logger",
+      "./types"
+    ],
+    "symbols": [
+      "OAuthErrorPayload",
+      "parseOAuthErrorPayload",
+      "payload",
+      "code",
+      "description",
+      "refreshAccessToken",
+      "parts",
+      "response",
+      "errorText",
+      "details",
+      "baseMessage",
+      "clearedAuth",
+      "storeError",
+      "payload",
+      "refreshedParts",
+      "updatedAuth",
+      "error"
+    ],
+    "complexity_score": 100
+  }
+}

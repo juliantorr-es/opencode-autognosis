@@ -1,0 +1,26 @@
+{
+  "id": "browser.test.ts-summary-1c06aab9",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/test/browser.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: browser.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- vitest\n- ../lib/auth/browser.js\n- ../lib/constants.js\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 56\n- Estimated complexity: 33.6/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.314Z",
+    "updated_at": "2026-01-30T05:26:52.314Z",
+    "hash": "bca67a14a63ab0e7ebf696756b53083f93cee50757602f1eed77e2b22d470a88",
+    "dependencies": [
+      "vitest",
+      "../lib/auth/browser.js",
+      "../lib/constants.js"
+    ],
+    "symbols": [
+      "originalPlatform",
+      "originalPlatform",
+      "originalPlatform",
+      "originalPlatform",
+      "originalPlatform",
+      "originalPath",
+      "result"
+    ],
+    "complexity_score": 33.6
+  }
+}

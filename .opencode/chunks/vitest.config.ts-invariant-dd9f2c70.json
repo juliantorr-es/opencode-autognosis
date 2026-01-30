@@ -1,0 +1,16 @@
+{
+  "id": "vitest.config.ts-invariant-dd9f2c70",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/vitest.config.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: vitest.config.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.337Z",
+    "updated_at": "2026-01-30T05:26:52.337Z",
+    "hash": "8e934f77bca66ee7ceac8b8c83142016a4a9ca95a2899713b98a51c2b6b5ce29",
+    "dependencies": [
+      "vitest/config"
+    ],
+    "symbols": [],
+    "complexity_score": 14.5
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "hooks.ts-summary-72fc6034",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/hooks.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: hooks.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (3)\n- **createSystemPromptHandler**: No documentation found\n- **createChatMessageTransformHandler**: No documentation found\n- **createCommandExecuteHandler**: No documentation found\n\n\n\n\n## Dependencies\n- ./state\n- ./logger\n- ./config\n- ./state/tool-cache\n- ./strategies\n- ./messages\n- ./state\n- ./prompts\n- ./commands/stats\n- ./commands/context\n- ./commands/help\n- ./commands/sweep\n\n## Exports\n- createSystemPromptHandler\n- createChatMessageTransformHandler\n- createCommandExecuteHandler\n\n## Complexity Metrics\n- Lines of code: 156\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.150Z",
+    "updated_at": "2026-01-30T05:26:52.150Z",
+    "hash": "19721ea58d4e9f8037849f8bd6aaf07380facdc400c00bb7525f16dc4d337a0f",
+    "dependencies": [
+      "./state",
+      "./logger",
+      "./config",
+      "./state/tool-cache",
+      "./strategies",
+      "./messages",
+      "./state",
+      "./prompts",
+      "./commands/stats",
+      "./commands/context",
+      "./commands/help",
+      "./commands/sweep"
+    ],
+    "symbols": [
+      "INTERNAL_AGENT_SIGNATURES",
+      "createSystemPromptHandler",
+      "systemText",
+      "discardEnabled",
+      "extractEnabled",
+      "promptName",
+      "syntheticPrompt",
+      "createChatMessageTransformHandler",
+      "createCommandExecuteHandler",
+      "args",
+      "subcommand",
+      "_subArgs",
+      "messagesResponse",
+      "messages"
+    ],
+    "complexity_score": 100
+  }
+}

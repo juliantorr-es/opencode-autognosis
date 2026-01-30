@@ -1,0 +1,22 @@
+{
+  "id": "shared-utils.ts-api-ff91a0d4",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/shared-utils.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: shared-utils.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.168Z",
+    "updated_at": "2026-01-30T05:26:52.168Z",
+    "hash": "c7c6fd2f0852a858adebb3710908d29853f36f4b07fd63a6dad5ee3c6d8b0ba8",
+    "dependencies": [
+      "./state",
+      "./messages/utils"
+    ],
+    "symbols": [
+      "isMessageCompacted",
+      "getLastUserMessage",
+      "i",
+      "msg"
+    ],
+    "complexity_score": 35.7
+  }
+}

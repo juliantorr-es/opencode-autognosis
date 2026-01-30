@@ -1,0 +1,17 @@
+{
+  "id": "shims.d.ts-api-531d36ef",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/shims.d.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: shims.d.ts\n\n## Public Functions\n\n### generatePKCE\n```typescript\nexport function generatePKCE(): Promise<PkcePair>;\n```\nNo documentation found\n\n**Returns:** Promise<PkcePair>\n\n\n## Classes\n\n\n## Interfaces\n\n### PkcePair\n```typescript\ninterface PkcePair\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.272Z",
+    "updated_at": "2026-01-30T05:26:52.272Z",
+    "hash": "65643ead853526a5ee21fe6403a8df64928e3799fdd708b2175d1ff98376f581",
+    "dependencies": [],
+    "symbols": [
+      "PkcePair",
+      "generatePKCE"
+    ],
+    "complexity_score": 8.9
+  }
+}

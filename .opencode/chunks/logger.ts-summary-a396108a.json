@@ -1,0 +1,35 @@
+{
+  "id": "logger.ts-summary-a396108a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/logger.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: logger.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (4)\n- **isConsoleLogEnabled**: No documentation found\n- **printAntigravityConsole**: No documentation found\n- **initLogger**: No documentation found\n- **createLogger**: No documentation found\n\n\n\n\n## Dependencies\n- ./types\n- ../constants\n\n## Exports\n- printAntigravityConsole\n- initLogger\n- createLogger\n\n## Complexity Metrics\n- Lines of code: 94\n- Estimated complexity: 99.4/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.211Z",
+    "updated_at": "2026-01-30T05:26:52.211Z",
+    "hash": "d8a6f77140ad0071351c8435589cdc953320990b2624efdd110f392dc34a1607",
+    "dependencies": [
+      "./types",
+      "../constants"
+    ],
+    "symbols": [
+      "LogLevel",
+      "ConsoleLogLevel",
+      "ANTIGRAVITY_CONSOLE_PREFIX",
+      "isConsoleLogEnabled",
+      "val",
+      "printAntigravityConsole",
+      "pad",
+      "prefixedMessage",
+      "args",
+      "Logger",
+      "_client",
+      "initLogger",
+      "createLogger",
+      "service",
+      "log",
+      "prefix",
+      "args"
+    ],
+    "complexity_score": 99.4
+  }
+}

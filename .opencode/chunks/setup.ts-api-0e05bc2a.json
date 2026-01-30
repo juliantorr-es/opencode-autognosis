@@ -1,0 +1,48 @@
+{
+  "id": "setup.ts-api-0e05bc2a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/tests/integration/setup.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: setup.ts\n\n## Public Functions\n\n### createTestContext\n```typescript\nexport async function createTestContext(): Promise<TestContext>\n```\nNo documentation found\n\n**Returns:** Promise<TestContext>\n\n\n### dumpServerLogs\n```typescript\nexport function dumpServerLogs(): void\n```\nNo documentation found\n\n**Returns:** void\n\n\n### createSession\n```typescript\nexport async function createSession(\n  ctx: TestContext,\n  _options?:\n```\nNo documentation found\n\n**Parameters:**\n- `ctx`: TestContext - \n- `_options`: { model?: { providerID: string; modelID: string } } - \n\n**Returns:** Promise<string>\n\n\n### deleteSession\n```typescript\nexport async function deleteSession(ctx: TestContext, sessionId: string): Promise<void>\n```\nNo documentation found\n\n**Parameters:**\n- `ctx`: TestContext - \n- `sessionId`: string - \n\n**Returns:** Promise<void>\n\n\n### sendPrompt\n```typescript\nexport async function sendPrompt(\n  ctx: TestContext,\n  sessionId: string,\n  prompt: string,\n  options?:\n```\nNo documentation found\n\n**Parameters:**\n- `ctx`: TestContext - \n- `sessionId`: string - \n- `prompt`: string - \n- `options`: { model?: { providerID: string; modelID: string }; tools?: Record<string, boolean> } - \n\n**Returns:** Promise<{ info: { role: string }; parts: unknown[] } | null>\n\n\n### getMessages\n```typescript\nexport async function getMessages(\n  ctx: TestContext,\n  sessionId: string\n): Promise<Array<\n```\nNo documentation found\n\n**Parameters:**\n- `ctx`: TestContext - \n- `sessionId`: string - \n\n**Returns:** Promise<Array<{ info: { role: string }; parts: unknown[] }>>\n\n\n### waitForIdle\n```typescript\nexport async function waitForIdle(\n  ctx: TestContext,\n  sessionId: string,\n  timeoutMs: number = 120000\n): Promise<void>\n```\nNo documentation found\n\n**Parameters:**\n- `ctx`: TestContext - \n- `sessionId`: string - \n- `timeoutMs`: number - \n\n**Returns:** Promise<void>\n\n\n### extractTextFromMessages\n```typescript\nexport function extractTextFromMessages(messages: Array<\n```\nNo documentation found\n\n**Parameters:**\n- `messages`: Array<{ info: { role: string }; parts: unknown[] }> - \n\n**Returns:** string\n\n\n### extractTextFromParts\n```typescript\nexport function extractTextFromParts(parts: unknown[]): string\n```\nNo documentation found\n\n**Parameters:**\n- `parts`: unknown[] - \n\n**Returns:** string\n\n\n## Classes\n\n\n## Interfaces\n\n### TestContext\n```typescript\nexport interface TestContext\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.276Z",
+    "updated_at": "2026-01-30T05:26:52.276Z",
+    "hash": "600e3b14e87eaa44ab3034b0df14e38559a505f81f4ef178bf3838b76224d509",
+    "dependencies": [
+      "@opencode-ai/sdk",
+      "node:fs",
+      "node:path",
+      "node:os"
+    ],
+    "symbols": [
+      "TestContext",
+      "TEST_MODELS",
+      "createTestContext",
+      "dumpServerLogs",
+      "logDir",
+      "files",
+      "latestFile",
+      "latestLog",
+      "content",
+      "lines",
+      "err",
+      "createSession",
+      "result",
+      "deleteSession",
+      "sendPrompt",
+      "result",
+      "getMessages",
+      "result",
+      "waitForIdle",
+      "start",
+      "result",
+      "sessionStatus",
+      "extractTextFromMessages",
+      "text",
+      "msg",
+      "extractTextFromParts",
+      "text",
+      "part"
+    ],
+    "complexity_score": 91
+  }
+}

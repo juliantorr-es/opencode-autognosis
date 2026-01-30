@@ -1,0 +1,31 @@
+{
+  "id": "types.ts-api-76cdf091",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/recovery/types.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: types.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n### StoredMessageMeta\n```typescript\nexport interface StoredMessageMeta\n```\nNo documentation found\n\n\n### StoredTextPart\n```typescript\nexport interface StoredTextPart\n```\nNo documentation found\n\n\n### StoredToolPart\n```typescript\nexport interface StoredToolPart\n```\nNo documentation found\n\n\n### StoredReasoningPart\n```typescript\nexport interface StoredReasoningPart\n```\nNo documentation found\n\n\n### StoredStepPart\n```typescript\nexport interface StoredStepPart\n```\nNo documentation found\n\n\n### MessagePart\n```typescript\nexport interface MessagePart\n```\nNo documentation found\n\n\n### MessageData\n```typescript\nexport interface MessageData\n```\nNo documentation found\n\n\n### MessageInfo\n```typescript\nexport interface MessageInfo\n```\nNo documentation found\n\n\n### ResumeConfig\n```typescript\nexport interface ResumeConfig\n```\nNo documentation found\n\n\n### ToolUsePart\n```typescript\nexport interface ToolUsePart\n```\nNo documentation found\n\n\n### ToolResultPart\n```typescript\nexport interface ToolResultPart\n```\nNo documentation found\n\n\n## Types\n\n### ThinkingPartType\n```typescript\nexport type ThinkingPartType\n```\nTypes for session recovery.\n\nBased on oh-my-opencode/src/hooks/session-recovery/types.ts\n\n\n### MetaPartType\n```typescript\nexport type MetaPartType\n```\nNo documentation found\n\n\n### ContentPartType\n```typescript\nexport type ContentPartType\n```\nNo documentation found\n\n\n### StoredPart\n```typescript\nexport type StoredPart\n```\nNo documentation found\n\n\n### RecoveryErrorType\n```typescript\nexport type RecoveryErrorType\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.973Z",
+    "updated_at": "2026-01-30T05:26:51.973Z",
+    "hash": "6586934c3a8435fca6a7a077673626e153287f7e6f877f9a685077cc4f55346d",
+    "dependencies": [],
+    "symbols": [
+      "ThinkingPartType",
+      "MetaPartType",
+      "ContentPartType",
+      "StoredMessageMeta",
+      "StoredTextPart",
+      "StoredToolPart",
+      "StoredReasoningPart",
+      "StoredStepPart",
+      "StoredPart",
+      "MessagePart",
+      "MessageData",
+      "MessageInfo",
+      "ResumeConfig",
+      "RecoveryErrorType",
+      "ToolUsePart",
+      "ToolResultPart"
+    ],
+    "complexity_score": 42.1
+  }
+}

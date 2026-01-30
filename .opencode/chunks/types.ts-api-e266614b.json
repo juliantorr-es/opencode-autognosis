@@ -1,0 +1,23 @@
+{
+  "id": "types.ts-api-e266614b",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/state/types.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: types.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n### WithParts\n```typescript\nexport interface WithParts\n```\nNo documentation found\n\n\n### ToolParameterEntry\n```typescript\nexport interface ToolParameterEntry\n```\nNo documentation found\n\n\n### SessionStats\n```typescript\nexport interface SessionStats\n```\nNo documentation found\n\n\n### Prune\n```typescript\nexport interface Prune\n```\nNo documentation found\n\n\n### SessionState\n```typescript\nexport interface SessionState\n```\nNo documentation found\n\n\n## Types\n\n### ToolStatus\n```typescript\nexport type ToolStatus\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.174Z",
+    "updated_at": "2026-01-30T05:26:52.174Z",
+    "hash": "1713200784cc31897cce2f5756985e5d6126da965ef855a7a50f1732d8ab3876",
+    "dependencies": [
+      "@opencode-ai/sdk/v2"
+    ],
+    "symbols": [
+      "WithParts",
+      "ToolStatus",
+      "ToolParameterEntry",
+      "SessionStats",
+      "Prune",
+      "SessionState"
+    ],
+    "complexity_score": 11.9
+  }
+}

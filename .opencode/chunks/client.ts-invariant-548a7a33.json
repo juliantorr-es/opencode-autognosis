@@ -1,0 +1,44 @@
+{
+  "id": "client.ts-invariant-548a7a33",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/client.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: client.ts\n\n## Core Invariants\n\n\n## Constraints\n- **SUPERMEMORY_API_URL**: \"https://api.supermemory.ai\"\n- **TIMEOUT_MS**: 30000\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 6 try-catch blocks, 1 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.364Z",
+    "updated_at": "2026-01-30T05:26:52.364Z",
+    "hash": "e01dbc27b4e671e46224c39c15931e38b5f3cf7eba7fa35a0acc1d93245dd783",
+    "dependencies": [
+      "supermemory",
+      "../config.js",
+      "./logger.js",
+      "../types/index.js"
+    ],
+    "symbols": [
+      "SUPERMEMORY_API_URL",
+      "TIMEOUT_MS",
+      "withTimeout",
+      "SupermemoryClient",
+      "result",
+      "error",
+      "errorMessage",
+      "result",
+      "error",
+      "errorMessage",
+      "result",
+      "error",
+      "errorMessage",
+      "error",
+      "errorMessage",
+      "result",
+      "error",
+      "errorMessage",
+      "response",
+      "errorText",
+      "result",
+      "error",
+      "errorMessage",
+      "supermemoryClient"
+    ],
+    "complexity_score": 87.5
+  }
+}

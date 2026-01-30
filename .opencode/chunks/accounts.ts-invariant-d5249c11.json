@@ -1,0 +1,38 @@
+{
+  "id": "accounts.ts-invariant-d5249c11",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/accounts.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: accounts.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 0 try-catch blocks, 1 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.196Z",
+    "updated_at": "2026-01-30T05:26:52.196Z",
+    "hash": "6048fc9d26c00c8867c24d49670200e0daf93b402d3d499794b2db0c5cc1c36b",
+    "dependencies": [
+      "./types",
+      "./auth",
+      "./storage"
+    ],
+    "symbols": [
+      "ManagedAccount",
+      "isRateLimitedForFamily",
+      "resetTime",
+      "clearExpiredRateLimits",
+      "now",
+      "AccountManager",
+      "activeIndex",
+      "multiAccount",
+      "storage",
+      "current",
+      "betterTierAvailable",
+      "next",
+      "available",
+      "paidAvailable",
+      "pool",
+      "account",
+      "current",
+      "available",
+      "waitTimes"
+    ],
+    "complexity_score": 100
+  }
+}

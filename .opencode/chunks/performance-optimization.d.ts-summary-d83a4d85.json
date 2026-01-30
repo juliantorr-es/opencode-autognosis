@@ -1,0 +1,16 @@
+{
+  "id": "performance-optimization.d.ts-summary-d83a4d85",
+  "file_path": "/Users/user/opencode-autognosis/dist/performance-optimization.d.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: performance-optimization.d.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **performanceTools**: No documentation found\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- performanceTools\n\n## Complexity Metrics\n- Lines of code: 4\n- Estimated complexity: 8.4/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.827Z",
+    "updated_at": "2026-01-30T05:26:51.827Z",
+    "hash": "b7a83f32482fa4c916e1e3d3a05615edc58824a0b1131115237b6965f8e4ec8d",
+    "dependencies": [],
+    "symbols": [
+      "performanceTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

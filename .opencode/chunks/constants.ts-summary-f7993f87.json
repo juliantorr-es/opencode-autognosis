@@ -1,0 +1,29 @@
+{
+  "id": "constants.ts-summary-f7993f87",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/recovery/constants.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: constants.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (3)\n- **getXdgData**: Get the XDG data directory for OpenCode storage.\nFalls back to ~/.local/share on Linux/Mac, or APPDATA on Windows.\n- **getXdgConfig**: Get the XDG config directory for Antigravity config.\nFalls back to ~/.config on Linux/Mac, or APPDATA on Windows.\n- **getAntigravityConfigDir**: Get the Antigravity config directory.\nDefault: ~/.config/opencode/antigravity.json\n\n\n\n\n## Dependencies\n- node:path\n- node:os\n\n## Exports\n- getXdgConfig\n- getAntigravityConfigDir\n- OPENCODE_STORAGE\n- MESSAGE_STORAGE\n- PART_STORAGE\n- THINKING_TYPES\n- META_TYPES\n- CONTENT_TYPES\n\n## Complexity Metrics\n- Lines of code: 53\n- Estimated complexity: 38.3/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.967Z",
+    "updated_at": "2026-01-30T05:26:51.967Z",
+    "hash": "776c925d1917219344c77ccd20cfdb7421795b87969a96b704768aae30862089",
+    "dependencies": [
+      "node:path",
+      "node:os"
+    ],
+    "symbols": [
+      "getXdgData",
+      "platform",
+      "getXdgConfig",
+      "platform",
+      "getAntigravityConfigDir",
+      "OPENCODE_STORAGE",
+      "MESSAGE_STORAGE",
+      "PART_STORAGE",
+      "THINKING_TYPES",
+      "META_TYPES",
+      "CONTENT_TYPES"
+    ],
+    "complexity_score": 38.3
+  }
+}

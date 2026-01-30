@@ -1,0 +1,13 @@
+{
+  "id": "activeset-1769750811575-2fde608d",
+  "name": "Test Set",
+  "chunks": [],
+  "priority": "high",
+  "created_at": "2026-01-30T05:26:51.575Z",
+  "last_accessed": "2026-01-30T05:26:51.575Z",
+  "metadata": {
+    "description": "Diagnostics test",
+    "session_id": "session-1769750811575",
+    "agent_id": "agent-4"
+  }
+}

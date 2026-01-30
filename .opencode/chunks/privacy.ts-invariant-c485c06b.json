@@ -1,0 +1,19 @@
+{
+  "id": "privacy.ts-invariant-c485c06b",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/privacy.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: privacy.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.373Z",
+    "updated_at": "2026-01-30T05:26:52.373Z",
+    "hash": "85e7caa448f9257d610527b8c139fba816c9105d84e7a32e34d6bbc66570c714",
+    "dependencies": [],
+    "symbols": [
+      "containsPrivateTag",
+      "stripPrivateContent",
+      "isFullyPrivate",
+      "stripped"
+    ],
+    "complexity_score": 5.3
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "types.ts-summary-7967891f",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/transform/types.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: types.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- ../../constants\n\n## Exports\n- ModelFamily\n- ThinkingTier\n- TransformContext\n- TransformResult\n- TransformDebugInfo\n- RequestPayload\n- ThinkingConfig\n- GoogleSearchConfig\n- ResolvedModel\n\n## Complexity Metrics\n- Lines of code: 115\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.113Z",
+    "updated_at": "2026-01-30T05:26:52.113Z",
+    "hash": "a1546b233fb435181d33dc4b08d7d62ba1050b3b185e28f13e6247d5e2c3639d",
+    "dependencies": [
+      "../../constants"
+    ],
+    "symbols": [
+      "ModelFamily",
+      "ThinkingTier",
+      "TransformContext",
+      "TransformResult",
+      "TransformDebugInfo",
+      "RequestPayload",
+      "ThinkingConfig",
+      "GoogleSearchConfig",
+      "ResolvedModel"
+    ],
+    "complexity_score": 100
+  }
+}

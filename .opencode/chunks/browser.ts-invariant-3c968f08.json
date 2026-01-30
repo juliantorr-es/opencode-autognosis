@@ -1,0 +1,18 @@
+{
+  "id": "browser.ts-invariant-3c968f08",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/browser.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: browser.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.198Z",
+    "updated_at": "2026-01-30T05:26:52.198Z",
+    "hash": "7f1ab3fd9ec3d639edfd015b38927832ae5473986e79e591335f49eb1300ca90",
+    "dependencies": [
+      "open"
+    ],
+    "symbols": [
+      "openBrowser"
+    ],
+    "complexity_score": 4.6
+  }
+}

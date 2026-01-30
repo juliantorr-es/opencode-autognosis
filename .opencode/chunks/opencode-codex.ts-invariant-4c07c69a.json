@@ -1,0 +1,36 @@
+{
+  "id": "opencode-codex.ts-invariant-4c07c69a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/prompts/opencode-codex.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: opencode-codex.ts\n\n## Core Invariants\n\n\n## Constraints\n- **OPENCODE_CODEX_URL**: \"https://raw.githubusercontent.com/anomalyco/opencode/dev/packages/opencode/src/session/prompt/codex.txt\"\n- **CACHE_DIR**: join(homedir(), \".opencode\", \"cache\")\n- **CACHE_FILE**: join(CACHE_DIR, \"opencode-codex.txt\")\n- **CACHE_META_FILE**: join(CACHE_DIR, \"opencode-codex-meta.json\")\n- **CACHE_TTL_MS**: 15 * 60 * 1000\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 3 try-catch blocks, 2 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.293Z",
+    "updated_at": "2026-01-30T05:26:52.293Z",
+    "hash": "793044b60ddf71599f02fb82f8168ff9d7d1fca9bac8dca346a02a46eb2e0026",
+    "dependencies": [
+      "node:path",
+      "node:os",
+      "node:fs/promises"
+    ],
+    "symbols": [
+      "OPENCODE_CODEX_URL",
+      "CACHE_DIR",
+      "CACHE_FILE",
+      "CACHE_META_FILE",
+      "CacheMeta",
+      "getOpenCodeCodexPrompt",
+      "cachedContent",
+      "cachedMeta",
+      "metaContent",
+      "CACHE_TTL_MS",
+      "headers",
+      "response",
+      "content",
+      "etag",
+      "error",
+      "getCachedPromptPrefix",
+      "content"
+    ],
+    "complexity_score": 100
+  }
+}

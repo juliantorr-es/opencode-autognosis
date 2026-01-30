@@ -1,0 +1,47 @@
+{
+  "id": "auth.ts-summary-fb6762ba",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/auth/auth.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: auth.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (6)\n- **createState**: Generate a random state value for OAuth flow\n- **parseAuthorizationInput**: Parse authorization code and state from user input\n- **exchangeAuthorizationCode**: Exchange authorization code for access and refresh tokens\n- **decodeJWT**: Decode a JWT token to extract payload\n- **refreshAccessToken**: Refresh access token using refresh token\n- **createAuthorizationFlow**: Create OAuth authorization flow\n\n\n\n\n## Dependencies\n- @openauthjs/openauth/pkce\n- node:crypto\n- ../types.js\n\n## Exports\n- CLIENT_ID\n- AUTHORIZE_URL\n- TOKEN_URL\n- REDIRECT_URI\n- SCOPE\n- createState\n- parseAuthorizationInput\n- exchangeAuthorizationCode\n- decodeJWT\n- refreshAccessToken\n- createAuthorizationFlow\n\n## Complexity Metrics\n- Lines of code: 196\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.280Z",
+    "updated_at": "2026-01-30T05:26:52.280Z",
+    "hash": "ab936090b4b12ed18d726bd1caca5e9e203879112caf04279f723f3a0d7de76a",
+    "dependencies": [
+      "@openauthjs/openauth/pkce",
+      "node:crypto",
+      "../types.js"
+    ],
+    "symbols": [
+      "CLIENT_ID",
+      "AUTHORIZE_URL",
+      "TOKEN_URL",
+      "REDIRECT_URI",
+      "SCOPE",
+      "createState",
+      "parseAuthorizationInput",
+      "value",
+      "url",
+      "params",
+      "exchangeAuthorizationCode",
+      "res",
+      "text",
+      "json",
+      "decodeJWT",
+      "parts",
+      "payload",
+      "decoded",
+      "refreshAccessToken",
+      "response",
+      "text",
+      "json",
+      "error",
+      "err",
+      "createAuthorizationFlow",
+      "pkce",
+      "state",
+      "url"
+    ],
+    "complexity_score": 100
+  }
+}

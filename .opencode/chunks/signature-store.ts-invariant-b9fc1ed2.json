@@ -1,0 +1,22 @@
+{
+  "id": "signature-store.ts-invariant-b9fc1ed2",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/stores/signature-store.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: signature-store.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.065Z",
+    "updated_at": "2026-01-30T05:26:52.065Z",
+    "hash": "8f2a1cf28a9db2c9117247ba8150e7e8d32d1673bde92877e454f4526a5dff46",
+    "dependencies": [
+      "../core/streaming/types"
+    ],
+    "symbols": [
+      "createSignatureStore",
+      "store",
+      "createThoughtBuffer",
+      "buffer",
+      "defaultSignatureStore"
+    ],
+    "complexity_score": 15.1
+  }
+}

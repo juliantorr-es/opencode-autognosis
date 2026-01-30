@@ -1,0 +1,24 @@
+{
+  "id": "spawn.ts-invariant-30f430d6",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/tools/spawn.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: spawn.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.349Z",
+    "updated_at": "2026-01-30T05:26:52.349Z",
+    "hash": "7c89692ac98f0a26f9d07ae4c7254f1a347661235a85a2f94196520c902d5a56",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "../manager.ts",
+      "../permissions.ts",
+      "./spawn.txt"
+    ],
+    "symbols": [
+      "ptySpawn",
+      "sessionId",
+      "info",
+      "output"
+    ],
+    "complexity_score": 37
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "index.ts-summary-14efa830",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/index.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: index.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 15\n- Estimated complexity: 5.5/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.186Z",
+    "updated_at": "2026-01-30T05:26:52.186Z",
+    "hash": "63d4f9d0b98681850376d98cd07c93fb4b52cdbf42a4cd389577d8f7b04fb157",
+    "dependencies": [],
+    "symbols": [],
+    "complexity_score": 5.5
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "jsonc.ts-api-9722c6ae",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/jsonc.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: jsonc.ts\n\n## Public Functions\n\n### stripJsoncComments\n```typescript\nexport function stripJsoncComments(content: string): string\n```\nStrips comments from JSONC content while respecting string boundaries.\nHandles // and /* comments, URLs in strings, and escaped quotes.\nAlso removes trailing commas to support more relaxed JSONC format.\n\n**Parameters:**\n- `content`: string - \n\n**Returns:** string\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.372Z",
+    "updated_at": "2026-01-30T05:26:52.372Z",
+    "hash": "43188cbcd98262fc85eb72f05d793edd3227ad6ab40a35cbfda592dff23feafe",
+    "dependencies": [],
+    "symbols": [
+      "stripJsoncComments",
+      "result",
+      "i",
+      "inString",
+      "inSingleLineComment",
+      "inMultiLineComment",
+      "char",
+      "nextChar",
+      "backslashCount",
+      "j"
+    ],
+    "complexity_score": 100
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "setup.ts-invariant-0e05bc2a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/tests/integration/setup.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: setup.ts\n\n## Core Invariants\n\n\n## Constraints\n- **TEST_MODELS**: {\n  gemini25Flash: { providerID: \"google\", modelID: \"gemini-2.5-flash\" },\n  gemini3Pro: { providerID: \"google\", modelID: \"gemini-3-pro-preview\" },\n  gemini3Flash: { providerID: \"google\", modelID: \"gemini-3-flash\" },\n  claudeSonnet: { providerID: \"google\", modelID: \"gemini-claude-sonnet-4-5-thinking-medium\" },\n} as const\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 1 try-catch blocks, 3 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.276Z",
+    "updated_at": "2026-01-30T05:26:52.276Z",
+    "hash": "24425e995065284dc91d7284c0660e1e729ec4f5630e05178fcd158c738514e5",
+    "dependencies": [
+      "@opencode-ai/sdk",
+      "node:fs",
+      "node:path",
+      "node:os"
+    ],
+    "symbols": [
+      "TestContext",
+      "TEST_MODELS",
+      "createTestContext",
+      "dumpServerLogs",
+      "logDir",
+      "files",
+      "latestFile",
+      "latestLog",
+      "content",
+      "lines",
+      "err",
+      "createSession",
+      "result",
+      "deleteSession",
+      "sendPrompt",
+      "result",
+      "getMessages",
+      "result",
+      "waitForIdle",
+      "start",
+      "result",
+      "sessionStatus",
+      "extractTextFromMessages",
+      "text",
+      "msg",
+      "extractTextFromParts",
+      "text",
+      "part"
+    ],
+    "complexity_score": 91
+  }
+}

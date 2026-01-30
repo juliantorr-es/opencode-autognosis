@@ -1,0 +1,33 @@
+{
+  "id": "cli.ts-api-2d0db5e2",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/cli.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: cli.ts\n\n## Public Functions\n\n### promptProjectId\n```typescript\nexport async function promptProjectId(): Promise<string>\n```\nPrompts the user for a project ID via stdin/stdout.\n\n**Returns:** Promise<string>\n\n\n### promptAddAnotherAccount\n```typescript\nexport async function promptAddAnotherAccount(currentCount: number): Promise<boolean>\n```\nPrompts user whether they want to add another OAuth account.\n\n**Parameters:**\n- `currentCount`: number - \n\n**Returns:** Promise<boolean>\n\n\n### promptLoginMode\n```typescript\nexport async function promptLoginMode(existingAccounts: ExistingAccountInfo[]): Promise<LoginMode>\n```\nPrompts user to choose login mode when accounts already exist.\nReturns \"add\" to append new accounts, \"fresh\" to clear and start over.\n\n**Parameters:**\n- `existingAccounts`: ExistingAccountInfo[] - \n\n**Returns:** Promise<LoginMode>\n\n\n## Classes\n\n\n## Interfaces\n\n### ExistingAccountInfo\n```typescript\nexport interface ExistingAccountInfo\n```\nNo documentation found\n\n\n## Types\n\n### LoginMode\n```typescript\nexport type LoginMode\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.931Z",
+    "updated_at": "2026-01-30T05:26:51.931Z",
+    "hash": "e58cea97cc0f0350cc19d2ef39e90ff4943c18d28bd3c7083c56ccb90b2031a9",
+    "dependencies": [
+      "node:readline/promises",
+      "node:process"
+    ],
+    "symbols": [
+      "promptProjectId",
+      "rl",
+      "answer",
+      "promptAddAnotherAccount",
+      "rl",
+      "answer",
+      "normalized",
+      "LoginMode",
+      "ExistingAccountInfo",
+      "promptLoginMode",
+      "rl",
+      "acc",
+      "label",
+      "answer",
+      "normalized"
+    ],
+    "complexity_score": 47.9
+  }
+}

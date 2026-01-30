@@ -1,0 +1,17 @@
+{
+  "id": "mutex.ts-api-d3e298ca",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/mutex.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: mutex.ts\n\n## Public Functions\n\n\n## Classes\n\n### Mutex\n```typescript\nexport class Mutex\n```\nPromise-based mutex for serializing async operations.\n\nProvides a simple lock mechanism using native Promise mechanics.\nNo external dependencies required.\n\n**Methods:**\n- `acquire`: async acquire(): Promise<void>\n- `release`: release(): void\n- `runExclusive`: async runExclusive<T>(fn: () => Promise<T>): Promise<T>\n\n\n**Properties:**\n- `locked`: any\n- `queue`: (() => void)[]\n\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.379Z",
+    "updated_at": "2026-01-30T05:26:52.379Z",
+    "hash": "1a671d9e4763e2c9ff928151b4dc026f634f0ccf66e9fe546e347ae4ee3691cf",
+    "dependencies": [],
+    "symbols": [
+      "Mutex",
+      "next"
+    ],
+    "complexity_score": 48.3
+  }
+}

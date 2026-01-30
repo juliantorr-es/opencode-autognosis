@@ -1,0 +1,16 @@
+{
+  "id": "activeset.d.ts-invariant-7c310872",
+  "file_path": "/Users/user/opencode-autognosis/dist/activeset.d.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: activeset.d.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.771Z",
+    "updated_at": "2026-01-30T05:26:51.771Z",
+    "hash": "1d46c834b65ce2deabd165d958400341802375c053823fb095554a80ca1d9f26",
+    "dependencies": [],
+    "symbols": [
+      "activeSetTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

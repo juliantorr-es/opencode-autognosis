@@ -1,0 +1,17 @@
+{
+  "id": "codex.test.ts-summary-ca4cda27",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/test/codex.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: codex.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- vitest\n- ../lib/prompts/codex.js\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 114\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.315Z",
+    "updated_at": "2026-01-30T05:26:52.315Z",
+    "hash": "158125adf929fc0e6bb4ec1d257807eac5d1e2aa07c47020f299e296c6036c01",
+    "dependencies": [
+      "vitest",
+      "../lib/prompts/codex.js"
+    ],
+    "symbols": [],
+    "complexity_score": 100
+  }
+}

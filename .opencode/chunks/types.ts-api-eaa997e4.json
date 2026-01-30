@@ -1,0 +1,20 @@
+{
+  "id": "types.ts-api-eaa997e4",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/core/streaming/types.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: types.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n### SignedThinking\n```typescript\nexport interface SignedThinking\n```\nNo documentation found\n\n\n### SignatureStore\n```typescript\nexport interface SignatureStore\n```\nNo documentation found\n\n\n### StreamingCallbacks\n```typescript\nexport interface StreamingCallbacks\n```\nNo documentation found\n\n\n### StreamingOptions\n```typescript\nexport interface StreamingOptions\n```\nNo documentation found\n\n\n### ThoughtBuffer\n```typescript\nexport interface ThoughtBuffer\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.943Z",
+    "updated_at": "2026-01-30T05:26:51.943Z",
+    "hash": "40a78fa509573a8305d6cdba167669a3ada213febd8e006b213e233c77347a98",
+    "dependencies": [],
+    "symbols": [
+      "SignedThinking",
+      "SignatureStore",
+      "StreamingCallbacks",
+      "StreamingOptions",
+      "ThoughtBuffer"
+    ],
+    "complexity_score": 7.1
+  }
+}

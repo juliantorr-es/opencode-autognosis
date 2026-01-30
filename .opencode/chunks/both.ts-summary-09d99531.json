@@ -1,0 +1,16 @@
+{
+  "id": "both.ts-summary-09d99531",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/prompts/system/both.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: both.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- SYSTEM_PROMPT_BOTH\n\n## Complexity Metrics\n- Lines of code: 61\n- Estimated complexity: 31.1/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.164Z",
+    "updated_at": "2026-01-30T05:26:52.164Z",
+    "hash": "48a946a2efa42a04a474e7e057767643604f9d12f34a3cd74012fd7fa42369b8",
+    "dependencies": [],
+    "symbols": [
+      "SYSTEM_PROMPT_BOTH"
+    ],
+    "complexity_score": 31.1
+  }
+}

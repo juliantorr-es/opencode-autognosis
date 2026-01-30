@@ -1,0 +1,30 @@
+{
+  "id": "server.ts-invariant-0e852032",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/auth/server.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: server.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 2 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nPerformance patterns: Contains explicit loops\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.284Z",
+    "updated_at": "2026-01-30T05:26:52.284Z",
+    "hash": "e4b01e313417ee4da2c0b43a40984bdbb3fd30d92ffeada61de21421e100c937",
+    "dependencies": [
+      "node:http",
+      "node:fs",
+      "node:path",
+      "node:url",
+      "../types.js"
+    ],
+    "symbols": [
+      "__dirname",
+      "successHtml",
+      "startLocalOAuthServer",
+      "server",
+      "url",
+      "code",
+      "poll",
+      "i",
+      "lastCode"
+    ],
+    "complexity_score": 67.3
+  }
+}

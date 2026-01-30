@@ -1,0 +1,16 @@
+{
+  "id": "vitest.config.ts-summary-dd9f2c70",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/vitest.config.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: vitest.config.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- vitest/config\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 25\n- Estimated complexity: 14.5/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.337Z",
+    "updated_at": "2026-01-30T05:26:52.337Z",
+    "hash": "ac4be455ce4d4465c7a4ef51555a84e5c0a3238e254a007baf4eb8465435b197",
+    "dependencies": [
+      "vitest/config"
+    ],
+    "symbols": [],
+    "complexity_score": 14.5
+  }
+}

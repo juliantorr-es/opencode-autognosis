@@ -1,0 +1,18 @@
+{
+  "id": "with-timeout.ts-invariant-2f1f6b91",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/with-timeout.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: with-timeout.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 1 try-catch blocks, 1 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.383Z",
+    "updated_at": "2026-01-30T05:26:52.383Z",
+    "hash": "9fc81aad3d847176d0e56d12a581b5ccf34780cabd6bbd2d444de6e6d97bb342",
+    "dependencies": [],
+    "symbols": [
+      "TimeoutError",
+      "withTimeout",
+      "timeoutId"
+    ],
+    "complexity_score": 56.5
+  }
+}

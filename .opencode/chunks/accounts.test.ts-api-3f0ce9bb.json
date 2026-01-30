@@ -1,0 +1,53 @@
+{
+  "id": "accounts.test.ts-api-3f0ce9bb",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/accounts.test.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: accounts.test.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.193Z",
+    "updated_at": "2026-01-30T05:26:52.193Z",
+    "hash": "2115da4fa1a7050cc13f9f5f02f294f5e72ce0faf427cacf416dd6ec0c5e67ed",
+    "dependencies": [
+      "bun:test",
+      "./accounts",
+      "./types"
+    ],
+    "symbols": [
+      "FAMILY",
+      "auth",
+      "manager",
+      "auth",
+      "manager",
+      "auth",
+      "manager",
+      "account",
+      "auth",
+      "manager",
+      "firstAccount",
+      "secondAccount",
+      "auth",
+      "manager",
+      "accounts",
+      "next",
+      "auth",
+      "manager",
+      "account",
+      "next",
+      "auth",
+      "manager",
+      "accounts",
+      "waitTime",
+      "auth",
+      "manager",
+      "beforeTime",
+      "account",
+      "afterTime",
+      "auth",
+      "manager",
+      "account",
+      "claudeAccount",
+      "geminiAccount"
+    ],
+    "complexity_score": 32.7
+  }
+}

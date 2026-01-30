@@ -1,0 +1,24 @@
+{
+  "id": "index.js-summary-cd2749f7",
+  "file_path": "/Users/user/opencode-autognosis/dist/index.js",
+  "chunk_type": "summary",
+  "content": "# Summary: index.js\n\n## File Type\n.js - JavaScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- ./system-tools.js\n- ./git-worktree.js\n- ./testing-infrastructure.js\n- ./chunk-cards.js\n- ./activeset.js\n- ./module-summaries.js\n- ./performance-optimization.js\n\n## Exports\n- AutognosisPlugin\n\n## Complexity Metrics\n- Lines of code: 22\n- Estimated complexity: 26.2/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.818Z",
+    "updated_at": "2026-01-30T05:26:51.818Z",
+    "hash": "14bbff0a7a34013c27d072453b05d92a982a8fc26db845567db2512741e94e94",
+    "dependencies": [
+      "./system-tools.js",
+      "./git-worktree.js",
+      "./testing-infrastructure.js",
+      "./chunk-cards.js",
+      "./activeset.js",
+      "./module-summaries.js",
+      "./performance-optimization.js"
+    ],
+    "symbols": [
+      "AutognosisPlugin"
+    ],
+    "complexity_score": 26.2
+  }
+}

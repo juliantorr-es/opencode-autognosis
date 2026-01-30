@@ -1,0 +1,35 @@
+{
+  "id": "logger.ts-summary-6869f7d8",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/logger.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: logger.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nDocumented purpose found in JSDoc\n\n## Key Components\n\n### Functions (5)\n- **isConsoleLogEnabled**: Check if console logging is enabled via environment variable.\n- **initLogger**: Initialize the logger with the plugin client.\nMust be called during plugin initialization to enable TUI logging.\n- **getLoggerClient**: Get the current client (for testing or advanced usage).\n- **createLogger**: Create a logger instance for a specific module.\n- **printAntigravityConsole**: Print a message to the console with Antigravity prefix.\nOnly outputs when OPENCODE_ANTIGRAVITY_CONSOLE_LOG=1 is set.\n\nUse this for standalone messages that don't belong to a specific module.\n\n\n\n\n## Dependencies\n- ./types\n\n## Exports\n- Logger\n- initLogger\n- getLoggerClient\n- createLogger\n- printAntigravityConsole\n\n## Complexity Metrics\n- Lines of code: 145\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.956Z",
+    "updated_at": "2026-01-30T05:26:51.956Z",
+    "hash": "3764249a61bc026b6b636726b61e8b6c2022844df2545cb04fb5ade303eaad35",
+    "dependencies": [
+      "./types"
+    ],
+    "symbols": [
+      "LogLevel",
+      "ENV_CONSOLE_LOG",
+      "ANTIGRAVITY_CONSOLE_PREFIX",
+      "Logger",
+      "_client",
+      "isConsoleLogEnabled",
+      "val",
+      "initLogger",
+      "getLoggerClient",
+      "createLogger",
+      "service",
+      "log",
+      "app",
+      "prefix",
+      "args",
+      "printAntigravityConsole",
+      "prefixedMessage",
+      "args"
+    ],
+    "complexity_score": 100
+  }
+}

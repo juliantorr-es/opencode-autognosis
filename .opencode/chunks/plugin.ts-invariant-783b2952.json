@@ -1,0 +1,28 @@
+{
+  "id": "plugin.ts-invariant-783b2952",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: plugin.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.353Z",
+    "updated_at": "2026-01-30T05:26:52.353Z",
+    "hash": "916f8514a5117dfe8fe720036b2836bbf7544706c44ca5dfcfa7eae73a920596",
+    "dependencies": [
+      "./plugin/logger.ts",
+      "./plugin/types.ts",
+      "./plugin/pty/manager.ts",
+      "./plugin/pty/permissions.ts",
+      "./plugin/pty/tools/spawn.ts",
+      "./plugin/pty/tools/write.ts",
+      "./plugin/pty/tools/read.ts",
+      "./plugin/pty/tools/list.ts",
+      "./plugin/pty/tools/kill.ts"
+    ],
+    "symbols": [
+      "log",
+      "PTYPlugin",
+      "sessionId"
+    ],
+    "complexity_score": 44.4
+  }
+}

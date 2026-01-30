@@ -1,0 +1,46 @@
+{
+  "id": "persistence.ts-api-24cf750f",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/state/persistence.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: persistence.ts\n\n## Public Functions\n\n### saveSessionState\n```typescript\nexport async function saveSessionState(\n    sessionState: SessionState,\n    logger: Logger,\n    sessionName?: string,\n): Promise<void>\n```\nNo documentation found\n\n**Parameters:**\n- `sessionState`: SessionState - \n- `logger`: Logger - \n- `sessionName`: string - \n\n**Returns:** Promise<void>\n\n\n### loadSessionState\n```typescript\nexport async function loadSessionState(\n    sessionId: string,\n    logger: Logger,\n): Promise<PersistedSessionState | null>\n```\nNo documentation found\n\n**Parameters:**\n- `sessionId`: string - \n- `logger`: Logger - \n\n**Returns:** Promise<PersistedSessionState | null>\n\n\n### loadAllSessionStats\n```typescript\nexport async function loadAllSessionStats(logger: Logger): Promise<AggregatedStats>\n```\nNo documentation found\n\n**Parameters:**\n- `logger`: Logger - \n\n**Returns:** Promise<AggregatedStats>\n\n\n## Classes\n\n\n## Interfaces\n\n### PersistedSessionState\n```typescript\nexport interface PersistedSessionState\n```\nNo documentation found\n\n\n### AggregatedStats\n```typescript\nexport interface AggregatedStats\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.170Z",
+    "updated_at": "2026-01-30T05:26:52.170Z",
+    "hash": "73e45474084aa12456cb8305ec7cff842eb68ddf5c8fe411684c49b0e5c83a8f",
+    "dependencies": [
+      "fs/promises",
+      "fs",
+      "os",
+      "path",
+      "./types",
+      "../logger"
+    ],
+    "symbols": [
+      "PersistedSessionState",
+      "STORAGE_DIR",
+      "ensureStorageDir",
+      "getSessionFilePath",
+      "saveSessionState",
+      "state",
+      "filePath",
+      "content",
+      "error",
+      "loadSessionState",
+      "filePath",
+      "content",
+      "state",
+      "error",
+      "AggregatedStats",
+      "loadAllSessionStats",
+      "result",
+      "files",
+      "jsonFiles",
+      "file",
+      "filePath",
+      "content",
+      "state",
+      "error"
+    ],
+    "complexity_score": 100
+  }
+}

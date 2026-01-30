@@ -1,0 +1,44 @@
+{
+  "id": "test-models.ts-summary-adb6ff20",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/script/test-models.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: test-models.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (4)\n- **testModel**: No documentation found\n- **parseArgs**: No documentation found\n- **printHelp**: No documentation found\n- **main**: No documentation found\n\n\n\n\n## Dependencies\n- child_process\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 171\n- Estimated complexity: 93.1/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.864Z",
+    "updated_at": "2026-01-30T05:26:51.864Z",
+    "hash": "b5f11691556974041ea5595387616c4e6c3b3fe61ae74b91b5621bf10590495c",
+    "dependencies": [
+      "child_process"
+    ],
+    "symbols": [
+      "ModelTest",
+      "MODELS",
+      "TEST_PROMPT",
+      "DEFAULT_TIMEOUT_MS",
+      "TestResult",
+      "testModel",
+      "start",
+      "proc",
+      "stdout",
+      "stderr",
+      "timer",
+      "duration",
+      "parseArgs",
+      "args",
+      "modelIdx",
+      "catIdx",
+      "timeoutIdx",
+      "printHelp",
+      "main",
+      "tests",
+      "t",
+      "passed",
+      "failed",
+      "failures",
+      "t",
+      "result",
+      "f"
+    ],
+    "complexity_score": 93.1
+  }
+}

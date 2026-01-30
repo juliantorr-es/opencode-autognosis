@@ -1,0 +1,31 @@
+{
+  "id": "stats.ts-summary-716dbccf",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/commands/stats.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: stats.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (2)\n- **formatStatsMessage**: No documentation found\n- **handleStatsCommand**: No documentation found\n\n\n\n\n## Dependencies\n- ../logger\n- ../state\n- ../ui/notification\n- ../ui/utils\n- ../state/persistence\n- ../strategies/utils\n\n## Exports\n- StatsCommandContext\n- handleStatsCommand\n\n## Complexity Metrics\n- Lines of code: 68\n- Estimated complexity: 27.8/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.140Z",
+    "updated_at": "2026-01-30T05:26:52.140Z",
+    "hash": "56c62998cd62e4c5d73bb3f5128ab4d2065534d0fa0f74daf72be6c109537202",
+    "dependencies": [
+      "../logger",
+      "../state",
+      "../ui/notification",
+      "../ui/utils",
+      "../state/persistence",
+      "../strategies/utils"
+    ],
+    "symbols": [
+      "StatsCommandContext",
+      "formatStatsMessage",
+      "lines",
+      "handleStatsCommand",
+      "sessionTokens",
+      "sessionTools",
+      "allTime",
+      "message",
+      "params"
+    ],
+    "complexity_score": 27.8
+  }
+}

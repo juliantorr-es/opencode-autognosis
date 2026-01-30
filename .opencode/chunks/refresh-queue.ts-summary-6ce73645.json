@@ -1,0 +1,36 @@
+{
+  "id": "refresh-queue.ts-summary-6ce73645",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/refresh-queue.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: refresh-queue.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **createProactiveRefreshQueue**: Create a proactive refresh queue instance.\n\n\n\n### Classes (1)\n- **ProactiveRefreshQueue**: Proactive Token Refresh Queue\n\nRuns in the background and proactively refreshes tokens before they expire.\nThis ensures that user requests never block on token refresh.\n\nAll logging is silent by default - uses structured logger that only outputs\nwhen OPENCODE_ANTIGRAVITY_CONSOLE_LOG=1 is set or TUI logging is available.\n\n\n## Dependencies\n- ./accounts\n- ./types\n- ./token\n- ./logger\n\n## Exports\n- ProactiveRefreshConfig\n- DEFAULT_PROACTIVE_REFRESH_CONFIG\n- ProactiveRefreshQueue\n- createProactiveRefreshQueue\n\n## Complexity Metrics\n- Lines of code: 321\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.981Z",
+    "updated_at": "2026-01-30T05:26:51.981Z",
+    "hash": "7749e9fff4c77f9f3360073c9b42b6bc60c1e910f9b3a7f07dbc202300e203ce",
+    "dependencies": [
+      "./accounts",
+      "./types",
+      "./token",
+      "./logger"
+    ],
+    "symbols": [
+      "log",
+      "ProactiveRefreshConfig",
+      "DEFAULT_PROACTIVE_REFRESH_CONFIG",
+      "RefreshQueueState",
+      "ProactiveRefreshQueue",
+      "now",
+      "bufferMs",
+      "refreshThreshold",
+      "accountsToRefresh",
+      "account",
+      "auth",
+      "refreshed",
+      "error",
+      "minutesUntilExpiry",
+      "intervalMs",
+      "createProactiveRefreshQueue"
+    ],
+    "complexity_score": 100
+  }
+}

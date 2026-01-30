@@ -1,0 +1,26 @@
+{
+  "id": "auth.ts-invariant-2d0283b1",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/auth.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: auth.ts\n\n## Core Invariants\n\n\n## Constraints\n- **ACCESS_TOKEN_EXPIRY_BUFFER_MS**: 60 * 1000\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.919Z",
+    "updated_at": "2026-01-30T05:26:51.919Z",
+    "hash": "497d1d0f0435f04ae23591165ed3df788707858798545876c08c10e2f56ac5d9",
+    "dependencies": [
+      "./types"
+    ],
+    "symbols": [
+      "ACCESS_TOKEN_EXPIRY_BUFFER_MS",
+      "isOAuthAuth",
+      "parseRefreshParts",
+      "formatRefreshParts",
+      "projectSegment",
+      "base",
+      "accessTokenExpired",
+      "calculateTokenExpiry",
+      "seconds"
+    ],
+    "complexity_score": 38.3
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "token.ts-invariant-dd20d5ae",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/token.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: token.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 3 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.070Z",
+    "updated_at": "2026-01-30T05:26:52.070Z",
+    "hash": "6d5d5bac3aac499a1f309634ff84ee3f30b4f28ec0f5c2a14bb133736b8d563a",
+    "dependencies": [
+      "../constants",
+      "./auth",
+      "./cache",
+      "./logger",
+      "./project",
+      "./types"
+    ],
+    "symbols": [
+      "log",
+      "OAuthErrorPayload",
+      "parseOAuthErrorPayload",
+      "payload",
+      "code",
+      "description",
+      "AntigravityTokenRefreshError",
+      "refreshAccessToken",
+      "parts",
+      "startTime",
+      "response",
+      "errorText",
+      "details",
+      "baseMessage",
+      "message",
+      "payload",
+      "refreshedParts",
+      "updatedAuth",
+      "error"
+    ],
+    "complexity_score": 100
+  }
+}

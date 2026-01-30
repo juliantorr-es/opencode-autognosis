@@ -5,6 +5,7 @@ import * as fsSync from "node:fs";
 import * as path from "node:path";
 import { promisify } from "node:util";
 import * as crypto from "node:crypto";
+import { Logger } from "./services/logger.js";
 
 const execAsync = promisify(exec);
 const PROJECT_ROOT = process.cwd();
@@ -14,7 +15,7 @@ const BENCHMARK_DIR = path.join(OPENCODE_DIR, "benchmarks");
 
 // Internal logging
 function log(message: string, data?: unknown) {
-    console.error(`[Testing] ${message}`, data || '');
+    Logger.log("Testing", message, data);
 }
 
 // =============================================================================

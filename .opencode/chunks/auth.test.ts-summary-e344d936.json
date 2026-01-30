@@ -1,0 +1,48 @@
+{
+  "id": "auth.test.ts-summary-e344d936",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/test/auth.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: auth.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- vitest\n- ../lib/auth/auth.js\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 144\n- Estimated complexity: 44.4/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.312Z",
+    "updated_at": "2026-01-30T05:26:52.312Z",
+    "hash": "71c18db63b939be363c9dd07c1515e539b36e560e623b3cbd9d37a89d4b0ef58",
+    "dependencies": [
+      "vitest",
+      "../lib/auth/auth.js"
+    ],
+    "symbols": [
+      "state",
+      "state1",
+      "state2",
+      "input",
+      "result",
+      "input",
+      "result",
+      "input",
+      "result",
+      "input",
+      "result",
+      "result",
+      "result",
+      "header",
+      "payload",
+      "signature",
+      "token",
+      "decoded",
+      "payload",
+      "token",
+      "decoded",
+      "result",
+      "result",
+      "token",
+      "result",
+      "flow",
+      "flow",
+      "url",
+      "flow1",
+      "flow2"
+    ],
+    "complexity_score": 44.4
+  }
+}

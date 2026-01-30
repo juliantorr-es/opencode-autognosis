@@ -1,0 +1,30 @@
+{
+  "id": "types.ts-api-9b899103",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/types.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: types.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n### OAuthAuthDetails\n```typescript\nexport interface OAuthAuthDetails\n```\nNo documentation found\n\n\n### NonOAuthAuthDetails\n```typescript\nexport interface NonOAuthAuthDetails\n```\nNo documentation found\n\n\n### ProviderModel\n```typescript\nexport interface ProviderModel\n```\nNo documentation found\n\n\n### Provider\n```typescript\nexport interface Provider\n```\nNo documentation found\n\n\n### LoaderResult\n```typescript\nexport interface LoaderResult\n```\nNo documentation found\n\n\n### PluginContext\n```typescript\nexport interface PluginContext\n```\nNo documentation found\n\n\n### RefreshParts\n```typescript\nexport interface RefreshParts\n```\nNo documentation found\n\n\n### MultiAccountRefreshParts\n```typescript\nexport interface MultiAccountRefreshParts\n```\nNo documentation found\n\n\n### ProjectContextResult\n```typescript\nexport interface ProjectContextResult\n```\nNo documentation found\n\n\n## Types\n\n### AuthDetails\n```typescript\nexport type AuthDetails\n```\nNo documentation found\n\n\n### GetAuth\n```typescript\nexport type GetAuth\n```\nNo documentation found\n\n\n### PluginClient\n```typescript\nexport type PluginClient\n```\nNo documentation found\n\n\n### PluginResult\n```typescript\nexport type PluginResult\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.267Z",
+    "updated_at": "2026-01-30T05:26:52.267Z",
+    "hash": "a3deb1761da48a25a221b1e2bc87408d12799f9e52e223812e3beb4ab264fbd0",
+    "dependencies": [
+      "@opencode-ai/plugin"
+    ],
+    "symbols": [
+      "OAuthAuthDetails",
+      "NonOAuthAuthDetails",
+      "AuthDetails",
+      "GetAuth",
+      "ProviderModel",
+      "Provider",
+      "LoaderResult",
+      "PluginClient",
+      "PluginContext",
+      "PluginResult",
+      "RefreshParts",
+      "MultiAccountRefreshParts",
+      "ProjectContextResult"
+    ],
+    "complexity_score": 14.100000000000001
+  }
+}

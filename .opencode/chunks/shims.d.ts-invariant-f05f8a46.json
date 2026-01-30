@@ -1,0 +1,17 @@
+{
+  "id": "shims.d.ts-invariant-f05f8a46",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/shims.d.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: shims.d.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.133Z",
+    "updated_at": "2026-01-30T05:26:52.133Z",
+    "hash": "363718a50181a2ecebc5f186dc733204bfbc6e9d184827b1522567b1e8dddea4",
+    "dependencies": [],
+    "symbols": [
+      "PkcePair",
+      "generatePKCE"
+    ],
+    "complexity_score": 8.9
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "vitest.config.ts-summary-ef900c9a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/vitest.config.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: vitest.config.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- vitest/config\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 11\n- Estimated complexity: 9.1/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.133Z",
+    "updated_at": "2026-01-30T05:26:52.133Z",
+    "hash": "a55a899529e68564a1e2c7f45a2074d33a66ae9e6f038382c20e2a6101711fc4",
+    "dependencies": [
+      "vitest/config"
+    ],
+    "symbols": [],
+    "complexity_score": 9.1
+  }
+}

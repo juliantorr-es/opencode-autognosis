@@ -1,0 +1,18 @@
+{
+  "id": "log-warn.ts-invariant-0377b4b3",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/log-warn.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: log-warn.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.378Z",
+    "updated_at": "2026-01-30T05:26:52.378Z",
+    "hash": "d9ade4c73b7956f78e94cee6c694894d826101a5e985f7bea046b4273ddf6ebf",
+    "dependencies": [
+      "./types"
+    ],
+    "symbols": [
+      "logWarn"
+    ],
+    "complexity_score": 46.2
+  }
+}

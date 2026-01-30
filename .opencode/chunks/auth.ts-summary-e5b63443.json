@@ -1,0 +1,28 @@
+{
+  "id": "auth.ts-summary-e5b63443",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/auth.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: auth.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (6)\n- **isOAuthAuth**: No documentation found\n- **parseRefreshParts**: Splits a packed refresh string into its constituent refresh token and project IDs.\n- **formatRefreshParts**: Serializes refresh token parts into the stored string format.\n- **accessTokenExpired**: Determines whether an access token is expired or missing, with buffer for clock skew.\n- **parseMultiAccountRefresh**: Parses refresh string that may contain multiple accounts separated by ||\n- **formatMultiAccountRefresh**: Serializes multiple accounts into refresh string\n\n\n\n\n## Dependencies\n- ./types\n\n## Exports\n- isOAuthAuth\n- parseRefreshParts\n- formatRefreshParts\n- accessTokenExpired\n- parseMultiAccountRefresh\n- formatMultiAccountRefresh\n\n## Complexity Metrics\n- Lines of code: 69\n- Estimated complexity: 34.9/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.197Z",
+    "updated_at": "2026-01-30T05:26:52.197Z",
+    "hash": "bf44a74b4027bd28cb0665b8a632f200ab22d5eca1ddf83bc6b001f8cd62f820",
+    "dependencies": [
+      "./types"
+    ],
+    "symbols": [
+      "ACCESS_TOKEN_EXPIRY_BUFFER_MS",
+      "ACCOUNT_SEPARATOR",
+      "isOAuthAuth",
+      "parseRefreshParts",
+      "formatRefreshParts",
+      "projectSegment",
+      "base",
+      "accessTokenExpired",
+      "parseMultiAccountRefresh",
+      "accountStrings",
+      "formatMultiAccountRefresh"
+    ],
+    "complexity_score": 34.9
+  }
+}

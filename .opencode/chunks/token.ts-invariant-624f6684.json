@@ -1,0 +1,39 @@
+{
+  "id": "token.ts-invariant-624f6684",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/token.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: token.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n- **Code Annotation**: NOTE: We don't save to client.auth.set here because it would overwrite\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 4 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.248Z",
+    "updated_at": "2026-01-30T05:26:52.248Z",
+    "hash": "2fcf551ec8d60858aa09f4eb127b1d32583a3974d0d1b9cc1a57a86c44a53d69",
+    "dependencies": [
+      "../constants",
+      "./auth",
+      "./cache",
+      "./project",
+      "./logger",
+      "./types"
+    ],
+    "symbols": [
+      "OAuthErrorPayload",
+      "parseOAuthErrorPayload",
+      "payload",
+      "code",
+      "description",
+      "refreshAccessToken",
+      "parts",
+      "response",
+      "errorText",
+      "details",
+      "baseMessage",
+      "clearedAuth",
+      "storeError",
+      "payload",
+      "refreshedParts",
+      "updatedAuth",
+      "error"
+    ],
+    "complexity_score": 100
+  }
+}

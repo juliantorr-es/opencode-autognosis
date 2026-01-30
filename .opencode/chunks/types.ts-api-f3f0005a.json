@@ -1,0 +1,34 @@
+{
+  "id": "types.ts-api-f3f0005a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/types.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: types.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n### PluginConfig\n```typescript\nexport interface PluginConfig\n```\nPlugin configuration from ~/.opencode/openai-codex-auth-config.json\n\n\n### UserConfig\n```typescript\nexport interface UserConfig\n```\nUser configuration structure from opencode.json\n\n\n### ConfigOptions\n```typescript\nexport interface ConfigOptions\n```\nConfiguration options for reasoning and text settings\n\n\n### ReasoningConfig\n```typescript\nexport interface ReasoningConfig\n```\nReasoning configuration for requests\n\n\n### OAuthServerInfo\n```typescript\nexport interface OAuthServerInfo\n```\nOAuth server information\n\n\n### PKCEPair\n```typescript\nexport interface PKCEPair\n```\nPKCE challenge and verifier\n\n\n### AuthorizationFlow\n```typescript\nexport interface AuthorizationFlow\n```\nAuthorization flow result\n\n\n### TokenSuccess\n```typescript\nexport interface TokenSuccess\n```\nToken exchange success result\n\n\n### TokenFailure\n```typescript\nexport interface TokenFailure\n```\nToken exchange failure result\n\n\n### ParsedAuthInput\n```typescript\nexport interface ParsedAuthInput\n```\nParsed authorization input\n\n\n### JWTPayload\n```typescript\nexport interface JWTPayload\n```\nJWT payload with ChatGPT account info\n\n\n### InputItem\n```typescript\nexport interface InputItem\n```\nMessage input item\n\n\n### RequestBody\n```typescript\nexport interface RequestBody\n```\nRequest body structure\n\n\n### SSEEventData\n```typescript\nexport interface SSEEventData\n```\nSSE event data structure\n\n\n### CacheMetadata\n```typescript\nexport interface CacheMetadata\n```\nCache metadata for Codex instructions\n\n\n### GitHubRelease\n```typescript\nexport interface GitHubRelease\n```\nGitHub release data\n\n\n## Types\n\n### TokenResult\n```typescript\nexport type TokenResult\n```\nToken exchange result\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.306Z",
+    "updated_at": "2026-01-30T05:26:52.306Z",
+    "hash": "4ed2bfd75545923c3fb0cca08eaaddc723de974008ee109eef1dc6177e913c3b",
+    "dependencies": [
+      "@opencode-ai/sdk"
+    ],
+    "symbols": [
+      "PluginConfig",
+      "UserConfig",
+      "ConfigOptions",
+      "ReasoningConfig",
+      "OAuthServerInfo",
+      "PKCEPair",
+      "AuthorizationFlow",
+      "TokenSuccess",
+      "TokenFailure",
+      "TokenResult",
+      "ParsedAuthInput",
+      "JWTPayload",
+      "InputItem",
+      "RequestBody",
+      "SSEEventData",
+      "CacheMetadata",
+      "GitHubRelease"
+    ],
+    "complexity_score": 43.900000000000006
+  }
+}

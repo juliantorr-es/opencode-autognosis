@@ -1,0 +1,23 @@
+{
+  "id": "logger.ts-invariant-ebe26739",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/logger.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: logger.ts\n\n## Core Invariants\n\n\n## Constraints\n- **LOG_FILE**: join(homedir(), \".opencode-supermemory.log\")\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.373Z",
+    "updated_at": "2026-01-30T05:26:52.373Z",
+    "hash": "658b2309041fa44459f6549db34ee621e9bca9391bab2c7da6ce07457c66e07a",
+    "dependencies": [
+      "fs",
+      "os",
+      "path"
+    ],
+    "symbols": [
+      "LOG_FILE",
+      "log",
+      "timestamp",
+      "line"
+    ],
+    "complexity_score": 9.6
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "module_id": "module-src-index-ts-f41e9d04",
+  "file_path": "/Users/user/opencode-autognosis/src/index.ts",
+  "chunk_cards": [
+    {
+      "id": "index.ts-summary-a1544acd",
+      "file_path": "/Users/user/opencode-autognosis/src/index.ts",
+      "chunk_type": "summary",
+      "content": "# Summary: index.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- ./system-tools.js\n- ./git-worktree.js\n- ./testing-infrastructure.js\n- ./chunk-cards.js\n- ./activeset.js\n- ./module-summaries.js\n- ./performance-optimization.js\n\n## Exports\n- AutognosisPlugin\n\n## Complexity Metrics\n- Lines of code: 23\n- Estimated complexity: 14.3/100\n\n## Notes\nNo specific notes found",
+      "metadata": {
+        "created_at": "2026-01-30T05:26:51.586Z",
+        "updated_at": "2026-01-30T05:26:51.586Z",
+        "hash": "a877e32426f989be39d33043bac73b5c30bc596a0e84af10ead21f7ad06c39b2",
+        "dependencies": [
+          "./system-tools.js",
+          "./git-worktree.js",
+          "./testing-infrastructure.js",
+          "./chunk-cards.js",
+          "./activeset.js",
+          "./module-summaries.js",
+          "./performance-optimization.js"
+        ],
+        "symbols": [
+          "AutognosisPlugin"
+        ],
+        "complexity_score": 14.3
+      }
+    }
+  ],
+  "hierarchy": {
+    "summary_level": "# Summary: index.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- ./system-tools.js\n- ./git-worktree.js\n- ./testing-infrastructure.js\n- ./chunk-cards.js\n- ./activeset.js\n- ./module-summaries.js\n- ./performance-optimization.js\n\n## Exports\n- AutognosisPlugin\n\n## Complexity Metrics\n- Lines of code: 23\n- Estimated complexity: 14.3/100\n\n## Notes\nNo specific notes found",
+    "signature_level": "No API documentation available",
+    "implementation_level": "No invariant analysis available"
+  },
+  "relationships": {
+    "imports": [
+      "./system-tools.js",
+      "./git-worktree.js",
+      "./testing-infrastructure.js",
+      "./chunk-cards.js",
+      "./activeset.js",
+      "./module-summaries.js",
+      "./performance-optimization.js"
+    ],
+    "exports": [],
+    "dependents": []
+  },
+  "metrics": {
+    "total_chunks": 1,
+    "complexity_score": 14.3,
+    "api_surface": 0
+  },
+  "synthesis_metadata": {
+    "created_at": "2026-01-30T05:26:51.587Z",
+    "updated_at": "2026-01-30T05:26:51.587Z",
+    "version": "1.0.0",
+    "synthesis_method": "chunk_card_synthesis"
+  }
+}

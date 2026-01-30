@@ -1,0 +1,16 @@
+{
+  "id": "both.ts-invariant-251d1d15",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/prompts/nudge/both.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: both.ts\n\n## Core Invariants\n\n\n## Constraints\n- **NUDGE_BOTH**: `<instruction name\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.163Z",
+    "updated_at": "2026-01-30T05:26:52.163Z",
+    "hash": "d8e8c63867e679ac3c91d0e96556c336b329711465da69f8a13e890085f8a945",
+    "dependencies": [],
+    "symbols": [
+      "NUDGE_BOTH"
+    ],
+    "complexity_score": 16.1
+  }
+}

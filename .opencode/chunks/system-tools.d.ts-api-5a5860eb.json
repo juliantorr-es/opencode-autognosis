@@ -1,0 +1,16 @@
+{
+  "id": "system-tools.d.ts-api-5a5860eb",
+  "file_path": "/Users/user/opencode-autognosis/dist/system-tools.d.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: system-tools.d.ts\n\n## Public Functions\n\n### systemTools\n```typescript\nexport declare function systemTools():\n```\nNo documentation found\n\n**Returns:** {\n    [key: string]: any;\n}\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.842Z",
+    "updated_at": "2026-01-30T05:26:51.842Z",
+    "hash": "1e67a94929d3973ae3620be12f29df47c8de0693f206add1874094926fcddeaf",
+    "dependencies": [],
+    "symbols": [
+      "systemTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

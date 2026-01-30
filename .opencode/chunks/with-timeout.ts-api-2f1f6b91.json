@@ -1,0 +1,18 @@
+{
+  "id": "with-timeout.ts-api-2f1f6b91",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/with-timeout.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: with-timeout.ts\n\n## Public Functions\n\n### withTimeout\n```typescript\nexport async function withTimeout<T>(\n\tpromise: Promise<T>,\n\tms: number,\n\tmessage = \"Operation timed out\",\n): Promise<T>\n```\nWraps a promise with a timeout.\n\nUses Promise.race to implement timeout semantics. If the wrapped promise\ndoesn't resolve within the specified time, throws a TimeoutError.\n\n**Important:** This does NOT abort the underlying promise - it continues\nrunning in the background. Use AbortController for true cancellation.\n\n**Parameters:**\n- `promise`: Promise<T> - \n- `ms`: number - \n- `message`: any - \n\n**Returns:** Promise<T>\n\n\n## Classes\n\n### TimeoutError\n```typescript\nexport class TimeoutError extends Error\n```\nPromise timeout utility for kdco registry plugins.\n\nProvides a clean wrapper around Promise.race for timeout handling,\nreplacing inline timeout patterns throughout the codebase.\n\n\n**Properties:**\n- `name`: any\n- `timeoutMs`: number\n\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.383Z",
+    "updated_at": "2026-01-30T05:26:52.383Z",
+    "hash": "470c0c602373054be271eec025b6cc516f84227a97fb587d35d20aa64d5a0bd0",
+    "dependencies": [],
+    "symbols": [
+      "TimeoutError",
+      "withTimeout",
+      "timeoutId"
+    ],
+    "complexity_score": 56.5
+  }
+}

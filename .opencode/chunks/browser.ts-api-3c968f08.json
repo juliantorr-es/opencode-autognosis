@@ -1,0 +1,18 @@
+{
+  "id": "browser.ts-api-3c968f08",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/browser.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: browser.ts\n\n## Public Functions\n\n### openBrowser\n```typescript\nexport async function openBrowser(url: string): Promise<void>\n```\nNo documentation found\n\n**Parameters:**\n- `url`: string - \n\n**Returns:** Promise<void>\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.198Z",
+    "updated_at": "2026-01-30T05:26:52.198Z",
+    "hash": "98c387ff01caaed08ae7089145b602fa290a647ba5a9d5737ad6c42d42a9d93e",
+    "dependencies": [
+      "open"
+    ],
+    "symbols": [
+      "openBrowser"
+    ],
+    "complexity_score": 4.6
+  }
+}

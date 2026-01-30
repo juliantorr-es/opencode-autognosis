@@ -1,0 +1,25 @@
+{
+  "id": "jsonc.ts-summary-9722c6ae",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/jsonc.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: jsonc.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **stripJsoncComments**: Strips comments from JSONC content while respecting string boundaries.\nHandles // and /* comments, URLs in strings, and escaped quotes.\nAlso removes trailing commas to support more relaxed JSONC format.\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- stripJsoncComments\n\n## Complexity Metrics\n- Lines of code: 86\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.371Z",
+    "updated_at": "2026-01-30T05:26:52.371Z",
+    "hash": "467e86e68753e8b5b2d7683b3bf486fcd20595c375fbd10bd8e788acadacc154",
+    "dependencies": [],
+    "symbols": [
+      "stripJsoncComments",
+      "result",
+      "i",
+      "inString",
+      "inSingleLineComment",
+      "inMultiLineComment",
+      "char",
+      "nextChar",
+      "backslashCount",
+      "j"
+    ],
+    "complexity_score": 100
+  }
+}

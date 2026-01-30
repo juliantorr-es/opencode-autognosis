@@ -1,0 +1,20 @@
+{
+  "id": "types.ts-api-3d73144f",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/transform/types.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: types.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n### TransformContext\n```typescript\nexport interface TransformContext\n```\nContext passed to request transformers containing model info and session metadata.\n\n\n### TransformResult\n```typescript\nexport interface TransformResult\n```\nResult from a request transformer, containing the transformed body and debug info.\n\n\n## Types\n\n### ModelFamily\n```typescript\nexport type ModelFamily\n```\nNo documentation found\n\n\n### RequestPayload\n```typescript\nexport type RequestPayload\n```\nNo documentation found\n\n\n### ToolDeclaration\n```typescript\nexport type ToolDeclaration\n```\nTool declaration structure in Antigravity/Gemini format.\nClaude models require `input_schema` instead of `parameters`.\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.266Z",
+    "updated_at": "2026-01-30T05:26:52.266Z",
+    "hash": "0b0c355cc9ba0587e9096feca2bd38eacbc6654dce85e94c1ca1bc30ef8cc4e7",
+    "dependencies": [],
+    "symbols": [
+      "ModelFamily",
+      "TransformContext",
+      "TransformResult",
+      "RequestPayload",
+      "ToolDeclaration"
+    ],
+    "complexity_score": 12.5
+  }
+}

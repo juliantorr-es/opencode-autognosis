@@ -1,0 +1,18 @@
+{
+  "id": "types.ts-invariant-1b24d212",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/types.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: types.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.382Z",
+    "updated_at": "2026-01-30T05:26:52.382Z",
+    "hash": "391421e08be57a0377b7a1e2c3e915572aebb8535f8013f7361e02c9bc81b8cd",
+    "dependencies": [
+      "@opencode-ai/sdk"
+    ],
+    "symbols": [
+      "OpencodeClient"
+    ],
+    "complexity_score": 13.4
+  }
+}

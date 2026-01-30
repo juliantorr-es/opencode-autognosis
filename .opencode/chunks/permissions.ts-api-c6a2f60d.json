@@ -1,0 +1,39 @@
+{
+  "id": "permissions.ts-api-c6a2f60d",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/permissions.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: permissions.ts\n\n## Public Functions\n\n### initPermissions\n```typescript\nexport function initPermissions(client: PluginClient, directory: string): void\n```\nNo documentation found\n\n**Parameters:**\n- `client`: PluginClient - \n- `directory`: string - \n\n**Returns:** void\n\n\n### checkCommandPermission\n```typescript\nexport async function checkCommandPermission(\n  command: string,\n  args: string[]\n): Promise<void>\n```\nNo documentation found\n\n**Parameters:**\n- `command`: string - \n- `args`: string[] - \n\n**Returns:** Promise<void>\n\n\n### checkWorkdirPermission\n```typescript\nexport async function checkWorkdirPermission(workdir: string): Promise<void>\n```\nNo documentation found\n\n**Parameters:**\n- `workdir`: string - \n\n**Returns:** Promise<void>\n\n\n## Classes\n\n\n## Interfaces\n\n### PermissionConfig\n```typescript\ninterface PermissionConfig\n```\nNo documentation found\n\n\n## Types\n\n### PermissionAction\n```typescript\ntype PermissionAction\n```\nNo documentation found\n\n\n### BashPermissions\n```typescript\ntype BashPermissions\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.344Z",
+    "updated_at": "2026-01-30T05:26:52.344Z",
+    "hash": "25ee5f9bdac086a293dc248b403ef601e14ccf049dce161854508857aae05c34",
+    "dependencies": [
+      "../types.ts",
+      "./wildcard.ts",
+      "../logger.ts"
+    ],
+    "symbols": [
+      "log",
+      "PermissionAction",
+      "BashPermissions",
+      "PermissionConfig",
+      "_client",
+      "_directory",
+      "initPermissions",
+      "getPermissionConfig",
+      "response",
+      "e",
+      "showToast",
+      "checkCommandPermission",
+      "config",
+      "bashPerms",
+      "action",
+      "checkWorkdirPermission",
+      "normalizedWorkdir",
+      "normalizedProject",
+      "config",
+      "extDirPerm"
+    ],
+    "complexity_score": 100
+  }
+}

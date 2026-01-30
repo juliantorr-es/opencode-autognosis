@@ -1,0 +1,14 @@
+{
+  "id": "index.ts-api-b2fafe8b",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/messages/index.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: index.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.154Z",
+    "updated_at": "2026-01-30T05:26:52.154Z",
+    "hash": "4058bcc83ab9160ddde1a466359c3a85a9e5788d4c1c569966a39c7df6f42606",
+    "dependencies": [],
+    "symbols": [],
+    "complexity_score": 0.30000000000000004
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "config.ts-invariant-ce0b0dda",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/config.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: config.ts\n\n## Core Invariants\n\n\n## Constraints\n- **CONFIG_DIR**: join(homedir(), \".config\", \"opencode\")\n- **CONFIG_FILES**: [\n  join(CONFIG_DIR, \"supermemory.jsonc\"),\n  join(CONFIG_DIR, \"supermemory.json\"),\n]\n- **DEFAULT_KEYWORD_PATTERNS**: [\n  \"remember\",\n  \"memorize\",\n  \"save\\\\s+this\",\n  \"note\\\\s+this\",\n  \"keep\\\\s+in\\\\s+mind\",\n  \"don'?t\\\\s+forget\",\n  \"learn\\\\s+this\",\n  \"store\\\\s+this\",\n  \"record\\\\s+this\",\n  \"make\\\\s+a\\\\s+note\",\n  \"take\\\\s+note\",\n  \"jot\\\\s+down\",\n  \"commit\\\\s+to\\\\s+memory\",\n  \"remember\\\\s+that\",\n  \"never\\\\s+forget\",\n  \"always\\\\s+remember\",\n]\n- **SUPERMEMORY_API_KEY**: fileConfig.apiKey ?? process.env.SUPERMEMORY_API_KEY\n- **CONFIG**: {\n  similarityThreshold: fileConfig.similarityThreshold ?? DEFAULTS.similarityThreshold,\n  maxMemories: fileConfig.maxMemories ?? DEFAULTS.maxMemories,\n  maxProjectMemories: fileConfig.maxProjectMemories ?? DEFAULTS.maxProjectMemories,\n  maxProfileItems: fileConfig.maxProfileItems ?? DEFAULTS.maxProfileItems,\n  injectProfile: fileConfig.injectProfile ?? DEFAULTS.injectProfile,\n  containerTagPrefix: fileConfig.containerTagPrefix ?? DEFAULTS.containerTagPrefix,\n  filterPrompt: fileConfig.filterPrompt ?? DEFAULTS.filterPrompt,\n  keywordPatterns: [\n    ...DEFAULT_KEYWORD_PATTERNS,\n    ...(fileConfig.keywordPatterns ?? []).filter(isValidRegex),\n  ],\n  compactionThreshold: validateCompactionThreshold(fileConfig.compactionThreshold),\n}\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 2 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.357Z",
+    "updated_at": "2026-01-30T05:26:52.357Z",
+    "hash": "f5a9616e9ea06e3cedfbad25833d6ab1ff912aa03c8225b222985947664d182a",
+    "dependencies": [
+      "node:fs",
+      "node:path",
+      "node:os",
+      "./services/jsonc.js"
+    ],
+    "symbols": [
+      "CONFIG_DIR",
+      "CONFIG_FILES",
+      "SupermemoryConfig",
+      "DEFAULT_KEYWORD_PATTERNS",
+      "DEFAULTS",
+      "isValidRegex",
+      "validateCompactionThreshold",
+      "loadConfig",
+      "path",
+      "content",
+      "json",
+      "fileConfig",
+      "SUPERMEMORY_API_KEY",
+      "CONFIG",
+      "isConfigured"
+    ],
+    "complexity_score": 57
+  }
+}

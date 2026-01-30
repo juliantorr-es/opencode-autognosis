@@ -1,0 +1,16 @@
+{
+  "id": "extract.ts-invariant-fea07772",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/prompts/nudge/extract.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: extract.ts\n\n## Core Invariants\n\n\n## Constraints\n- **NUDGE_EXTRACT**: `<instruction name\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.164Z",
+    "updated_at": "2026-01-30T05:26:52.164Z",
+    "hash": "300e552b4d4928e07e961ebe3970f302b52fd21bfbcd25d79cda2e9002ec2ac3",
+    "dependencies": [],
+    "symbols": [
+      "NUDGE_EXTRACT"
+    ],
+    "complexity_score": 6
+  }
+}

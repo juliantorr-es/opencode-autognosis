@@ -1,0 +1,33 @@
+{
+  "id": "purge-errors.ts-summary-bb83a245",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/strategies/purge-errors.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: purge-errors.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- ../config\n- ../logger\n- ../state\n- ../messages/utils\n- ../protected-file-patterns\n- ./utils\n\n## Exports\n- purgeErrors\n\n## Complexity Metrics\n- Lines of code: 81\n- Estimated complexity: 97.1/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.177Z",
+    "updated_at": "2026-01-30T05:26:52.177Z",
+    "hash": "167acaa3a34dfcb63328647e972bf169d42d21f2e315c98fe696d290714eb4dc",
+    "dependencies": [
+      "../config",
+      "../logger",
+      "../state",
+      "../messages/utils",
+      "../protected-file-patterns",
+      "./utils"
+    ],
+    "symbols": [
+      "purgeErrors",
+      "allToolIds",
+      "alreadyPruned",
+      "unprunedIds",
+      "protectedTools",
+      "turnThreshold",
+      "newPruneIds",
+      "id",
+      "metadata",
+      "filePath",
+      "turnAge"
+    ],
+    "complexity_score": 97.1
+  }
+}

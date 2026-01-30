@@ -6,6 +6,8 @@ import * as path from "node:path";
 import { promisify } from "node:util";
 import * as crypto from "node:crypto";
 import ts from "typescript";
+import { getDb } from "./database.js";
+import { Logger } from "./services/logger.js";
 
 const execAsync = promisify(exec);
 const PROJECT_ROOT = process.cwd();
@@ -15,7 +17,7 @@ const CACHE_DIR = path.join(OPENCODE_DIR, "cache");
 
 // Internal logging
 function log(message: string, data?: unknown) {
-  console.error(`[ChunkCards] ${message}`, data || '');
+  Logger.log("ChunkCards", message, data);
 }
 
 // =============================================================================
@@ -235,6 +237,9 @@ export function chunkCardsTools(): { [key: string]: any } {
           // Save chunk card
           await fs.writeFile(cardPath, JSON.stringify(chunkCard, null, 2));
           
+          // Sync to SQLite Index
+          getDb().ingestChunkCard(chunkCard);
+          
           return JSON.stringify({
             status: "SUCCESS",
             card: chunkCard,
@@ -390,6 +395,9 @@ export function chunkCardsTools(): { [key: string]: any } {
           }
           
           await fs.unlink(cardPath);
+          
+          // Remove from SQLite Index
+          getDb().deleteChunkCard(card_id);
           
           return JSON.stringify({
             status: "SUCCESS",

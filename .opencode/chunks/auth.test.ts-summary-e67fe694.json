@@ -1,0 +1,40 @@
+{
+  "id": "auth.test.ts-summary-e67fe694",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/auth.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: auth.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- vitest\n- ./auth\n- ./types\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 196\n- Estimated complexity: 46.6/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.917Z",
+    "updated_at": "2026-01-30T05:26:51.917Z",
+    "hash": "2b3c38d8d7c013ce89db05c2f7ba5e331bfaeefe0a65f0040105a96df5e59871",
+    "dependencies": [
+      "vitest",
+      "./auth",
+      "./types"
+    ],
+    "symbols": [
+      "auth",
+      "auth",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "original",
+      "formatted",
+      "parsed",
+      "auth",
+      "auth",
+      "auth",
+      "auth",
+      "auth",
+      "auth"
+    ],
+    "complexity_score": 46.6
+  }
+}

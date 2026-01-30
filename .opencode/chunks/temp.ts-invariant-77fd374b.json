@@ -1,0 +1,19 @@
+{
+  "id": "temp.ts-invariant-77fd374b",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/temp.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: temp.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.381Z",
+    "updated_at": "2026-01-30T05:26:52.381Z",
+    "hash": "7b46ad766187d477c98ef01d1603c3a0c747b67ec91995c2b8f14e96ae2ef53d",
+    "dependencies": [
+      "node:fs",
+      "node:os"
+    ],
+    "symbols": [
+      "getTempDir"
+    ],
+    "complexity_score": 20.7
+  }
+}

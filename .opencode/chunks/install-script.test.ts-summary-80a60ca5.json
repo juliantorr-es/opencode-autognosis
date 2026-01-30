@@ -1,0 +1,43 @@
+{
+  "id": "install-script.test.ts-summary-80a60ca5",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/test/install-script.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: install-script.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- vitest\n- node:child_process\n- node:fs\n- node:os\n- node:path\n- jsonc-parser\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 149\n- Estimated complexity: 30.9/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.320Z",
+    "updated_at": "2026-01-30T05:26:52.320Z",
+    "hash": "ab5b7d586812dc5d9fedb96bfb727039a5389de925a4193d059ce3a771661581",
+    "dependencies": [
+      "vitest",
+      "node:child_process",
+      "node:fs",
+      "node:os",
+      "node:path",
+      "jsonc-parser"
+    ],
+    "symbols": [
+      "SCRIPT_PATH",
+      "runInstaller",
+      "readJsoncFile",
+      "content",
+      "makeHome",
+      "writeConfig",
+      "configDir",
+      "path",
+      "homeDir",
+      "configPath",
+      "homeDir",
+      "jsoncPath",
+      "jsonPath",
+      "jsonBefore",
+      "jsonAfter",
+      "homeDir",
+      "configPath",
+      "homeDir",
+      "configPath",
+      "homeDir",
+      "opencodeDir"
+    ],
+    "complexity_score": 30.9
+  }
+}

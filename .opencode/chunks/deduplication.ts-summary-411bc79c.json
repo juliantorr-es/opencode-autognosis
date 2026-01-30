@@ -1,0 +1,42 @@
+{
+  "id": "deduplication.ts-summary-411bc79c",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/strategies/deduplication.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: deduplication.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (3)\n- **createToolSignature**: No documentation found\n- **normalizeParameters**: No documentation found\n- **sortObjectKeys**: No documentation found\n\n\n\n\n## Dependencies\n- ../config\n- ../logger\n- ../state\n- ../messages/utils\n- ../protected-file-patterns\n- ./utils\n\n## Exports\n- deduplicate\n\n## Complexity Metrics\n- Lines of code: 117\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.175Z",
+    "updated_at": "2026-01-30T05:26:52.175Z",
+    "hash": "22f80a8f049242d1eca9a7502a55f9068742cabad0468cbde3b884a54452b5c9",
+    "dependencies": [
+      "../config",
+      "../logger",
+      "../state",
+      "../messages/utils",
+      "../protected-file-patterns",
+      "./utils"
+    ],
+    "symbols": [
+      "deduplicate",
+      "allToolIds",
+      "alreadyPruned",
+      "unprunedIds",
+      "protectedTools",
+      "signatureMap",
+      "id",
+      "metadata",
+      "filePath",
+      "signature",
+      "newPruneIds",
+      "idsToRemove",
+      "createToolSignature",
+      "normalized",
+      "sorted",
+      "normalizeParameters",
+      "normalized",
+      "sortObjectKeys",
+      "sorted",
+      "key"
+    ],
+    "complexity_score": 100
+  }
+}

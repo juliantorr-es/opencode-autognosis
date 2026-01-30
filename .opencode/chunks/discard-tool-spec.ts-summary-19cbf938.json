@@ -1,0 +1,16 @@
+{
+  "id": "discard-tool-spec.ts-summary-19cbf938",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/prompts/discard-tool-spec.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: discard-tool-spec.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- DISCARD_TOOL_SPEC\n\n## Complexity Metrics\n- Lines of code: 41\n- Estimated complexity: 24.1/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.160Z",
+    "updated_at": "2026-01-30T05:26:52.160Z",
+    "hash": "8f4340fbce17955cb97a54d6f6f62fc3b0b72936cf37032c81261765281fe33e",
+    "dependencies": [],
+    "symbols": [
+      "DISCARD_TOOL_SPEC"
+    ],
+    "complexity_score": 24.1
+  }
+}

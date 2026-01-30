@@ -1,0 +1,28 @@
+{
+  "id": "protected-file-patterns.ts-invariant-1cdefb31",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/protected-file-patterns.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: protected-file-patterns.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nPerformance patterns: Contains explicit loops\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.167Z",
+    "updated_at": "2026-01-30T05:26:52.167Z",
+    "hash": "8fa1c086a8be88f73e3fce2913890c149331e136db49a2090abfdfa4cafaf954",
+    "dependencies": [],
+    "symbols": [
+      "normalizePath",
+      "escapeRegExpChar",
+      "matchesGlob",
+      "input",
+      "pat",
+      "regex",
+      "i",
+      "ch",
+      "next",
+      "after",
+      "getFilePathFromParameters",
+      "filePath",
+      "isProtectedFilePath"
+    ],
+    "complexity_score": 100
+  }
+}

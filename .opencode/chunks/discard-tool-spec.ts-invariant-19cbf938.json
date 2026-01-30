@@ -1,0 +1,16 @@
+{
+  "id": "discard-tool-spec.ts-invariant-19cbf938",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/prompts/discard-tool-spec.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: discard-tool-spec.ts\n\n## Core Invariants\n\n\n## Constraints\n- **DISCARD_TOOL_SPEC**: `Discards tool outputs from context to manage conversation size and reduce noise.\n\n## IMPORTANT: The Prunable List\nA \\`<prunable-tools>\\` list is provided to you showing available tool outputs you can discard when there are tools available for pruning. Each line has the format \\`ID: tool, parameter\\` (e.g., \\`20: read, /path/to/file.ts\\`). You MUST only use numeric IDs that appear in this list to select which tools to discard.\n\n## When to Use This Tool\n\nUse \\`discard\\` for removing tool content that is no longer needed\n\n- **Noise:** Irrelevant, unhelpful, or superseded outputs that provide no value.\n- **Task Completion:** Work is complete and there's no valuable information worth preserving.\n\n## When NOT to Use This Tool\n\n- **If the output contains useful information:** Keep it in context rather than discarding.\n- **If you'll need the output later:** Don't discard files you plan to edit or context you'll need for implementation.\n\n## Best Practices\n- **Strategic Batching:** Don't discard single small tool outputs (like short bash commands) unless they are pure noise. Wait until you have several items to perform high-impact discards.\n- **Think ahead:** Before discarding, ask: \"Will I need this output for an upcoming task?\" If yes, keep it.\n\n## Format\n\n- \\`ids\\`: Array where the first element is the reason, followed by numeric IDs from the \\`<prunable-tools>\\` list\n\nReasons: \\`noise\\` | \\`completion\\`\n\n## Example\n\n<example_noise>\nAssistant: [Reads 'wrong_file.ts']\nThis file isn't relevant to the auth system. I'll remove it to clear the context.\n[Uses discard with ids: [\"noise\", \"5\"]]\n</example_noise>\n\n<example_completion>\nAssistant: [Runs tests, they pass]\nThe tests passed and I don't need to preserve any details. I'll clean up now.\n[Uses discard with ids: [\"completion\", \"20\", \"21\"]]\n</example_completion>`\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.161Z",
+    "updated_at": "2026-01-30T05:26:52.161Z",
+    "hash": "1257124341e248e49ae4003e1eae02af99b6976e7234a7411f825665a9e84652",
+    "dependencies": [],
+    "symbols": [
+      "DISCARD_TOOL_SPEC"
+    ],
+    "complexity_score": 24.1
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "constants.ts-invariant-e945582a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/constants.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: constants.ts\n\n## Core Invariants\n\n\n## Constraints\n- **PLUGIN_NAME**: \"openai-codex-plugin\"\n- **CODEX_BASE_URL**: \"https://chatgpt.com/backend-api\"\n- **DUMMY_API_KEY**: \"chatgpt-oauth\"\n- **PROVIDER_ID**: \"openai\"\n- **HTTP_STATUS**: {\n\tOK: 200,\n\tUNAUTHORIZED: 401,\n\tNOT_FOUND: 404,\n\tTOO_MANY_REQUESTS: 429,\n} as const\n- **OPENAI_HEADERS**: {\n\tBETA: \"OpenAI-Beta\",\n\tACCOUNT_ID: \"chatgpt-account-id\",\n\tORIGINATOR: \"originator\",\n\tSESSION_ID: \"session_id\",\n\tCONVERSATION_ID: \"conversation_id\",\n} as const\n- **OPENAI_HEADER_VALUES**: {\n\tBETA_RESPONSES: \"responses\n- **URL_PATHS**: {\n\tRESPONSES: \"/responses\",\n\tCODEX_RESPONSES: \"/codex/responses\",\n} as const\n- **JWT_CLAIM_PATH**: \"https://api.openai.com/auth\" as const\n- **ERROR_MESSAGES**: {\n\tNO_ACCOUNT_ID: \"Failed to extract accountId from token\",\n\tTOKEN_REFRESH_FAILED: \"Failed to refresh token, authentication required\",\n\tREQUEST_PARSE_ERROR: \"Error parsing request\",\n} as const\n- **LOG_STAGES**: {\n\tBEFORE_TRANSFORM: \"before-transform\",\n\tAFTER_TRANSFORM: \"after-transform\",\n\tRESPONSE: \"response\",\n\tERROR_RESPONSE: \"error-response\",\n} as const\n- **PLATFORM_OPENERS**: {\n\tdarwin: \"open\",\n\twin32: \"start\",\n\tlinux: \"xdg-open\",\n} as const\n- **AUTH_LABELS**: {\n\tOAUTH: \"ChatGPT Plus/Pro (Codex Subscription)\",\n\tOAUTH_MANUAL: \"ChatGPT Plus/Pro (Manual URL Paste)\",\n\tAPI_KEY: \"Manually enter API Key\",\n\tINSTRUCTIONS:\n\t\t\"A browser window should open. If it doesn't, copy the URL and open it manually.\",\n\tINSTRUCTIONS_MANUAL:\n\t\t\"After logging in, copy the full redirect URL and paste it here.\",\n} as const\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.286Z",
+    "updated_at": "2026-01-30T05:26:52.286Z",
+    "hash": "e44ca754ca8a286c5a6632d3511dfa2d9f9a2d768d93f24b4a42222eb1ec501e",
+    "dependencies": [],
+    "symbols": [
+      "PLUGIN_NAME",
+      "CODEX_BASE_URL",
+      "DUMMY_API_KEY",
+      "PROVIDER_ID",
+      "HTTP_STATUS",
+      "OPENAI_HEADERS",
+      "OPENAI_HEADER_VALUES",
+      "URL_PATHS",
+      "JWT_CLAIM_PATH",
+      "ERROR_MESSAGES",
+      "LOG_STAGES",
+      "PLATFORM_OPENERS",
+      "AUTH_LABELS"
+    ],
+    "complexity_score": 47.2
+  }
+}

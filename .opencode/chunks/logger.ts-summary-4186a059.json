@@ -1,0 +1,26 @@
+{
+  "id": "logger.ts-summary-4186a059",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/logger.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: logger.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (2)\n- **initLogger**: No documentation found\n- **createLogger**: No documentation found\n\n\n\n\n## Dependencies\n- ./types.ts\n\n## Exports\n- initLogger\n- createLogger\n\n## Complexity Metrics\n- Lines of code: 53\n- Estimated complexity: 60.3/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.339Z",
+    "updated_at": "2026-01-30T05:26:52.339Z",
+    "hash": "81201ae809bc29ccacacd3ff24cfa80a56625d35be9c34c883379e6aaab01daa",
+    "dependencies": [
+      "./types.ts"
+    ],
+    "symbols": [
+      "LogLevel",
+      "Logger",
+      "_client",
+      "initLogger",
+      "createLogger",
+      "service",
+      "log",
+      "prefix",
+      "args"
+    ],
+    "complexity_score": 60.3
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "types.ts-invariant-7967891f",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/transform/types.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: types.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.113Z",
+    "updated_at": "2026-01-30T05:26:52.113Z",
+    "hash": "391421e08be57a0377b7a1e2c3e915572aebb8535f8013f7361e02c9bc81b8cd",
+    "dependencies": [
+      "../../constants"
+    ],
+    "symbols": [
+      "ModelFamily",
+      "ThinkingTier",
+      "TransformContext",
+      "TransformResult",
+      "TransformDebugInfo",
+      "RequestPayload",
+      "ThinkingConfig",
+      "GoogleSearchConfig",
+      "ResolvedModel"
+    ],
+    "complexity_score": 100
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "index.ts-summary-bf88be9b",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/cache/index.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: index.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 9\n- Estimated complexity: 9.9/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.920Z",
+    "updated_at": "2026-01-30T05:26:51.920Z",
+    "hash": "d109ca2d771010afa51c2eaef46cbe3cf4ce8eb4f90dc5838ca783dc42e8d6e0",
+    "dependencies": [],
+    "symbols": [],
+    "complexity_score": 9.9
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "types.ts-summary-1b24d212",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/types.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: types.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- @opencode-ai/sdk\n\n## Exports\n- OpencodeClient\n\n## Complexity Metrics\n- Lines of code: 14\n- Estimated complexity: 13.4/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.382Z",
+    "updated_at": "2026-01-30T05:26:52.382Z",
+    "hash": "8ac538727d92cf8cd6ecc8fccff87ada91357749348760894eeaec51ad23f1fc",
+    "dependencies": [
+      "@opencode-ai/sdk"
+    ],
+    "symbols": [
+      "OpencodeClient"
+    ],
+    "complexity_score": 13.4
+  }
+}

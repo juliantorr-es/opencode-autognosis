@@ -1,0 +1,28 @@
+{
+  "id": "constants.ts-api-e945582a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/constants.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: constants.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.286Z",
+    "updated_at": "2026-01-30T05:26:52.286Z",
+    "hash": "1a5394db76ec8ffaaf91664b2ad9ca9ad899a59feadd580252c6c1a304aecbbe",
+    "dependencies": [],
+    "symbols": [
+      "PLUGIN_NAME",
+      "CODEX_BASE_URL",
+      "DUMMY_API_KEY",
+      "PROVIDER_ID",
+      "HTTP_STATUS",
+      "OPENAI_HEADERS",
+      "OPENAI_HEADER_VALUES",
+      "URL_PATHS",
+      "JWT_CLAIM_PATH",
+      "ERROR_MESSAGES",
+      "LOG_STAGES",
+      "PLATFORM_OPENERS",
+      "AUTH_LABELS"
+    ],
+    "complexity_score": 47.2
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "stats.ts-api-716dbccf",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/commands/stats.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: stats.ts\n\n## Public Functions\n\n### handleStatsCommand\n```typescript\nexport async function handleStatsCommand(ctx: StatsCommandContext): Promise<void>\n```\nNo documentation found\n\n**Parameters:**\n- `ctx`: StatsCommandContext - \n\n**Returns:** Promise<void>\n\n\n## Classes\n\n\n## Interfaces\n\n### StatsCommandContext\n```typescript\nexport interface StatsCommandContext\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.140Z",
+    "updated_at": "2026-01-30T05:26:52.140Z",
+    "hash": "18b33ea602a76d071f2b0dc064d4bfe51c750b124ba2e49481b23ea18514f7d3",
+    "dependencies": [
+      "../logger",
+      "../state",
+      "../ui/notification",
+      "../ui/utils",
+      "../state/persistence",
+      "../strategies/utils"
+    ],
+    "symbols": [
+      "StatsCommandContext",
+      "formatStatsMessage",
+      "lines",
+      "handleStatsCommand",
+      "sessionTokens",
+      "sessionTools",
+      "allTime",
+      "message",
+      "params"
+    ],
+    "complexity_score": 27.8
+  }
+}

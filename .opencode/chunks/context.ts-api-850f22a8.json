@@ -1,0 +1,28 @@
+{
+  "id": "context.ts-api-850f22a8",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/context.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: context.ts\n\n## Public Functions\n\n### formatContextForPrompt\n```typescript\nexport function formatContextForPrompt(\n  profile: ProfileResponse | null,\n  userMemories: MemoriesResponseMinimal,\n  projectMemories: MemoriesResponseMinimal\n): string\n```\nNo documentation found\n\n**Parameters:**\n- `profile`: ProfileResponse | null - \n- `userMemories`: MemoriesResponseMinimal - \n- `projectMemories`: MemoriesResponseMinimal - \n\n**Returns:** string\n\n\n## Classes\n\n\n## Interfaces\n\n### MemoryResultMinimal\n```typescript\ninterface MemoryResultMinimal\n```\nNo documentation found\n\n\n### MemoriesResponseMinimal\n```typescript\ninterface MemoriesResponseMinimal\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.371Z",
+    "updated_at": "2026-01-30T05:26:52.371Z",
+    "hash": "62cd75982b81818d8b4a05128c838eecb8aff8793812ebbeb18e0dbdd01fd6df",
+    "dependencies": [
+      "supermemory/resources",
+      "../config.js"
+    ],
+    "symbols": [
+      "MemoryResultMinimal",
+      "MemoriesResponseMinimal",
+      "formatContextForPrompt",
+      "parts",
+      "projectResults",
+      "similarity",
+      "content",
+      "userResults",
+      "similarity",
+      "content"
+    ],
+    "complexity_score": 52.5
+  }
+}

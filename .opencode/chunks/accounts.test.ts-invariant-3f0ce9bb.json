@@ -1,0 +1,53 @@
+{
+  "id": "accounts.test.ts-invariant-3f0ce9bb",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/accounts.test.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: accounts.test.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.193Z",
+    "updated_at": "2026-01-30T05:26:52.193Z",
+    "hash": "11c67b7385565c1919bde0898ae022f6d15deaf9ad3e4a619e4d7e3744151916",
+    "dependencies": [
+      "bun:test",
+      "./accounts",
+      "./types"
+    ],
+    "symbols": [
+      "FAMILY",
+      "auth",
+      "manager",
+      "auth",
+      "manager",
+      "auth",
+      "manager",
+      "account",
+      "auth",
+      "manager",
+      "firstAccount",
+      "secondAccount",
+      "auth",
+      "manager",
+      "accounts",
+      "next",
+      "auth",
+      "manager",
+      "account",
+      "next",
+      "auth",
+      "manager",
+      "accounts",
+      "waitTime",
+      "auth",
+      "manager",
+      "beforeTime",
+      "account",
+      "afterTime",
+      "auth",
+      "manager",
+      "account",
+      "claudeAccount",
+      "geminiAccount"
+    ],
+    "complexity_score": 32.7
+  }
+}

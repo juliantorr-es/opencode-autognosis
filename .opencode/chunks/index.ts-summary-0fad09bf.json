@@ -1,0 +1,28 @@
+{
+  "id": "index.ts-summary-0fad09bf",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/index.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: index.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- @opencode-ai/plugin\n- ./lib/config\n- ./lib/logger\n- ./lib/state\n- ./lib/strategies\n- ./lib/hooks\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 105\n- Estimated complexity: 75.5/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.134Z",
+    "updated_at": "2026-01-30T05:26:52.134Z",
+    "hash": "f29d956517b9e832aba83d2147fb3e4888d2883525331e36e1af8948ecfa0295",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "./lib/config",
+      "./lib/logger",
+      "./lib/state",
+      "./lib/strategies",
+      "./lib/hooks"
+    ],
+    "symbols": [
+      "plugin",
+      "config",
+      "logger",
+      "state",
+      "toolsToAdd",
+      "existingPrimaryTools"
+    ],
+    "complexity_score": 75.5
+  }
+}

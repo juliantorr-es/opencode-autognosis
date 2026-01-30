@@ -1,0 +1,23 @@
+{
+  "id": "logger.ts-summary-ebe26739",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/logger.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: logger.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **log**: No documentation found\n\n\n\n\n## Dependencies\n- fs\n- os\n- path\n\n## Exports\n- log\n\n## Complexity Metrics\n- Lines of code: 16\n- Estimated complexity: 9.6/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.372Z",
+    "updated_at": "2026-01-30T05:26:52.372Z",
+    "hash": "85b587050241f8db37b9526bacb50a8016d1ac76375daea60e8abc717a6b862e",
+    "dependencies": [
+      "fs",
+      "os",
+      "path"
+    ],
+    "symbols": [
+      "LOG_FILE",
+      "log",
+      "timestamp",
+      "line"
+    ],
+    "complexity_score": 9.6
+  }
+}

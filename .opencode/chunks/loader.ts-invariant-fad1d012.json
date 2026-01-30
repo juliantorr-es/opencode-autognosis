@@ -1,0 +1,46 @@
+{
+  "id": "loader.ts-invariant-fad1d012",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/config/loader.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: loader.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 1 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.935Z",
+    "updated_at": "2026-01-30T05:26:51.935Z",
+    "hash": "4164b1c49c0428d1057b0f4d74374bea29ce2a709e5b3eebcf6543846345d04c",
+    "dependencies": [
+      "node:fs",
+      "node:path",
+      "node:os",
+      "./schema",
+      "../logger"
+    ],
+    "symbols": [
+      "log",
+      "getConfigDir",
+      "platform",
+      "xdgConfig",
+      "getUserConfigPath",
+      "getProjectConfigPath",
+      "loadConfigFile",
+      "content",
+      "rawConfig",
+      "result",
+      "error",
+      "mergeConfigs",
+      "applyEnvOverrides",
+      "env",
+      "loadConfig",
+      "config",
+      "userConfigPath",
+      "userConfig",
+      "projectConfigPath",
+      "projectConfig",
+      "configExists",
+      "getDefaultLogsDir",
+      "runtimeConfig",
+      "initRuntimeConfig",
+      "getKeepThinking"
+    ],
+    "complexity_score": 100
+  }
+}

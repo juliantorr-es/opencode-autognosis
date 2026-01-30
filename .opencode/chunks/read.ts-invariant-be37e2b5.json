@@ -1,0 +1,38 @@
+{
+  "id": "read.ts-invariant-be37e2b5",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/tools/read.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: read.ts\n\n## Core Invariants\n\n\n## Constraints\n- **DEFAULT_LIMIT**: 500\n- **MAX_LINE_LENGTH**: 2000\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 1 try-catch blocks, 4 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.348Z",
+    "updated_at": "2026-01-30T05:26:52.348Z",
+    "hash": "bcfdff4a11460d108001325953d3acf1cfab5f930152e0fa8bb43078dda4d58e",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "../manager.ts",
+      "./read.txt"
+    ],
+    "symbols": [
+      "DEFAULT_LIMIT",
+      "MAX_LINE_LENGTH",
+      "ptyRead",
+      "session",
+      "offset",
+      "limit",
+      "regex",
+      "e",
+      "error",
+      "result",
+      "formattedLines",
+      "lineNum",
+      "truncatedLine",
+      "output",
+      "result",
+      "formattedLines",
+      "lineNum",
+      "truncatedLine",
+      "output"
+    ],
+    "complexity_score": 75.8
+  }
+}

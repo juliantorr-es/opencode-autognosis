@@ -1,0 +1,16 @@
+{
+  "id": "extract-tool-spec.ts-invariant-1c392aef",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/prompts/extract-tool-spec.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: extract-tool-spec.ts\n\n## Core Invariants\n\n\n## Constraints\n- **EXTRACT_TOOL_SPEC**: `Extracts key findings from tool outputs into distilled knowledge, then removes the raw outputs from context.\n\n## IMPORTANT: The Prunable List\nA \\`<prunable-tools>\\` list is provided to you showing available tool outputs you can extract from when there are tools available for pruning. Each line has the format \\`ID: tool, parameter\\` (e.g., \\`20: read, /path/to/file.ts\\`). You MUST only use numeric IDs that appear in this list to select which tools to extract.\n\n## When to Use This Tool\n\nUse \\`extract\\` when you have gathered useful information that you want to **preserve in distilled form** before removing the raw outputs:\n\n- **Task Completion:** You completed a unit of work and want to preserve key findings.\n- **Knowledge Preservation:** You have context that contains valuable information, but also a lot of unnecessary detail - you only need to preserve some specifics.\n\n## When NOT to Use This Tool\n\n- **If you need precise syntax:** If you'll edit a file or grep for exact strings, keep the raw output.\n- **If uncertain:** Prefer keeping over re-fetching.\n\n\n## Best Practices\n- **Strategic Batching:** Wait until you have several items or a few large outputs to extract, rather than doing tiny, frequent extractions. Aim for high-impact extractions that significantly reduce context size.\n- **Think ahead:** Before extracting, ask: \"Will I need the raw output for an upcoming task?\" If you researched a file you'll later edit, do NOT extract it.\n\n## Format\n\n- \\`ids\\`: Array of numeric IDs as strings from the \\`<prunable-tools>\\` list\n- \\`distillation\\`: Array of strings, one per ID (positional: distillation[0] is for ids[0], etc.)\n\nEach distillation string should capture the essential information you need to preserve - function signatures, logic, constraints, values, etc. Be as detailed as needed for your task.\n\n## Example\n\n<example_extraction>\nAssistant: [Reads auth service and user types]\nI'll preserve the key details before extracting.\n[Uses extract with:\n  ids: [\"10\", \"11\"],\n  distillation: [\n    \"auth.ts: validateToken(token: string) -> User|null checks cache first (5min TTL) then OIDC. hashPassword uses bcrypt 12 rounds. Tokens must be 128+ chars.\",\n    \"user.ts: interface User { id: string\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.161Z",
+    "updated_at": "2026-01-30T05:26:52.161Z",
+    "hash": "8004a4c43e9e16abe4d4b1f3fea48066f6019c124984a3fe583939232be1b013",
+    "dependencies": [],
+    "symbols": [
+      "EXTRACT_TOOL_SPEC"
+    ],
+    "complexity_score": 42.8
+  }
+}

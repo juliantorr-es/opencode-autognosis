@@ -1,0 +1,29 @@
+{
+  "id": "tier.test.ts-invariant-cbf84e7a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/tier.test.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: tier.test.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.246Z",
+    "updated_at": "2026-01-30T05:26:52.246Z",
+    "hash": "86910870cb5af94ade500ddbf0b215331dfec9c3a3d33fa21c9ca472ff4d6778",
+    "dependencies": [
+      "bun:test",
+      "./accounts",
+      "./accounts"
+    ],
+    "symbols": [
+      "mockAuth",
+      "manager",
+      "acc1",
+      "next",
+      "acc1",
+      "paidAcc",
+      "active",
+      "next",
+      "acc1",
+      "active"
+    ],
+    "complexity_score": 38.1
+  }
+}

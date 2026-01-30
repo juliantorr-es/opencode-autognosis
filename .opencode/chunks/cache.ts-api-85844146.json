@@ -1,0 +1,39 @@
+{
+  "id": "cache.ts-api-85844146",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/cache.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: cache.ts\n\n## Public Functions\n\n### resolveCachedAuth\n```typescript\nexport function resolveCachedAuth(auth: OAuthAuthDetails): OAuthAuthDetails\n```\nReturns a cached auth snapshot when available, favoring unexpired tokens.\n\n**Parameters:**\n- `auth`: OAuthAuthDetails - \n\n**Returns:** OAuthAuthDetails\n\n\n### storeCachedAuth\n```typescript\nexport function storeCachedAuth(auth: OAuthAuthDetails): void\n```\nStores the latest auth snapshot keyed by refresh token.\n\n**Parameters:**\n- `auth`: OAuthAuthDetails - \n\n**Returns:** void\n\n\n### clearCachedAuth\n```typescript\nexport function clearCachedAuth(refresh?: string): void\n```\nClears cached auth globally or for a specific refresh token.\n\n**Parameters:**\n- `refresh`: string - \n\n**Returns:** void\n\n\n### cacheSignature\n```typescript\nexport function cacheSignature(family: ModelFamily, sessionId: string, thoughtText: string, signature: string): void\n```\nCaches a thought signature for a given session and thought text.\nImplements a simple LRU-like eviction policy (clears old entries when limit reached).\n\n**Parameters:**\n- `family`: ModelFamily - \n- `sessionId`: string - \n- `thoughtText`: string - \n- `signature`: string - \n\n**Returns:** void\n\n\n### getCachedSignature\n```typescript\nexport function getCachedSignature(family: ModelFamily, sessionId: string, thoughtText: string): string | undefined\n```\nNo documentation found\n\n**Parameters:**\n- `family`: ModelFamily - \n- `sessionId`: string - \n- `thoughtText`: string - \n\n**Returns:** string | undefined\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n\n### ModelFamily\n```typescript\nexport type ModelFamily\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.199Z",
+    "updated_at": "2026-01-30T05:26:52.199Z",
+    "hash": "2be042a3c5d8dbc2d04801907cdc60066d58885c0fca2b4300196f7e4db0a801",
+    "dependencies": [
+      "node:crypto",
+      "./auth",
+      "./types"
+    ],
+    "symbols": [
+      "authCache",
+      "normalizeRefreshKey",
+      "key",
+      "resolveCachedAuth",
+      "key",
+      "cached",
+      "storeCachedAuth",
+      "key",
+      "clearCachedAuth",
+      "key",
+      "signatureCache",
+      "ModelFamily",
+      "normalizeThoughtText",
+      "getSignatureKey",
+      "normalizedText",
+      "input",
+      "cacheSignature",
+      "key",
+      "getCachedSignature",
+      "key"
+    ],
+    "complexity_score": 68.1
+  }
+}

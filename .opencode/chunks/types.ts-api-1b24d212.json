@@ -1,0 +1,18 @@
+{
+  "id": "types.ts-api-1b24d212",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/types.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: types.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n\n### OpencodeClient\n```typescript\nexport type OpencodeClient\n```\nOpenCode client instance type.\nDerived from the factory function return type for type safety.\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.382Z",
+    "updated_at": "2026-01-30T05:26:52.382Z",
+    "hash": "7daeadb7a5b1c79b5c35c7b7fabecd2f88c7a5afb2da72566183d531a68b1f24",
+    "dependencies": [
+      "@opencode-ai/sdk"
+    ],
+    "symbols": [
+      "OpencodeClient"
+    ],
+    "complexity_score": 13.4
+  }
+}

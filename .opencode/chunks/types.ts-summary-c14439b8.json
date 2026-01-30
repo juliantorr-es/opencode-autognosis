@@ -1,0 +1,35 @@
+{
+  "id": "types.ts-summary-c14439b8",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/types.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: types.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- @opencode-ai/plugin\n- ../antigravity/oauth\n\n## Exports\n- OAuthAuthDetails\n- ApiKeyAuthDetails\n- NonOAuthAuthDetails\n- AuthDetails\n- GetAuth\n- ProviderModel\n- Provider\n- LoaderResult\n- PluginClient\n- PluginContext\n- AuthPrompt\n- OAuthAuthorizationResult\n- AuthMethod\n- PluginEventPayload\n- PluginResult\n- RefreshParts\n- ProjectContextResult\n\n## Complexity Metrics\n- Lines of code: 112\n- Estimated complexity: 23.200000000000003/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.114Z",
+    "updated_at": "2026-01-30T05:26:52.114Z",
+    "hash": "d607945b487d76fcedcc25ce9e6f0410be426bd2322447deaea972f7567ccbb1",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "../antigravity/oauth"
+    ],
+    "symbols": [
+      "OAuthAuthDetails",
+      "ApiKeyAuthDetails",
+      "NonOAuthAuthDetails",
+      "AuthDetails",
+      "GetAuth",
+      "ProviderModel",
+      "Provider",
+      "LoaderResult",
+      "PluginClient",
+      "PluginContext",
+      "AuthPrompt",
+      "OAuthAuthorizationResult",
+      "AuthMethod",
+      "PluginEventPayload",
+      "PluginResult",
+      "RefreshParts",
+      "ProjectContextResult"
+    ],
+    "complexity_score": 23.200000000000003
+  }
+}

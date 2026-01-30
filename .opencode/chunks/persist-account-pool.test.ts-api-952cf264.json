@@ -1,0 +1,51 @@
+{
+  "id": "persist-account-pool.test.ts-api-952cf264",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/persist-account-pool.test.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: persist-account-pool.test.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.962Z",
+    "updated_at": "2026-01-30T05:26:51.962Z",
+    "hash": "306a0e1ee76253af03c96990fd58981393e28dceba3157f02857bd6fee681f3d",
+    "dependencies": [
+      "vitest",
+      "node:fs",
+      "./storage",
+      "./storage"
+    ],
+    "symbols": [
+      "actual",
+      "createMockAccount",
+      "createMockStorage",
+      "error",
+      "result",
+      "mockStorage",
+      "result",
+      "mockStorage",
+      "result",
+      "mockStorage",
+      "result",
+      "error",
+      "result",
+      "result",
+      "result",
+      "result",
+      "v2Storage",
+      "result",
+      "storage",
+      "writtenContent",
+      "parsed",
+      "error",
+      "result",
+      "newStorage",
+      "existingStorage",
+      "result",
+      "enoent",
+      "storage",
+      "tmpWriteCall",
+      "parsed",
+      "gitignoreWriteCall"
+    ],
+    "complexity_score": 100
+  }
+}

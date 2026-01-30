@@ -1,0 +1,24 @@
+{
+  "id": "types.ts-api-277bea34",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/types.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: types.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n### PTYSession\n```typescript\nexport interface PTYSession\n```\nNo documentation found\n\n\n### PTYSessionInfo\n```typescript\nexport interface PTYSessionInfo\n```\nNo documentation found\n\n\n### SpawnOptions\n```typescript\nexport interface SpawnOptions\n```\nNo documentation found\n\n\n### ReadResult\n```typescript\nexport interface ReadResult\n```\nNo documentation found\n\n\n### SearchResult\n```typescript\nexport interface SearchResult\n```\nNo documentation found\n\n\n## Types\n\n### PTYStatus\n```typescript\nexport type PTYStatus\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.351Z",
+    "updated_at": "2026-01-30T05:26:52.351Z",
+    "hash": "66f4b25edd9dca9fc9530203bcb9232fbdcca3a52651c916f6ceec169d3d9f98",
+    "dependencies": [
+      "bun-pty",
+      "./buffer.ts"
+    ],
+    "symbols": [
+      "PTYStatus",
+      "PTYSession",
+      "PTYSessionInfo",
+      "SpawnOptions",
+      "ReadResult",
+      "SearchResult"
+    ],
+    "complexity_score": 10.2
+  }
+}

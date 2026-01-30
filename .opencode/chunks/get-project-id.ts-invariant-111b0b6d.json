@@ -1,0 +1,48 @@
+{
+  "id": "get-project-id.ts-invariant-111b0b6d",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/get-project-id.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: get-project-id.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 2 try-catch blocks, 3 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.377Z",
+    "updated_at": "2026-01-30T05:26:52.377Z",
+    "hash": "f71263a9c38c3b14c69f0a70e20b1cb62a685e805727a4cf14d54e5b7c839e9a",
+    "dependencies": [
+      "node:crypto",
+      "node:fs/promises",
+      "node:path",
+      "./log-warn",
+      "./types",
+      "./with-timeout"
+    ],
+    "symbols": [
+      "hashPath",
+      "hash",
+      "getProjectId",
+      "gitPath",
+      "gitStat",
+      "gitDir",
+      "content",
+      "match",
+      "gitdirPath",
+      "resolvedGitdir",
+      "commondirPath",
+      "commondirFile",
+      "commondirContent",
+      "gitDirStat",
+      "cacheFile",
+      "cache",
+      "cached",
+      "proc",
+      "timeoutMs",
+      "exitCode",
+      "output",
+      "roots",
+      "projectId",
+      "e",
+      "stderr",
+      "error"
+    ],
+    "complexity_score": 100
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "discard.ts-summary-800aa72c",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/prompts/system/discard.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: discard.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- SYSTEM_PROMPT_DISCARD\n\n## Complexity Metrics\n- Lines of code: 52\n- Estimated complexity: 25.2/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.165Z",
+    "updated_at": "2026-01-30T05:26:52.165Z",
+    "hash": "d00898755f0ee6e97cb8dd4e2e1264d8f7997b4f746de11a118b5c38207746b1",
+    "dependencies": [],
+    "symbols": [
+      "SYSTEM_PROMPT_DISCARD"
+    ],
+    "complexity_score": 25.2
+  }
+}

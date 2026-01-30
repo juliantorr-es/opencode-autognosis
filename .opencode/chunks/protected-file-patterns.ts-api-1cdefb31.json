@@ -1,0 +1,28 @@
+{
+  "id": "protected-file-patterns.ts-api-1cdefb31",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/protected-file-patterns.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: protected-file-patterns.ts\n\n## Public Functions\n\n### matchesGlob\n```typescript\nexport function matchesGlob(inputPath: string, pattern: string): boolean\n```\nBasic glob matching with support for `**`, `*`, and `?`.\n\nNotes:\n- Matching is performed against the full (normalized) string.\n- `*` and `?` do not match `/`.\n- `**` matches across `/`.\n\n**Parameters:**\n- `inputPath`: string - \n- `pattern`: string - \n\n**Returns:** boolean\n\n\n### getFilePathFromParameters\n```typescript\nexport function getFilePathFromParameters(parameters: unknown): string | undefined\n```\nNo documentation found\n\n**Parameters:**\n- `parameters`: unknown - \n\n**Returns:** string | undefined\n\n\n### isProtectedFilePath\n```typescript\nexport function isProtectedFilePath(filePath: string | undefined, patterns: string[]): boolean\n```\nNo documentation found\n\n**Parameters:**\n- `filePath`: string | undefined - \n- `patterns`: string[] - \n\n**Returns:** boolean\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.167Z",
+    "updated_at": "2026-01-30T05:26:52.167Z",
+    "hash": "d31a06b6768153572d521dbaf488183ad3c3aa0c5ba7ce0763fba83ba8f595ec",
+    "dependencies": [],
+    "symbols": [
+      "normalizePath",
+      "escapeRegExpChar",
+      "matchesGlob",
+      "input",
+      "pat",
+      "regex",
+      "i",
+      "ch",
+      "next",
+      "after",
+      "getFilePathFromParameters",
+      "filePath",
+      "isProtectedFilePath"
+    ],
+    "complexity_score": 100
+  }
+}

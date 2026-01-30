@@ -1,0 +1,28 @@
+{
+  "id": "constants.ts-summary-830ee1ac",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/hooks/auto-update-checker/constants.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: constants.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (2)\n- **getCacheDir**: No documentation found\n- **getUserConfigDir**: No documentation found\n\n\n\n\n## Dependencies\n- node:path\n- node:os\n\n## Exports\n- PACKAGE_NAME\n- NPM_REGISTRY_URL\n- NPM_FETCH_TIMEOUT\n- CACHE_DIR\n- INSTALLED_PACKAGE_JSON\n- USER_CONFIG_DIR\n- USER_OPENCODE_CONFIG\n- USER_OPENCODE_CONFIG_JSONC\n\n## Complexity Metrics\n- Lines of code: 33\n- Estimated complexity: 21.3/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.888Z",
+    "updated_at": "2026-01-30T05:26:51.888Z",
+    "hash": "772823bf118557d62bfc252829f11a2d4e22ceaa22d1d39664efde37bf0b52af",
+    "dependencies": [
+      "node:path",
+      "node:os"
+    ],
+    "symbols": [
+      "PACKAGE_NAME",
+      "NPM_REGISTRY_URL",
+      "NPM_FETCH_TIMEOUT",
+      "getCacheDir",
+      "CACHE_DIR",
+      "INSTALLED_PACKAGE_JSON",
+      "getUserConfigDir",
+      "USER_CONFIG_DIR",
+      "USER_OPENCODE_CONFIG",
+      "USER_OPENCODE_CONFIG_JSONC"
+    ],
+    "complexity_score": 21.3
+  }
+}

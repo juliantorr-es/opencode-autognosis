@@ -1,0 +1,24 @@
+{
+  "id": "cli.ts-summary-94c0d6ce",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/cli.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: cli.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (2)\n- **promptProjectId**: Prompts the user for a project ID via stdin/stdout.\n- **promptAddAnotherAccount**: Prompts user whether they want to add another account.\nReturns true if they want to add another, false if done.\n\n\n\n\n## Dependencies\n- node:readline/promises\n- node:process\n\n## Exports\n- promptProjectId\n- promptAddAnotherAccount\n\n## Complexity Metrics\n- Lines of code: 30\n- Estimated complexity: 26/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.200Z",
+    "updated_at": "2026-01-30T05:26:52.200Z",
+    "hash": "6d58c02ecc83f683164a942774eb3bd1a3faa7975d67b5b9ace956830a557d09",
+    "dependencies": [
+      "node:readline/promises",
+      "node:process"
+    ],
+    "symbols": [
+      "promptProjectId",
+      "rl",
+      "answer",
+      "promptAddAnotherAccount",
+      "rl",
+      "answer"
+    ],
+    "complexity_score": 26
+  }
+}

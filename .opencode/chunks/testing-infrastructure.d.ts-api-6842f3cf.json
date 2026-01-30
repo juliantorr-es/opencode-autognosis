@@ -1,0 +1,16 @@
+{
+  "id": "testing-infrastructure.d.ts-api-6842f3cf",
+  "file_path": "/Users/user/opencode-autognosis/dist/testing-infrastructure.d.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: testing-infrastructure.d.ts\n\n## Public Functions\n\n### testingTools\n```typescript\nexport declare function testingTools():\n```\nNo documentation found\n\n**Returns:** {\n    [key: string]: any;\n}\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.848Z",
+    "updated_at": "2026-01-30T05:26:51.848Z",
+    "hash": "32f6518597a91d3a1956aeabc4e47d3f3472abb78f5219df9832745b2403d1e0",
+    "dependencies": [],
+    "symbols": [
+      "testingTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

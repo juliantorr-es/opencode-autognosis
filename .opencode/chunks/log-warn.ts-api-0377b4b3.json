@@ -1,0 +1,18 @@
+{
+  "id": "log-warn.ts-api-0377b4b3",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/log-warn.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: log-warn.ts\n\n## Public Functions\n\n### logWarn\n```typescript\nexport function logWarn(\n\tclient: OpencodeClient | undefined,\n\tservice: string,\n\tmessage: string,\n): void\n```\nLog a warning message via OpenCode client or console fallback.\n\nUses the OpenCode logging API when a client is available, which integrates\nwith the OpenCode UI log panel. Falls back to console.warn for CLI contexts\nor when no client is provided.\n\n**Parameters:**\n- `client`: OpencodeClient | undefined - \n- `service`: string - \n- `message`: string - \n\n**Returns:** void\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.378Z",
+    "updated_at": "2026-01-30T05:26:52.378Z",
+    "hash": "2ad52fa06ce6ea4e6e2e3404150322ff184e3ba9dd601843dd94b0c0798d1f34",
+    "dependencies": [
+      "./types"
+    ],
+    "symbols": [
+      "logWarn"
+    ],
+    "complexity_score": 46.2
+  }
+}

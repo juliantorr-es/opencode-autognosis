@@ -1,0 +1,38 @@
+{
+  "id": "write.ts-invariant-83e9c764",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/tools/write.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: write.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 0 try-catch blocks, 3 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.350Z",
+    "updated_at": "2026-01-30T05:26:52.350Z",
+    "hash": "2775e76d534c4d184136a99c1771b818f5eedc78944bd1e1d3f67ba5ca631b8c",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "../manager.ts",
+      "../permissions.ts",
+      "./write.txt"
+    ],
+    "symbols": [
+      "parseEscapeSequences",
+      "extractCommands",
+      "commands",
+      "lines",
+      "line",
+      "trimmed",
+      "parseCommand",
+      "parts",
+      "command",
+      "args",
+      "ptyWrite",
+      "session",
+      "parsedData",
+      "commands",
+      "commandLine",
+      "success",
+      "preview",
+      "displayPreview"
+    ],
+    "complexity_score": 94.4
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "chunk-cards.d.ts-summary-ef0b1b47",
+  "file_path": "/Users/user/opencode-autognosis/dist/chunk-cards.d.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: chunk-cards.d.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (11)\n- **ensureChunkDir**: No documentation found\n- **calculateHash**: No documentation found\n- **calculateComplexity**: No documentation found\n- **extractSymbols**: No documentation found\n- **chunkCardsTools**: No documentation found\n- **generateSummaryChunk**: No documentation found\n- **generateApiChunk**: No documentation found\n- **generateInvariantChunk**: No documentation found\n- **extractDependencies**: No documentation found\n- **parseFileAST**: No documentation found\n- **extractSymbolsFromAST**: No documentation found\n\n\n\n\n## Dependencies\n- typescript\n\n## Exports\n- CHUNK_DIR\n- ChunkCard\n- ensureChunkDir\n- calculateHash\n- calculateComplexity\n- extractSymbols\n- chunkCardsTools\n- generateSummaryChunk\n- generateApiChunk\n- generateInvariantChunk\n- extractDependencies\n- parseFileAST\n- extractSymbolsFromAST\n\n## Complexity Metrics\n- Lines of code: 30\n- Estimated complexity: 19/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.789Z",
+    "updated_at": "2026-01-30T05:26:51.789Z",
+    "hash": "baebd0187386b859365c7096fb9c70ad00c71de3083adb6506a562a5ea8110c3",
+    "dependencies": [
+      "typescript"
+    ],
+    "symbols": [
+      "CHUNK_DIR",
+      "ChunkCard",
+      "ensureChunkDir",
+      "calculateHash",
+      "calculateComplexity",
+      "extractSymbols",
+      "chunkCardsTools",
+      "generateSummaryChunk",
+      "generateApiChunk",
+      "generateInvariantChunk",
+      "extractDependencies",
+      "parseFileAST",
+      "extractSymbolsFromAST"
+    ],
+    "complexity_score": 19
+  }
+}

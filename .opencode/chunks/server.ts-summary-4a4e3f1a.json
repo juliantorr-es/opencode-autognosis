@@ -1,0 +1,45 @@
+{
+  "id": "server.ts-summary-4a4e3f1a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/server.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: server.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nDocumented purpose found in JSDoc\n\n## Key Components\n\n### Functions (5)\n- **isOrbStackDockerHost**: Detect if running in OrbStack Docker with --network host mode.\nOrbStack's host networking only forwards ports bound to 127.0.0.1 to macOS.\n- **isWSL**: Detect WSL (Windows Subsystem for Linux) environment.\n- **isRemoteEnvironment**: Detect remote/SSH environment where localhost may not be accessible from browser.\n- **getBindAddress**: Determine the best bind address for the OAuth callback server.\n\nPriority:\n1. OPENCODE_ANTIGRAVITY_OAUTH_BIND environment variable (user override)\n2. OrbStack Docker with --network host: 127.0.0.1 (required for port forwarding)\n3. WSL/SSH/Remote: 0.0.0.0 (needed for cross-network access)\n4. Default: 127.0.0.1 (most secure for local development)\n- **startOAuthListener**: Starts a lightweight HTTP server that listens for the Antigravity OAuth redirect\nand resolves with the captured callback URL.\n\n\n\n\n## Dependencies\n- node:http\n- node:fs\n- ../constants\n\n## Exports\n- OAuthListener\n- startOAuthListener\n\n## Complexity Metrics\n- Lines of code: 367\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.054Z",
+    "updated_at": "2026-01-30T05:26:52.054Z",
+    "hash": "b6cfe0bfdff1645484b2408a007346f63d8b1b098c3ea6af624cc1f12c2b7d30",
+    "dependencies": [
+      "node:http",
+      "node:fs",
+      "../constants"
+    ],
+    "symbols": [
+      "OAuthListenerOptions",
+      "OAuthListener",
+      "redirectUri",
+      "callbackPath",
+      "isOrbStackDockerHost",
+      "version",
+      "hostname",
+      "resolv",
+      "isWSL",
+      "release",
+      "isRemoteEnvironment",
+      "getBindAddress",
+      "envBind",
+      "startOAuthListener",
+      "port",
+      "origin",
+      "settled",
+      "resolveCallback",
+      "rejectCallback",
+      "timeoutHandle",
+      "callbackPromise",
+      "successResponse",
+      "server",
+      "url",
+      "bindAddress",
+      "handleError"
+    ],
+    "complexity_score": 100
+  }
+}

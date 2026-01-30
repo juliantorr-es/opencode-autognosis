@@ -1,0 +1,20 @@
+{
+  "id": "shell.ts-invariant-1e3e1d9a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/shell.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: shell.ts\n\n## Core Invariants\n\n\n## Constraints\n- **SHELL_FORBIDDEN_CHARS**: /[\\x00]/\n\n/**\n * Assert that a string is safe for shell escaping.\n *\n * Null bytes cannot be escaped in any shell and must be rejected outright.\n * This is the first line of defense before any escaping is attempted.\n *\n * @param value - String to validate\n * @param context - Description for error message (e.g., \"Bash argument\")\n * @throws {Error} if string contains forbidden characters\n *\n * @example\n * ```ts\n * assertShellSafe(userInput, \"Bash argument\")\n * // Throws: \"Bash argument contains null bytes...\"\n *\n * assertShellSafe(filePath, \"Script path\")\n * // Throws: \"Script path contains null bytes...\"\n * ```\n */\nexport function assertShellSafe(value: string, context: string): void {\n\t// Law 4: Fail Fast - reject invalid input immediately with clear message\n\tif (SHELL_FORBIDDEN_CHARS.test(value)) {\n\t\tthrow new Error(\n\t\t\t`${context} contains null bytes which cannot be safely escaped for shell execution`,\n\t\t)\n\t}\n}\n\n/**\n * Escape a string for safe use in bash double-quoted strings.\n *\n * Handles all shell metacharacters including:\n * - Backslash (\\), double quote (\"), dollar ($), backtick (`)\n * - Exclamation mark (!) for history expansion\n * - Newlines and carriage returns (replaced with spaces)\n *\n * @param str - String to escape\n * @returns Escaped string safe for bash double-quoted context\n * @throws {Error} if string contains null bytes\n *\n * @example\n * ```ts\n * const path\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 0 try-catch blocks, 1 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.381Z",
+    "updated_at": "2026-01-30T05:26:52.381Z",
+    "hash": "78ec5a2330e9ed8b8277bf56b7be266486f16dc8fba6e3a4c632042081e9b86c",
+    "dependencies": [],
+    "symbols": [
+      "SHELL_FORBIDDEN_CHARS",
+      "assertShellSafe",
+      "escapeBash",
+      "escapeAppleScript",
+      "escapeBatch"
+    ],
+    "complexity_score": 100
+  }
+}

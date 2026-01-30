@@ -1,0 +1,52 @@
+{
+  "id": "tools.ts-api-fffc4db8",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/strategies/tools.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: tools.ts\n\n## Public Functions\n\n### createDiscardTool\n```typescript\nexport function createDiscardTool(ctx: PruneToolContext): ReturnType<typeof tool>\n```\nNo documentation found\n\n**Parameters:**\n- `ctx`: PruneToolContext - \n\n**Returns:** ReturnType<typeof tool>\n\n\n### createExtractTool\n```typescript\nexport function createExtractTool(ctx: PruneToolContext): ReturnType<typeof tool>\n```\nNo documentation found\n\n**Parameters:**\n- `ctx`: PruneToolContext - \n\n**Returns:** ReturnType<typeof tool>\n\n\n## Classes\n\n\n## Interfaces\n\n### PruneToolContext\n```typescript\nexport interface PruneToolContext\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.181Z",
+    "updated_at": "2026-01-30T05:26:52.181Z",
+    "hash": "376aa4c08fc724074be30e0b73eab156ee723d257cabedbf014f60ec6b2e7c4f",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "../state",
+      "../config",
+      "../messages/utils",
+      "../ui/notification",
+      "../ui/utils",
+      "../state",
+      "../state/persistence",
+      "../logger",
+      "../prompts",
+      "./utils",
+      "../protected-file-patterns"
+    ],
+    "symbols": [
+      "DISCARD_TOOL_DESCRIPTION",
+      "EXTRACT_TOOL_DESCRIPTION",
+      "PruneToolContext",
+      "executePruneOperation",
+      "sessionId",
+      "numericToolIds",
+      "messagesResponse",
+      "messages",
+      "currentParams",
+      "toolIdList",
+      "index",
+      "id",
+      "metadata",
+      "allProtectedTools",
+      "filePath",
+      "pruneToolIds",
+      "toolMetadata",
+      "id",
+      "toolParameters",
+      "createDiscardTool",
+      "reason",
+      "validReasons",
+      "numericIds",
+      "createExtractTool"
+    ],
+    "complexity_score": 100
+  }
+}

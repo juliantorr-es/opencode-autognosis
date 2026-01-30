@@ -1,0 +1,16 @@
+{
+  "id": "terminal-detect.ts-invariant-a17bc24b",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/terminal-detect.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: terminal-detect.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.382Z",
+    "updated_at": "2026-01-30T05:26:52.382Z",
+    "hash": "b289746ae9fb309c4472771351c54325dfe4ffe8ddd49ad71933b26819f416b9",
+    "dependencies": [],
+    "symbols": [
+      "isInsideTmux"
+    ],
+    "complexity_score": 30.5
+  }
+}

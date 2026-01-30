@@ -1,0 +1,30 @@
+{
+  "id": "token.test.ts-invariant-8e989381",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/token.test.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: token.test.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.069Z",
+    "updated_at": "2026-01-30T05:26:52.069Z",
+    "hash": "d1d866bfb057156be61b5cadb6d8e881a5753921e4a0e1a6c1adedea4366126d",
+    "dependencies": [
+      "vitest",
+      "../constants",
+      "./token",
+      "./types"
+    ],
+    "symbols": [
+      "baseAuth",
+      "createClient",
+      "client",
+      "fetchMock",
+      "result",
+      "client",
+      "fetchMock",
+      "result",
+      "client",
+      "fetchMock"
+    ],
+    "complexity_score": 28.8
+  }
+}

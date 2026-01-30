@@ -1,0 +1,29 @@
+{
+  "id": "tier.test.ts-summary-cbf84e7a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/tier.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: tier.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- bun:test\n- ./accounts\n- ./accounts\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 111\n- Estimated complexity: 38.1/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.245Z",
+    "updated_at": "2026-01-30T05:26:52.245Z",
+    "hash": "7ad323964c2ffe473ecd15d99384d0ab2670f1a0f918117770ce1f3d713b3839",
+    "dependencies": [
+      "bun:test",
+      "./accounts",
+      "./accounts"
+    ],
+    "symbols": [
+      "mockAuth",
+      "manager",
+      "acc1",
+      "next",
+      "acc1",
+      "paidAcc",
+      "active",
+      "next",
+      "acc1",
+      "active"
+    ],
+    "complexity_score": 38.1
+  }
+}

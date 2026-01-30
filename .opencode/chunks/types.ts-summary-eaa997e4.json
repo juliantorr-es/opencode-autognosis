@@ -1,0 +1,20 @@
+{
+  "id": "types.ts-summary-eaa997e4",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/core/streaming/types.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: types.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- SignedThinking\n- SignatureStore\n- StreamingCallbacks\n- StreamingOptions\n- ThoughtBuffer\n\n## Complexity Metrics\n- Lines of code: 31\n- Estimated complexity: 7.1/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.943Z",
+    "updated_at": "2026-01-30T05:26:51.943Z",
+    "hash": "b1493e834fce92e7e8d695b612ec8c0b6718c2c9d66ce19d92dc04bcca665fd9",
+    "dependencies": [],
+    "symbols": [
+      "SignedThinking",
+      "SignatureStore",
+      "StreamingCallbacks",
+      "StreamingOptions",
+      "ThoughtBuffer"
+    ],
+    "complexity_score": 7.1
+  }
+}

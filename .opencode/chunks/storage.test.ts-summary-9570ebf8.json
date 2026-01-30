@@ -1,0 +1,49 @@
+{
+  "id": "storage.test.ts-summary-9570ebf8",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/storage.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: storage.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- bun:test\n- node:path\n- node:fs\n- ./storage\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 289\n- Estimated complexity: 48.900000000000006/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.240Z",
+    "updated_at": "2026-01-30T05:26:52.240Z",
+    "hash": "e89b4c11944ed946155d53b02d69244d5f4f3749c565b88befdad0d84385db6e",
+    "dependencies": [
+      "bun:test",
+      "node:path",
+      "node:fs",
+      "./storage"
+    ],
+    "symbols": [
+      "mockFs",
+      "now",
+      "futureTime",
+      "v1Data",
+      "storage",
+      "savedContent",
+      "pastTime",
+      "v1Data",
+      "storage",
+      "futureTime",
+      "v2Data",
+      "storage",
+      "savedContent",
+      "pastTime",
+      "v2Data",
+      "storage",
+      "futureTime",
+      "v3Data",
+      "storage",
+      "now",
+      "v3Data",
+      "storage",
+      "error",
+      "storage",
+      "storage",
+      "unknownVersionData",
+      "storage",
+      "noVersionData",
+      "storage"
+    ],
+    "complexity_score": 48.900000000000006
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "types.ts-summary-277bea34",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/types.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: types.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- bun-pty\n- ./buffer.ts\n\n## Exports\n- PTYStatus\n- PTYSession\n- PTYSessionInfo\n- SpawnOptions\n- ReadResult\n- SearchResult\n\n## Complexity Metrics\n- Lines of code: 62\n- Estimated complexity: 10.2/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.350Z",
+    "updated_at": "2026-01-30T05:26:52.350Z",
+    "hash": "9f0130f9813275ea466b18a2f42b19c8b6efe6ecd83ab8f7740ff64201804643",
+    "dependencies": [
+      "bun-pty",
+      "./buffer.ts"
+    ],
+    "symbols": [
+      "PTYStatus",
+      "PTYSession",
+      "PTYSessionInfo",
+      "SpawnOptions",
+      "ReadResult",
+      "SearchResult"
+    ],
+    "complexity_score": 10.2
+  }
+}

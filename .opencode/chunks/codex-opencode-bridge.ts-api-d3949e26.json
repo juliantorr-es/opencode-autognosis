@@ -1,0 +1,18 @@
+{
+  "id": "codex-opencode-bridge.ts-api-d3949e26",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/prompts/codex-opencode-bridge.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: codex-opencode-bridge.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n### CodexOpenCodeBridgeMeta\n```typescript\nexport interface CodexOpenCodeBridgeMeta\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.288Z",
+    "updated_at": "2026-01-30T05:26:52.288Z",
+    "hash": "8867d5c558af9c0dec6557832b90f793bb4844d25ce7cc36f4a0eeac5a1e4bf1",
+    "dependencies": [],
+    "symbols": [
+      "CODEX_OPENCODE_BRIDGE",
+      "CodexOpenCodeBridgeMeta",
+      "CODEX_OPENCODE_BRIDGE_META"
+    ],
+    "complexity_score": 80.2
+  }
+}

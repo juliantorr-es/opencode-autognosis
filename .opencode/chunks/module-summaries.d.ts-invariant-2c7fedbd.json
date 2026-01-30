@@ -1,0 +1,16 @@
+{
+  "id": "module-summaries.d.ts-invariant-2c7fedbd",
+  "file_path": "/Users/user/opencode-autognosis/dist/module-summaries.d.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: module-summaries.d.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.819Z",
+    "updated_at": "2026-01-30T05:26:51.819Z",
+    "hash": "79be75d61a8a73b63f29a23800fbc3bb244a5e7add44fcf72278a5e2db1bf169",
+    "dependencies": [],
+    "symbols": [
+      "moduleSummariesTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

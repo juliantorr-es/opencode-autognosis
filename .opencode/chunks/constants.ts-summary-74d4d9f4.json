@@ -1,0 +1,37 @@
+{
+  "id": "constants.ts-summary-74d4d9f4",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/constants.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: constants.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- ANTIGRAVITY_CLIENT_ID\n- ANTIGRAVITY_CLIENT_SECRET\n- ANTIGRAVITY_CALLBACK_PORT\n- ANTIGRAVITY_REDIRECT_URI\n- ANTIGRAVITY_SCOPES\n- ANTIGRAVITY_USER_AGENT\n- ANTIGRAVITY_API_CLIENT\n- ANTIGRAVITY_CLIENT_METADATA\n- CODE_ASSIST_ENDPOINT_DAILY\n- CODE_ASSIST_ENDPOINT_AUTOPUSH\n- CODE_ASSIST_ENDPOINT_PROD\n- CODE_ASSIST_ENDPOINT_FALLBACKS\n- CODE_ASSIST_ENDPOINT\n- CODE_ASSIST_API_VERSION\n- CODE_ASSIST_HEADERS\n- ANTIGRAVITY_PROVIDER_ID\n- SEARCH_MODEL\n- SEARCH_THINKING_BUDGET_FAST\n- SEARCH_THINKING_BUDGET_DEEP\n- SEARCH_TIMEOUT_MS\n- MAX_ACCOUNTS\n- ENV_CONSOLE_LOG\n\n## Complexity Metrics\n- Lines of code: 56\n- Estimated complexity: 14.600000000000001/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.191Z",
+    "updated_at": "2026-01-30T05:26:52.191Z",
+    "hash": "6e39fe4b093c4f9efc6296436e2723e87c4ba9304360500c35b7415c685e6a14",
+    "dependencies": [],
+    "symbols": [
+      "ANTIGRAVITY_CLIENT_ID",
+      "ANTIGRAVITY_CLIENT_SECRET",
+      "ANTIGRAVITY_CALLBACK_PORT",
+      "ANTIGRAVITY_REDIRECT_URI",
+      "ANTIGRAVITY_SCOPES",
+      "ANTIGRAVITY_USER_AGENT",
+      "ANTIGRAVITY_API_CLIENT",
+      "ANTIGRAVITY_CLIENT_METADATA",
+      "CODE_ASSIST_ENDPOINT_DAILY",
+      "CODE_ASSIST_ENDPOINT_AUTOPUSH",
+      "CODE_ASSIST_ENDPOINT_PROD",
+      "CODE_ASSIST_ENDPOINT_FALLBACKS",
+      "CODE_ASSIST_ENDPOINT",
+      "CODE_ASSIST_API_VERSION",
+      "CODE_ASSIST_HEADERS",
+      "ANTIGRAVITY_PROVIDER_ID",
+      "SEARCH_MODEL",
+      "SEARCH_THINKING_BUDGET_FAST",
+      "SEARCH_THINKING_BUDGET_DEEP",
+      "SEARCH_TIMEOUT_MS",
+      "MAX_ACCOUNTS",
+      "ENV_CONSOLE_LOG"
+    ],
+    "complexity_score": 14.600000000000001
+  }
+}

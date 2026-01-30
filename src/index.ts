@@ -5,6 +5,7 @@ import { chunkCardsTools } from "./chunk-cards.js";
 import { activeSetTools } from "./activeset.js";
 import { moduleSummariesTools } from "./module-summaries.js";
 import { performanceTools } from "./performance-optimization.js";
+import { graphTools } from "./database.js";
 
 export const AutognosisPlugin = async () => {
   return {
@@ -16,6 +17,7 @@ export const AutognosisPlugin = async () => {
       ...activeSetTools(),
       ...moduleSummariesTools(),
       ...performanceTools(),
+      ...graphTools(),
     },
   };
 };

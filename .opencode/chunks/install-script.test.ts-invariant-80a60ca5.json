@@ -1,0 +1,43 @@
+{
+  "id": "install-script.test.ts-invariant-80a60ca5",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/test/install-script.test.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: install-script.test.ts\n\n## Core Invariants\n\n\n## Constraints\n- **SCRIPT_PATH**: resolve(process.cwd(), 'scripts', 'install-opencode-codex-auth.js')\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.321Z",
+    "updated_at": "2026-01-30T05:26:52.321Z",
+    "hash": "caad65d2e14dc0ff6d23b0034f6b3eb291ab144ce28210087c3fe0b0ff039bc3",
+    "dependencies": [
+      "vitest",
+      "node:child_process",
+      "node:fs",
+      "node:os",
+      "node:path",
+      "jsonc-parser"
+    ],
+    "symbols": [
+      "SCRIPT_PATH",
+      "runInstaller",
+      "readJsoncFile",
+      "content",
+      "makeHome",
+      "writeConfig",
+      "configDir",
+      "path",
+      "homeDir",
+      "configPath",
+      "homeDir",
+      "jsoncPath",
+      "jsonPath",
+      "jsonBefore",
+      "jsonAfter",
+      "homeDir",
+      "configPath",
+      "homeDir",
+      "configPath",
+      "homeDir",
+      "opencodeDir"
+    ],
+    "complexity_score": 30.9
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "model-resolver.test.ts-invariant-c673e04b",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/transform/model-resolver.test.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: model-resolver.test.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.108Z",
+    "updated_at": "2026-01-30T05:26:52.108Z",
+    "hash": "7b86dfc5a254b52e48315efaf953c5445c59b9aa7bb225ef20b881e7553f921f",
+    "dependencies": [
+      "vitest",
+      "./model-resolver"
+    ],
+    "symbols": [
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "lowResult",
+      "medResult",
+      "highResult",
+      "result",
+      "result",
+      "result",
+      "result",
+      "result",
+      "antigravity",
+      "cli",
+      "result"
+    ],
+    "complexity_score": 96.6
+  }
+}

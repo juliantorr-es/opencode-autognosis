@@ -1,0 +1,28 @@
+{
+  "id": "wildcard.ts-summary-6470250d",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/wildcard.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: wildcard.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (4)\n- **match**: No documentation found\n- **all**: No documentation found\n- **allStructured**: No documentation found\n- **matchSequence**: No documentation found\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- match\n- all\n- allStructured\n\n## Complexity Metrics\n- Lines of code: 60\n- Estimated complexity: 71/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.351Z",
+    "updated_at": "2026-01-30T05:26:52.351Z",
+    "hash": "ddf535bd6795384a01f614da20412798535ab7dff365cd46c9ffbbf47edcd292",
+    "dependencies": [],
+    "symbols": [
+      "match",
+      "regex",
+      "all",
+      "sorted",
+      "result",
+      "allStructured",
+      "sorted",
+      "result",
+      "parts",
+      "firstPart",
+      "matchSequence",
+      "i",
+      "item"
+    ],
+    "complexity_score": 71
+  }
+}

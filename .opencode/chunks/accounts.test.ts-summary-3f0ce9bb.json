@@ -1,0 +1,53 @@
+{
+  "id": "accounts.test.ts-summary-3f0ce9bb",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/accounts.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: accounts.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- bun:test\n- ./accounts\n- ./types\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 157\n- Estimated complexity: 32.7/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.192Z",
+    "updated_at": "2026-01-30T05:26:52.192Z",
+    "hash": "7ed22cfd3ea1d0d6b3725ede0ff6227eed0768a2798a104a6c8148a06bb83091",
+    "dependencies": [
+      "bun:test",
+      "./accounts",
+      "./types"
+    ],
+    "symbols": [
+      "FAMILY",
+      "auth",
+      "manager",
+      "auth",
+      "manager",
+      "auth",
+      "manager",
+      "account",
+      "auth",
+      "manager",
+      "firstAccount",
+      "secondAccount",
+      "auth",
+      "manager",
+      "accounts",
+      "next",
+      "auth",
+      "manager",
+      "account",
+      "next",
+      "auth",
+      "manager",
+      "accounts",
+      "waitTime",
+      "auth",
+      "manager",
+      "beforeTime",
+      "account",
+      "afterTime",
+      "auth",
+      "manager",
+      "account",
+      "claudeAccount",
+      "geminiAccount"
+    ],
+    "complexity_score": 32.7
+  }
+}

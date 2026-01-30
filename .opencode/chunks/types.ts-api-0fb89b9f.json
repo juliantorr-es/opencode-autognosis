@@ -1,0 +1,28 @@
+{
+  "id": "types.ts-api-0fb89b9f",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/recovery/types.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: types.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n### StoredMessageMeta\n```typescript\nexport interface StoredMessageMeta\n```\nNo documentation found\n\n\n### StoredTextPart\n```typescript\nexport interface StoredTextPart\n```\nNo documentation found\n\n\n### StoredToolPart\n```typescript\nexport interface StoredToolPart\n```\nNo documentation found\n\n\n### StoredReasoningPart\n```typescript\nexport interface StoredReasoningPart\n```\nNo documentation found\n\n\n### StoredStepPart\n```typescript\nexport interface StoredStepPart\n```\nNo documentation found\n\n\n### MessagePart\n```typescript\nexport interface MessagePart\n```\nNo documentation found\n\n\n### MessageData\n```typescript\nexport interface MessageData\n```\nNo documentation found\n\n\n### MessageInfo\n```typescript\nexport interface MessageInfo\n```\nNo documentation found\n\n\n## Types\n\n### ThinkingPartType\n```typescript\nexport type ThinkingPartType\n```\nNo documentation found\n\n\n### MetaPartType\n```typescript\nexport type MetaPartType\n```\nNo documentation found\n\n\n### ContentPartType\n```typescript\nexport type ContentPartType\n```\nNo documentation found\n\n\n### RecoveryErrorType\n```typescript\nexport type RecoveryErrorType\n```\nNo documentation found\n\n\n### StoredPart\n```typescript\nexport type StoredPart\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.221Z",
+    "updated_at": "2026-01-30T05:26:52.221Z",
+    "hash": "98e6c21851da2192f6c302cdc714111c2730614a4c775852e541b65c1f086b1b",
+    "dependencies": [],
+    "symbols": [
+      "ThinkingPartType",
+      "MetaPartType",
+      "ContentPartType",
+      "RecoveryErrorType",
+      "StoredMessageMeta",
+      "StoredTextPart",
+      "StoredToolPart",
+      "StoredReasoningPart",
+      "StoredStepPart",
+      "StoredPart",
+      "MessagePart",
+      "MessageData",
+      "MessageInfo"
+    ],
+    "complexity_score": 21.9
+  }
+}

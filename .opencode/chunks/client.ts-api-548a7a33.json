@@ -1,0 +1,44 @@
+{
+  "id": "client.ts-api-548a7a33",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/client.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: client.ts\n\n## Public Functions\n\n\n## Classes\n\n### SupermemoryClient\n```typescript\nexport class SupermemoryClient\n```\nNo documentation found\n\n**Methods:**\n- `getClient`: private getClient(): Supermemory\n- `searchMemories`: async searchMemories(query: string, containerTag: string)\n- `getProfile`: async getProfile(containerTag: string, query?: string)\n- `addMemory`: async addMemory(\n    content: string,\n    containerTag: string,\n    metadata?:\n- `deleteMemory`: async deleteMemory(memoryId: string)\n- `listMemories`: async listMemories(containerTag: string, limit = 20)\n- `ingestConversation`: async ingestConversation(\n    conversationId: string,\n    messages: ConversationMessage[],\n    containerTags: string[],\n    metadata?: Record<string, string | number | boolean>\n  )\n\n\n**Properties:**\n- `client`: Supermemory | null\n\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.364Z",
+    "updated_at": "2026-01-30T05:26:52.364Z",
+    "hash": "31e7c7ba4a16c2971897122a57b5ecaaff8a307c44b1dc5530e94e93e7f109f5",
+    "dependencies": [
+      "supermemory",
+      "../config.js",
+      "./logger.js",
+      "../types/index.js"
+    ],
+    "symbols": [
+      "SUPERMEMORY_API_URL",
+      "TIMEOUT_MS",
+      "withTimeout",
+      "SupermemoryClient",
+      "result",
+      "error",
+      "errorMessage",
+      "result",
+      "error",
+      "errorMessage",
+      "result",
+      "error",
+      "errorMessage",
+      "error",
+      "errorMessage",
+      "result",
+      "error",
+      "errorMessage",
+      "response",
+      "errorText",
+      "result",
+      "error",
+      "errorMessage",
+      "supermemoryClient"
+    ],
+    "complexity_score": 87.5
+  }
+}

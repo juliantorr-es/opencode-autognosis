@@ -1,0 +1,41 @@
+{
+  "id": "token.ts-summary-dd20d5ae",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/token.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: token.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nDocumented purpose found in JSDoc\n\n## Key Components\n\n### Functions (2)\n- **parseOAuthErrorPayload**: Parses OAuth error payloads returned by Google token endpoints, tolerating varied shapes.\n- **refreshAccessToken**: Refreshes an Antigravity OAuth access token, updates persisted credentials, and handles revocation.\n\n\n\n### Classes (1)\n- **AntigravityTokenRefreshError**: No documentation found\n\n\n## Dependencies\n- ../constants\n- ./auth\n- ./cache\n- ./logger\n- ./project\n- ./types\n\n## Exports\n- AntigravityTokenRefreshError\n- refreshAccessToken\n\n## Complexity Metrics\n- Lines of code: 171\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.070Z",
+    "updated_at": "2026-01-30T05:26:52.070Z",
+    "hash": "2ab98696980fc3c8886a4c9a220d9bc0a4c293b5a882c8163e311da2d929d274",
+    "dependencies": [
+      "../constants",
+      "./auth",
+      "./cache",
+      "./logger",
+      "./project",
+      "./types"
+    ],
+    "symbols": [
+      "log",
+      "OAuthErrorPayload",
+      "parseOAuthErrorPayload",
+      "payload",
+      "code",
+      "description",
+      "AntigravityTokenRefreshError",
+      "refreshAccessToken",
+      "parts",
+      "startTime",
+      "response",
+      "errorText",
+      "details",
+      "baseMessage",
+      "message",
+      "payload",
+      "refreshedParts",
+      "updatedAuth",
+      "error"
+    ],
+    "complexity_score": 100
+  }
+}

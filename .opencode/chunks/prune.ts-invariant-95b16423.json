@@ -1,0 +1,38 @@
+{
+  "id": "prune.ts-invariant-95b16423",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/messages/prune.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: prune.ts\n\n## Core Invariants\n\n\n## Constraints\n- **PRUNED_TOOL_OUTPUT_REPLACEMENT**: \"[Output removed to save context - information superseded or no longer needed]\"\nconst PRUNED_TOOL_ERROR_INPUT_REPLACEMENT\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.157Z",
+    "updated_at": "2026-01-30T05:26:52.157Z",
+    "hash": "86543639c00e33571b47fd10bcadb00ae465b699b17def3fb368d9c70c243d3c",
+    "dependencies": [
+      "../state",
+      "../logger",
+      "../config",
+      "../shared-utils"
+    ],
+    "symbols": [
+      "PRUNED_TOOL_OUTPUT_REPLACEMENT",
+      "PRUNED_TOOL_ERROR_INPUT_REPLACEMENT",
+      "PRUNED_QUESTION_INPUT_REPLACEMENT",
+      "prune",
+      "pruneToolOutputs",
+      "msg",
+      "parts",
+      "part",
+      "pruneToolInputs",
+      "msg",
+      "parts",
+      "part",
+      "pruneToolErrors",
+      "msg",
+      "parts",
+      "part",
+      "input",
+      "key"
+    ],
+    "complexity_score": 100
+  }
+}

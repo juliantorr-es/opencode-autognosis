@@ -1,0 +1,36 @@
+{
+  "id": "cache.ts-api-4e94ac27",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/hooks/auto-update-checker/cache.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: cache.ts\n\n## Public Functions\n\n### invalidatePackage\n```typescript\nexport function invalidatePackage(packageName: string = PACKAGE_NAME): boolean\n```\nNo documentation found\n\n**Parameters:**\n- `packageName`: string - \n\n**Returns:** boolean\n\n\n### invalidateCache\n```typescript\nexport function invalidateCache(): boolean\n```\nNo documentation found\n\n**Returns:** boolean\n\n\n## Classes\n\n\n## Interfaces\n\n### BunLockfile\n```typescript\ninterface BunLockfile\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.883Z",
+    "updated_at": "2026-01-30T05:26:51.883Z",
+    "hash": "65494c7827b0821f2b354ce1df1a0ea9d507c6d7c549bc06a713c05eae1fb4f9",
+    "dependencies": [
+      "node:fs",
+      "node:path",
+      "./constants"
+    ],
+    "symbols": [
+      "BunLockfile",
+      "stripTrailingCommas",
+      "removeFromBunLock",
+      "lockPath",
+      "content",
+      "lock",
+      "modified",
+      "invalidatePackage",
+      "pkgDir",
+      "pkgJsonPath",
+      "packageRemoved",
+      "dependencyRemoved",
+      "lockRemoved",
+      "content",
+      "pkgJson",
+      "err",
+      "invalidateCache"
+    ],
+    "complexity_score": 75.2
+  }
+}

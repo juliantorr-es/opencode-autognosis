@@ -1,0 +1,48 @@
+{
+  "id": "get-project-id.ts-api-111b0b6d",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/get-project-id.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: get-project-id.ts\n\n## Public Functions\n\n### getProjectId\n```typescript\nexport async function getProjectId(projectRoot: string, client?: OpencodeClient): Promise<string>\n```\nGenerate a unique project ID from the project root path.\n\n**Strategy:**\n1. Uses the first root commit SHA for stability across renames/moves\n2. Falls back to path hash for non-git repos or empty repos\n3. Caches result in .git/opencode for performance\n\n**Git Worktree Support:**\nWhen .git is a file (worktree), resolves the actual .git directory\nand uses the shared cache. This ensures all worktrees share the same\nproject ID and associated data.\n\n**Parameters:**\n- `projectRoot`: string - \n- `client`: OpencodeClient - \n\n**Returns:** Promise<string>\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.376Z",
+    "updated_at": "2026-01-30T05:26:52.376Z",
+    "hash": "d901be24669a81d3b39073b9cf1483b359b1443dc8163cf5804ce87c17797a24",
+    "dependencies": [
+      "node:crypto",
+      "node:fs/promises",
+      "node:path",
+      "./log-warn",
+      "./types",
+      "./with-timeout"
+    ],
+    "symbols": [
+      "hashPath",
+      "hash",
+      "getProjectId",
+      "gitPath",
+      "gitStat",
+      "gitDir",
+      "content",
+      "match",
+      "gitdirPath",
+      "resolvedGitdir",
+      "commondirPath",
+      "commondirFile",
+      "commondirContent",
+      "gitDirStat",
+      "cacheFile",
+      "cache",
+      "cached",
+      "proc",
+      "timeoutMs",
+      "exitCode",
+      "output",
+      "roots",
+      "projectId",
+      "e",
+      "stderr",
+      "error"
+    ],
+    "complexity_score": 100
+  }
+}

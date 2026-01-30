@@ -1,0 +1,33 @@
+{
+  "id": "purge-errors.ts-api-bb83a245",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/strategies/purge-errors.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: purge-errors.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.177Z",
+    "updated_at": "2026-01-30T05:26:52.177Z",
+    "hash": "7d9b8179e6696a4990e12b026f3d82377421dd8b7f9da273183d0110d13d5552",
+    "dependencies": [
+      "../config",
+      "../logger",
+      "../state",
+      "../messages/utils",
+      "../protected-file-patterns",
+      "./utils"
+    ],
+    "symbols": [
+      "purgeErrors",
+      "allToolIds",
+      "alreadyPruned",
+      "unprunedIds",
+      "protectedTools",
+      "turnThreshold",
+      "newPruneIds",
+      "id",
+      "metadata",
+      "filePath",
+      "turnAge"
+    ],
+    "complexity_score": 97.1
+  }
+}

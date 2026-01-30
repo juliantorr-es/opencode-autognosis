@@ -1,0 +1,28 @@
+{
+  "id": "constants.ts-summary-e945582a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/constants.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: constants.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- PLUGIN_NAME\n- CODEX_BASE_URL\n- DUMMY_API_KEY\n- PROVIDER_ID\n- HTTP_STATUS\n- OPENAI_HEADERS\n- OPENAI_HEADER_VALUES\n- URL_PATHS\n- JWT_CLAIM_PATH\n- ERROR_MESSAGES\n- LOG_STAGES\n- PLATFORM_OPENERS\n- AUTH_LABELS\n\n## Complexity Metrics\n- Lines of code: 82\n- Estimated complexity: 47.2/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.286Z",
+    "updated_at": "2026-01-30T05:26:52.286Z",
+    "hash": "160d638a0e0632e7105488d90dbb7af8d3d4954371b24502d1420a7b17fe1a5a",
+    "dependencies": [],
+    "symbols": [
+      "PLUGIN_NAME",
+      "CODEX_BASE_URL",
+      "DUMMY_API_KEY",
+      "PROVIDER_ID",
+      "HTTP_STATUS",
+      "OPENAI_HEADERS",
+      "OPENAI_HEADER_VALUES",
+      "URL_PATHS",
+      "JWT_CLAIM_PATH",
+      "ERROR_MESSAGES",
+      "LOG_STAGES",
+      "PLATFORM_OPENERS",
+      "AUTH_LABELS"
+    ],
+    "complexity_score": 47.2
+  }
+}

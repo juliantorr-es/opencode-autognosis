@@ -1,0 +1,24 @@
+{
+  "id": "index.js-invariant-cd2749f7",
+  "file_path": "/Users/user/opencode-autognosis/dist/index.js",
+  "chunk_type": "invariant",
+  "content": "# Invariants: index.js\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.818Z",
+    "updated_at": "2026-01-30T05:26:51.818Z",
+    "hash": "fdcba90a2cfd086a71f538ad47dc7ccf26b6018ae118e81dd39782325ec1567a",
+    "dependencies": [
+      "./system-tools.js",
+      "./git-worktree.js",
+      "./testing-infrastructure.js",
+      "./chunk-cards.js",
+      "./activeset.js",
+      "./module-summaries.js",
+      "./performance-optimization.js"
+    ],
+    "symbols": [
+      "AutognosisPlugin"
+    ],
+    "complexity_score": 26.2
+  }
+}

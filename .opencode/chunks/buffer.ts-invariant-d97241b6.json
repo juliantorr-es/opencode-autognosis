@@ -1,0 +1,25 @@
+{
+  "id": "buffer.ts-invariant-d97241b6",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/buffer.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: buffer.ts\n\n## Core Invariants\n\n\n## Constraints\n- **DEFAULT_MAX_LINES**: parseInt(process.env.PTY_MAX_BUFFER_LINES || \"50000\", 10)\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nPerformance patterns: Contains explicit loops\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.340Z",
+    "updated_at": "2026-01-30T05:26:52.340Z",
+    "hash": "8ab7594b5243279361008af0e3557cebaf346286bf0d4fedcc48f5ecbc5826c5",
+    "dependencies": [],
+    "symbols": [
+      "DEFAULT_MAX_LINES",
+      "SearchMatch",
+      "RingBuffer",
+      "newLines",
+      "line",
+      "start",
+      "end",
+      "matches",
+      "i",
+      "line"
+    ],
+    "complexity_score": 41.1
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "tags.ts-invariant-1f6a1dc9",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/tags.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: tags.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 1 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.374Z",
+    "updated_at": "2026-01-30T05:26:52.374Z",
+    "hash": "b44328f40d8fe37088e8e973f8942096df96058c336faa927deed7521df9afcf",
+    "dependencies": [
+      "node:crypto",
+      "node:child_process",
+      "../config.js"
+    ],
+    "symbols": [
+      "sha256",
+      "getGitEmail",
+      "email",
+      "getUserTag",
+      "email",
+      "fallback",
+      "getProjectTag",
+      "getTags"
+    ],
+    "complexity_score": 21.7
+  }
+}

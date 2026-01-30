@@ -1,0 +1,52 @@
+{
+  "id": "tools.ts-summary-fffc4db8",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/strategies/tools.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: tools.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (3)\n- **executePruneOperation**: No documentation found\n- **createDiscardTool**: No documentation found\n- **createExtractTool**: No documentation found\n\n\n\n\n## Dependencies\n- @opencode-ai/plugin\n- ../state\n- ../config\n- ../messages/utils\n- ../ui/notification\n- ../ui/utils\n- ../state\n- ../state/persistence\n- ../logger\n- ../prompts\n- ./utils\n- ../protected-file-patterns\n\n## Exports\n- PruneToolContext\n- createDiscardTool\n- createExtractTool\n\n## Complexity Metrics\n- Lines of code: 221\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.180Z",
+    "updated_at": "2026-01-30T05:26:52.180Z",
+    "hash": "09eaeb5c03bbad25a7e9168cb6789fcd63bf2d6ec38fd5d374a49b4649b152e5",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "../state",
+      "../config",
+      "../messages/utils",
+      "../ui/notification",
+      "../ui/utils",
+      "../state",
+      "../state/persistence",
+      "../logger",
+      "../prompts",
+      "./utils",
+      "../protected-file-patterns"
+    ],
+    "symbols": [
+      "DISCARD_TOOL_DESCRIPTION",
+      "EXTRACT_TOOL_DESCRIPTION",
+      "PruneToolContext",
+      "executePruneOperation",
+      "sessionId",
+      "numericToolIds",
+      "messagesResponse",
+      "messages",
+      "currentParams",
+      "toolIdList",
+      "index",
+      "id",
+      "metadata",
+      "allProtectedTools",
+      "filePath",
+      "pruneToolIds",
+      "toolMetadata",
+      "id",
+      "toolParameters",
+      "createDiscardTool",
+      "reason",
+      "validReasons",
+      "numericIds",
+      "createExtractTool"
+    ],
+    "complexity_score": 100
+  }
+}

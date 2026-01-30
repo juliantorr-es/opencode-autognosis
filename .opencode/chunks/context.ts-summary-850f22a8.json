@@ -1,0 +1,28 @@
+{
+  "id": "context.ts-summary-850f22a8",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/context.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: context.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **formatContextForPrompt**: No documentation found\n\n\n\n\n## Dependencies\n- supermemory/resources\n- ../config.js\n\n## Exports\n- formatContextForPrompt\n\n## Complexity Metrics\n- Lines of code: 65\n- Estimated complexity: 52.5/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.370Z",
+    "updated_at": "2026-01-30T05:26:52.370Z",
+    "hash": "6b02c4fe55bb09681eda7817485db9711d4ff76279aa14a239f134579bd0c776",
+    "dependencies": [
+      "supermemory/resources",
+      "../config.js"
+    ],
+    "symbols": [
+      "MemoryResultMinimal",
+      "MemoriesResponseMinimal",
+      "formatContextForPrompt",
+      "parts",
+      "projectResults",
+      "similarity",
+      "content",
+      "userResults",
+      "similarity",
+      "content"
+    ],
+    "complexity_score": 52.5
+  }
+}

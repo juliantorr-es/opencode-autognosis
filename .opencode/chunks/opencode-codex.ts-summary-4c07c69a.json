@@ -1,0 +1,36 @@
+{
+  "id": "opencode-codex.ts-summary-4c07c69a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/prompts/opencode-codex.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: opencode-codex.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (2)\n- **getOpenCodeCodexPrompt**: Fetch OpenCode's codex.txt prompt with ETag-based caching\nUses HTTP conditional requests to efficiently check for updates\n\nRate limit protection: Only checks GitHub if cache is older than 15 minutes\n- **getCachedPromptPrefix**: Get first N characters of the cached OpenCode prompt for verification\n\n\n\n\n## Dependencies\n- node:path\n- node:os\n- node:fs/promises\n\n## Exports\n- getOpenCodeCodexPrompt\n- getCachedPromptPrefix\n\n## Complexity Metrics\n- Lines of code: 121\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.292Z",
+    "updated_at": "2026-01-30T05:26:52.292Z",
+    "hash": "c5296db6ca61305e2c74495aa1be46dea5aa2ef76283e7e77731370e00d42c66",
+    "dependencies": [
+      "node:path",
+      "node:os",
+      "node:fs/promises"
+    ],
+    "symbols": [
+      "OPENCODE_CODEX_URL",
+      "CACHE_DIR",
+      "CACHE_FILE",
+      "CACHE_META_FILE",
+      "CacheMeta",
+      "getOpenCodeCodexPrompt",
+      "cachedContent",
+      "cachedMeta",
+      "metaContent",
+      "CACHE_TTL_MS",
+      "headers",
+      "response",
+      "content",
+      "etag",
+      "error",
+      "getCachedPromptPrefix",
+      "content"
+    ],
+    "complexity_score": 100
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "model-map.ts-invariant-f552f4c7",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/request/helpers/model-map.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: model-map.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 1 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.300Z",
+    "updated_at": "2026-01-30T05:26:52.300Z",
+    "hash": "3f0accf8020ab4aae04bf8ee20f00076749b54c92713adaa1415242e5157186b",
+    "dependencies": [],
+    "symbols": [
+      "MODEL_MAP",
+      "getNormalizedModel",
+      "lowerModelId",
+      "match",
+      "isKnownModel"
+    ],
+    "complexity_score": 48.3
+  }
+}

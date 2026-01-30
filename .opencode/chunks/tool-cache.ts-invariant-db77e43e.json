@@ -1,0 +1,34 @@
+{
+  "id": "tool-cache.ts-invariant-db77e43e",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/state/tool-cache.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: tool-cache.ts\n\n## Core Invariants\n\n\n## Constraints\n- **MAX_TOOL_CACHE_SIZE**: 1000\n\n/**\n * Sync tool parameters from OpenCode's session.messages() API.\n */\nexport async function syncToolCache(\n    state: SessionState,\n    config: PluginConfig,\n    logger: Logger,\n    messages: WithParts[],\n): Promise<void> {\n    try {\n        logger.info(\"Syncing tool parameters from OpenCode messages\")\n\n        state.nudgeCounter\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 1 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.173Z",
+    "updated_at": "2026-01-30T05:26:52.173Z",
+    "hash": "834d462e1e2b806693bf8f9cbdee82ac80f4c989d93e8f20cf13bab1878ce4d7",
+    "dependencies": [
+      "./index",
+      "../logger",
+      "../config",
+      "../shared-utils"
+    ],
+    "symbols": [
+      "MAX_TOOL_CACHE_SIZE",
+      "syncToolCache",
+      "turnCounter",
+      "msg",
+      "parts",
+      "part",
+      "turnProtectionEnabled",
+      "turnProtectionTurns",
+      "isProtectedByTurn",
+      "allProtectedTools",
+      "error",
+      "trimToolParametersCache",
+      "keysToRemove",
+      "key"
+    ],
+    "complexity_score": 100
+  }
+}

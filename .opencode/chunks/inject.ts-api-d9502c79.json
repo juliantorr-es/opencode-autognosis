@@ -1,0 +1,49 @@
+{
+  "id": "inject.ts-api-d9502c79",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/messages/inject.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: inject.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.155Z",
+    "updated_at": "2026-01-30T05:26:52.155Z",
+    "hash": "6fe37559dacd596a3dd32dad02c4e3bef74083ea4aed97ab91467b114bd0b594",
+    "dependencies": [
+      "../state",
+      "../logger",
+      "../config",
+      "@opencode-ai/sdk/v2",
+      "../prompts",
+      "./utils",
+      "../protected-file-patterns",
+      "../shared-utils"
+    ],
+    "symbols": [
+      "getNudgeString",
+      "discardEnabled",
+      "extractEnabled",
+      "wrapPrunableTools",
+      "getCooldownMessage",
+      "discardEnabled",
+      "extractEnabled",
+      "toolName",
+      "buildPrunableToolsList",
+      "lines",
+      "toolIdList",
+      "allProtectedTools",
+      "filePath",
+      "numericId",
+      "paramKey",
+      "description",
+      "insertPruneToolContext",
+      "prunableToolsContent",
+      "prunableToolsList",
+      "nudgeString",
+      "lastUserMessage",
+      "userInfo",
+      "variant",
+      "lastMessage",
+      "isLastMessageUser"
+    ],
+    "complexity_score": 100
+  }
+}

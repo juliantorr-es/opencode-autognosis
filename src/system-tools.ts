@@ -5,6 +5,7 @@ import * as fsSync from "node:fs";
 import * as path from "node:path";
 import { promisify } from "node:util";
 import * as crypto from "node:crypto";
+import { Logger } from "./services/logger.js";
 
 const execAsync = promisify(exec);
 const PROJECT_ROOT = process.cwd();
@@ -13,8 +14,7 @@ const CACHE_DIR = path.join(OPENCODE_DIR, "cache");
 
 // Internal logging
 function log(message: string, data?: unknown) {
-    // console.error is used here for internal debugging as standard console.log may interfere with tool outputs
-    console.error(`[Autognosis] ${message}`, data || '');
+    Logger.log("Autognosis", message, data);
 }
 
 // =============================================================================

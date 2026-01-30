@@ -1,0 +1,27 @@
+{
+  "id": "oauth.test.ts-summary-55f386b0",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/antigravity/oauth.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: oauth.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- bun:test\n- ./oauth\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 144\n- Estimated complexity: 57.4/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.187Z",
+    "updated_at": "2026-01-30T05:26:52.187Z",
+    "hash": "f358a4a7de1584f6cd3029561a56533b3dc6c24f4fce342a299a5f5d7ab674dc",
+    "dependencies": [
+      "bun:test",
+      "./oauth"
+    ],
+    "symbols": [
+      "mockFetch",
+      "originalFetch",
+      "result",
+      "result",
+      "result",
+      "callCount",
+      "result",
+      "paidResult",
+      "freeResult"
+    ],
+    "complexity_score": 57.4
+  }
+}

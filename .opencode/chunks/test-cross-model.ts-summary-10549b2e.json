@@ -1,0 +1,30 @@
+{
+  "id": "test-cross-model.ts-summary-10549b2e",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/script/test-cross-model.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: test-cross-model.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **runTests**: No documentation found\n\n\n\n\n## Dependencies\n- ../src/plugin/transform/cross-model-sanitizer\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 141\n- Estimated complexity: 82.1/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.861Z",
+    "updated_at": "2026-01-30T05:26:51.861Z",
+    "hash": "6ba6af045d81054dcead71f4736c9eb23fc122a3ed0051c2aa994ef95ae1e75b",
+    "dependencies": [
+      "../src/plugin/transform/cross-model-sanitizer"
+    ],
+    "symbols": [
+      "GEMINI_THOUGHT_SIGNATURE",
+      "geminiHistoryWithThinkingAndToolCall",
+      "runTests",
+      "passed",
+      "failed",
+      "geminiFamily",
+      "claudeFamily",
+      "result",
+      "payload",
+      "modelParts",
+      "thinkingPart",
+      "toolPart",
+      "sameFamily"
+    ],
+    "complexity_score": 82.1
+  }
+}

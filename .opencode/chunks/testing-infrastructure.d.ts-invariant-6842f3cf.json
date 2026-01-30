@@ -1,0 +1,16 @@
+{
+  "id": "testing-infrastructure.d.ts-invariant-6842f3cf",
+  "file_path": "/Users/user/opencode-autognosis/dist/testing-infrastructure.d.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: testing-infrastructure.d.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.848Z",
+    "updated_at": "2026-01-30T05:26:51.848Z",
+    "hash": "941481ffc7e43b5f02d716f811121c8ba654847dae9a48dfae0cbd27fa29ae58",
+    "dependencies": [],
+    "symbols": [
+      "testingTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

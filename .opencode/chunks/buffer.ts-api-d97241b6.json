@@ -1,0 +1,25 @@
+{
+  "id": "buffer.ts-api-d97241b6",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/buffer.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: buffer.ts\n\n## Public Functions\n\n\n## Classes\n\n### RingBuffer\n```typescript\nexport class RingBuffer\n```\nNo documentation found\n\n**Methods:**\n- `append`: append(data: string): void\n- `read`: read(offset: number = 0, limit?: number): string[]\n- `search`: search(pattern: RegExp): SearchMatch[]\n- `clear`: clear(): void\n\n\n**Properties:**\n- `lines`: string[]\n- `maxLines`: number\n\n\n\n## Interfaces\n\n### SearchMatch\n```typescript\nexport interface SearchMatch\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.340Z",
+    "updated_at": "2026-01-30T05:26:52.340Z",
+    "hash": "0592451f70c37f861b1d4e964caf41ba9d61a37592b0d97b2655ea712c66ffa5",
+    "dependencies": [],
+    "symbols": [
+      "DEFAULT_MAX_LINES",
+      "SearchMatch",
+      "RingBuffer",
+      "newLines",
+      "line",
+      "start",
+      "end",
+      "matches",
+      "i",
+      "line"
+    ],
+    "complexity_score": 41.1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "auth.ts-api-2d0283b1",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/auth.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: auth.ts\n\n## Public Functions\n\n### isOAuthAuth\n```typescript\nexport function isOAuthAuth(auth: AuthDetails): auth is OAuthAuthDetails\n```\nNo documentation found\n\n**Parameters:**\n- `auth`: AuthDetails - \n\n**Returns:** auth is OAuthAuthDetails\n\n\n### parseRefreshParts\n```typescript\nexport function parseRefreshParts(refresh: string): RefreshParts\n```\nSplits a packed refresh string into its constituent refresh token and project IDs.\n\n**Parameters:**\n- `refresh`: string - \n\n**Returns:** RefreshParts\n\n\n### formatRefreshParts\n```typescript\nexport function formatRefreshParts(parts: RefreshParts): string\n```\nSerializes refresh token parts into the stored string format.\n\n**Parameters:**\n- `parts`: RefreshParts - \n\n**Returns:** string\n\n\n### accessTokenExpired\n```typescript\nexport function accessTokenExpired(auth: OAuthAuthDetails): boolean\n```\nDetermines whether an access token is expired or missing, with buffer for clock skew.\n\n**Parameters:**\n- `auth`: OAuthAuthDetails - \n\n**Returns:** boolean\n\n\n### calculateTokenExpiry\n```typescript\nexport function calculateTokenExpiry(requestTimeMs: number, expiresInSeconds: unknown): number\n```\nCalculates absolute expiry timestamp based on a duration.\n\n**Parameters:**\n- `requestTimeMs`: number - \n- `expiresInSeconds`: unknown - \n\n**Returns:** number\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.919Z",
+    "updated_at": "2026-01-30T05:26:51.919Z",
+    "hash": "576c33fb9271b69864b509f7d6695792a17c8f65558191ea0a466f4c2c771d54",
+    "dependencies": [
+      "./types"
+    ],
+    "symbols": [
+      "ACCESS_TOKEN_EXPIRY_BUFFER_MS",
+      "isOAuthAuth",
+      "parseRefreshParts",
+      "formatRefreshParts",
+      "projectSegment",
+      "base",
+      "accessTokenExpired",
+      "calculateTokenExpiry",
+      "seconds"
+    ],
+    "complexity_score": 38.3
+  }
+}

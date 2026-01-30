@@ -1,0 +1,36 @@
+{
+  "id": "refresh-queue.ts-invariant-6ce73645",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/refresh-queue.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: refresh-queue.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nDetected patterns: Class component state\n\n## Error Handling\nError handling metrics: 3 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.983Z",
+    "updated_at": "2026-01-30T05:26:51.983Z",
+    "hash": "99ee83a2e1d9c50f64b3ddeecbcee03fbe6887519618e70763606abecffa0cc6",
+    "dependencies": [
+      "./accounts",
+      "./types",
+      "./token",
+      "./logger"
+    ],
+    "symbols": [
+      "log",
+      "ProactiveRefreshConfig",
+      "DEFAULT_PROACTIVE_REFRESH_CONFIG",
+      "RefreshQueueState",
+      "ProactiveRefreshQueue",
+      "now",
+      "bufferMs",
+      "refreshThreshold",
+      "accountsToRefresh",
+      "account",
+      "auth",
+      "refreshed",
+      "error",
+      "minutesUntilExpiry",
+      "intervalMs",
+      "createProactiveRefreshQueue"
+    ],
+    "complexity_score": 100
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "model-map.ts-api-f552f4c7",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/request/helpers/model-map.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: model-map.ts\n\n## Public Functions\n\n### getNormalizedModel\n```typescript\nexport function getNormalizedModel(modelId: string): string | undefined\n```\nGet normalized model name from config ID\n\n**Parameters:**\n- `modelId`: string - \n\n**Returns:** string | undefined\n\n\n### isKnownModel\n```typescript\nexport function isKnownModel(modelId: string): boolean\n```\nCheck if a model ID is in the model map\n\n**Parameters:**\n- `modelId`: string - \n\n**Returns:** boolean\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.300Z",
+    "updated_at": "2026-01-30T05:26:52.300Z",
+    "hash": "bcde7693160f2ed3cb4e12355ea355bcc15cee5858ad0fda2323b8c6a3c7d833",
+    "dependencies": [],
+    "symbols": [
+      "MODEL_MAP",
+      "getNormalizedModel",
+      "lowerModelId",
+      "match",
+      "isKnownModel"
+    ],
+    "complexity_score": 48.3
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "utils.ts-summary-f82f72b3",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/state/utils.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: utils.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **isSubAgentSession**: No documentation found\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- isSubAgentSession\n\n## Complexity Metrics\n- Lines of code: 9\n- Estimated complexity: 21.9/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.174Z",
+    "updated_at": "2026-01-30T05:26:52.174Z",
+    "hash": "ec076475d613320da31aa10527a3b20eced375527eadf4a844376b99bd94d6a2",
+    "dependencies": [],
+    "symbols": [
+      "isSubAgentSession",
+      "result",
+      "error"
+    ],
+    "complexity_score": 21.9
+  }
+}

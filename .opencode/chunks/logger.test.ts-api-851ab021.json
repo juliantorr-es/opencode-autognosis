@@ -1,0 +1,19 @@
+{
+  "id": "logger.test.ts-api-851ab021",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/test/logger.test.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: logger.test.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.322Z",
+    "updated_at": "2026-01-30T05:26:52.322Z",
+    "hash": "c3ecfb913d0b2d2a52acb24b34e086f513e64e01e75d6003ad1de6f13f04fd50",
+    "dependencies": [
+      "vitest",
+      "../lib/logger.js"
+    ],
+    "symbols": [
+      "isEnabled"
+    ],
+    "complexity_score": 14.4
+  }
+}

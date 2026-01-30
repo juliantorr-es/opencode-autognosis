@@ -1,0 +1,16 @@
+{
+  "id": "performance-optimization.d.ts-api-d83a4d85",
+  "file_path": "/Users/user/opencode-autognosis/dist/performance-optimization.d.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: performance-optimization.d.ts\n\n## Public Functions\n\n### performanceTools\n```typescript\nexport declare function performanceTools():\n```\nNo documentation found\n\n**Returns:** {\n    [key: string]: any;\n}\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.827Z",
+    "updated_at": "2026-01-30T05:26:51.827Z",
+    "hash": "36166be62f814cd61d20cbfa2976305741f38b3964ac14a0eb5159ed41839a14",
+    "dependencies": [],
+    "symbols": [
+      "performanceTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

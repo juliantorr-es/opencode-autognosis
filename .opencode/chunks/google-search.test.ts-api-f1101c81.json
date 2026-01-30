@@ -1,0 +1,38 @@
+{
+  "id": "google-search.test.ts-api-f1101c81",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/tests/integration/google-search.test.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: google-search.test.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.274Z",
+    "updated_at": "2026-01-30T05:26:52.274Z",
+    "hash": "9d72b9f964bc26af6472626c13e58b97715d2b371fe8b92d13621f52657771aa",
+    "dependencies": [
+      "bun:test",
+      "./setup"
+    ],
+    "symbols": [
+      "itSkipInCI",
+      "ctx",
+      "sessionId",
+      "response",
+      "assistantText",
+      "response",
+      "assistantText",
+      "sessionId",
+      "response",
+      "assistantText",
+      "sessionId",
+      "response",
+      "assistantText",
+      "response",
+      "assistantText",
+      "sessionId",
+      "response",
+      "assistantText",
+      "response",
+      "assistantText"
+    ],
+    "complexity_score": 100
+  }
+}

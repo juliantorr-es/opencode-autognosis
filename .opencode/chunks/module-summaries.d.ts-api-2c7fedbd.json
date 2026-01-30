@@ -1,0 +1,16 @@
+{
+  "id": "module-summaries.d.ts-api-2c7fedbd",
+  "file_path": "/Users/user/opencode-autognosis/dist/module-summaries.d.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: module-summaries.d.ts\n\n## Public Functions\n\n### moduleSummariesTools\n```typescript\nexport declare function moduleSummariesTools():\n```\nNo documentation found\n\n**Returns:** {\n    [key: string]: any;\n}\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.819Z",
+    "updated_at": "2026-01-30T05:26:51.819Z",
+    "hash": "ccc2e12373846435082b99c1e3b970247065277e5169df71ee8ffa1d19b75f54",
+    "dependencies": [],
+    "symbols": [
+      "moduleSummariesTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

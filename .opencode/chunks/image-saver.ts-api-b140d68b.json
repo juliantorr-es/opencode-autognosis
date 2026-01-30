@@ -1,0 +1,36 @@
+{
+  "id": "image-saver.ts-api-b140d68b",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/image-saver.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: image-saver.ts\n\n## Public Functions\n\n### saveImageToDisk\n```typescript\nexport function saveImageToDisk(base64Data: string, mimeType: string): string\n```\nSave base64 image data to disk and return the file path.\n\n**Parameters:**\n- `base64Data`: string - \n- `mimeType`: string - \n\n**Returns:** string\n\n\n### processImageData\n```typescript\nexport function processImageData(inlineData:\n```\nProcess inlineData and return either a file path or base64 data URL.\nAttempts to save to disk first, falls back to base64 if saving fails.\n\n**Parameters:**\n- `inlineData`: { mimeType?: string; data?: string } - \n\n**Returns:** string | null\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.954Z",
+    "updated_at": "2026-01-30T05:26:51.954Z",
+    "hash": "2f38287eb013f1a0ddbcc8d7bbe126567ae047ef6625b93e5d87b971c78ca85f",
+    "dependencies": [
+      "fs",
+      "path",
+      "os"
+    ],
+    "symbols": [
+      "getImageOutputDir",
+      "homeDir",
+      "outputDir",
+      "generateImageFilename",
+      "timestamp",
+      "random",
+      "ext",
+      "saveImageToDisk",
+      "outputDir",
+      "filename",
+      "filePath",
+      "buffer",
+      "error",
+      "processImageData",
+      "mimeType",
+      "data",
+      "filePath"
+    ],
+    "complexity_score": 72.8
+  }
+}

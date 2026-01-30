@@ -1,0 +1,38 @@
+{
+  "id": "read.ts-api-be37e2b5",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/tools/read.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: read.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.347Z",
+    "updated_at": "2026-01-30T05:26:52.347Z",
+    "hash": "fb8ed3312ecda323d80e91757630831d531fc7313eb16b69f411ab687ad4c1dc",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "../manager.ts",
+      "./read.txt"
+    ],
+    "symbols": [
+      "DEFAULT_LIMIT",
+      "MAX_LINE_LENGTH",
+      "ptyRead",
+      "session",
+      "offset",
+      "limit",
+      "regex",
+      "e",
+      "error",
+      "result",
+      "formattedLines",
+      "lineNum",
+      "truncatedLine",
+      "output",
+      "result",
+      "formattedLines",
+      "lineNum",
+      "truncatedLine",
+      "output"
+    ],
+    "complexity_score": 75.8
+  }
+}

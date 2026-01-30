@@ -1,0 +1,35 @@
+{
+  "id": "logger.ts-api-6869f7d8",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/logger.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: logger.ts\n\n## Public Functions\n\n### initLogger\n```typescript\nexport function initLogger(client: PluginClient): void\n```\nInitialize the logger with the plugin client.\nMust be called during plugin initialization to enable TUI logging.\n\n**Parameters:**\n- `client`: PluginClient - \n\n**Returns:** void\n\n\n### getLoggerClient\n```typescript\nexport function getLoggerClient(): PluginClient | null\n```\nGet the current client (for testing or advanced usage).\n\n**Returns:** PluginClient | null\n\n\n### createLogger\n```typescript\nexport function createLogger(module: string): Logger\n```\nCreate a logger instance for a specific module.\n\n**Parameters:**\n- `module`: string - \n\n**Returns:** Logger\n\n\n### printAntigravityConsole\n```typescript\nexport function printAntigravityConsole(\n  level: LogLevel,\n  message: string,\n  extra?: unknown,\n): void\n```\nPrint a message to the console with Antigravity prefix.\nOnly outputs when OPENCODE_ANTIGRAVITY_CONSOLE_LOG=1 is set.\n\nUse this for standalone messages that don't belong to a specific module.\n\n**Parameters:**\n- `level`: LogLevel - \n- `message`: string - \n- `extra`: unknown - \n\n**Returns:** void\n\n\n## Classes\n\n\n## Interfaces\n\n### Logger\n```typescript\nexport interface Logger\n```\nNo documentation found\n\n\n## Types\n\n### LogLevel\n```typescript\ntype LogLevel\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.956Z",
+    "updated_at": "2026-01-30T05:26:51.956Z",
+    "hash": "b2240b1e24bf031dfd87b321b6a206546d2c5a2c6e5d4d25512e1e884e1abc6c",
+    "dependencies": [
+      "./types"
+    ],
+    "symbols": [
+      "LogLevel",
+      "ENV_CONSOLE_LOG",
+      "ANTIGRAVITY_CONSOLE_PREFIX",
+      "Logger",
+      "_client",
+      "isConsoleLogEnabled",
+      "val",
+      "initLogger",
+      "getLoggerClient",
+      "createLogger",
+      "service",
+      "log",
+      "app",
+      "prefix",
+      "args",
+      "printAntigravityConsole",
+      "prefixedMessage",
+      "args"
+    ],
+    "complexity_score": 100
+  }
+}

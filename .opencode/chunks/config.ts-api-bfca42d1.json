@@ -1,0 +1,27 @@
+{
+  "id": "config.ts-api-bfca42d1",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/config.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: config.ts\n\n## Public Functions\n\n### loadPluginConfig\n```typescript\nexport function loadPluginConfig(): PluginConfig\n```\nLoad plugin configuration from ~/.opencode/openai-codex-auth-config.json\nFalls back to defaults if file doesn't exist or is invalid\n\n**Returns:** PluginConfig\n\n\n### getCodexMode\n```typescript\nexport function getCodexMode(pluginConfig: PluginConfig): boolean\n```\nGet the effective CODEX_MODE setting\nPriority: environment variable > config file > default (true)\n\n**Parameters:**\n- `pluginConfig`: PluginConfig - \n\n**Returns:** boolean\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.285Z",
+    "updated_at": "2026-01-30T05:26:52.285Z",
+    "hash": "877c072fadc50227c1e59d66f1104c345fe5c574a997a9d6f228838c9cba280a",
+    "dependencies": [
+      "node:fs",
+      "node:path",
+      "node:os",
+      "./types.js"
+    ],
+    "symbols": [
+      "CONFIG_PATH",
+      "DEFAULT_CONFIG",
+      "loadPluginConfig",
+      "fileContent",
+      "userConfig",
+      "error",
+      "getCodexMode"
+    ],
+    "complexity_score": 42.1
+  }
+}

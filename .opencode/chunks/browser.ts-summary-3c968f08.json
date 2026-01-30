@@ -1,0 +1,18 @@
+{
+  "id": "browser.ts-summary-3c968f08",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/browser.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: browser.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **openBrowser**: No documentation found\n\n\n\n\n## Dependencies\n- open\n\n## Exports\n- openBrowser\n\n## Complexity Metrics\n- Lines of code: 6\n- Estimated complexity: 4.6/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.198Z",
+    "updated_at": "2026-01-30T05:26:52.198Z",
+    "hash": "3295e7f852faeac82d4badd4658dfb5051ef24498f913c765c93ebe855dd8632",
+    "dependencies": [
+      "open"
+    ],
+    "symbols": [
+      "openBrowser"
+    ],
+    "complexity_score": 4.6
+  }
+}

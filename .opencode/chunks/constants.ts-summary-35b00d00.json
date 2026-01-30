@@ -1,0 +1,37 @@
+{
+  "id": "constants.ts-summary-35b00d00",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/constants.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: constants.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- ANTIGRAVITY_CLIENT_ID\n- ANTIGRAVITY_CLIENT_SECRET\n- ANTIGRAVITY_SCOPES\n- ANTIGRAVITY_REDIRECT_URI\n- ANTIGRAVITY_ENDPOINT_DAILY\n- ANTIGRAVITY_ENDPOINT_AUTOPUSH\n- ANTIGRAVITY_ENDPOINT_PROD\n- ANTIGRAVITY_ENDPOINT_FALLBACKS\n- ANTIGRAVITY_LOAD_ENDPOINTS\n- ANTIGRAVITY_ENDPOINT\n- GEMINI_CLI_ENDPOINT\n- ANTIGRAVITY_DEFAULT_PROJECT_ID\n- ANTIGRAVITY_HEADERS\n- GEMINI_CLI_HEADERS\n- HeaderStyle\n- ANTIGRAVITY_PROVIDER_ID\n- CLAUDE_TOOL_SYSTEM_INSTRUCTION\n- CLAUDE_DESCRIPTION_PROMPT\n- EMPTY_SCHEMA_PLACEHOLDER_NAME\n- EMPTY_SCHEMA_PLACEHOLDER_DESCRIPTION\n- SKIP_THOUGHT_SIGNATURE\n- ANTIGRAVITY_SYSTEM_INSTRUCTION\n\n## Complexity Metrics\n- Lines of code: 157\n- Estimated complexity: 84.7/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.880Z",
+    "updated_at": "2026-01-30T05:26:51.880Z",
+    "hash": "c99c68974e18d2fb0e3fdda9cee2a142c73315540488b4e13fa52a00f6567c29",
+    "dependencies": [],
+    "symbols": [
+      "ANTIGRAVITY_CLIENT_ID",
+      "ANTIGRAVITY_CLIENT_SECRET",
+      "ANTIGRAVITY_SCOPES",
+      "ANTIGRAVITY_REDIRECT_URI",
+      "ANTIGRAVITY_ENDPOINT_DAILY",
+      "ANTIGRAVITY_ENDPOINT_AUTOPUSH",
+      "ANTIGRAVITY_ENDPOINT_PROD",
+      "ANTIGRAVITY_ENDPOINT_FALLBACKS",
+      "ANTIGRAVITY_LOAD_ENDPOINTS",
+      "ANTIGRAVITY_ENDPOINT",
+      "GEMINI_CLI_ENDPOINT",
+      "ANTIGRAVITY_DEFAULT_PROJECT_ID",
+      "ANTIGRAVITY_HEADERS",
+      "GEMINI_CLI_HEADERS",
+      "HeaderStyle",
+      "ANTIGRAVITY_PROVIDER_ID",
+      "CLAUDE_TOOL_SYSTEM_INSTRUCTION",
+      "CLAUDE_DESCRIPTION_PROMPT",
+      "EMPTY_SCHEMA_PLACEHOLDER_NAME",
+      "EMPTY_SCHEMA_PLACEHOLDER_DESCRIPTION",
+      "SKIP_THOUGHT_SIGNATURE",
+      "ANTIGRAVITY_SYSTEM_INSTRUCTION"
+    ],
+    "complexity_score": 84.7
+  }
+}

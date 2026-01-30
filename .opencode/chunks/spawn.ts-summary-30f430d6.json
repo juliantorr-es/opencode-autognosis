@@ -1,0 +1,24 @@
+{
+  "id": "spawn.ts-summary-30f430d6",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/tools/spawn.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: spawn.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- @opencode-ai/plugin\n- ../manager.ts\n- ../permissions.ts\n- ./spawn.txt\n\n## Exports\n- ptySpawn\n\n## Complexity Metrics\n- Lines of code: 50\n- Estimated complexity: 37/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.348Z",
+    "updated_at": "2026-01-30T05:26:52.348Z",
+    "hash": "f06afee964a9c45431e37ae05b54507b8188eb57a3377cc820d0855cd4a504a6",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "../manager.ts",
+      "../permissions.ts",
+      "./spawn.txt"
+    ],
+    "symbols": [
+      "ptySpawn",
+      "sessionId",
+      "info",
+      "output"
+    ],
+    "complexity_score": 37
+  }
+}

@@ -5,6 +5,7 @@ import * as fsSync from "node:fs";
 import * as path from "node:path";
 import { promisify } from "node:util";
 import * as crypto from "node:crypto";
+import { Logger } from "./services/logger.js";
 
 const execAsync = promisify(exec);
 const PROJECT_ROOT = process.cwd();
@@ -13,7 +14,7 @@ const WORKTREE_DIR = path.join(OPENCODE_DIR, "worktrees");
 
 // Internal logging
 function log(message: string, data?: unknown) {
-    console.error(`[GitWorktree] ${message}`, data || '');
+    Logger.log("GitWorktree", message, data);
 }
 
 // =============================================================================
@@ -228,8 +229,8 @@ export function gitWorktreeTools(): { [key: string]: any } {
                     }
                     
                     // Create initial commit if needed
-                    const { stdout: log } = await runCmd("git log --oneline -1");
-                    if (!log || log.includes("Initial commit")) {
+                    const { stdout: gitLog } = await runCmd("git log --oneline -1");
+                    if (!gitLog || gitLog.includes("Initial commit")) {
                         await runCmd(`git commit --allow-empty -m "${message}"`);
                     }
                     
@@ -242,7 +243,7 @@ export function gitWorktreeTools(): { [key: string]: any } {
                         if (fsSync.existsSync(worktreePath)) {
                             const { error: removeError } = await runCmd(`git worktree remove ${worktreePath}`);
                             if (removeError) {
-                                console.error("[GitWorktree] Warning: Failed to remove existing worktree", removeError);
+                                log("Warning: Failed to remove existing worktree", removeError);
                             }
                         }
                         

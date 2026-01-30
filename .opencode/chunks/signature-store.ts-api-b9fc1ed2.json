@@ -1,0 +1,22 @@
+{
+  "id": "signature-store.ts-api-b9fc1ed2",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/stores/signature-store.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: signature-store.ts\n\n## Public Functions\n\n### createSignatureStore\n```typescript\nexport function createSignatureStore(): SignatureStore\n```\nNo documentation found\n\n**Returns:** SignatureStore\n\n\n### createThoughtBuffer\n```typescript\nexport function createThoughtBuffer(): ThoughtBuffer\n```\nNo documentation found\n\n**Returns:** ThoughtBuffer\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.065Z",
+    "updated_at": "2026-01-30T05:26:52.065Z",
+    "hash": "1b58a0055a575c41b6979f46d7e549912fe24b6c30eabcdb86808e2d3be636ec",
+    "dependencies": [
+      "../core/streaming/types"
+    ],
+    "symbols": [
+      "createSignatureStore",
+      "store",
+      "createThoughtBuffer",
+      "buffer",
+      "defaultSignatureStore"
+    ],
+    "complexity_score": 15.1
+  }
+}

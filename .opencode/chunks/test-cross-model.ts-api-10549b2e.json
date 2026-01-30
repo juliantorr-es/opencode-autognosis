@@ -1,0 +1,30 @@
+{
+  "id": "test-cross-model.ts-api-10549b2e",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/script/test-cross-model.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: test-cross-model.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.862Z",
+    "updated_at": "2026-01-30T05:26:51.862Z",
+    "hash": "22a6383ccb4eee21d0fc1349ad1fb64f8e862ac03028e56329351646ed4fda11",
+    "dependencies": [
+      "../src/plugin/transform/cross-model-sanitizer"
+    ],
+    "symbols": [
+      "GEMINI_THOUGHT_SIGNATURE",
+      "geminiHistoryWithThinkingAndToolCall",
+      "runTests",
+      "passed",
+      "failed",
+      "geminiFamily",
+      "claudeFamily",
+      "result",
+      "payload",
+      "modelParts",
+      "thinkingPart",
+      "toolPart",
+      "sameFamily"
+    ],
+    "complexity_score": 82.1
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "plugin.ts-summary-783b2952",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: plugin.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- ./plugin/logger.ts\n- ./plugin/types.ts\n- ./plugin/pty/manager.ts\n- ./plugin/pty/permissions.ts\n- ./plugin/pty/tools/spawn.ts\n- ./plugin/pty/tools/write.ts\n- ./plugin/pty/tools/read.ts\n- ./plugin/pty/tools/list.ts\n- ./plugin/pty/tools/kill.ts\n\n## Exports\n- PTYPlugin\n\n## Complexity Metrics\n- Lines of code: 44\n- Estimated complexity: 44.4/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.353Z",
+    "updated_at": "2026-01-30T05:26:52.353Z",
+    "hash": "57c6396856ed24277c97df01144e39f0bac652c1b1ebc13b1044a94c0fe6439a",
+    "dependencies": [
+      "./plugin/logger.ts",
+      "./plugin/types.ts",
+      "./plugin/pty/manager.ts",
+      "./plugin/pty/permissions.ts",
+      "./plugin/pty/tools/spawn.ts",
+      "./plugin/pty/tools/write.ts",
+      "./plugin/pty/tools/read.ts",
+      "./plugin/pty/tools/list.ts",
+      "./plugin/pty/tools/kill.ts"
+    ],
+    "symbols": [
+      "log",
+      "PTYPlugin",
+      "sessionId"
+    ],
+    "complexity_score": 44.4
+  }
+}

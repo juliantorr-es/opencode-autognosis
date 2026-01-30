@@ -1,0 +1,34 @@
+{
+  "id": "debug.ts-api-a3dcd82d",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/debug.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: debug.ts\n\n## Public Functions\n\n### startAntigravityDebugRequest\n```typescript\nexport function startAntigravityDebugRequest(meta: AntigravityDebugRequestMeta): AntigravityDebugContext | null\n```\nNo documentation found\n\n**Parameters:**\n- `meta`: AntigravityDebugRequestMeta - \n\n**Returns:** AntigravityDebugContext | null\n\n\n### logAntigravityDebugResponse\n```typescript\nexport function logAntigravityDebugResponse(\n  context: AntigravityDebugContext | null | undefined,\n  response: Response,\n  meta: AntigravityDebugResponseMeta =\n```\nNo documentation found\n\n**Parameters:**\n- `context`: AntigravityDebugContext | null | undefined - \n- `response`: Response - \n- `meta`: AntigravityDebugResponseMeta - \n\n**Returns:** void\n\n\n## Classes\n\n\n## Interfaces\n\n### AntigravityDebugContext\n```typescript\nexport interface AntigravityDebugContext\n```\nNo documentation found\n\n\n### AntigravityDebugRequestMeta\n```typescript\ninterface AntigravityDebugRequestMeta\n```\nNo documentation found\n\n\n### AntigravityDebugResponseMeta\n```typescript\ninterface AntigravityDebugResponseMeta\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.201Z",
+    "updated_at": "2026-01-30T05:26:52.201Z",
+    "hash": "14c696a5c481e26e7b4795f7b10dec66b018aa8d53e845ed7541f3422f28fe56",
+    "dependencies": [
+      "./logger"
+    ],
+    "symbols": [
+      "MAX_BODY_PREVIEW_CHARS",
+      "log",
+      "AntigravityDebugContext",
+      "AntigravityDebugRequestMeta",
+      "AntigravityDebugResponseMeta",
+      "requestCounter",
+      "startAntigravityDebugRequest",
+      "id",
+      "method",
+      "logAntigravityDebugResponse",
+      "durationMs",
+      "maskHeaders",
+      "result",
+      "parsed",
+      "formatBodyPreview",
+      "truncateForLog",
+      "formatError"
+    ],
+    "complexity_score": 79.6
+  }
+}

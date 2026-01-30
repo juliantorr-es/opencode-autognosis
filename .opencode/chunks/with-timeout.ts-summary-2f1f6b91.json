@@ -1,0 +1,18 @@
+{
+  "id": "with-timeout.ts-summary-2f1f6b91",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/with-timeout.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: with-timeout.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **withTimeout**: Wraps a promise with a timeout.\n\nUses Promise.race to implement timeout semantics. If the wrapped promise\ndoesn't resolve within the specified time, throws a TimeoutError.\n\n**Important:** This does NOT abort the underlying promise - it continues\nrunning in the background. Use AbortController for true cancellation.\n\n\n\n### Classes (1)\n- **TimeoutError**: Promise timeout utility for kdco registry plugins.\n\nProvides a clean wrapper around Promise.race for timeout handling,\nreplacing inline timeout patterns throughout the codebase.\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- TimeoutError\n- withTimeout\n\n## Complexity Metrics\n- Lines of code: 85\n- Estimated complexity: 56.5/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.383Z",
+    "updated_at": "2026-01-30T05:26:52.383Z",
+    "hash": "f014231c3972b1a6c66a2a802b1b4fa85c164fb359ff2ef2e434181ea213d68c",
+    "dependencies": [],
+    "symbols": [
+      "TimeoutError",
+      "withTimeout",
+      "timeoutId"
+    ],
+    "complexity_score": 56.5
+  }
+}

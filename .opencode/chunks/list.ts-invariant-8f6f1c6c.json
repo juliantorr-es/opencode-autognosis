@@ -1,0 +1,24 @@
+{
+  "id": "list.ts-invariant-8f6f1c6c",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/tools/list.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: list.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.346Z",
+    "updated_at": "2026-01-30T05:26:52.346Z",
+    "hash": "cd96da45074fbf70ca88dc1a9c201bf4404db83e7578e7fb8189633828f529e6",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "../manager.ts",
+      "./list.txt"
+    ],
+    "symbols": [
+      "ptyList",
+      "sessions",
+      "lines",
+      "session",
+      "exitInfo"
+    ],
+    "complexity_score": 25.1
+  }
+}

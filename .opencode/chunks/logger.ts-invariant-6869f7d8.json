@@ -1,0 +1,35 @@
+{
+  "id": "logger.ts-invariant-6869f7d8",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/logger.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: logger.ts\n\n## Core Invariants\n\n\n## Constraints\n- **ENV_CONSOLE_LOG**: \"OPENCODE_ANTIGRAVITY_CONSOLE_LOG\"\n- **ANTIGRAVITY_CONSOLE_PREFIX**: \"[Antigravity]\"\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.956Z",
+    "updated_at": "2026-01-30T05:26:51.956Z",
+    "hash": "07a801c389771ec8a1ebe7d6a2187cbe2104e757943899100313f2b9395b1697",
+    "dependencies": [
+      "./types"
+    ],
+    "symbols": [
+      "LogLevel",
+      "ENV_CONSOLE_LOG",
+      "ANTIGRAVITY_CONSOLE_PREFIX",
+      "Logger",
+      "_client",
+      "isConsoleLogEnabled",
+      "val",
+      "initLogger",
+      "getLoggerClient",
+      "createLogger",
+      "service",
+      "log",
+      "app",
+      "prefix",
+      "args",
+      "printAntigravityConsole",
+      "prefixedMessage",
+      "args"
+    ],
+    "complexity_score": 100
+  }
+}

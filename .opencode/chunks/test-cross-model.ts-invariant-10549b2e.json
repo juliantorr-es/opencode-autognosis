@@ -1,0 +1,30 @@
+{
+  "id": "test-cross-model.ts-invariant-10549b2e",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/script/test-cross-model.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: test-cross-model.ts\n\n## Core Invariants\n\n\n## Constraints\n- **GEMINI_THOUGHT_SIGNATURE**: 'EsgQCsUQAXLI2nybuafAE150LGTo2r78fakesig123abc456def789'\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.862Z",
+    "updated_at": "2026-01-30T05:26:51.862Z",
+    "hash": "46764e6eaacf445b436ff7fe865391f7c7d5d2fa3f53c0a6f5818999ea3630a8",
+    "dependencies": [
+      "../src/plugin/transform/cross-model-sanitizer"
+    ],
+    "symbols": [
+      "GEMINI_THOUGHT_SIGNATURE",
+      "geminiHistoryWithThinkingAndToolCall",
+      "runTests",
+      "passed",
+      "failed",
+      "geminiFamily",
+      "claudeFamily",
+      "result",
+      "payload",
+      "modelParts",
+      "thinkingPart",
+      "toolPart",
+      "sameFamily"
+    ],
+    "complexity_score": 82.1
+  }
+}

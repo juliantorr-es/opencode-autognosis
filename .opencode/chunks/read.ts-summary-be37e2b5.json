@@ -1,0 +1,38 @@
+{
+  "id": "read.ts-summary-be37e2b5",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/tools/read.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: read.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- @opencode-ai/plugin\n- ../manager.ts\n- ./read.txt\n\n## Exports\n- ptyRead\n\n## Complexity Metrics\n- Lines of code: 108\n- Estimated complexity: 75.8/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.347Z",
+    "updated_at": "2026-01-30T05:26:52.347Z",
+    "hash": "9a8ece0acb9dee78a921eac5718f601acffd446113537d609d95be6039be4cf6",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "../manager.ts",
+      "./read.txt"
+    ],
+    "symbols": [
+      "DEFAULT_LIMIT",
+      "MAX_LINE_LENGTH",
+      "ptyRead",
+      "session",
+      "offset",
+      "limit",
+      "regex",
+      "e",
+      "error",
+      "result",
+      "formattedLines",
+      "lineNum",
+      "truncatedLine",
+      "output",
+      "result",
+      "formattedLines",
+      "lineNum",
+      "truncatedLine",
+      "output"
+    ],
+    "complexity_score": 75.8
+  }
+}

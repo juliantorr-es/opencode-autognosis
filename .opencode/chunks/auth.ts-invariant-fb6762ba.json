@@ -1,0 +1,47 @@
+{
+  "id": "auth.ts-invariant-fb6762ba",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/auth/auth.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: auth.ts\n\n## Core Invariants\n\n\n## Constraints\n- **CLIENT_ID**: \"app_EMoamEEZ73f0CkXaXp7hrann\"\n- **AUTHORIZE_URL**: \"https://auth.openai.com/oauth/authorize\"\n- **TOKEN_URL**: \"https://auth.openai.com/oauth/token\"\n- **REDIRECT_URI**: \"http://localhost:1455/auth/callback\"\n- **SCOPE**: \"openid profile email offline_access\"\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 3 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.281Z",
+    "updated_at": "2026-01-30T05:26:52.281Z",
+    "hash": "9c6b67f70b41e5145fc16b8e6c9a54bf1b28ee5720ac2c0fd3a4e3e679025580",
+    "dependencies": [
+      "@openauthjs/openauth/pkce",
+      "node:crypto",
+      "../types.js"
+    ],
+    "symbols": [
+      "CLIENT_ID",
+      "AUTHORIZE_URL",
+      "TOKEN_URL",
+      "REDIRECT_URI",
+      "SCOPE",
+      "createState",
+      "parseAuthorizationInput",
+      "value",
+      "url",
+      "params",
+      "exchangeAuthorizationCode",
+      "res",
+      "text",
+      "json",
+      "decodeJWT",
+      "parts",
+      "payload",
+      "decoded",
+      "refreshAccessToken",
+      "response",
+      "text",
+      "json",
+      "error",
+      "err",
+      "createAuthorizationFlow",
+      "pkce",
+      "state",
+      "url"
+    ],
+    "complexity_score": 100
+  }
+}

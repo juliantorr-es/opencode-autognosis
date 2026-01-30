@@ -3,6 +3,7 @@ import * as fs from "node:fs/promises";
 import * as fsSync from "node:fs";
 import * as path from "node:path";
 import * as crypto from "node:crypto";
+import { Logger } from "./services/logger.js";
 
 const PROJECT_ROOT = process.cwd();
 const OPENCODE_DIR = path.join(PROJECT_ROOT, ".opencode");
@@ -11,7 +12,7 @@ const MODULE_DIR = path.join(OPENCODE_DIR, "modules");
 
 // Internal logging
 function log(message: string, data?: unknown) {
-  console.error(`[ModuleSummaries] ${message}`, data || '');
+  Logger.log("ModuleSummaries", message, data);
 }
 
 // =============================================================================

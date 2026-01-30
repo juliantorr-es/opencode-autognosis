@@ -1,0 +1,20 @@
+{
+  "id": "types.ts-api-304b6e1a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/hooks/auto-update-checker/types.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: types.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n### NpmDistTags\n```typescript\nexport interface NpmDistTags\n```\nNo documentation found\n\n\n### OpencodeConfig\n```typescript\nexport interface OpencodeConfig\n```\nNo documentation found\n\n\n### PackageJson\n```typescript\nexport interface PackageJson\n```\nNo documentation found\n\n\n### UpdateCheckResult\n```typescript\nexport interface UpdateCheckResult\n```\nNo documentation found\n\n\n### AutoUpdateCheckerOptions\n```typescript\nexport interface AutoUpdateCheckerOptions\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.894Z",
+    "updated_at": "2026-01-30T05:26:51.894Z",
+    "hash": "2d895ac0945c2a77789b36dc42b2d152b5c85cd395a4a309bfdcfcc3cbdc61ae",
+    "dependencies": [],
+    "symbols": [
+      "NpmDistTags",
+      "OpencodeConfig",
+      "PackageJson",
+      "UpdateCheckResult",
+      "AutoUpdateCheckerOptions"
+    ],
+    "complexity_score": 6.9
+  }
+}

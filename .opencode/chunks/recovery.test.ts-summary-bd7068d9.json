@@ -1,0 +1,35 @@
+{
+  "id": "recovery.test.ts-summary-bd7068d9",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/recovery.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: recovery.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- vitest\n- ./recovery\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 150\n- Estimated complexity: 81/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.974Z",
+    "updated_at": "2026-01-30T05:26:51.974Z",
+    "hash": "91ba517f7a495928ef0fbb9b98b83c9791eb92f335cc7c62a255b61a40159a96",
+    "dependencies": [
+      "vitest",
+      "./recovery"
+    ],
+    "symbols": [
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "error",
+      "promptTooLongPatterns",
+      "contextLengthPatterns",
+      "toolPairingPatterns"
+    ],
+    "complexity_score": 81
+  }
+}

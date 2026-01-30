@@ -1,0 +1,20 @@
+{
+  "id": "shell.ts-api-1e3e1d9a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-worktree/src/plugin/kdco-primitives/shell.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: shell.ts\n\n## Public Functions\n\n### assertShellSafe\n```typescript\nexport function assertShellSafe(value: string, context: string): void\n```\nAssert that a string is safe for shell escaping.\n\nNull bytes cannot be escaped in any shell and must be rejected outright.\nThis is the first line of defense before any escaping is attempted.\n\n**Parameters:**\n- `value`: string - \n- `context`: string - \n\n**Returns:** void\n\n\n### escapeBash\n```typescript\nexport function escapeBash(str: string): string\n```\nEscape a string for safe use in bash double-quoted strings.\n\nHandles all shell metacharacters including:\n- Backslash (\\), double quote (\"), dollar ($), backtick (`)\n- Exclamation mark (!) for history expansion\n- Newlines and carriage returns (replaced with spaces)\n\n**Parameters:**\n- `str`: string - \n\n**Returns:** string\n\n\n### escapeAppleScript\n```typescript\nexport function escapeAppleScript(str: string): string\n```\nEscape a string for safe use in AppleScript double-quoted strings.\n\nAppleScript uses different escaping rules than POSIX shells.\nOnly backslash and double quote need escaping.\nNewlines are replaced with spaces (AppleScript doesn't support \\n escapes).\n\n**Parameters:**\n- `str`: string - \n\n**Returns:** string\n\n\n### escapeBatch\n```typescript\nexport function escapeBatch(str: string): string\n```\nEscape a string for safe use in Windows batch files.\n\nHandles batch metacharacters:\n- Percent (%), caret (^), ampersand (&)\n- Less than (<), greater than (>), pipe (|)\n\n**Parameters:**\n- `str`: string - \n\n**Returns:** string\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.380Z",
+    "updated_at": "2026-01-30T05:26:52.380Z",
+    "hash": "9c2bb62d36a30932a2486833505ad6268d07f45848702adf08322cce28832e17",
+    "dependencies": [],
+    "symbols": [
+      "SHELL_FORBIDDEN_CHARS",
+      "assertShellSafe",
+      "escapeBash",
+      "escapeAppleScript",
+      "escapeBatch"
+    ],
+    "complexity_score": 100
+  }
+}

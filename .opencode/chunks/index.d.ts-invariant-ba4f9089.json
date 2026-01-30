@@ -1,0 +1,16 @@
+{
+  "id": "index.d.ts-invariant-ba4f9089",
+  "file_path": "/Users/user/opencode-autognosis/dist/index.d.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: index.d.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.817Z",
+    "updated_at": "2026-01-30T05:26:51.817Z",
+    "hash": "215dd0d23018bbc2c7b1476e081cd4cae97d7e27271609eeb003f8b8192ad88f",
+    "dependencies": [],
+    "symbols": [
+      "AutognosisPlugin"
+    ],
+    "complexity_score": 16.7
+  }
+}

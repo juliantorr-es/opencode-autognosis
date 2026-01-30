@@ -1,0 +1,39 @@
+{
+  "id": "state.ts-summary-8663630e",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/state/state.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: state.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (5)\n- **createSessionState**: No documentation found\n- **resetSessionState**: No documentation found\n- **ensureSessionInitialized**: No documentation found\n- **findLastCompactionTimestamp**: No documentation found\n- **countTurns**: No documentation found\n\n\n\n\n## Dependencies\n- ./types\n- ../logger\n- ./persistence\n- ./utils\n- ../shared-utils\n\n## Exports\n- checkSession\n- createSessionState\n- resetSessionState\n- ensureSessionInitialized\n- countTurns\n\n## Complexity Metrics\n- Lines of code: 143\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.171Z",
+    "updated_at": "2026-01-30T05:26:52.171Z",
+    "hash": "575ff88b25dab151e99af9fb7b215fa40428917f7c487a1a8bed8ab84ec769c3",
+    "dependencies": [
+      "./types",
+      "../logger",
+      "./persistence",
+      "./utils",
+      "../shared-utils"
+    ],
+    "symbols": [
+      "checkSession",
+      "lastUserMessage",
+      "lastSessionId",
+      "err",
+      "lastCompactionTimestamp",
+      "createSessionState",
+      "resetSessionState",
+      "ensureSessionInitialized",
+      "isSubAgent",
+      "persisted",
+      "findLastCompactionTimestamp",
+      "i",
+      "msg",
+      "countTurns",
+      "turnCount",
+      "msg",
+      "parts",
+      "part"
+    ],
+    "complexity_score": 100
+  }
+}

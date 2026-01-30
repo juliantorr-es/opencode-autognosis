@@ -1,0 +1,16 @@
+{
+  "id": "git-worktree.d.ts-api-51e4e09a",
+  "file_path": "/Users/user/opencode-autognosis/dist/git-worktree.d.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: git-worktree.d.ts\n\n## Public Functions\n\n### gitWorktreeTools\n```typescript\nexport declare function gitWorktreeTools():\n```\nNo documentation found\n\n**Returns:** {\n    [key: string]: any;\n}\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.810Z",
+    "updated_at": "2026-01-30T05:26:51.810Z",
+    "hash": "ec715c2d2208a3b49e303bb48bb9b22f8d5846e28f00638e96a68d64d2c9eeff",
+    "dependencies": [],
+    "symbols": [
+      "gitWorktreeTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

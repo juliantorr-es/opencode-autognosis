@@ -1,0 +1,24 @@
+{
+  "id": "list.ts-api-8f6f1c6c",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/tools/list.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: list.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.346Z",
+    "updated_at": "2026-01-30T05:26:52.346Z",
+    "hash": "0d513c7748ce9238169402406c3e2d3265c734c67502dafcefc7360c839aab44",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "../manager.ts",
+      "./list.txt"
+    ],
+    "symbols": [
+      "ptyList",
+      "sessions",
+      "lines",
+      "session",
+      "exitInfo"
+    ],
+    "complexity_score": 25.1
+  }
+}

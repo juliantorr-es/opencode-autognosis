@@ -1,0 +1,35 @@
+{
+  "id": "logger.ts-api-a396108a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/logger.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: logger.ts\n\n## Public Functions\n\n### printAntigravityConsole\n```typescript\nexport function printAntigravityConsole(\n  level: ConsoleLogLevel,\n  message: string,\n  extra?: unknown,\n  linesBefore: number = 1,\n): void\n```\nNo documentation found\n\n**Parameters:**\n- `level`: ConsoleLogLevel - \n- `message`: string - \n- `extra`: unknown - \n- `linesBefore`: number - \n\n**Returns:** void\n\n\n### initLogger\n```typescript\nexport function initLogger(client: PluginClient): void\n```\nNo documentation found\n\n**Parameters:**\n- `client`: PluginClient - \n\n**Returns:** void\n\n\n### createLogger\n```typescript\nexport function createLogger(module: string): Logger\n```\nNo documentation found\n\n**Parameters:**\n- `module`: string - \n\n**Returns:** Logger\n\n\n## Classes\n\n\n## Interfaces\n\n### Logger\n```typescript\ninterface Logger\n```\nNo documentation found\n\n\n## Types\n\n### LogLevel\n```typescript\ntype LogLevel\n```\nNo documentation found\n\n\n### ConsoleLogLevel\n```typescript\ntype ConsoleLogLevel\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.212Z",
+    "updated_at": "2026-01-30T05:26:52.212Z",
+    "hash": "dd32a5f0b1ca68d7031902d0fa92a5f530235580f72331fe80a148d0b7282372",
+    "dependencies": [
+      "./types",
+      "../constants"
+    ],
+    "symbols": [
+      "LogLevel",
+      "ConsoleLogLevel",
+      "ANTIGRAVITY_CONSOLE_PREFIX",
+      "isConsoleLogEnabled",
+      "val",
+      "printAntigravityConsole",
+      "pad",
+      "prefixedMessage",
+      "args",
+      "Logger",
+      "_client",
+      "initLogger",
+      "createLogger",
+      "service",
+      "log",
+      "prefix",
+      "args"
+    ],
+    "complexity_score": 99.4
+  }
+}

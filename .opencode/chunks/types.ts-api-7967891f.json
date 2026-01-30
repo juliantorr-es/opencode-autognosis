@@ -1,0 +1,26 @@
+{
+  "id": "types.ts-api-7967891f",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/transform/types.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: types.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n### TransformContext\n```typescript\nexport interface TransformContext\n```\nContext for request transformation.\nContains all information needed to transform a request payload.\n\n\n### TransformResult\n```typescript\nexport interface TransformResult\n```\nResult of request transformation.\n\n\n### TransformDebugInfo\n```typescript\nexport interface TransformDebugInfo\n```\nDebug information from transformation.\n\n\n### ThinkingConfig\n```typescript\nexport interface ThinkingConfig\n```\nThinking configuration normalized from various input formats.\n\n\n### GoogleSearchConfig\n```typescript\nexport interface GoogleSearchConfig\n```\nGoogle Search Grounding configuration.\n\n\n### ResolvedModel\n```typescript\nexport interface ResolvedModel\n```\nModel resolution result with tier information.\n\n\n## Types\n\n### ModelFamily\n```typescript\nexport type ModelFamily\n```\nNo documentation found\n\n\n### ThinkingTier\n```typescript\nexport type ThinkingTier\n```\nNo documentation found\n\n\n### RequestPayload\n```typescript\nexport type RequestPayload\n```\nGeneric request payload type.\nThe actual structure varies between Claude and Gemini.\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.113Z",
+    "updated_at": "2026-01-30T05:26:52.113Z",
+    "hash": "e21fa2b587a80382558fcfe2e2c987727c9bb600756e34209395ab1d89a97c10",
+    "dependencies": [
+      "../../constants"
+    ],
+    "symbols": [
+      "ModelFamily",
+      "ThinkingTier",
+      "TransformContext",
+      "TransformResult",
+      "TransformDebugInfo",
+      "RequestPayload",
+      "ThinkingConfig",
+      "GoogleSearchConfig",
+      "ResolvedModel"
+    ],
+    "complexity_score": 100
+  }
+}

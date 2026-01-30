@@ -1,0 +1,16 @@
+{
+  "id": "logger.d.ts-api-c1388ef0",
+  "file_path": "/Users/user/opencode-autognosis/dist/services/logger.d.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: logger.d.ts\n\n## Public Functions\n\n### log\n```typescript\nexport declare function log(message: string, data?: unknown): void;\n```\nNo documentation found\n\n**Parameters:**\n- `message`: string - \n- `data`: unknown - \n\n**Returns:** void\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.841Z",
+    "updated_at": "2026-01-30T05:26:51.841Z",
+    "hash": "546b31d812603ad66bc95febec119171e7916de1f51f15d1586257fdcf16da70",
+    "dependencies": [],
+    "symbols": [
+      "log"
+    ],
+    "complexity_score": 0.2
+  }
+}

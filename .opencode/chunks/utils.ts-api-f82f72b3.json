@@ -1,0 +1,18 @@
+{
+  "id": "utils.ts-api-f82f72b3",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/state/utils.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: utils.ts\n\n## Public Functions\n\n### isSubAgentSession\n```typescript\nexport async function isSubAgentSession(client: any, sessionID: string): Promise<boolean>\n```\nNo documentation found\n\n**Parameters:**\n- `client`: any - \n- `sessionID`: string - \n\n**Returns:** Promise<boolean>\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.174Z",
+    "updated_at": "2026-01-30T05:26:52.174Z",
+    "hash": "6231d04561407ece8bbdf7beadf5b5af32a487a68852a8f8fb4e8d6b27dd79ff",
+    "dependencies": [],
+    "symbols": [
+      "isSubAgentSession",
+      "result",
+      "error"
+    ],
+    "complexity_score": 21.9
+  }
+}

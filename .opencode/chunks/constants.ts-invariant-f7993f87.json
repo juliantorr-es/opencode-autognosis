@@ -1,0 +1,29 @@
+{
+  "id": "constants.ts-invariant-f7993f87",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/recovery/constants.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: constants.ts\n\n## Core Invariants\n\n\n## Constraints\n- **OPENCODE_STORAGE**: join(getXdgData(), \"opencode\", \"storage\")\n- **MESSAGE_STORAGE**: join(OPENCODE_STORAGE, \"message\")\n- **PART_STORAGE**: join(OPENCODE_STORAGE, \"part\")\n- **THINKING_TYPES**: new Set([\"thinking\", \"redacted_thinking\", \"reasoning\"])\n- **META_TYPES**: new Set([\"step-start\", \"step-finish\"])\n- **CONTENT_TYPES**: new Set([\"text\", \"tool\", \"tool_use\", \"tool_result\"])\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.967Z",
+    "updated_at": "2026-01-30T05:26:51.967Z",
+    "hash": "203b73eb51c459ea767c380a663dcea4f8aad09dfa4fdf123789650ba406f095",
+    "dependencies": [
+      "node:path",
+      "node:os"
+    ],
+    "symbols": [
+      "getXdgData",
+      "platform",
+      "getXdgConfig",
+      "platform",
+      "getAntigravityConfigDir",
+      "OPENCODE_STORAGE",
+      "MESSAGE_STORAGE",
+      "PART_STORAGE",
+      "THINKING_TYPES",
+      "META_TYPES",
+      "CONTENT_TYPES"
+    ],
+    "complexity_score": 38.3
+  }
+}

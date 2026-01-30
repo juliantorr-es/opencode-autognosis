@@ -1,0 +1,26 @@
+{
+  "id": "logger.ts-invariant-4186a059",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/logger.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: logger.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.339Z",
+    "updated_at": "2026-01-30T05:26:52.339Z",
+    "hash": "142066411ab1c79e02e5df9227da6b82b89c6177e667ed9553e4b53f852facc8",
+    "dependencies": [
+      "./types.ts"
+    ],
+    "symbols": [
+      "LogLevel",
+      "Logger",
+      "_client",
+      "initLogger",
+      "createLogger",
+      "service",
+      "log",
+      "prefix",
+      "args"
+    ],
+    "complexity_score": 60.3
+  }
+}

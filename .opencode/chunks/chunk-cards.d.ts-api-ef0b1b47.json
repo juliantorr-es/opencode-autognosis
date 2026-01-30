@@ -1,0 +1,30 @@
+{
+  "id": "chunk-cards.d.ts-api-ef0b1b47",
+  "file_path": "/Users/user/opencode-autognosis/dist/chunk-cards.d.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: chunk-cards.d.ts\n\n## Public Functions\n\n### ensureChunkDir\n```typescript\nexport declare function ensureChunkDir(): Promise<void>;\n```\nNo documentation found\n\n**Returns:** Promise<void>\n\n\n### calculateHash\n```typescript\nexport declare function calculateHash(content: string): string;\n```\nNo documentation found\n\n**Parameters:**\n- `content`: string - \n\n**Returns:** string\n\n\n### calculateComplexity\n```typescript\nexport declare function calculateComplexity(content: string): number;\n```\nNo documentation found\n\n**Parameters:**\n- `content`: string - \n\n**Returns:** number\n\n\n### extractSymbols\n```typescript\nexport declare function extractSymbols(content: string, filePath?: string): string[];\n```\nNo documentation found\n\n**Parameters:**\n- `content`: string - \n- `filePath`: string - \n\n**Returns:** string[]\n\n\n### chunkCardsTools\n```typescript\nexport declare function chunkCardsTools():\n```\nNo documentation found\n\n**Returns:** {\n    [key: string]: any;\n}\n\n\n### generateSummaryChunk\n```typescript\nexport declare function generateSummaryChunk(content: string, filePath: string, ast: ts.SourceFile | null): Promise<string>;\n```\nNo documentation found\n\n**Parameters:**\n- `content`: string - \n- `filePath`: string - \n- `ast`: ts.SourceFile | null - \n\n**Returns:** Promise<string>\n\n\n### generateApiChunk\n```typescript\nexport declare function generateApiChunk(content: string, filePath: string, ast: ts.SourceFile | null): Promise<string>;\n```\nNo documentation found\n\n**Parameters:**\n- `content`: string - \n- `filePath`: string - \n- `ast`: ts.SourceFile | null - \n\n**Returns:** Promise<string>\n\n\n### generateInvariantChunk\n```typescript\nexport declare function generateInvariantChunk(content: string, filePath: string, ast: ts.SourceFile | null): Promise<string>;\n```\nNo documentation found\n\n**Parameters:**\n- `content`: string - \n- `filePath`: string - \n- `ast`: ts.SourceFile | null - \n\n**Returns:** Promise<string>\n\n\n### extractDependencies\n```typescript\nexport declare function extractDependencies(content: string, ast?: ts.SourceFile | null, filePath?: string): Promise<string[]>;\n```\nNo documentation found\n\n**Parameters:**\n- `content`: string - \n- `ast`: ts.SourceFile | null - \n- `filePath`: string - \n\n**Returns:** Promise<string[]>\n\n\n### parseFileAST\n```typescript\nexport declare function parseFileAST(filePath: string, content: string): ts.SourceFile | null;\n```\nNo documentation found\n\n**Parameters:**\n- `filePath`: string - \n- `content`: string - \n\n**Returns:** ts.SourceFile | null\n\n\n### extractSymbolsFromAST\n```typescript\nexport declare function extractSymbolsFromAST(sourceFile: ts.SourceFile | null, content: string): string[] | null;\n```\nNo documentation found\n\n**Parameters:**\n- `sourceFile`: ts.SourceFile | null - \n- `content`: string - \n\n**Returns:** string[] | null\n\n\n## Classes\n\n\n## Interfaces\n\n### ChunkCard\n```typescript\nexport interface ChunkCard\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.790Z",
+    "updated_at": "2026-01-30T05:26:51.790Z",
+    "hash": "fe9be2e86da047be130fcb730c2f9c59e170f80d799c46257a10c479771188dd",
+    "dependencies": [
+      "typescript"
+    ],
+    "symbols": [
+      "CHUNK_DIR",
+      "ChunkCard",
+      "ensureChunkDir",
+      "calculateHash",
+      "calculateComplexity",
+      "extractSymbols",
+      "chunkCardsTools",
+      "generateSummaryChunk",
+      "generateApiChunk",
+      "generateInvariantChunk",
+      "extractDependencies",
+      "parseFileAST",
+      "extractSymbolsFromAST"
+    ],
+    "complexity_score": 19
+  }
+}

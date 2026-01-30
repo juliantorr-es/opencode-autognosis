@@ -1,0 +1,45 @@
+{
+  "id": "plugin-config.test.ts-invariant-fb2f010d",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/test/plugin-config.test.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: plugin-config.test.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 0 try-catch blocks, 1 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.324Z",
+    "updated_at": "2026-01-30T05:26:52.324Z",
+    "hash": "af8e05701510299cf3debaf3f24ea99f16fb8b560763d95b2e35a8da8632cf85",
+    "dependencies": [
+      "vitest",
+      "../lib/config.js",
+      "../lib/types.js",
+      "node:fs",
+      "node:os",
+      "node:path"
+    ],
+    "symbols": [
+      "actual",
+      "mockExistsSync",
+      "mockReadFileSync",
+      "originalEnv",
+      "config",
+      "config",
+      "config",
+      "consoleSpy",
+      "config",
+      "consoleSpy",
+      "config",
+      "config",
+      "result",
+      "config",
+      "result",
+      "config",
+      "result",
+      "config",
+      "result",
+      "config",
+      "result",
+      "config",
+      "result"
+    ],
+    "complexity_score": 29.400000000000002
+  }
+}

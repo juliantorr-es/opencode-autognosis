@@ -1,0 +1,29 @@
+{
+  "id": "tier.test.ts-api-cbf84e7a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/tier.test.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: tier.test.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.245Z",
+    "updated_at": "2026-01-30T05:26:52.245Z",
+    "hash": "ad00390a08afa292a0b7bcfbc2575918d32896a21561683311e516511b16769b",
+    "dependencies": [
+      "bun:test",
+      "./accounts",
+      "./accounts"
+    ],
+    "symbols": [
+      "mockAuth",
+      "manager",
+      "acc1",
+      "next",
+      "acc1",
+      "paidAcc",
+      "active",
+      "next",
+      "acc1",
+      "active"
+    ],
+    "complexity_score": 38.1
+  }
+}

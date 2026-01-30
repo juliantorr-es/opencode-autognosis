@@ -1,0 +1,44 @@
+{
+  "id": "notification.ts-api-e031f962",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/ui/notification.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: notification.ts\n\n## Public Functions\n\n### sendUnifiedNotification\n```typescript\nexport async function sendUnifiedNotification(\n    client: any,\n    logger: Logger,\n    config: PluginConfig,\n    state: SessionState,\n    sessionId: string,\n    pruneToolIds: string[],\n    toolMetadata: Map<string, ToolParameterEntry>,\n    reason: PruneReason | undefined,\n    params: any,\n    workingDirectory: string,\n    distillation?: string[],\n): Promise<boolean>\n```\nNo documentation found\n\n**Parameters:**\n- `client`: any - \n- `logger`: Logger - \n- `config`: PluginConfig - \n- `state`: SessionState - \n- `sessionId`: string - \n- `pruneToolIds`: string[] - \n- `toolMetadata`: Map<string, ToolParameterEntry> - \n- `reason`: PruneReason | undefined - \n- `params`: any - \n- `workingDirectory`: string - \n- `distillation`: string[] - \n\n**Returns:** Promise<boolean>\n\n\n### sendIgnoredMessage\n```typescript\nexport async function sendIgnoredMessage(\n    client: any,\n    sessionID: string,\n    text: string,\n    params: any,\n    logger: Logger,\n): Promise<void>\n```\nNo documentation found\n\n**Parameters:**\n- `client`: any - \n- `sessionID`: string - \n- `text`: string - \n- `params`: any - \n- `logger`: Logger - \n\n**Returns:** Promise<void>\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n\n### PruneReason\n```typescript\nexport type PruneReason\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.184Z",
+    "updated_at": "2026-01-30T05:26:52.184Z",
+    "hash": "7784b7d94775d9ec5d2c6ade5a7d835741301d953c597e32f7ae59c2208436b3",
+    "dependencies": [
+      "../logger",
+      "../state",
+      "./utils",
+      "../state",
+      "../config"
+    ],
+    "symbols": [
+      "PruneReason",
+      "PRUNE_REASON_LABELS",
+      "buildMinimalMessage",
+      "extractedTokens",
+      "extractedSuffix",
+      "reasonSuffix",
+      "message",
+      "buildDetailedMessage",
+      "message",
+      "pruneTokenCounterStr",
+      "extractedTokens",
+      "extractedSuffix",
+      "reasonLabel",
+      "itemLines",
+      "sendUnifiedNotification",
+      "hasPruned",
+      "showDistillation",
+      "message",
+      "sendIgnoredMessage",
+      "agent",
+      "variant",
+      "model",
+      "error"
+    ],
+    "complexity_score": 82.6
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "codex-opencode-bridge.ts-summary-d3949e26",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-openai-codex-auth/lib/prompts/codex-opencode-bridge.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: codex-opencode-bridge.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- CODEX_OPENCODE_BRIDGE\n- CodexOpenCodeBridgeMeta\n- CODEX_OPENCODE_BRIDGE_META\n\n## Complexity Metrics\n- Lines of code: 162\n- Estimated complexity: 80.2/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.288Z",
+    "updated_at": "2026-01-30T05:26:52.288Z",
+    "hash": "817852f86ab70df6095bb458f361b9aad7524f841e68f94cf297c5e28f0b92e3",
+    "dependencies": [],
+    "symbols": [
+      "CODEX_OPENCODE_BRIDGE",
+      "CodexOpenCodeBridgeMeta",
+      "CODEX_OPENCODE_BRIDGE_META"
+    ],
+    "complexity_score": 80.2
+  }
+}

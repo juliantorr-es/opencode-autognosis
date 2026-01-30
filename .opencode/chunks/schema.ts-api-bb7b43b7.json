@@ -1,0 +1,24 @@
+{
+  "id": "schema.ts-api-bb7b43b7",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/config/schema.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: schema.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n\n### AccountSelectionStrategy\n```typescript\nexport type AccountSelectionStrategy\n```\nNo documentation found\n\n\n### AntigravityConfig\n```typescript\nexport type AntigravityConfig\n```\nNo documentation found\n\n\n### SignatureCacheConfig\n```typescript\nexport type SignatureCacheConfig\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.937Z",
+    "updated_at": "2026-01-30T05:26:51.937Z",
+    "hash": "6c7f8188aad4a91b83838acc2a52d7892968b4dca4d7183d0448f88087923ec0",
+    "dependencies": [
+      "zod"
+    ],
+    "symbols": [
+      "AccountSelectionStrategySchema",
+      "AccountSelectionStrategy",
+      "SignatureCacheConfigSchema",
+      "AntigravityConfigSchema",
+      "AntigravityConfig",
+      "SignatureCacheConfig",
+      "DEFAULT_CONFIG"
+    ],
+    "complexity_score": 100
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "types.ts-summary-9b899103",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/types.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: types.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- @opencode-ai/plugin\n\n## Exports\n- OAuthAuthDetails\n- NonOAuthAuthDetails\n- AuthDetails\n- GetAuth\n- ProviderModel\n- Provider\n- LoaderResult\n- PluginClient\n- PluginContext\n- PluginResult\n- RefreshParts\n- MultiAccountRefreshParts\n- ProjectContextResult\n\n## Complexity Metrics\n- Lines of code: 61\n- Estimated complexity: 14.100000000000001/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.267Z",
+    "updated_at": "2026-01-30T05:26:52.267Z",
+    "hash": "9a5b8f83a08e858c4115b60c8a6082777dd4be61a24757c04d71b2b02feb0bc6",
+    "dependencies": [
+      "@opencode-ai/plugin"
+    ],
+    "symbols": [
+      "OAuthAuthDetails",
+      "NonOAuthAuthDetails",
+      "AuthDetails",
+      "GetAuth",
+      "ProviderModel",
+      "Provider",
+      "LoaderResult",
+      "PluginClient",
+      "PluginContext",
+      "PluginResult",
+      "RefreshParts",
+      "MultiAccountRefreshParts",
+      "ProjectContextResult"
+    ],
+    "complexity_score": 14.100000000000001
+  }
+}

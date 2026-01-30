@@ -1,0 +1,27 @@
+{
+  "id": "index.ts-api-8647ba30",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/prompts/index.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: index.ts\n\n## Public Functions\n\n### loadPrompt\n```typescript\nexport function loadPrompt(name: string, vars?: Record<string, string>): string\n```\nNo documentation found\n\n**Parameters:**\n- `name`: string - \n- `vars`: Record<string, string> - \n\n**Returns:** string\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.162Z",
+    "updated_at": "2026-01-30T05:26:52.162Z",
+    "hash": "aae13175f200efccd6c78eabd00647f0ebe190c34b582436ee5674ba90cd1f7c",
+    "dependencies": [
+      "./discard-tool-spec",
+      "./extract-tool-spec",
+      "./system/both",
+      "./system/discard",
+      "./system/extract",
+      "./nudge/both",
+      "./nudge/discard",
+      "./nudge/extract"
+    ],
+    "symbols": [
+      "PROMPTS",
+      "loadPrompt",
+      "content"
+    ],
+    "complexity_score": 42.8
+  }
+}

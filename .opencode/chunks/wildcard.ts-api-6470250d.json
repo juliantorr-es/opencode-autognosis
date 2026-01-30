@@ -1,0 +1,28 @@
+{
+  "id": "wildcard.ts-api-6470250d",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-pty/src/plugin/pty/wildcard.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: wildcard.ts\n\n## Public Functions\n\n### match\n```typescript\nexport function match(str: string, pattern: string): boolean\n```\nNo documentation found\n\n**Parameters:**\n- `str`: string - \n- `pattern`: string - \n\n**Returns:** boolean\n\n\n### all\n```typescript\nexport function all(input: string, patterns: Record<string, string>): string | undefined\n```\nNo documentation found\n\n**Parameters:**\n- `input`: string - \n- `patterns`: Record<string, string> - \n\n**Returns:** string | undefined\n\n\n### allStructured\n```typescript\nexport function allStructured(\n    input:\n```\nNo documentation found\n\n**Parameters:**\n- `input`: { head: string; tail: string[] } - \n- `patterns`: Record<string, string> - \n\n**Returns:** string | undefined\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.352Z",
+    "updated_at": "2026-01-30T05:26:52.352Z",
+    "hash": "6adf4cf514339d485c9819c68a9f162010d79fdb7840c324d6d3a8df2c6961a0",
+    "dependencies": [],
+    "symbols": [
+      "match",
+      "regex",
+      "all",
+      "sorted",
+      "result",
+      "allStructured",
+      "sorted",
+      "result",
+      "parts",
+      "firstPart",
+      "matchSequence",
+      "i",
+      "item"
+    ],
+    "complexity_score": 71
+  }
+}

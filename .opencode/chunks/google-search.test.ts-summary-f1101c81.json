@@ -1,0 +1,38 @@
+{
+  "id": "google-search.test.ts-summary-f1101c81",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/tests/integration/google-search.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: google-search.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n\n\n\n## Dependencies\n- bun:test\n- ./setup\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 221\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.273Z",
+    "updated_at": "2026-01-30T05:26:52.273Z",
+    "hash": "b642feb388875e1e764ca323e72bff3ae6d515c7dc644cd376c6122f6458a23b",
+    "dependencies": [
+      "bun:test",
+      "./setup"
+    ],
+    "symbols": [
+      "itSkipInCI",
+      "ctx",
+      "sessionId",
+      "response",
+      "assistantText",
+      "response",
+      "assistantText",
+      "sessionId",
+      "response",
+      "assistantText",
+      "sessionId",
+      "response",
+      "assistantText",
+      "response",
+      "assistantText",
+      "sessionId",
+      "response",
+      "assistantText",
+      "response",
+      "assistantText"
+    ],
+    "complexity_score": 100
+  }
+}

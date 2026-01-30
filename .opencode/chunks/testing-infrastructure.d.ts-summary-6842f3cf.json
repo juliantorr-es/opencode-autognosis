@@ -1,0 +1,16 @@
+{
+  "id": "testing-infrastructure.d.ts-summary-6842f3cf",
+  "file_path": "/Users/user/opencode-autognosis/dist/testing-infrastructure.d.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: testing-infrastructure.d.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **testingTools**: No documentation found\n\n\n\n\n## Dependencies\nNo external dependencies\n\n## Exports\n- testingTools\n\n## Complexity Metrics\n- Lines of code: 4\n- Estimated complexity: 8.4/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.848Z",
+    "updated_at": "2026-01-30T05:26:51.848Z",
+    "hash": "e18aeb6763d6e6d62f9d85849281931a5ac46aef93cbf9b60ba61fc1b1561373",
+    "dependencies": [],
+    "symbols": [
+      "testingTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

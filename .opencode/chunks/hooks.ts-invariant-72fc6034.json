@@ -1,0 +1,42 @@
+{
+  "id": "hooks.ts-invariant-72fc6034",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/hooks.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: hooks.ts\n\n## Core Invariants\n\n\n## Constraints\n- **INTERNAL_AGENT_SIGNATURES**: [\n    \"You are a title generator\",\n    \"You are a helpful AI assistant tasked with summarizing conversations\",\n    \"Summarize what was done in this conversation\",\n]\n\nexport function createSystemPromptHandler(\n    state: SessionState,\n    logger: Logger,\n    config: PluginConfig,\n) {\n    return async (_input: unknown, output: { system: string[] })\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 0 try-catch blocks, 4 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.151Z",
+    "updated_at": "2026-01-30T05:26:52.151Z",
+    "hash": "b869d226444df449988fbdb1cc16fdb196c2fbc817a647110323b752ff64bf51",
+    "dependencies": [
+      "./state",
+      "./logger",
+      "./config",
+      "./state/tool-cache",
+      "./strategies",
+      "./messages",
+      "./state",
+      "./prompts",
+      "./commands/stats",
+      "./commands/context",
+      "./commands/help",
+      "./commands/sweep"
+    ],
+    "symbols": [
+      "INTERNAL_AGENT_SIGNATURES",
+      "createSystemPromptHandler",
+      "systemText",
+      "discardEnabled",
+      "extractEnabled",
+      "promptName",
+      "syntheticPrompt",
+      "createChatMessageTransformHandler",
+      "createCommandExecuteHandler",
+      "args",
+      "subcommand",
+      "_subArgs",
+      "messagesResponse",
+      "messages"
+    ],
+    "complexity_score": 100
+  }
+}

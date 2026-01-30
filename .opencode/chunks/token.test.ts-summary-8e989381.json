@@ -1,0 +1,30 @@
+{
+  "id": "token.test.ts-summary-8e989381",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/token.test.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: token.test.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (1)\n- **createClient**: No documentation found\n\n\n\n\n## Dependencies\n- vitest\n- ../constants\n- ./token\n- ./types\n\n## Exports\nNo exports\n\n## Complexity Metrics\n- Lines of code: 88\n- Estimated complexity: 28.8/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.068Z",
+    "updated_at": "2026-01-30T05:26:52.068Z",
+    "hash": "408f3bb119b9e9c564be251e6fe67db9993aa93462f884f8401eb32564451889",
+    "dependencies": [
+      "vitest",
+      "../constants",
+      "./token",
+      "./types"
+    ],
+    "symbols": [
+      "baseAuth",
+      "createClient",
+      "client",
+      "fetchMock",
+      "result",
+      "client",
+      "fetchMock",
+      "result",
+      "client",
+      "fetchMock"
+    ],
+    "complexity_score": 28.8
+  }
+}

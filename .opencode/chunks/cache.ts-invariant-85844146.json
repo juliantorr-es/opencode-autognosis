@@ -1,0 +1,39 @@
+{
+  "id": "cache.ts-invariant-85844146",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/cache.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: cache.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.199Z",
+    "updated_at": "2026-01-30T05:26:52.199Z",
+    "hash": "ed8de32549b6824f258826791d9f75d655a58e6b3977951d9ee65e96dcec33d0",
+    "dependencies": [
+      "node:crypto",
+      "./auth",
+      "./types"
+    ],
+    "symbols": [
+      "authCache",
+      "normalizeRefreshKey",
+      "key",
+      "resolveCachedAuth",
+      "key",
+      "cached",
+      "storeCachedAuth",
+      "key",
+      "clearCachedAuth",
+      "key",
+      "signatureCache",
+      "ModelFamily",
+      "normalizeThoughtText",
+      "getSignatureKey",
+      "normalizedText",
+      "input",
+      "cacheSignature",
+      "key",
+      "getCachedSignature",
+      "key"
+    ],
+    "complexity_score": 68.1
+  }
+}

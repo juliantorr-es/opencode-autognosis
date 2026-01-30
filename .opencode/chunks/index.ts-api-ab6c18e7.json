@@ -1,0 +1,38 @@
+{
+  "id": "index.ts-api-ab6c18e7",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/hooks/auto-update-checker/index.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: index.ts\n\n## Public Functions\n\n### createAutoUpdateCheckerHook\n```typescript\nexport function createAutoUpdateCheckerHook(\n  client: PluginClient,\n  directory: string,\n  options: AutoUpdateCheckerOptions =\n```\nNo documentation found\n\n**Parameters:**\n- `client`: PluginClient - \n- `directory`: string - \n- `options`: AutoUpdateCheckerOptions - \n\n**Returns:** void\n\n\n## Classes\n\n\n## Interfaces\n\n### PluginClient\n```typescript\ninterface PluginClient\n```\nNo documentation found\n\n\n### SessionCreatedEvent\n```typescript\ninterface SessionCreatedEvent\n```\nNo documentation found\n\n\n## Types\n\n### PluginEvent\n```typescript\ntype PluginEvent\n```\nNo documentation found\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.893Z",
+    "updated_at": "2026-01-30T05:26:51.893Z",
+    "hash": "9d45c9ae6d4989d0ecd756b018e9c61a564b19e4d8fda393859f4ab07c96b589",
+    "dependencies": [
+      "./types",
+      "./checker",
+      "./cache",
+      "./constants",
+      "../../plugin/debug"
+    ],
+    "symbols": [
+      "debugLog",
+      "PluginClient",
+      "SessionCreatedEvent",
+      "PluginEvent",
+      "createAutoUpdateCheckerHook",
+      "hasChecked",
+      "props",
+      "localDevVersion",
+      "runBackgroundUpdateCheck",
+      "pluginInfo",
+      "cachedVersion",
+      "currentVersion",
+      "latestVersion",
+      "updated",
+      "showUpdateAvailableToast",
+      "showAutoUpdatedToast",
+      "showLocalDevToast"
+    ],
+    "complexity_score": 100
+  }
+}

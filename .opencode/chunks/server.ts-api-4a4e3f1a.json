@@ -1,0 +1,45 @@
+{
+  "id": "server.ts-api-4a4e3f1a",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/server.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: server.ts\n\n## Public Functions\n\n### startOAuthListener\n```typescript\nexport async function startOAuthListener(\n```\nStarts a lightweight HTTP server that listens for the Antigravity OAuth redirect\nand resolves with the captured callback URL.\n\n**Parameters:**\n- `{ timeoutMs = 5 * 60 * 1000 }`: OAuthListenerOptions - \n\n**Returns:** Promise<OAuthListener>\n\n\n## Classes\n\n\n## Interfaces\n\n### OAuthListenerOptions\n```typescript\ninterface OAuthListenerOptions\n```\nNo documentation found\n\n\n### OAuthListener\n```typescript\nexport interface OAuthListener\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.054Z",
+    "updated_at": "2026-01-30T05:26:52.054Z",
+    "hash": "ba29940d2b55f6ae4d56b0c081ee6884eecb65632d1815bd4a4ceaad4112dbd8",
+    "dependencies": [
+      "node:http",
+      "node:fs",
+      "../constants"
+    ],
+    "symbols": [
+      "OAuthListenerOptions",
+      "OAuthListener",
+      "redirectUri",
+      "callbackPath",
+      "isOrbStackDockerHost",
+      "version",
+      "hostname",
+      "resolv",
+      "isWSL",
+      "release",
+      "isRemoteEnvironment",
+      "getBindAddress",
+      "envBind",
+      "startOAuthListener",
+      "port",
+      "origin",
+      "settled",
+      "resolveCallback",
+      "rejectCallback",
+      "timeoutHandle",
+      "callbackPromise",
+      "successResponse",
+      "server",
+      "url",
+      "bindAddress",
+      "handleError"
+    ],
+    "complexity_score": 100
+  }
+}

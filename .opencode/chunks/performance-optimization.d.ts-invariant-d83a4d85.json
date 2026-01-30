@@ -1,0 +1,16 @@
+{
+  "id": "performance-optimization.d.ts-invariant-d83a4d85",
+  "file_path": "/Users/user/opencode-autognosis/dist/performance-optimization.d.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: performance-optimization.d.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.827Z",
+    "updated_at": "2026-01-30T05:26:51.827Z",
+    "hash": "6e5ed486386037bbda1fce52792351f2a666d5012035309fd9d011bf508dd6f5",
+    "dependencies": [],
+    "symbols": [
+      "performanceTools"
+    ],
+    "complexity_score": 8.4
+  }
+}

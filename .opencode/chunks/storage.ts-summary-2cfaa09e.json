@@ -1,0 +1,53 @@
+{
+  "id": "storage.ts-summary-2cfaa09e",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/storage.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: storage.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (7)\n- **getDataDir**: No documentation found\n- **getStoragePath**: No documentation found\n- **migrateV1ToV2**: No documentation found\n- **migrateV2ToV3**: No documentation found\n- **loadAccounts**: No documentation found\n- **saveAccounts**: No documentation found\n- **migrateFromRefreshString**: No documentation found\n\n\n\n\n## Dependencies\n- node:fs\n- node:path\n- node:os\n- ./logger\n\n## Exports\n- ModelFamily\n- AccountTier\n- RateLimitState\n- AccountMetadataV1\n- AccountStorageV1\n- RateLimitStateV2\n- AccountMetadataV2\n- AccountStorageV2\n- AccountMetadata\n- AccountStorage\n- getStoragePath\n- loadAccounts\n- saveAccounts\n- migrateFromRefreshString\n\n## Complexity Metrics\n- Lines of code: 228\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.243Z",
+    "updated_at": "2026-01-30T05:26:52.243Z",
+    "hash": "8561793831a84603aab095b33320c9dbb4c0c80c64193e24fb5207deadc4e773",
+    "dependencies": [
+      "node:fs",
+      "node:path",
+      "node:os",
+      "./logger"
+    ],
+    "symbols": [
+      "log",
+      "ModelFamily",
+      "AccountTier",
+      "RateLimitState",
+      "AccountMetadataV1",
+      "AccountStorageV1",
+      "RateLimitStateV2",
+      "AccountMetadataV2",
+      "AccountStorageV2",
+      "AccountMetadata",
+      "AccountStorage",
+      "AnyAccountStorage",
+      "getDataDir",
+      "platform",
+      "xdgData",
+      "getStoragePath",
+      "migrateV1ToV2",
+      "rateLimitResetTimes",
+      "migrateV2ToV3",
+      "rateLimitResetTimes",
+      "loadAccounts",
+      "path",
+      "content",
+      "data",
+      "storage",
+      "v2",
+      "error",
+      "saveAccounts",
+      "path",
+      "content",
+      "error",
+      "migrateFromRefreshString",
+      "now"
+    ],
+    "complexity_score": 100
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "accounts.ts-summary-d5249c11",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/accounts.ts",
+  "chunk_type": "summary",
+  "content": "# Summary: accounts.ts\n\n## File Type\n.ts - TypeScript source file\n\n## Purpose\nPurpose not explicitly documented\n\n## Key Components\n\n### Functions (2)\n- **isRateLimitedForFamily**: No documentation found\n- **clearExpiredRateLimits**: No documentation found\n\n\n\n### Classes (1)\n- **AccountManager**: Manages multiple OAuth accounts with automatic rotation and rate limit handling.\n\n\n## Dependencies\n- ./types\n- ./auth\n- ./storage\n\n## Exports\n- ManagedAccount\n- AccountManager\n\n## Complexity Metrics\n- Lines of code: 264\n- Estimated complexity: 100/100\n\n## Notes\nNo specific notes found",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.195Z",
+    "updated_at": "2026-01-30T05:26:52.195Z",
+    "hash": "ebccd28f74d500c070fa1a928bc0b86458b4f632e386e1a57d22db6518610c30",
+    "dependencies": [
+      "./types",
+      "./auth",
+      "./storage"
+    ],
+    "symbols": [
+      "ManagedAccount",
+      "isRateLimitedForFamily",
+      "resetTime",
+      "clearExpiredRateLimits",
+      "now",
+      "AccountManager",
+      "activeIndex",
+      "multiAccount",
+      "storage",
+      "current",
+      "betterTierAvailable",
+      "next",
+      "available",
+      "paidAvailable",
+      "pool",
+      "account",
+      "current",
+      "available",
+      "waitTimes"
+    ],
+    "complexity_score": 100
+  }
+}

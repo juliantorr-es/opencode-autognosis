@@ -1,0 +1,36 @@
+{
+  "id": "image-saver.ts-invariant-b140d68b",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/image-saver.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: image-saver.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 1 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.954Z",
+    "updated_at": "2026-01-30T05:26:51.954Z",
+    "hash": "e7537aadffe14b52ca435964eb589a814c75da87d46434e980c30dcb3be9b330",
+    "dependencies": [
+      "fs",
+      "path",
+      "os"
+    ],
+    "symbols": [
+      "getImageOutputDir",
+      "homeDir",
+      "outputDir",
+      "generateImageFilename",
+      "timestamp",
+      "random",
+      "ext",
+      "saveImageToDisk",
+      "outputDir",
+      "filename",
+      "filePath",
+      "buffer",
+      "error",
+      "processImageData",
+      "mimeType",
+      "data",
+      "filePath"
+    ],
+    "complexity_score": 72.8
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "cli.ts-invariant-94c0d6ce",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/cli.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: cli.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 2 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.200Z",
+    "updated_at": "2026-01-30T05:26:52.200Z",
+    "hash": "032f4558811cad989db3101445d38753442ce25bdb9182dd07fde1e4b7442262",
+    "dependencies": [
+      "node:readline/promises",
+      "node:process"
+    ],
+    "symbols": [
+      "promptProjectId",
+      "rl",
+      "answer",
+      "promptAddAnotherAccount",
+      "rl",
+      "answer"
+    ],
+    "complexity_score": 26
+  }
+}

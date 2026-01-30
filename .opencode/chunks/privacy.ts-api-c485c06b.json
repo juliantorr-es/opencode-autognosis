@@ -1,0 +1,19 @@
+{
+  "id": "privacy.ts-api-c485c06b",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-supermemory/src/services/privacy.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: privacy.ts\n\n## Public Functions\n\n### containsPrivateTag\n```typescript\nexport function containsPrivateTag(content: string): boolean\n```\nNo documentation found\n\n**Parameters:**\n- `content`: string - \n\n**Returns:** boolean\n\n\n### stripPrivateContent\n```typescript\nexport function stripPrivateContent(content: string): string\n```\nNo documentation found\n\n**Parameters:**\n- `content`: string - \n\n**Returns:** string\n\n\n### isFullyPrivate\n```typescript\nexport function isFullyPrivate(content: string): boolean\n```\nNo documentation found\n\n**Parameters:**\n- `content`: string - \n\n**Returns:** boolean\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.373Z",
+    "updated_at": "2026-01-30T05:26:52.373Z",
+    "hash": "ff30b1cce8396e9fe261ab562a2fef37a480e7897aadf5320d7f8ae66ec341fb",
+    "dependencies": [],
+    "symbols": [
+      "containsPrivateTag",
+      "stripPrivateContent",
+      "isFullyPrivate",
+      "stripped"
+    ],
+    "complexity_score": 5.3
+  }
+}

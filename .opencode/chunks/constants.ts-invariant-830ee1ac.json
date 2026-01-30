@@ -1,0 +1,28 @@
+{
+  "id": "constants.ts-invariant-830ee1ac",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/hooks/auto-update-checker/constants.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: constants.ts\n\n## Core Invariants\n\n\n## Constraints\n- **PACKAGE_NAME**: \"opencode-antigravity-auth\"\n- **NPM_REGISTRY_URL**: `https://registry.npmjs.org/-/package/${PACKAGE_NAME}/dist-tags`\n- **NPM_FETCH_TIMEOUT**: 5000\n- **CACHE_DIR**: getCacheDir()\n- **INSTALLED_PACKAGE_JSON**: path.join(\n  CACHE_DIR,\n  \"node_modules\",\n  PACKAGE_NAME,\n  \"package.json\"\n)\n- **USER_CONFIG_DIR**: getUserConfigDir()\n- **USER_OPENCODE_CONFIG**: path.join(USER_CONFIG_DIR, \"opencode\", \"opencode.json\")\n- **USER_OPENCODE_CONFIG_JSONC**: path.join(USER_CONFIG_DIR, \"opencode\", \"opencode.jsonc\")\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.888Z",
+    "updated_at": "2026-01-30T05:26:51.888Z",
+    "hash": "82efedd091d4949a8ce7ccfde5571844215fe9518bf9152b5223c91445410862",
+    "dependencies": [
+      "node:path",
+      "node:os"
+    ],
+    "symbols": [
+      "PACKAGE_NAME",
+      "NPM_REGISTRY_URL",
+      "NPM_FETCH_TIMEOUT",
+      "getCacheDir",
+      "CACHE_DIR",
+      "INSTALLED_PACKAGE_JSON",
+      "getUserConfigDir",
+      "USER_CONFIG_DIR",
+      "USER_OPENCODE_CONFIG",
+      "USER_OPENCODE_CONFIG_JSONC"
+    ],
+    "complexity_score": 21.3
+  }
+}

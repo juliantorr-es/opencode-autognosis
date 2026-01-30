@@ -1,0 +1,38 @@
+{
+  "id": "accounts.ts-api-d5249c11",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-google-antigravity-auth/src/plugin/accounts.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: accounts.ts\n\n## Public Functions\n\n\n## Classes\n\n### AccountManager\n```typescript\nexport class AccountManager\n```\nManages multiple OAuth accounts with automatic rotation and rate limit handling.\n\n**Methods:**\n- `save`: async save(): Promise<void>\n- `getCurrentAccount`: getCurrentAccount(): ManagedAccount | null\n- `markSwitched`: markSwitched(account: ManagedAccount, reason: \"rate-limit\" | \"initial\" | \"rotation\"): void\n- `getAccountCount`: getAccountCount(): number\n- `getCurrentOrNextForFamily`: getCurrentOrNextForFamily(family: ModelFamily): ManagedAccount | null\n- `getNextForFamily`: getNextForFamily(family: ModelFamily): ManagedAccount | null\n- `markRateLimited`: markRateLimited(account: ManagedAccount, retryAfterMs: number, family: ModelFamily): void\n- `updateAccount`: updateAccount(account: ManagedAccount, access: string, expires: number, parts?: RefreshParts): void\n- `toAuthDetails`: toAuthDetails(): OAuthAuthDetails\n- `addAccount`: addAccount(parts: RefreshParts, access?: string, expires?: number, email?: string, tier?: AccountTier): void\n- `removeAccount`: removeAccount(index: number): boolean\n- `getAccounts`: getAccounts(): ManagedAccount[]\n- `accountToAuth`: accountToAuth(account: ManagedAccount): OAuthAuthDetails\n- `getMinWaitTimeForFamily`: getMinWaitTimeForFamily(family: ModelFamily): number\n\n\n**Properties:**\n- `accounts`: ManagedAccount[]\n- `currentIndex`: any\n- `currentAccountIndex`: any\n\n\n\n## Interfaces\n\n### ManagedAccount\n```typescript\nexport interface ManagedAccount\n```\nNo documentation found\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.195Z",
+    "updated_at": "2026-01-30T05:26:52.195Z",
+    "hash": "bd26694e124ae55dc0f1a2e32585c42f0ed4ee59debe80a390717dd24c0bfa75",
+    "dependencies": [
+      "./types",
+      "./auth",
+      "./storage"
+    ],
+    "symbols": [
+      "ManagedAccount",
+      "isRateLimitedForFamily",
+      "resetTime",
+      "clearExpiredRateLimits",
+      "now",
+      "AccountManager",
+      "activeIndex",
+      "multiAccount",
+      "storage",
+      "current",
+      "betterTierAvailable",
+      "next",
+      "available",
+      "paidAvailable",
+      "pool",
+      "account",
+      "current",
+      "available",
+      "waitTimes"
+    ],
+    "complexity_score": 100
+  }
+}

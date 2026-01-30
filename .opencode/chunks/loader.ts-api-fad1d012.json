@@ -1,0 +1,46 @@
+{
+  "id": "loader.ts-api-fad1d012",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-antigravity-auth/src/plugin/config/loader.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: loader.ts\n\n## Public Functions\n\n### getUserConfigPath\n```typescript\nexport function getUserConfigPath(): string\n```\nGet the user-level config file path.\n\n**Returns:** string\n\n\n### getProjectConfigPath\n```typescript\nexport function getProjectConfigPath(directory: string): string\n```\nGet the project-level config file path.\n\n**Parameters:**\n- `directory`: string - \n\n**Returns:** string\n\n\n### loadConfig\n```typescript\nexport function loadConfig(directory: string): AntigravityConfig\n```\nLoad the complete configuration.\n\n**Parameters:**\n- `directory`: string - \n\n**Returns:** AntigravityConfig\n\n\n### configExists\n```typescript\nexport function configExists(path: string): boolean\n```\nCheck if a config file exists at the given path.\n\n**Parameters:**\n- `path`: string - \n\n**Returns:** boolean\n\n\n### getDefaultLogsDir\n```typescript\nexport function getDefaultLogsDir(): string\n```\nGet the default logs directory.\n\n**Returns:** string\n\n\n### initRuntimeConfig\n```typescript\nexport function initRuntimeConfig(config: AntigravityConfig): void\n```\nNo documentation found\n\n**Parameters:**\n- `config`: AntigravityConfig - \n\n**Returns:** void\n\n\n### getKeepThinking\n```typescript\nexport function getKeepThinking(): boolean\n```\nNo documentation found\n\n**Returns:** boolean\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:51.934Z",
+    "updated_at": "2026-01-30T05:26:51.934Z",
+    "hash": "d9b73d791b9a02a120eebd8cd8a7d034cfc4a051e2c6d7c735cd7f5fce88240c",
+    "dependencies": [
+      "node:fs",
+      "node:path",
+      "node:os",
+      "./schema",
+      "../logger"
+    ],
+    "symbols": [
+      "log",
+      "getConfigDir",
+      "platform",
+      "xdgConfig",
+      "getUserConfigPath",
+      "getProjectConfigPath",
+      "loadConfigFile",
+      "content",
+      "rawConfig",
+      "result",
+      "error",
+      "mergeConfigs",
+      "applyEnvOverrides",
+      "env",
+      "loadConfig",
+      "config",
+      "userConfigPath",
+      "userConfig",
+      "projectConfigPath",
+      "projectConfig",
+      "configExists",
+      "getDefaultLogsDir",
+      "runtimeConfig",
+      "initRuntimeConfig",
+      "getKeepThinking"
+    ],
+    "complexity_score": 100
+  }
+}

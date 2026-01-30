@@ -1,0 +1,46 @@
+{
+  "id": "persistence.ts-invariant-24cf750f",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/state/persistence.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: persistence.ts\n\n## Core Invariants\n\n\n## Constraints\n- **STORAGE_DIR**: join(homedir(), \".local\", \"share\", \"opencode\", \"storage\", \"plugin\", \"dcp\")\n\nasync function ensureStorageDir(): Promise<void> {\n    if (!existsSync(STORAGE_DIR)) {\n        await fs.mkdir(STORAGE_DIR, { recursive: true })\n    }\n}\n\nfunction getSessionFilePath(sessionId: string): string {\n    return join(STORAGE_DIR, `${sessionId}.json`)\n}\n\nexport async function saveSessionState(\n    sessionState: SessionState,\n    logger: Logger,\n    sessionName?: string,\n): Promise<void> {\n    try {\n        if (!sessionState.sessionId) {\n            return\n        }\n\n        await ensureStorageDir()\n\n        const state: PersistedSessionState\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nError handling metrics: 4 try-catch blocks, 0 throw statements\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.170Z",
+    "updated_at": "2026-01-30T05:26:52.170Z",
+    "hash": "944aeb54684237be2982d71dfd4d9064498b0a4257a8fd20be9a9518270996cc",
+    "dependencies": [
+      "fs/promises",
+      "fs",
+      "os",
+      "path",
+      "./types",
+      "../logger"
+    ],
+    "symbols": [
+      "PersistedSessionState",
+      "STORAGE_DIR",
+      "ensureStorageDir",
+      "getSessionFilePath",
+      "saveSessionState",
+      "state",
+      "filePath",
+      "content",
+      "error",
+      "loadSessionState",
+      "filePath",
+      "content",
+      "state",
+      "error",
+      "AggregatedStats",
+      "loadAllSessionStats",
+      "result",
+      "files",
+      "jsonFiles",
+      "file",
+      "filePath",
+      "content",
+      "state",
+      "error"
+    ],
+    "complexity_score": 100
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "index.ts-invariant-b2fafe8b",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/messages/index.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: index.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nNo obvious performance optimization patterns detected\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.154Z",
+    "updated_at": "2026-01-30T05:26:52.154Z",
+    "hash": "443d8b209a68c1f2ba1af268ee21f9dd54879b0dc19daa137e22929e78c307b8",
+    "dependencies": [],
+    "symbols": [],
+    "complexity_score": 0.30000000000000004
+  }
+}

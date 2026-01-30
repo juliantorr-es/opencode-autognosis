@@ -1,0 +1,28 @@
+{
+  "id": "index.ts-api-0fad09bf",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/index.ts",
+  "chunk_type": "api",
+  "content": "# API Surface: index.ts\n\n## Public Functions\n\n\n## Classes\n\n\n## Interfaces\n\n\n## Types\n",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.135Z",
+    "updated_at": "2026-01-30T05:26:52.135Z",
+    "hash": "4058bcc83ab9160ddde1a466359c3a85a9e5788d4c1c569966a39c7df6f42606",
+    "dependencies": [
+      "@opencode-ai/plugin",
+      "./lib/config",
+      "./lib/logger",
+      "./lib/state",
+      "./lib/strategies",
+      "./lib/hooks"
+    ],
+    "symbols": [
+      "plugin",
+      "config",
+      "logger",
+      "state",
+      "toolsToAdd",
+      "existingPrimaryTools"
+    ],
+    "complexity_score": 75.5
+  }
+}

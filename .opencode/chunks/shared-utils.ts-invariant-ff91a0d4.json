@@ -1,0 +1,22 @@
+{
+  "id": "shared-utils.ts-invariant-ff91a0d4",
+  "file_path": "/Users/user/opencode-autognosis/reference repos/opencode-dynamic-context-pruning/lib/shared-utils.ts",
+  "chunk_type": "invariant",
+  "content": "# Invariants: shared-utils.ts\n\n## Core Invariants\n\n\n## Constraints\n\n\n## Assumptions\n\n\n## State Management\nNo explicit state management patterns detected\n\n## Error Handling\nNo explicit error handling patterns detected\n\n## Performance Considerations\nPerformance patterns: Contains explicit loops\n\n## Security Considerations\nNo obvious security risks detected via static analysis",
+  "metadata": {
+    "created_at": "2026-01-30T05:26:52.168Z",
+    "updated_at": "2026-01-30T05:26:52.168Z",
+    "hash": "c531ebfaec4ee695db05a2e48b71b2650ede3156bc23c2b81f316933213bd0dc",
+    "dependencies": [
+      "./state",
+      "./messages/utils"
+    ],
+    "symbols": [
+      "isMessageCompacted",
+      "getLastUserMessage",
+      "i",
+      "msg"
+    ],
+    "complexity_score": 35.7
+  }
+}
