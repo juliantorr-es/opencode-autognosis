@@ -1,33 +1,74 @@
-import Database from "better-sqlite3";
 import * as path from "node:path";
 import * as fs from "node:fs";
+import { createRequire } from "node:module";
 import { tool } from "@opencode-ai/plugin";
 import type { ChunkCard } from "./chunk-cards.js";
 import { ollama, DEFAULT_EMBEDDING_MODEL } from "./services/ollama.js";
 
+const require = createRequire(import.meta.url);
 const PROJECT_ROOT = process.cwd();
 const OPENCODE_DIR = path.join(PROJECT_ROOT, ".opencode");
 const DB_PATH = path.join(OPENCODE_DIR, "autognosis.db");
 
+/**
+ * Multi-Runtime SQLite Adapter
+ * Detects Bun vs Node and provides a unified interface.
+ */
+class DatabaseAdapter {
+  private inner: any;
+  private isBun: boolean;
+
+  constructor(path: string) {
+    this.isBun = !!(globalThis as any).Bun;
+    if (this.isBun) {
+      const { Database } = require("bun:sqlite");
+      this.inner = new Database(path, { create: true });
+    } else {
+      const Database = require("better-sqlite3");
+      this.inner = new Database(path);
+    }
+  }
+
+  exec(sql: string) {
+    return this.inner.exec(sql);
+  }
+
+  pragma(sql: string) {
+    if (this.isBun) return this.inner.exec(`PRAGMA ${sql}`);
+    return this.inner.pragma(sql);
+  }
+
+  prepare(sql: string) {
+    const stmt = this.inner.prepare(sql);
+    // Unify APIs: Bun uses .get()/.all() on statement, Better-SQLite3 does too.
+    // However, Better-SQLite3 returns 'info' from .run(), Bun returns nothing or different.
+    return {
+      run: (...args: any[]) => stmt.run(...args),
+      get: (...args: any[]) => stmt.get(...args),
+      all: (...args: any[]) => stmt.all(...args)
+    };
+  }
+
+  transaction(fn: Function) {
+    return this.inner.transaction(fn);
+  }
+}
+
 export class CodeGraphDB {
-  private db: Database.Database;
+  private db: DatabaseAdapter;
   private workerRunning: boolean = false;
 
   constructor() {
-    // Ensure directory exists
     if (!fs.existsSync(OPENCODE_DIR)) {
       fs.mkdirSync(OPENCODE_DIR, { recursive: true });
     }
     
-    this.db = new Database(DB_PATH);
+    this.db = new DatabaseAdapter(DB_PATH);
     this.initialize();
-    
-    // Start background worker
     this.startWorker();
   }
 
   private initialize() {
-    // Enable WAL mode for concurrency and performance
     this.db.pragma('journal_mode = WAL');
 
     this.db.exec(`
@@ -51,7 +92,7 @@ export class CodeGraphDB {
       CREATE TABLE IF NOT EXISTS embedding_queue (
         chunk_id TEXT PRIMARY KEY,
         text_to_embed TEXT,
-        status TEXT DEFAULT 'pending', -- pending, processing, failed
+        status TEXT DEFAULT 'pending',
         retries INTEGER DEFAULT 0,
         FOREIGN KEY(chunk_id) REFERENCES chunks(id) ON DELETE CASCADE
       );
@@ -60,7 +101,7 @@ export class CodeGraphDB {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         chunk_id TEXT,
         name TEXT NOT NULL,
-        kind TEXT, -- 'function', 'class', 'interface', etc.
+        kind TEXT,
         FOREIGN KEY(chunk_id) REFERENCES chunks(id) ON DELETE CASCADE
       );
 
@@ -75,7 +116,7 @@ export class CodeGraphDB {
         author TEXT,
         date DATETIME,
         message TEXT,
-        files_touched TEXT -- JSON array of paths
+        files_touched TEXT
       );
 
       CREATE TABLE IF NOT EXISTS plan_ledger (
@@ -89,8 +130,8 @@ export class CodeGraphDB {
 
       CREATE TABLE IF NOT EXISTS background_jobs (
         id TEXT PRIMARY KEY,
-        type TEXT, -- 'validation', 'setup', 'indexing'
-        status TEXT DEFAULT 'pending', -- pending, running, completed, failed
+        type TEXT,
+        status TEXT DEFAULT 'pending',
         progress INTEGER DEFAULT 0,
         result TEXT,
         error TEXT,
@@ -98,7 +139,6 @@ export class CodeGraphDB {
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
       );
 
-      -- Indexes for performance
       CREATE INDEX IF NOT EXISTS idx_files_path ON files(path);
       CREATE INDEX IF NOT EXISTS idx_symbols_name ON symbols(name);
       CREATE INDEX IF NOT EXISTS idx_dependencies_target ON dependencies(target_path);
@@ -106,13 +146,9 @@ export class CodeGraphDB {
       CREATE INDEX IF NOT EXISTS idx_jobs_status ON background_jobs(status);
     `);
 
-    // Migrations
     try { this.db.exec("ALTER TABLE chunks ADD COLUMN embedding BLOB"); } catch {}
   }
 
-  /**
-   * Background Job Management
-   */
   public createJob(id: string, type: string, metadata?: any): void {
     this.db.prepare(`
       INSERT INTO background_jobs (id, type, status, progress, result)
@@ -123,15 +159,12 @@ export class CodeGraphDB {
   public updateJob(id: string, updates: { status?: string, progress?: number, result?: string, error?: string }): void {
     const sets: string[] = [];
     const params: any[] = [];
-    
     if (updates.status) { sets.push("status = ?"); params.push(updates.status); }
     if (updates.progress !== undefined) { sets.push("progress = ?"); params.push(updates.progress); }
     if (updates.result) { sets.push("result = ?"); params.push(updates.result); }
     if (updates.error) { sets.push("error = ?"); params.push(updates.error); }
-    
     sets.push("updated_at = CURRENT_TIMESTAMP");
     params.push(id);
-
     this.db.prepare(`UPDATE background_jobs SET ${sets.join(", ")} WHERE id = ?`).run(...params);
   }
 
@@ -149,22 +182,13 @@ export class CodeGraphDB {
   private async startWorker() {
     if (this.workerRunning) return;
     this.workerRunning = true;
-    
-    // Run periodically
     setInterval(async () => {
-      try {
-        await this.processEmbeddingQueue();
-      } catch (e) {
-        // Log to file if needed, but avoid console to protect TUI
-      }
-    }, 5000); // Check every 5s
+      try { await this.processEmbeddingQueue(); } catch (e) {}
+    }, 5000);
   }
 
   private async processEmbeddingQueue() {
-    // Check if Ollama is ready
     if (!(await ollama.isRunning())) return;
-
-    // Get next task
     const task = this.db.prepare(`
       SELECT chunk_id, text_to_embed, retries 
       FROM embedding_queue 
@@ -174,29 +198,19 @@ export class CodeGraphDB {
     `).get() as { chunk_id: string; text_to_embed: string; retries: number } | undefined;
 
     if (!task) return;
-
-    // Mark processing
     this.db.prepare("UPDATE embedding_queue SET status = 'processing' WHERE chunk_id = ?").run(task.chunk_id);
 
     try {
-      // Generate embedding
       const vector = await ollama.getEmbedding(task.text_to_embed);
-      
       if (vector.length > 0) {
-        // Store blob (Float32Array to Buffer)
         const buffer = Buffer.from(new Float32Array(vector).buffer);
-        
         const updateChunk = this.db.prepare("UPDATE chunks SET embedding = ? WHERE id = ?");
         const deleteQueue = this.db.prepare("DELETE FROM embedding_queue WHERE chunk_id = ?");
-        
-        const txn = this.db.transaction(() => {
+        this.db.transaction(() => {
           updateChunk.run(buffer, task.chunk_id);
           deleteQueue.run(task.chunk_id);
-        });
-        txn();
-      } else {
-        throw new Error("Empty vector returned");
-      }
+        })();
+      } else { throw new Error("Empty vector"); }
     } catch (error) {
       if (task.retries > 3) {
         this.db.prepare("UPDATE embedding_queue SET status = 'failed' WHERE chunk_id = ?").run(task.chunk_id);
@@ -206,70 +220,41 @@ export class CodeGraphDB {
     }
   }
 
-  /**
-   * Syncs a ChunkCard (JSON) into the SQLite Index.
-   */
   public ingestChunkCard(card: ChunkCard) {
     const insertFile = this.db.prepare(`
       INSERT INTO files (path, hash, last_indexed)
       VALUES (?, ?, CURRENT_TIMESTAMP)
-      ON CONFLICT(path) DO UPDATE SET
-        hash = excluded.hash,
-        last_indexed = CURRENT_TIMESTAMP
+      ON CONFLICT(path) DO UPDATE SET hash = excluded.hash, last_indexed = CURRENT_TIMESTAMP
       RETURNING id
     `);
-
     const insertChunk = this.db.prepare(`
       INSERT INTO chunks (id, file_id, type, complexity_score, content_summary)
       VALUES (?, ?, ?, ?, ?)
-      ON CONFLICT(id) DO UPDATE SET
-        complexity_score = excluded.complexity_score,
-        content_summary = excluded.content_summary
+      ON CONFLICT(id) DO UPDATE SET complexity_score = excluded.complexity_score, content_summary = excluded.content_summary
     `);
-
     const queueEmbedding = this.db.prepare(`
       INSERT INTO embedding_queue (chunk_id, text_to_embed)
       VALUES (?, ?)
-      ON CONFLICT(chunk_id) DO UPDATE SET
-        text_to_embed = excluded.text_to_embed,
-        status = 'pending',
-        retries = 0
+      ON CONFLICT(chunk_id) DO UPDATE SET text_to_embed = excluded.text_to_embed, status = 'pending', retries = 0
     `);
-
-    const insertSymbol = this.db.prepare(`
-      INSERT INTO symbols (chunk_id, name, kind) VALUES (?, ?, 'unknown')
-    `);
-
-    const insertDep = this.db.prepare(`
-      INSERT INTO dependencies (source_chunk_id, target_path) VALUES (?, ?)
-    `);
-
+    const insertSymbol = this.db.prepare(`INSERT INTO symbols (chunk_id, name, kind) VALUES (?, ?, 'unknown')`);
+    const insertDep = this.db.prepare(`INSERT INTO dependencies (source_chunk_id, target_path) VALUES (?, ?)`);
     const deleteOldSymbols = this.db.prepare('DELETE FROM symbols WHERE chunk_id = ?');
     const deleteOldDeps = this.db.prepare('DELETE FROM dependencies WHERE source_chunk_id = ?');
 
-    const transaction = this.db.transaction(() => {
+    this.db.transaction(() => {
       const fileRes = insertFile.get(card.file_path, card.metadata.hash) as { id: number };
       const fileId = fileRes.id;
-
       insertChunk.run(card.id, fileId, card.chunk_type, card.metadata.complexity_score, card.content.slice(0, 500));
-
       const textToEmbed = `${card.chunk_type.toUpperCase()} for ${path.basename(card.file_path)}
 
 ${card.content.slice(0, 2000)}`;
       queueEmbedding.run(card.id, textToEmbed);
-
       deleteOldSymbols.run(card.id);
-      for (const sym of card.metadata.symbols) {
-        insertSymbol.run(card.id, sym);
-      }
-
+      for (const sym of card.metadata.symbols) insertSymbol.run(card.id, sym);
       deleteOldDeps.run(card.id);
-      for (const dep of card.metadata.dependencies) {
-        insertDep.run(card.id, dep);
-      }
-    });
-
-    transaction();
+      for (const dep of card.metadata.dependencies) insertDep.run(card.id, dep);
+    })();
   }
 
   public deleteChunkCard(cardId: string) {
@@ -289,57 +274,33 @@ ${card.content.slice(0, 2000)}`;
       VALUES (?, ?, ?, ?, ?)
       ON CONFLICT(hash) DO NOTHING
     `);
-
-    const transaction = this.db.transaction((data) => {
-      for (const c of data) {
-        insert.run(c.hash, c.author, c.date, c.message, JSON.stringify(c.files));
-      }
-    });
-    transaction(commits);
+    this.db.transaction((data: any[]) => {
+      for (const c of data) insert.run(c.hash, c.author, c.date, c.message, JSON.stringify(c.files));
+    })(commits);
   }
 
   public getHotFiles(pathPrefix: string = '', limit: number = 10) {
-    const recent = this.db.prepare(`
-      SELECT files_touched FROM commits ORDER BY date DESC LIMIT 100
-    `).all() as { files_touched: string }[];
-
+    const recent = this.db.prepare(`SELECT files_touched FROM commits ORDER BY date DESC LIMIT 100`).all() as { files_touched: string }[];
     const counts: Record<string, number> = {};
     for (const r of recent) {
       try {
         const files = JSON.parse(r.files_touched);
-        for (const f of files) {
-          if (f.startsWith(pathPrefix)) {
-            counts[f] = (counts[f] || 0) + 1;
-          }
-        }
+        for (const f of files) if (f.startsWith(pathPrefix)) counts[f] = (counts[f] || 0) + 1;
       } catch {}
     }
-
-    return Object.entries(counts)
-      .map(([path, count]) => ({ path, count }))
-      .sort((a, b) => b.count - a.count)
-      .slice(0, limit);
+    return Object.entries(counts).map(([path, count]) => ({ path, count })).sort((a, b) => b.count - a.count).slice(0, limit);
   }
 
   public getPlanMetrics(planId: string) {
     const total = this.db.prepare("SELECT COUNT(*) as c FROM plan_ledger WHERE plan_id = ?").get(planId) as { c: number };
     const onPlan = this.db.prepare("SELECT COUNT(*) as c FROM plan_ledger WHERE plan_id = ? AND is_on_plan = 1").get(planId) as { c: number };
     const offPlan = this.db.prepare("SELECT COUNT(*) as c FROM plan_ledger WHERE plan_id = ? AND is_on_plan = 0").get(planId) as { c: number };
-    
-    return {
-      total: total.c,
-      on_plan: onPlan.c,
-      off_plan: offPlan.c,
-      compliance: total.c > 0 ? Math.round((onPlan.c / total.c) * 100) : 100
-    };
+    return { total: total.c, on_plan: onPlan.c, off_plan: offPlan.c, compliance: total.c > 0 ? Math.round((onPlan.c / total.c) * 100) : 100 };
   }
 
   public findDependents(filePath: string): string[] {
     const query = this.db.prepare(`
-      SELECT DISTINCT f.path 
-      FROM files f
-      JOIN chunks c ON f.id = c.file_id
-      JOIN dependencies d ON c.id = d.source_chunk_id
+      SELECT DISTINCT f.path FROM files f JOIN chunks c ON f.id = c.file_id JOIN dependencies d ON c.id = d.source_chunk_id
       WHERE d.target_path LIKE ? OR d.target_path = ?
     `);
     const basename = path.basename(filePath);
@@ -349,36 +310,25 @@ ${card.content.slice(0, 2000)}`;
 
   public searchSymbols(query: string): any[] {
     const stmt = this.db.prepare(`
-      SELECT s.name, c.type, f.path 
-      FROM symbols s
-      JOIN chunks c ON s.chunk_id = c.id
-      JOIN files f ON c.file_id = f.id
-      WHERE s.name LIKE ?
-      LIMIT 20
+      SELECT s.name, c.type, f.path FROM symbols s JOIN chunks c ON s.chunk_id = c.id JOIN files f ON c.file_id = f.id
+      WHERE s.name LIKE ? LIMIT 20
     `);
     return stmt.all(`%${query}%`);
   }
 
   public async semanticSearch(query: string, limit: number = 10): Promise<any[]> {
-    if (!(await ollama.isRunning())) {
-      throw new Error("Ollama is not running. Please run 'autognosis_setup_ai' first.");
-    }
+    if (!(await ollama.isRunning())) throw new Error("Ollama is not running.");
     const queryVec = await ollama.getEmbedding(query);
     if (queryVec.length === 0) return [];
-
     const chunks = this.db.prepare(`
-      SELECT c.id, c.content_summary, c.type, f.path, c.embedding
-      FROM chunks c
-      JOIN files f ON c.file_id = f.id
+      SELECT c.id, c.content_summary, c.type, f.path, c.embedding FROM chunks c JOIN files f ON c.file_id = f.id
       WHERE c.embedding IS NOT NULL
     `).all() as { id: string; content_summary: string; type: string; path: string; embedding: Buffer }[];
-
     const results = chunks.map(chunk => {
       const vector = new Float32Array(chunk.embedding.buffer, chunk.embedding.byteOffset, chunk.embedding.byteLength / 4);
-      const similarity = this.cosineSimilarity(queryVec, vector);
+      const similarity = this.cosineSimilarity(Array.from(queryVec), vector);
       return { ...chunk, similarity, embedding: undefined };
     });
-
     results.sort((a, b) => b.similarity - a.similarity);
     return results.slice(0, limit);
   }
@@ -421,33 +371,18 @@ export function graphTools(): { [key: string]: any } {
         async execute({ model }) {
             const jobId = `job-setup-ai-${Date.now()}`;
             getDb().createJob(jobId, "setup", { model });
-
             (async () => {
                 try {
                     getDb().updateJob(jobId, { status: "running", progress: 10 });
-                    if (!(await ollama.isInstalled())) {
-                        await ollama.install();
-                    }
+                    if (!(await ollama.isInstalled())) await ollama.install();
                     getDb().updateJob(jobId, { progress: 40 });
                     await ollama.startServer();
                     getDb().updateJob(jobId, { progress: 60 });
                     await ollama.pullModel(model);
-                    getDb().updateJob(jobId, { 
-                        status: "completed", 
-                        progress: 100, 
-                        result: `Model ${model} is ready.` 
-                    });
-                } catch (error: any) {
-                    getDb().updateJob(jobId, { status: "failed", error: error.message });
-                }
+                    getDb().updateJob(jobId, { status: "completed", progress: 100, result: `Model ${model} is ready.` });
+                } catch (error: any) { getDb().updateJob(jobId, { status: "failed", error: error.message }); }
             })();
-
-            return JSON.stringify({ 
-                status: "STARTED", 
-                message: "AI Setup started in background.", 
-                job_id: jobId,
-                instruction: "Use graph_background_status to check progress."
-            }, null, 2);
+            return JSON.stringify({ status: "STARTED", message: "AI Setup started in background.", job_id: jobId, instruction: "Use graph_background_status to check progress." }, null, 2);
         }
     }),
     graph_semantic_search: tool({
@@ -521,7 +456,6 @@ export function graphTools(): { [key: string]: any } {
         catch (error) { return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2); }
       }
     }),
-
     graph_background_status: tool({
       description: "Check status of background tasks (validation, setup, indexing).",
       args: { 
@@ -531,13 +465,9 @@ export function graphTools(): { [key: string]: any } {
       },
       async execute({ job_id, type, limit }) {
         try {
-          if (job_id) {
-            return JSON.stringify({ status: "SUCCESS", job: getDb().getJob(job_id) }, null, 2);
-          }
+          if (job_id) return JSON.stringify({ status: "SUCCESS", job: getDb().getJob(job_id) }, null, 2);
           return JSON.stringify({ status: "SUCCESS", jobs: getDb().listJobs(type, limit) }, null, 2);
-        } catch (error) {
-          return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2);
-        }
+        } catch (error) { return JSON.stringify({ status: "ERROR", message: String(error) }, null, 2); }
       }
     })
   };
