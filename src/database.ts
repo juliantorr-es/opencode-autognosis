@@ -152,6 +152,27 @@ export class CodeGraphDB {
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
       );
 
+      CREATE TABLE IF NOT EXISTS blackboard (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        author TEXT,
+        message TEXT,
+        topic TEXT,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+      );
+
+      CREATE TABLE IF NOT EXISTS intents (
+        patch_id TEXT PRIMARY KEY,
+        reasoning TEXT,
+        plan_id TEXT
+      );
+
+      CREATE TABLE IF NOT EXISTS arch_rules (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        source_pattern TEXT,
+        target_pattern TEXT,
+        restriction TEXT DEFAULT 'forbidden'
+      );
+
       CREATE TABLE IF NOT EXISTS background_jobs (
         id TEXT PRIMARY KEY,
         type TEXT,
@@ -201,6 +222,55 @@ export class CodeGraphDB {
       return this.db.prepare("SELECT * FROM background_jobs WHERE type = ? ORDER BY created_at DESC LIMIT ?").all(type, limit);
     }
     return this.db.prepare("SELECT * FROM background_jobs ORDER BY created_at DESC LIMIT ?").all(limit);
+  }
+
+  public postToBlackboard(author: string, message: string, topic: string = 'general') {
+    this.db.prepare(`
+      INSERT INTO blackboard (author, message, topic)
+      VALUES (?, ?, ?)
+    `).run(author, message, topic);
+  }
+
+  public readBlackboard(topic?: string, limit: number = 10) {
+    if (topic) {
+      return this.db.prepare(`
+        SELECT * FROM blackboard WHERE topic = ? ORDER BY timestamp DESC LIMIT ?
+      `).all(topic, limit);
+    }
+    return this.db.prepare(`
+      SELECT * FROM blackboard ORDER BY timestamp DESC LIMIT ?
+    `).all(limit);
+  }
+
+  public storeIntent(patchId: string, reasoning: string, planId: string) {
+    this.db.prepare(`
+      INSERT INTO intents (patch_id, reasoning, plan_id)
+      VALUES (?, ?, ?)
+      ON CONFLICT(patch_id) DO UPDATE SET
+        reasoning = excluded.reasoning,
+        plan_id = excluded.plan_id
+    `).run(patchId, reasoning, planId);
+  }
+
+  public getIntent(patchId: string) {
+    return this.db.prepare("SELECT * FROM intents WHERE patch_id = ?").get(patchId);
+  }
+
+  public addArchRule(source: string, target: string) {
+    this.db.prepare(`
+      INSERT INTO arch_rules (source_pattern, target_pattern)
+      VALUES (?, ?)
+    `).run(source, target);
+  }
+
+  public checkArchViolation(sourcePath: string, targetPath: string) {
+    const rules = this.db.prepare("SELECT * FROM arch_rules").all() as any[];
+    for (const rule of rules) {
+      if (sourcePath.includes(rule.source_pattern) && targetPath.includes(rule.target_pattern)) {
+        return rule;
+      }
+    }
+    return null;
   }
 
   private async startWorker() {

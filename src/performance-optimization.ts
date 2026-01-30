@@ -742,7 +742,7 @@ async function getAllSourceFiles(): Promise<string[]> {
   return sourceFiles;
 }
 
-async function indexFile(filePath: string): Promise<void> {
+export async function indexFile(filePath: string): Promise<void> {
   try {
     const content = await fs.readFile(filePath, 'utf-8');
     await ensureChunkDir();

@@ -23,22 +23,15 @@ const internal = {
 
 async function scoutPlugins() {
     const plugins = new Set<string>();
-    
-    // 1. Check opencode.jsonc
     try {
         const config = JSON.parse(fsSync.readFileSync(path.join(PROJECT_ROOT, "opencode.jsonc"), "utf-8"));
         if (config.plugin) config.plugin.forEach((p: string) => plugins.add(p));
-    } catch {}
-
-    // 2. Check package.json dependencies
+    } catch {} // Ignore errors if config file doesn't exist
     try {
         const pkg = JSON.parse(fsSync.readFileSync(path.join(PROJECT_ROOT, "package.json"), "utf-8"));
         const allDeps = { ...pkg.dependencies, ...pkg.devDependencies };
-        Object.keys(allDeps).forEach(d => {
-            if (d.includes("opencode")) plugins.add(d);
-        });
-    } catch {}
-
+        Object.keys(allDeps).forEach(d => { if (d.includes("opencode")) plugins.add(d); });
+    } catch {} // Ignore errors if package.json doesn't exist
     return Array.from(plugins);
 }
 
@@ -47,28 +40,25 @@ async function updateBridgePrompt(plugins: string[]) {
     if (!fsSync.existsSync(bridgePath)) return "bridge.md not found at " + bridgePath;
 
     const toolsSection = `
-## Current Consolidated Tools (Autognosis v2)
+## Current Consolidated Tools (Autognosis v2.2)
 - code_search: Universal search (semantic, symbol, filename, content).
 - code_analyze: Deep structural analysis and impact reports.
-- code_context: Working memory (ActiveSet) management.
+- code_context: Working memory (ActiveSet) management and LRU eviction.
 - code_read: Precise symbol jumping and file slicing.
-- code_propose: Planning, patch generation, and PR promotion.
-- code_status: System health, background job monitoring, and compliance metrics.
-- code_setup: Environment initialization and maintenance.
+- code_propose: Planning, patch generation, PR promotion, and Intent indexing.
+- code_status: System health, background jobs, compliance, and Multi-Agent Blackboard.
+- code_setup: Environment initialization, AI setup, and Architectural Boundaries.
 
 ## Other Detected Plugins
 ${plugins.filter(p => p !== "opencode-autognosis").map(p => `- ${p}`).join('\n')}
 `;
 
     let content = fsSync.readFileSync(bridgePath, "utf-8");
-    
-    // Replace or Append Tool Usage section
     if (content.includes("## Current Consolidated Tools")) {
         content = content.replace(/## Current Consolidated Tools[\s\S]*?(?=\n#|$)/, toolsSection);
     } else {
         content += "\n" + toolsSection;
     }
-
     fsSync.writeFileSync(bridgePath, content);
     return "Updated bridge.md with consolidated tools and detected plugins.";
 }
@@ -107,7 +97,7 @@ export function unifiedTools(): { [key: string]: any } {
           case "module": return internal.module_synthesize.execute({ file_path: args.target, force_resynthesize: args.force });
           case "impact": return internal.brief_fix_loop.execute({ symbol: args.target, intent: "impact_analysis" });
           case "reasoning": return internal.module_hierarchical_reasoning.execute({ module_id: args.target });
-          case "callers": return internal.graph_search_symbols.execute({ query: args.target }); // Fallback or direct DB query
+          case "callers": return internal.graph_search_symbols.execute({ query: args.target }); 
           default: return internal.chunk_create_card.execute({ file_path: args.target, chunk_type: args.mode as any, force_recreate: args.force });
         }
       }
@@ -117,30 +107,20 @@ export function unifiedTools(): { [key: string]: any } {
       description: "Manage working memory (ActiveSets). Limits context window usage by loading/unloading specific chunks.",
       args: {
         action: tool.schema.enum(["create", "load", "add", "remove", "status", "list", "close", "evict"]),
-        target: tool.schema.string().optional().describe("ActiveSet ID or Chunk IDs (comma separated)"),
-        name: tool.schema.string().optional().describe("Name for new ActiveSet"),
+        target: tool.schema.string().optional().describe("ActiveSet ID or Chunk IDs"),
+        name: tool.schema.string().optional(),
         limit: tool.schema.number().optional().default(5).describe("Eviction limit"),
         plan_id: tool.schema.string().optional()
       },
       async execute(args) {
         switch (args.action) {
-          case "create": {
-              const chunk_ids = args.target?.split(',').map(s => s.trim());
-              return internal.activeset_create.execute({ name: args.name || "Context", chunk_ids });
-          }
+          case "create": return internal.activeset_create.execute({ name: args.name || "Context", chunk_ids: args.target?.split(',').map(s => s.trim()) });
           case "load": return internal.activeset_load.execute({ set_id: args.target! });
-          case "add": {
-              const chunk_ids = args.target?.split(',').map(s => s.trim());
-              return internal.activeset_add_chunks.execute({ chunk_ids: chunk_ids! });
-          }
-          case "remove": {
-              const chunk_ids = args.target?.split(',').map(s => s.trim());
-              return internal.activeset_remove_chunks.execute({ chunk_ids: chunk_ids! });
-          }
+          case "add": return internal.activeset_add_chunks.execute({ chunk_ids: args.target?.split(',').map(s => s.trim())! });
+          case "remove": return internal.activeset_remove_chunks.execute({ chunk_ids: args.target?.split(',').map(s => s.trim())! });
           case "evict": {
               const lru = getDb().getLruChunks(args.limit);
-              const chunk_ids = lru.map(c => c.chunk_id);
-              return internal.activeset_remove_chunks.execute({ chunk_ids });
+              return internal.activeset_remove_chunks.execute({ chunk_ids: lru.map(c => c.chunk_id) });
           }
           case "list": return internal.activeset_list.execute({});
           case "close": return internal.activeset_close.execute({});
@@ -159,9 +139,7 @@ export function unifiedTools(): { [key: string]: any } {
         plan_id: tool.schema.string().optional()
       },
       async execute(args) {
-        // Log access for LRU eviction
         if (args.symbol) {
-            // Find chunk id for symbol first (simplified)
             getDb().logAccess(args.symbol, args.plan_id);
             return internal.jump_to_symbol.execute({ symbol: args.symbol, plan_id: args.plan_id });
         }
@@ -174,14 +152,15 @@ export function unifiedTools(): { [key: string]: any } {
     }),
 
     code_propose: tool({
-      description: "Plan, propose, and promote changes. Includes patch generation and PR promotion.",
+      description: "Plan, propose, and promote changes. Includes patch generation, Intent indexing, and PR promotion.",
       args: {
         action: tool.schema.enum(["plan", "patch", "validate", "finalize", "promote"]),
-        symbol: tool.schema.string().optional().describe("Locus symbol for plan"),
-        intent: tool.schema.string().optional().describe("Work intent"),
-        message: tool.schema.string().optional().describe("Commit/PR message"),
-        patch_path: tool.schema.string().optional().describe("Path to .diff file"),
-        branch: tool.schema.string().optional().describe("Branch name for promotion"),
+        symbol: tool.schema.string().optional(),
+        intent: tool.schema.string().optional(),
+        reasoning: tool.schema.string().optional().describe("Detailed reasoning for the change (Decision Indexing)"),
+        message: tool.schema.string().optional(),
+        patch_path: tool.schema.string().optional(),
+        branch: tool.schema.string().optional(),
         plan_id: tool.schema.string().optional(),
         outcome: tool.schema.string().optional()
       },
@@ -194,9 +173,27 @@ export function unifiedTools(): { [key: string]: any } {
               if (violations.some(v => v.severity === "error")) {
                   return JSON.stringify({ status: "POLICY_VIOLATION", violations, message: "Patch rejected by policy engine." }, null, 2);
               }
-              return internal.prepare_patch.execute({ message: args.message!, plan_id: args.plan_id });
+              const res = await internal.prepare_patch.execute({ message: args.message!, plan_id: args.plan_id });
+              const json = JSON.parse(res);
+              if (json.status === "SUCCESS" && args.reasoning) {
+                  getDb().storeIntent(json.patch_id, args.reasoning, args.plan_id || "adhoc");
+              }
+              return res;
           }
-          case "validate": return internal.validate_patch.execute({ patch_path: args.patch_path!, plan_id: args.plan_id });
+          case "validate": {
+              // Architectural Boundary Check
+              const { stdout: diff } = await (internal as any).runCmd("git diff --name-only");
+              const changedFiles = diff.split('\n').filter(Boolean);
+              for (const file of changedFiles) {
+                  const deps = await internal.extractDependencies.execute({ content: "", ast: null, filePath: file });
+                  const imports = JSON.parse(deps);
+                  for (const imp of imports) {
+                      const violation = getDb().checkArchViolation(file, imp);
+                      if (violation) return JSON.stringify({ status: "ARCH_VIOLATION", file, forbidden_import: imp, rule: violation }, null, 2);
+                  }
+              }
+              return internal.validate_patch.execute({ patch_path: args.patch_path!, plan_id: args.plan_id });
+          }
           case "promote": {
               const branch = args.branch || `autognosis-fix-${Date.now()}`;
               const { execSync } = await import("node:child_process");
@@ -206,9 +203,7 @@ export function unifiedTools(): { [key: string]: any } {
                   execSync(`git add . && git commit -m "${args.message || 'Automated promotion'}"`);
                   execSync(`gh pr create --title "${args.message}" --body "Automated promotion from Autognosis v2."`);
                   return JSON.stringify({ status: "SUCCESS", promoted_to: branch, pr: "OPENED" }, null, 2);
-              } catch (e: any) {
-                  return JSON.stringify({ status: "ERROR", message: e.message }, null, 2);
-              }
+              } catch (e: any) { return JSON.stringify({ status: "ERROR", message: e.message }, null, 2); }
           }
           case "finalize": return internal.finalize_plan.execute({ plan_id: args.plan_id!, outcome: args.outcome! });
         }
@@ -216,24 +211,32 @@ export function unifiedTools(): { [key: string]: any } {
     }),
 
     code_status: tool({
-      description: "Monitor system health, background jobs, and plan metrics.",
+      description: "Monitor system health, background jobs, compliance, and Multi-Agent Blackboard.",
       args: {
-        mode: tool.schema.enum(["stats", "hot_files", "jobs", "plan", "doctor"]).optional().default("stats"),
+        mode: tool.schema.enum(["stats", "hot_files", "jobs", "plan", "doctor", "blackboard"]).optional().default("stats"),
+        action: tool.schema.enum(["post", "read"]).optional(),
+        topic: tool.schema.string().optional().default("general"),
+        message: tool.schema.string().optional(),
         job_id: tool.schema.string().optional(),
         plan_id: tool.schema.string().optional(),
         path: tool.schema.string().optional().default("")
       },
       async execute(args) {
         switch (args.mode) {
+          case "blackboard": {
+              if (args.action === "post") {
+                  getDb().postToBlackboard("Agent", args.message!, args.topic);
+                  return JSON.stringify({ status: "SUCCESS", message: "Posted to blackboard." });
+              }
+              return JSON.stringify({ status: "SUCCESS", entries: getDb().readBlackboard(args.topic) });
+          }
           case "hot_files": return internal.journal_query_hot_files.execute({ path_prefix: args.path });
           case "jobs": return internal.graph_background_status.execute({ job_id: args.job_id });
           case "plan": return internal.graph_get_plan_metrics.execute({ plan_id: args.plan_id! });
           case "doctor": {
               const stats = getDb().getStats();
               let logSnippet = "";
-              try {
-                  logSnippet = fsSync.readFileSync(path.join(PROJECT_ROOT, ".opencode", "logs", "autognosis.log"), "utf-8").split('\n').slice(-20).join('\n');
-              } catch (e) {}
+              try { logSnippet = fsSync.readFileSync(path.join(PROJECT_ROOT, ".opencode", "logs", "autognosis.log"), "utf-8").split('\n').slice(-20).join('\n'); } catch (e) {}
               return JSON.stringify({ status: "HEALTHY", stats, recent_logs: logSnippet }, null, 2);
           }
           default: return internal.graph_stats.execute({});
@@ -242,33 +245,33 @@ export function unifiedTools(): { [key: string]: any } {
     }),
 
     code_setup: tool({
-      description: "One-time setup and maintenance tasks (AI, Git Journal, Indexing, Prompt Scouting).",
+      description: "Setup and maintenance tasks (AI, Git Journal, Indexing, Prompt Scouting, Arch Boundaries).",
       args: {
-        action: tool.schema.enum(["init", "ai", "index", "journal", "scout"]),
+        action: tool.schema.enum(["init", "ai", "index", "journal", "scout", "arch_rule"]),
         provider: tool.schema.enum(["ollama", "mlx"]).optional().default("ollama"),
-        model: tool.schema.string().optional().describe("AI Model name"),
-        limit: tool.schema.number().optional().describe("History limit")
+        model: tool.schema.string().optional(),
+        limit: tool.schema.number().optional(),
+        source: tool.schema.string().optional().describe("Source target pattern"),
+        target: tool.schema.string().optional().describe("Target target pattern (forbidden)")
       },
       async execute(args) {
         switch (args.action) {
+          case "arch_rule": {
+              getDb().addArchRule(args.source!, args.target!);
+              return JSON.stringify({ status: "SUCCESS", message: `Architecture rule added: ${args.source} cannot import ${args.target}` });
+          }
           case "ai": return internal.autognosis_setup_ai.execute({ provider: args.provider, model: args.model });
           case "index": return internal.perf_incremental_index.execute({ background: true });
           case "journal": return internal.journal_build.execute({ limit: args.limit });
-          case "scout": {
-              const plugins = await scoutPlugins();
-              return updateBridgePrompt(plugins);
-          }
+          case "scout": { const plugins = await scoutPlugins(); return updateBridgePrompt(plugins); }
           default: return internal.autognosis_init.execute({ mode: "apply", token: "adhoc" });
         }
       }
     }),
 
     internal_call: tool({
-      description: "Advanced access to specialized internal tools. Use only when unified tools are insufficient.",
-      args: {
-        tool_name: tool.schema.string().describe("Internal tool name"),
-        args: tool.schema.any().describe("Arguments for the internal tool")
-      },
+      description: "Advanced access to specialized internal tools.",
+      args: { tool_name: tool.schema.string(), args: tool.schema.any() },
       async execute({ tool_name, args }) {
         const target = (internal as any)[tool_name];
         if (!target) throw new Error(`Internal tool '${tool_name}' not found.`);

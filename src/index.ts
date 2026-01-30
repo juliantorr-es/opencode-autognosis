@@ -1,10 +1,14 @@
 import { unifiedTools } from "./unified-api.js";
 import { loadWorkingMemory, loadActiveSet } from "./activeset.js";
 import { tui } from "./services/tui.js";
+import { codeWatcher } from "./services/watcher.js";
 
 export const AutognosisPlugin = async ({ client }: any) => {
   // Initialize TUI service for progress streaming
   tui.setClient(client);
+
+  // Start live file watcher
+  codeWatcher.start();
 
   return {
     tool: {
