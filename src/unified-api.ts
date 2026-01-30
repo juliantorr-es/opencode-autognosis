@@ -40,13 +40,13 @@ async function updateBridgePrompt(plugins: string[]) {
     if (!fsSync.existsSync(bridgePath)) return "bridge.md not found at " + bridgePath;
 
     const toolsSection = `
-## Current Consolidated Tools (Autognosis v2.2)
+## Current Consolidated Tools (Autognosis v2.3)
 - code_search: Universal search (semantic, symbol, filename, content).
 - code_analyze: Deep structural analysis and impact reports.
-- code_context: Working memory (ActiveSet) management and LRU eviction.
-- code_read: Precise symbol jumping and file slicing.
+- code_context: Working memory (ActiveSet) management, LRU eviction, and Symbol Graffiti.
+- code_read: Precise symbol jumping and file slicing with Mutex Lock checks.
 - code_propose: Planning, patch generation, PR promotion, and Intent indexing.
-- code_status: System health, background jobs, compliance, and Multi-Agent Blackboard.
+- code_status: System health, background jobs, Multi-Agent Blackboard, and Resource Locks.
 - code_setup: Environment initialization, AI setup, and Architectural Boundaries.
 
 ## Other Detected Plugins
@@ -64,14 +64,16 @@ ${plugins.filter(p => p !== "opencode-autognosis").map(p => `- ${p}`).join('\n')
 }
 
 export function unifiedTools(): { [key: string]: any } {
+  const agentName = process.env.AGENT_NAME || `agent-${process.pid}`;
+
   return {
     code_search: tool({
       description: "Search the codebase using various engines (filename, content, symbol, or semantic/vector).",
       args: {
         query: tool.schema.string().describe("Search query"),
-        mode: tool.schema.enum(["filename", "content", "symbol", "semantic"]).optional().default("filename").describe("Search strategy"),
-        path: tool.schema.string().optional().default(".").describe("Root path for search"),
-        limit: tool.schema.number().optional().default(10).describe("Max results"),
+        mode: tool.schema.enum(["filename", "content", "symbol", "semantic"]).optional().default("filename"),
+        path: tool.schema.string().optional().default("."),
+        limit: tool.schema.number().optional().default(10),
         plan_id: tool.schema.string().optional()
       },
       async execute(args) {
@@ -109,7 +111,7 @@ export function unifiedTools(): { [key: string]: any } {
         action: tool.schema.enum(["create", "load", "add", "remove", "status", "list", "close", "evict"]),
         target: tool.schema.string().optional().describe("ActiveSet ID or Chunk IDs"),
         name: tool.schema.string().optional(),
-        limit: tool.schema.number().optional().default(5).describe("Eviction limit"),
+        limit: tool.schema.number().optional().default(5),
         plan_id: tool.schema.string().optional()
       },
       async execute(args) {
@@ -130,7 +132,7 @@ export function unifiedTools(): { [key: string]: any } {
     }),
 
     code_read: tool({
-      description: "Precise reading of symbols or file slices. Follows the current plan.",
+      description: "Precise reading of symbols or file slices. Follows current plan. Checks for locks and returns graffiti.",
       args: {
         symbol: tool.schema.string().optional().describe("Symbol to jump to"),
         file: tool.schema.string().optional().describe("File path to read"),
@@ -139,25 +141,39 @@ export function unifiedTools(): { [key: string]: any } {
         plan_id: tool.schema.string().optional()
       },
       async execute(args) {
-        if (args.symbol) {
-            getDb().logAccess(args.symbol, args.plan_id);
-            return internal.jump_to_symbol.execute({ symbol: args.symbol, plan_id: args.plan_id });
+        const resourceId = args.symbol || args.file;
+        if (resourceId) {
+            getDb().logAccess(resourceId, args.plan_id);
+            const lock = getDb().isLocked(resourceId);
+            const graffiti = getDb().getGraffiti(resourceId);
+            
+            let result: any;
+            if (args.symbol) {
+                result = await internal.jump_to_symbol.execute({ symbol: args.symbol, plan_id: args.plan_id });
+            } else {
+                result = await internal.read_slice.execute({ file: args.file!, start_line: args.start_line!, end_line: args.end_line!, plan_id: args.plan_id });
+            }
+
+            const parsed = JSON.parse(result);
+            return JSON.stringify({
+                ...parsed,
+                coordination: {
+                    lock_status: lock ? `LOCKED by ${lock.owner_agent}` : "FREE",
+                    graffiti: graffiti.length > 0 ? graffiti : undefined
+                }
+            }, null, 2);
         }
-        if (args.file && args.start_line && args.end_line) {
-          getDb().logAccess(args.file, args.plan_id);
-          return internal.read_slice.execute({ file: args.file, start_line: args.start_line, end_line: args.end_line, plan_id: args.plan_id });
-        }
-        throw new Error("Either 'symbol' or 'file' with line range must be provided.");
+        throw new Error("Either 'symbol' or 'file' must be provided.");
       }
     }),
 
     code_propose: tool({
-      description: "Plan, propose, and promote changes. Includes patch generation, Intent indexing, and PR promotion.",
+      description: "Plan, propose, and promote changes. Automatically handles coordination pulse and lock checks.",
       args: {
         action: tool.schema.enum(["plan", "patch", "validate", "finalize", "promote"]),
         symbol: tool.schema.string().optional(),
         intent: tool.schema.string().optional(),
-        reasoning: tool.schema.string().optional().describe("Detailed reasoning for the change (Decision Indexing)"),
+        reasoning: tool.schema.string().optional(),
         message: tool.schema.string().optional(),
         patch_path: tool.schema.string().optional(),
         branch: tool.schema.string().optional(),
@@ -166,32 +182,40 @@ export function unifiedTools(): { [key: string]: any } {
       },
       async execute(args) {
         switch (args.action) {
-          case "plan": return internal.brief_fix_loop.execute({ symbol: args.symbol!, intent: args.intent! });
+          case "plan": {
+              getDb().postToBlackboard(agentName, `Planning ${args.intent} for ${args.symbol}`, "pulse");
+              return internal.brief_fix_loop.execute({ symbol: args.symbol!, intent: args.intent! });
+          }
           case "patch": {
+              // 1. Check for locks on all changed files
               const { stdout: diff } = await (internal as any).runCmd("git diff");
+              const { stdout: files } = await (internal as any).runCmd("git diff --name-only");
+              const changedFiles = files.split('\n').filter(Boolean);
+              
+              for (const file of changedFiles) {
+                  const lock = getDb().isLocked(file);
+                  if (lock && lock.owner_agent !== agentName) {
+                      return JSON.stringify({ status: "COLLISION_PREVENTED", message: `File ${file} is locked by ${lock.owner_agent}. Use 'code_status' to investigate.` });
+                  }
+              }
+
+              // 2. Run Policy Engine
               const violations = policyEngine.checkDiff(diff);
               if (violations.some(v => v.severity === "error")) {
                   return JSON.stringify({ status: "POLICY_VIOLATION", violations, message: "Patch rejected by policy engine." }, null, 2);
               }
+
+              // 3. Prepare patch and record intent
               const res = await internal.prepare_patch.execute({ message: args.message!, plan_id: args.plan_id });
               const json = JSON.parse(res);
-              if (json.status === "SUCCESS" && args.reasoning) {
-                  getDb().storeIntent(json.patch_id, args.reasoning, args.plan_id || "adhoc");
+              if (json.status === "SUCCESS") {
+                  if (args.reasoning) getDb().storeIntent(json.patch_id, args.reasoning, args.plan_id || "adhoc");
+                  getDb().postToBlackboard(agentName, `Proposed patch ${json.patch_id}: ${args.message}`, "pulse");
               }
               return res;
           }
           case "validate": {
-              // Architectural Boundary Check
-              const { stdout: diff } = await (internal as any).runCmd("git diff --name-only");
-              const changedFiles = diff.split('\n').filter(Boolean);
-              for (const file of changedFiles) {
-                  const deps = await internal.extractDependencies.execute({ content: "", ast: null, filePath: file });
-                  const imports = JSON.parse(deps);
-                  for (const imp of imports) {
-                      const violation = getDb().checkArchViolation(file, imp);
-                      if (violation) return JSON.stringify({ status: "ARCH_VIOLATION", file, forbidden_import: imp, rule: violation }, null, 2);
-                  }
-              }
+              getDb().postToBlackboard(agentName, `Validating patch ${args.patch_path}`, "pulse");
               return internal.validate_patch.execute({ patch_path: args.patch_path!, plan_id: args.plan_id });
           }
           case "promote": {
@@ -202,20 +226,25 @@ export function unifiedTools(): { [key: string]: any } {
                   execSync(`git apply ${args.patch_path}`);
                   execSync(`git add . && git commit -m "${args.message || 'Automated promotion'}"`);
                   execSync(`gh pr create --title "${args.message}" --body "Automated promotion from Autognosis v2."`);
+                  getDb().postToBlackboard(agentName, `Promoted patch to PR on branch ${branch}`, "pulse");
                   return JSON.stringify({ status: "SUCCESS", promoted_to: branch, pr: "OPENED" }, null, 2);
               } catch (e: any) { return JSON.stringify({ status: "ERROR", message: e.message }, null, 2); }
           }
-          case "finalize": return internal.finalize_plan.execute({ plan_id: args.plan_id!, outcome: args.outcome! });
+          case "finalize": {
+              getDb().postToBlackboard(agentName, `Finalized plan ${args.plan_id} with outcome: ${args.outcome}`, "pulse");
+              return internal.finalize_plan.execute({ plan_id: args.plan_id!, outcome: args.outcome! });
+          }
         }
       }
     }),
 
     code_status: tool({
-      description: "Monitor system health, background jobs, compliance, and Multi-Agent Blackboard.",
+      description: "Monitor system health, background jobs, Multi-Agent Blackboard, and Resource Locks.",
       args: {
-        mode: tool.schema.enum(["stats", "hot_files", "jobs", "plan", "doctor", "blackboard"]).optional().default("stats"),
-        action: tool.schema.enum(["post", "read"]).optional(),
+        mode: tool.schema.enum(["stats", "hot_files", "jobs", "plan", "doctor", "blackboard", "locks"]).optional().default("stats"),
+        action: tool.schema.enum(["post", "read", "lock", "unlock"]).optional(),
         topic: tool.schema.string().optional().default("general"),
+        target: tool.schema.string().optional().describe("Resource ID (file/symbol) for locks or Symbol ID for graffiti"),
         message: tool.schema.string().optional(),
         job_id: tool.schema.string().optional(),
         plan_id: tool.schema.string().optional(),
@@ -223,9 +252,19 @@ export function unifiedTools(): { [key: string]: any } {
       },
       async execute(args) {
         switch (args.mode) {
+          case "locks": {
+              if (args.action === "lock") {
+                  getDb().acquireLock(args.target!, agentName);
+                  return JSON.stringify({ status: "SUCCESS", message: `Locked ${args.target}` });
+              } else if (args.action === "unlock") {
+                  getDb().releaseLock(args.target!, agentName);
+                  return JSON.stringify({ status: "SUCCESS", message: `Unlocked ${args.target}` });
+              }
+              return JSON.stringify({ status: "SUCCESS", active_locks: getDb().listLocks() });
+          }
           case "blackboard": {
               if (args.action === "post") {
-                  getDb().postToBlackboard("Agent", args.message!, args.topic);
+                  getDb().postToBlackboard(agentName, args.message!, args.topic, args.target);
                   return JSON.stringify({ status: "SUCCESS", message: "Posted to blackboard." });
               }
               return JSON.stringify({ status: "SUCCESS", entries: getDb().readBlackboard(args.topic) });

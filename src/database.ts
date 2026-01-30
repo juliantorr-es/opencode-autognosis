@@ -157,7 +157,16 @@ export class CodeGraphDB {
         author TEXT,
         message TEXT,
         topic TEXT,
+        symbol_id TEXT, -- Optional link to a code symbol
+        embedding BLOB, -- For semantic search on the blackboard
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+      );
+
+      CREATE TABLE IF NOT EXISTS locks (
+        resource_id TEXT PRIMARY KEY, -- file path or symbol name
+        owner_agent TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        expires_at DATETIME
       );
 
       CREATE TABLE IF NOT EXISTS intents (
@@ -224,11 +233,20 @@ export class CodeGraphDB {
     return this.db.prepare("SELECT * FROM background_jobs ORDER BY created_at DESC LIMIT ?").all(limit);
   }
 
-  public postToBlackboard(author: string, message: string, topic: string = 'general') {
+  public postToBlackboard(author: string, message: string, topic: string = 'general', symbolId?: string) {
+    const insert = this.db.prepare(`
+      INSERT INTO blackboard (author, message, topic, symbol_id)
+      VALUES (?, ?, ?, ?)
+      RETURNING id
+    `);
+    
+    const res = insert.get(author, message, topic, symbolId || null) as { id: number };
+    
+    // Queue for embedding (blackboard search)
     this.db.prepare(`
-      INSERT INTO blackboard (author, message, topic)
-      VALUES (?, ?, ?)
-    `).run(author, message, topic);
+      INSERT INTO embedding_queue (chunk_id, text_to_embed)
+      VALUES (?, ?)
+    `).run(`blackboard-${res.id}`, `${topic.toUpperCase()}: ${message}`);
   }
 
   public readBlackboard(topic?: string, limit: number = 10) {
@@ -240,6 +258,50 @@ export class CodeGraphDB {
     return this.db.prepare(`
       SELECT * FROM blackboard ORDER BY timestamp DESC LIMIT ?
     `).all(limit);
+  }
+
+  public getGraffiti(symbolId: string) {
+    return this.db.prepare(`
+      SELECT author, message, timestamp 
+      FROM blackboard 
+      WHERE symbol_id = ? 
+      ORDER BY timestamp DESC
+    `).all(symbolId);
+  }
+
+  public acquireLock(resourceId: string, agentName: string, ttlSeconds: number = 300) {
+    // Check if already locked by someone else
+    const current = this.isLocked(resourceId);
+    if (current && current.owner_agent !== agentName) {
+      throw new Error(`Resource ${resourceId} is already locked by ${current.owner_agent}`);
+    }
+
+    const expiresAt = new Date(Date.now() + ttlSeconds * 1000).toISOString();
+    this.db.prepare(`
+      INSERT INTO locks (resource_id, owner_agent, expires_at)
+      VALUES (?, ?, ?)
+      ON CONFLICT(resource_id) DO UPDATE SET
+        owner_agent = excluded.owner_agent,
+        expires_at = excluded.expires_at
+    `).run(resourceId, agentName, expiresAt);
+  }
+
+  public releaseLock(resourceId: string, agentName: string) {
+    this.db.prepare(`
+      DELETE FROM locks 
+      WHERE resource_id = ? AND owner_agent = ?
+    `).run(resourceId, agentName);
+  }
+
+  public isLocked(resourceId: string) {
+    // Automatically prune expired locks
+    this.db.prepare("DELETE FROM locks WHERE expires_at < CURRENT_TIMESTAMP").run();
+    
+    return this.db.prepare("SELECT * FROM locks WHERE resource_id = ?").get(resourceId) as { owner_agent: string, expires_at: string } | undefined;
+  }
+
+  public listLocks() {
+    return this.db.prepare("SELECT * FROM locks").all();
   }
 
   public storeIntent(patchId: string, reasoning: string, planId: string) {
