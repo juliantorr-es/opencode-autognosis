@@ -35,6 +35,7 @@ export interface ChunkCard {
     hash: string;
     dependencies: string[];
     symbols: string[];
+    calls?: Array<{ name: string; line: number }>;
     complexity_score: number;
   };
 }
@@ -230,6 +231,7 @@ export function chunkCardsTools(): { [key: string]: any } {
               hash: calculateHash(chunkContent),
               dependencies: await extractDependencies(sourceContent, ast, file_path),
               symbols: extractSymbolsFromAST(ast, sourceContent) || extractSymbols(sourceContent, file_path),
+              calls: ast ? extractCallsFromAST(ast, sourceContent) : extractCalls(sourceContent, file_path),
               complexity_score: calculateComplexity(sourceContent)
             }
           };
@@ -1082,6 +1084,45 @@ function getJSDocDescription(node: ts.Node, sourceFile: ts.SourceFile): string {
     return jsDocTags[0].comment || "Documented in JSDoc";
   }
   return "No documentation found";
+}
+
+function extractCallsFromAST(sourceFile: ts.SourceFile, content: string): Array<{ name: string; line: number }> {
+  const calls: Array<{ name: string; line: number }> = [];
+  function visit(node: ts.Node) {
+    if (ts.isCallExpression(node)) {
+      const expression = node.expression;
+      let name = "";
+      if (ts.isIdentifier(expression)) {
+        name = expression.text;
+      } else if (ts.isPropertyAccessExpression(expression)) {
+        name = expression.name.text;
+      }
+      if (name) {
+        const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+        calls.push({ name, line: line + 1 });
+      }
+    }
+    ts.forEachChild(node, visit);
+  }
+  visit(sourceFile);
+  return calls;
+}
+
+function extractCalls(content: string, filePath: string): Array<{ name: string; line: number }> {
+  const calls: Array<{ name: string; line: number }> = [];
+  // Basic regex fallback for non-TS languages: matches word(...)
+  const regex = /\b(\w+)\s*\(/g;
+  let match;
+  const lines = content.split('\n');
+  while ((match = regex.exec(content)) !== null) {
+    const name = match[1];
+    if (['if', 'for', 'while', 'switch', 'catch', 'return'].includes(name)) continue;
+    // Find line number
+    const offset = match.index;
+    const lineNumber = content.substring(0, offset).split('\n').length;
+    calls.push({ name, line: lineNumber });
+  }
+  return calls;
 }
 
 // =============================================================================

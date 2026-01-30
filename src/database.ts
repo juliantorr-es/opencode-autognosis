@@ -113,6 +113,28 @@ export class CodeGraphDB {
         FOREIGN KEY(source_chunk_id) REFERENCES chunks(id) ON DELETE CASCADE
       );
 
+      CREATE TABLE IF NOT EXISTS calls (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        caller_chunk_id TEXT,
+        callee_name TEXT,
+        line_number INTEGER,
+        FOREIGN KEY(caller_chunk_id) REFERENCES chunks(id) ON DELETE CASCADE
+      );
+
+      CREATE TABLE IF NOT EXISTS policies (
+        id TEXT PRIMARY KEY,
+        name TEXT,
+        pattern TEXT,
+        severity TEXT, -- 'error', 'warning'
+        description TEXT
+      );
+
+      CREATE TABLE IF NOT EXISTS context_access_log (
+        chunk_id TEXT,
+        plan_id TEXT,
+        accessed_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      );
+
       CREATE TABLE IF NOT EXISTS commits (
         hash TEXT PRIMARY KEY,
         author TEXT,
@@ -248,8 +270,10 @@ export class CodeGraphDB {
     `);
     const insertSymbol = this.db.prepare(`INSERT INTO symbols (chunk_id, name, kind) VALUES (?, ?, 'unknown')`);
     const insertDep = this.db.prepare(`INSERT INTO dependencies (source_chunk_id, target_path) VALUES (?, ?)`);
+    const insertCall = this.db.prepare(`INSERT INTO calls (caller_chunk_id, callee_name, line_number) VALUES (?, ?, ?)`);
     const deleteOldSymbols = this.db.prepare('DELETE FROM symbols WHERE chunk_id = ?');
     const deleteOldDeps = this.db.prepare('DELETE FROM dependencies WHERE source_chunk_id = ?');
+    const deleteOldCalls = this.db.prepare('DELETE FROM calls WHERE caller_chunk_id = ?');
 
     this.db.transaction(() => {
       const fileRes = insertFile.get(card.file_path, card.metadata.hash) as { id: number };
@@ -263,7 +287,22 @@ ${card.content.slice(0, 2000)}`;
       for (const sym of card.metadata.symbols) insertSymbol.run(card.id, sym);
       deleteOldDeps.run(card.id);
       for (const dep of card.metadata.dependencies) insertDep.run(card.id, dep);
+      
+      deleteOldCalls.run(card.id);
+      if (card.metadata.calls) {
+        for (const call of card.metadata.calls) insertCall.run(card.id, call.name, call.line);
+      }
     })();
+  }
+
+  public findCallers(functionName: string) {
+    return this.db.prepare(`
+      SELECT DISTINCT f.path, cl.line_number
+      FROM files f
+      JOIN chunks c ON f.id = c.file_id
+      JOIN calls cl ON c.id = cl.caller_chunk_id
+      WHERE cl.callee_name = ?
+    `).all(functionName) as { path: string, line_number: number }[];
   }
 
   public deleteChunkCard(cardId: string) {
@@ -275,6 +314,23 @@ ${card.content.slice(0, 2000)}`;
       INSERT INTO plan_ledger (plan_id, tool_name, args, is_on_plan)
       VALUES (?, ?, ?, ?)
     `).run(planId || 'no-plan', toolName, JSON.stringify(args), isOnPlan ? 1 : 0);
+  }
+
+  public logAccess(chunkId: string, planId?: string) {
+    this.db.prepare(`
+      INSERT INTO context_access_log (chunk_id, plan_id)
+      VALUES (?, ?)
+    `).run(chunkId, planId || 'default');
+  }
+
+  public getLruChunks(limit: number = 5) {
+    return this.db.prepare(`
+      SELECT chunk_id, MAX(accessed_at) as last_seen
+      FROM context_access_log
+      GROUP BY chunk_id
+      ORDER BY last_seen ASC
+      LIMIT ?
+    `).all(limit) as { chunk_id: string }[];
   }
 
   public ingestCommits(commits: any[]) {
@@ -333,14 +389,23 @@ ${card.content.slice(0, 2000)}`;
       SELECT c.id, c.content_summary, c.type, f.path, c.embedding FROM chunks c JOIN files f ON c.file_id = f.id
       WHERE c.embedding IS NOT NULL
     `).all() as { id: string; content_summary: string; type: string; path: string; embedding: Buffer }[];
-    const results = chunks.map(chunk => {
-      const vector = new Float32Array(chunk.embedding.buffer, chunk.embedding.byteOffset, chunk.embedding.byteLength / 4);
-      const similarity = this.cosineSimilarity(Array.from(queryVec), vector);
-      return { ...chunk, similarity, embedding: undefined };
-    });
-    results.sort((a, b) => b.similarity - a.similarity);
-    return results.slice(0, limit);
-  }
+        const results = chunks.map(chunk => {
+          const vector = new Float32Array(chunk.embedding.buffer, chunk.embedding.byteOffset, chunk.embedding.byteLength / 4);
+          const vectorSimilarity = this.cosineSimilarity(Array.from(queryVec), vector);
+          
+          // Heuristic Reranking: Blended score with keyword overlap
+          const keywords = query.toLowerCase().split(/\s+/);
+          const text = chunk.content_summary.toLowerCase();
+          let keywordScore = 0;
+          for (const kw of keywords) if (text.includes(kw)) keywordScore += 0.1;
+          
+          const similarity = (vectorSimilarity * 0.7) + (Math.min(0.3, keywordScore));
+          return { ...chunk, similarity, vectorSimilarity, keywordScore, embedding: undefined };
+        });
+    
+        results.sort((a, b) => b.similarity - a.similarity);
+        return results.slice(0, limit);
+      }
 
   private cosineSimilarity(vecA: number[], vecB: Float32Array): number {
     let dot = 0, normA = 0, normB = 0;
