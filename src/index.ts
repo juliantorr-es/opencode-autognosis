@@ -3,6 +3,8 @@ import { loadWorkingMemory, loadActiveSet } from "./activeset.js";
 import { tui } from "./services/tui.js";
 import { codeWatcher } from "./services/watcher.js";
 import { Logger } from "./services/logger.js";
+import { closeDb, getDb } from "./database.js";
+import { stopBackgroundIndexing } from "./performance-optimization.js";
 
 export const AutognosisPlugin = async ({ client }: any) => {
   try {
@@ -21,27 +23,53 @@ export const AutognosisPlugin = async ({ client }: any) => {
         ...unifiedTools(),
       },
 
+      event: async ({ event }: any) => {
+        if (!event) return;
+
+        if (event.type === "session.deleted") {
+          Logger.log("Main", "Session deleted, cleaning up resources...");
+          try {
+            codeWatcher.stop();
+            stopBackgroundIndexing();
+            getDb().stopAllWorkers();
+            closeDb();
+            tui.stop();
+          } catch (e) {
+            Logger.log("Main", "Error during resource cleanup", e);
+          }
+        }
+      },
+
       "experimental.session.compacting": async (input: { sessionID: string }, output: { context: string[] }) => {
         try {
+          const agentName = process.env.AGENT_NAME || `agent-${process.pid}`;
           const memory = await loadWorkingMemory();
           if (memory.current_set) {
             const activeSet = await loadActiveSet(memory.current_set);
             if (activeSet) {
-              const stateBlock = `
-[AUTOGNOSIS CONTEXT PRESERVATION]
-ActiveSet ID: ${activeSet.id}
-ActiveSet Name: ${activeSet.name}
-Priority: ${activeSet.priority}
-Loaded Chunks: ${activeSet.chunks.join(", ")}
-Metadata: ${JSON.stringify(activeSet.metadata)}
+          const profile = getDb().getAgentProfile(agentName);
+          const stateBlock = `
+[AUTOGNOSIS OPERATIONAL KERNEL]
+Worker: ${agentName} | Rank: ${profile.rank.toUpperCase()} | MMR: ${profile.mmr}
+Context: ActiveSet ${activeSet.name} loaded.
 
-The agent is currently focused on these files and symbols. Ensure the summary reflects this active working memory state.
+[STANDING ORDERS]
+1. IDENTITY: You are a worker process. Focus on artifact production and evidence verification.
+2. TERMINATION: Every task must end in: COMPLETED (with receipts), BLOCKED (missing dependency), NEEDS-DECISION (options for human), or ABORTED (rollback).
+3. EVIDENCE: Claims of fact require evidence_ids. No evidence = Dead end.
+4. ANTI-SPIRAL: Self-referential narrative or existential speculation triggers immediate MMR penalties and autonomy restriction.
+
+[BOARD DIGEST]
+${getDb().getBoardDigest()}
+
+[RECENT TRACES]
+${(getDb() as any).db.query("SELECT id, tool_invocation FROM trace_artifacts ORDER BY timestamp DESC LIMIT 3").all().map((t: any) => `- ${t.id}: ${t.tool_invocation}`).join("\n")}
 `;
               output.context.push(stateBlock);
             }
           }
         } catch (error) {
-          // Fail silently during compaction to avoid breaking the core session
+          // Fail silently during compaction
         }
       }
     };

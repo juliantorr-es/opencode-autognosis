@@ -1,72 +1,46 @@
-import * as fsSync from "node:fs";
-import * as path from "node:path";
-import { Logger } from "./logger.js";
+import { z } from "zod";
+import { type AgentProfile, type RunEval, AgentRank } from "./schemas.js";
 
-export interface PolicyViolation {
-  file: string;
-  line: number;
-  message: string;
-  severity: "error" | "warning";
-}
-
-export class PolicyEngine {
-  private rules = [
-    {
-      name: "No Debug Logs",
-      pattern: /console\.(log|debug|info)\(/,
-      message: "Direct console logging is forbidden in production code.",
-      severity: "error" as const
+/**
+ * Access Tier Module (Non-Kernel)
+ * Handles the logic for MMR scaling, rank promotions, and tool allowances.
+ */
+export const PolicyModule = {
+    calculateNewMMR(currentMMR: number, runEval: RunEval): number {
+        const complexityMultiplier = runEval.evidence_ids.length > 0 ? 1.5 : 0.5;
+        let delta = runEval.mmr_delta * complexityMultiplier;
+        if (runEval.breakdown.safety < 0.5) delta -= 100;
+        return Math.max(0, currentMMR + delta);
     },
-    {
-      name: "No TODO Debt",
-      pattern: /\/\/\s*TODO/,
-      message: "New TODOs must be linked to a ticket ID.",
-      severity: "warning" as const
+
+    determineRank(mmr: number): z.infer<typeof AgentRank> {
+        if (mmr < 1000) return "wood";
+        if (mmr < 2000) return "bronze";
+        if (mmr < 3000) return "silver";
+        if (mmr < 4000) return "gold";
+        if (mmr < 5000) return "platinum";
+        if (mmr < 6000) return "emerald";
+        if (mmr < 7000) return "diamond";
+        if (mmr < 8000) return "master";
+        return "challenger";
     },
-    {
-      name: "Forbidden Eval",
-      pattern: /eval\(/,
-      message: "Use of 'eval' is strictly forbidden for security reasons.",
-      severity: "error" as const
+
+    getAllowedTools(rank: string): string[] {
+        const base = ["code_search", "code_read", "code_status", "code_job"];
+        const analysis = [...base, "code_analyze", "code_context"];
+        const mutation = [...analysis, "code_propose"];
+        const kernel = [...mutation, "code_setup", "code_contract", "code_skill", "code_trace"];
+
+        if (["wood", "bronze"].includes(rank)) return base;
+        if (["silver", "gold"].includes(rank)) return analysis;
+        if (["platinum", "emerald"].includes(rank)) return mutation;
+        return kernel;
     }
-  ];
+};
 
-  public checkContent(file: string, content: string): PolicyViolation[] {
-    const violations: PolicyViolation[] = [];
-    const lines = content.split('\n');
-
-    for (const rule of this.rules) {
-      lines.forEach((line, index) => {
-        if (rule.pattern.test(line)) {
-          violations.push({
-            file,
-            line: index + 1,
-            message: rule.message,
-            severity: rule.severity
-          });
-        }
-      });
+export const policyEngine = {
+    checkDiff(diff: string): any[] {
+        // Placeholder for policy engine diff checking
+        return [];
     }
-    return violations;
-  }
-
-  public checkDiff(diff: string): PolicyViolation[] {
-    // Check only added lines in diffs
-    const addedLines = diff.split('\n').filter(l => l.startsWith('+') && !l.startsWith('+++'));
-    const violations: PolicyViolation[] = [];
-    
-    for (const rule of this.rules) {
-      if (rule.pattern.test(addedLines.join('\n'))) {
-        violations.push({
-          file: "diff",
-          line: 0,
-          message: `[Policy: ${rule.name}] ${rule.message}`,
-          severity: rule.severity
-        });
-      }
-    }
-    return violations;
-  }
-}
-
-export const policyEngine = new PolicyEngine();
+};

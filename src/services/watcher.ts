@@ -10,25 +10,37 @@ export class CodeWatcher {
   private queue: string[] = [];
   private isProcessing: boolean = false;
 
-  public start() {
+  public async start() {
     if (this.watcher) return;
 
-    Logger.log("Watcher", "Starting live codebase watcher...");
+    Logger.log("Watcher", "Starting live codebase watcher (Aggressive resource throttling active)...");
 
     this.watcher = chokidar.watch(PROJECT_ROOT, {
       ignored: [
         "**/node_modules/**",
+        "**/.venv/**",
+        "**/venv/**",
+        "**/env/**",
         "**/dist/**",
         "**/build/**",
-        "**/.opencode/**"
+        "**/.opencode/**",
+        "**/.git/**",
+        "**/.DS_Store",
+        "**/__pycache__/**",
+        "**/.pytest_cache/**",
+        "**/.next/**",
+        "**/.aws/**"
       ],
       persistent: true,
       ignoreInitial: true,
       awaitWriteFinish: {
-          stabilityThreshold: 2000,
-          pollInterval: 100
+          stabilityThreshold: 500, // Process faster after write
+          pollInterval: 200
       }
     });
+
+    // Give the system a moment to settle descriptors
+    await new Promise(r => setTimeout(r, 50));
 
     this.watcher
       .on("add", (filePath: string) => this.enqueue(filePath))
@@ -49,7 +61,7 @@ export class CodeWatcher {
     
     if (supportedExts.includes(ext) && !this.queue.includes(filePath)) {
       this.queue.push(filePath);
-      this.processQueue();
+      this.processQueue().catch(() => {});
     }
   }
 
@@ -68,15 +80,15 @@ export class CodeWatcher {
         Logger.log("Watcher", `Failed to index ${filePath}`, e);
       }
       
-      // Small cooldown to let the system breathe
-      await new Promise(r => setTimeout(r, 100));
+      // Senior-level throttling: Give system 1s between heavy indexing tasks
+      // to avoid file descriptor or CPU spikes.
+      await new Promise(r => setTimeout(r, 1000));
     }
     this.isProcessing = false;
   }
 
   private handleFileDelete(filePath: string) {
     Logger.log("Watcher", `File deleted: ${filePath}`);
-    // Optionally clean up index for deleted files
   }
 }
 

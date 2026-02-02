@@ -17,9 +17,9 @@ import {
   generateInvariantChunk,
   extractDependencies,
   extractSymbolsFromAST,
-  extractSymbols,
-  type ChunkCard
+  extractSymbols
 } from "./chunk-cards.js";
+import { type ChunkCard } from "./services/schemas.js";
 import { Logger } from "./services/logger.js";
 import { tui } from "./services/tui.js";
 
@@ -165,8 +165,13 @@ async function setCacheEntry(key: string, value: any, ttlSeconds?: number): Prom
 
 async function recordMetrics(metrics: PerformanceMetrics): Promise<void> {
   try {
-    const metricsPath = path.join(METRICS_DIR, `metrics-${Date.now()}.json`);
-    await fs.writeFile(metricsPath, JSON.stringify(metrics, null, 2));
+    getDb().recordMetric({
+        operation: metrics.operation,
+        duration_ms: metrics.duration_ms,
+        memory_usage_mb: metrics.memory_usage_mb,
+        success: metrics.success,
+        error: metrics.error
+    });
   } catch (error) {
     // Fail silently for metrics errors
   }
@@ -712,7 +717,7 @@ export function performanceTools(): { [key: string]: any } {
 // HELPER FUNCTIONS
 // =============================================================================
 
-async function getAllSourceFiles(): Promise<string[]> {
+export async function getAllSourceFiles(): Promise<string[]> {
   const extensions = ['.ts', '.js', '.tsx', '.jsx', '.py', '.go', '.rs', '.cpp', '.c'];
   const sourceFiles: string[] = [];
   
@@ -764,6 +769,7 @@ export async function indexFile(filePath: string): Promise<void> {
       
       const chunkCard: ChunkCard = {
         id: cardId,
+        schema_version: "2.1.0",
         file_path: filePath,
         chunk_type: chunkType,
         content: chunkContent,
@@ -787,7 +793,18 @@ export async function indexFile(filePath: string): Promise<void> {
   }
 }
 
+let currentBackgroundTaskId: string | null = null;
+let shouldStopIndexing: boolean = false;
+
+export function stopBackgroundIndexing() {
+  shouldStopIndexing = true;
+  currentBackgroundTaskId = null;
+}
+
 async function runBackgroundIndexing(taskId: string, indexingState: IndexingState): Promise<void> {
+  currentBackgroundTaskId = taskId;
+  shouldStopIndexing = false;
+  
   try {
     const taskPath = path.join(PERF_DIR, `${taskId}.json`);
     let task = JSON.parse(await fs.readFile(taskPath, 'utf-8'));
@@ -820,6 +837,7 @@ async function runBackgroundIndexing(taskId: string, indexingState: IndexingStat
            const allFiles = await getAllSourceFiles();
            filesToIndex = [];
            for (const f of allFiles) {
+              if (shouldStopIndexing) break;
               const fp = path.join(PROJECT_ROOT, f);
               if (fsSync.existsSync(fp)) {
                  const stats = await fs.stat(fp);
@@ -838,15 +856,17 @@ async function runBackgroundIndexing(taskId: string, indexingState: IndexingStat
     const total = filesToIndex.length;
     let processed = 0;
 
-    if (total === 0) {
-      task.progress = 100;
-      task.status = "completed";
+    if (total === 0 || shouldStopIndexing) {
+      task.progress = shouldStopIndexing ? task.progress : 100;
+      task.status = shouldStopIndexing ? "stopped" : "completed";
       task.completed_at = new Date().toISOString();
       await fs.writeFile(taskPath, JSON.stringify(task, null, 2));
       return;
     }
 
     for (const file of filesToIndex) {
+      if (shouldStopIndexing) break;
+
       const filePath = path.join(PROJECT_ROOT, file);
       if (fsSync.existsSync(filePath)) {
         await indexFile(filePath);
@@ -865,11 +885,18 @@ async function runBackgroundIndexing(taskId: string, indexingState: IndexingStat
     }
     
     // Complete task
-    task.status = "completed";
+    if (shouldStopIndexing) {
+        task.status = "stopped";
+    } else {
+        task.status = "completed";
+        task.progress = 100;
+    }
     task.completed_at = new Date().toISOString();
-    task.progress = 100;
     await fs.writeFile(taskPath, JSON.stringify(task, null, 2));
-    await tui.showSuccess("Indexing Complete", `Processed ${total} files.`);
+    
+    if (!shouldStopIndexing) {
+        await tui.showSuccess("Indexing Complete", `Processed ${total} files.`);
+    }
     
   } catch (error) {
     // Update task with error

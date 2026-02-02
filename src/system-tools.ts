@@ -14,6 +14,12 @@ const PROJECT_ROOT = process.cwd();
 const OPENCODE_DIR = path.join(PROJECT_ROOT, ".opencode");
 const CACHE_DIR = path.join(OPENCODE_DIR, "cache");
 
+const activeJobIds = new Set<string>();
+
+export function stopAllBackgroundJobs() {
+    activeJobIds.clear();
+}
+
 // Internal logging
 function log(message: string, data?: unknown) {
     Logger.log("Autognosis", message, data);
@@ -183,7 +189,14 @@ export function systemTools(): { [key: string]: any } {
         record(plan_id, "read_slice", { file, start_line, end_line });
         const { stdout, stderr } = await runCmd(`sed -n '${start_line},${end_line}p;${end_line + 1}q' "${file}"`);
         if (stderr) return `Error: ${stderr}`;
-        return JSON.stringify({ file, start_line, end_line, content: stdout }, null, 2);
+        
+        let mtime = "";
+        try {
+            const stats = await fs.stat(file);
+            mtime = stats.mtime.toISOString();
+        } catch {}
+
+        return JSON.stringify({ file, start_line, end_line, content: stdout, mtime }, null, 2);
       }
     }),
 
@@ -224,7 +237,14 @@ export function systemTools(): { [key: string]: any } {
         const start = Math.max(1, line - 5);
         const end = line + 15;
         const { stdout: slice } = await runCmd(`sed -n '${start},${end}p;${end + 1}q' "${file}"`);
-        return JSON.stringify({ symbol, resolved_location: { file, line }, slice: { start, end, content: slice } }, null, 2);
+
+        let mtime = "";
+        try {
+            const stats = await fs.stat(file);
+            mtime = stats.mtime.toISOString();
+        } catch {}
+
+        return JSON.stringify({ symbol, resolved_location: { file, line }, slice: { start, end, content: slice }, mtime }, null, 2);
       }
     }),
 
@@ -311,18 +331,24 @@ export function systemTools(): { [key: string]: any } {
         
         const jobId = `job-validate-${Date.now()}`;
         getDb().createJob(jobId, "validation", { patch_path, plan_id });
+        activeJobIds.add(jobId);
 
         // Spawn background worker
         (async () => {
-            getDb().updateJob(jobId, { status: "running", progress: 10 });
-            await tui.showProgress("Patch Validation", 10, "Creating temporary worktree...");
-            
+            const isCancelled = () => !activeJobIds.has(jobId);
             const tempWorktree = path.join(PROJECT_ROOT, ".opencode", "temp-" + jobId);
+
             try {
+                getDb().updateJob(jobId, { status: "running", progress: 10 });
+                await tui.showProgress("Patch Validation", 10, "Creating temporary worktree...");
+                
+                if (isCancelled()) throw new Error("Job cancelled");
                 await runCmd(`git worktree add -d "${tempWorktree}"`);
+                
                 getDb().updateJob(jobId, { progress: 30 });
                 await tui.showProgress("Patch Validation", 30, "Applying diff...");
                 
+                if (isCancelled()) throw new Error("Job cancelled");
                 const content = await fs.readFile(patch_path, "utf-8");
                 const parts = content.split('\n\n');
                 const diffOnly = parts.length > 1 ? parts.slice(1).join('\n\n') : content;
@@ -331,9 +357,11 @@ export function systemTools(): { [key: string]: any } {
                 
                 const { error: applyError } = await runCmd(`git apply "${tempDiff}"`, tempWorktree);
                 if (applyError) throw new Error(`Apply failed: ${applyError.message}`);
+                
                 getDb().updateJob(jobId, { progress: 60 });
                 await tui.showProgress("Patch Validation", 60, "Running build verification...");
                 
+                if (isCancelled()) throw new Error("Job cancelled");
                 let buildStatus = "SKIPPED";
                 if (fsSync.existsSync(path.join(tempWorktree, "package.json"))) {
                     const { error: buildError } = await runCmd("npm run build", tempWorktree);
@@ -343,6 +371,7 @@ export function systemTools(): { [key: string]: any } {
                     buildStatus = buildError ? "FAILED" : "SUCCESS";
                 }
                 
+                if (isCancelled()) throw new Error("Job cancelled");
                 getDb().updateJob(jobId, { 
                     status: "completed", 
                     progress: 100, 
@@ -350,9 +379,14 @@ export function systemTools(): { [key: string]: any } {
                 });
                 await tui.showSuccess("Validation Complete", `Apply: OK, Build: ${buildStatus}`);
             } catch (error: any) {
-                getDb().updateJob(jobId, { status: "failed", error: error.message });
-                await tui.showError("Validation Failed", error.message);
+                if (error.message === "Job cancelled") {
+                    getDb().updateJob(jobId, { status: "stopped", error: "Job was stopped by system cleanup" });
+                } else {
+                    getDb().updateJob(jobId, { status: "failed", error: error.message });
+                    await tui.showError("Validation Failed", error.message);
+                }
             } finally {
+                activeJobIds.delete(jobId);
                 try {
                     await runCmd(`git worktree remove -f "${tempWorktree}"`);
                     if (fsSync.existsSync(tempWorktree)) await fs.rm(tempWorktree, { recursive: true, force: true });

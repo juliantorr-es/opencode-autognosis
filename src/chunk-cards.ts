@@ -8,8 +8,11 @@ import * as crypto from "node:crypto";
 import ts from "typescript";
 import { getDb } from "./database.js";
 import { Logger } from "./services/logger.js";
+import { type ChunkCard, ChunkCardSchema } from "./services/schemas.js";
+import { safeWriteArtifact } from "./services/fs-utils.js";
 
 const execAsync = promisify(exec);
+
 const PROJECT_ROOT = process.cwd();
 const OPENCODE_DIR = path.join(PROJECT_ROOT, ".opencode");
 export const CHUNK_DIR = path.join(OPENCODE_DIR, "chunks");
@@ -23,22 +26,6 @@ function log(message: string, data?: unknown) {
 // =============================================================================
 // TYPES AND INTERFACES
 // =============================================================================
-
-export interface ChunkCard {
-  id: string;
-  file_path: string;
-  chunk_type: "summary" | "api" | "invariant";
-  content: string;
-  metadata: {
-    created_at: string;
-    updated_at: string;
-    hash: string;
-    dependencies: string[];
-    symbols: string[];
-    calls?: Array<{ name: string; line: number }>;
-    complexity_score: number;
-  };
-}
 
 interface ModuleSummary {
   module_id: string;
@@ -220,11 +207,25 @@ export function chunkCardsTools(): { [key: string]: any } {
           }
           
           // Create chunk card
+          const agentName = process.env.AGENT_NAME || `agent-${process.pid}`;
+          let currentHash = "";
+          try {
+              const { execSync } = require("node:child_process");
+              currentHash = execSync("git rev-parse --short HEAD", { encoding: "utf-8" }).trim();
+          } catch {}
+
           const chunkCard: ChunkCard = {
             id: cardId,
+            schema_version: "2.1.0",
             file_path,
             chunk_type,
             content: chunkContent,
+            parent_id: undefined,
+            provenance: {
+                agent_id: agentName,
+                git_hash: currentHash
+            },
+            verification: await detectVerificationHooks(file_path),
             metadata: {
               created_at: new Date().toISOString(),
               updated_at: new Date().toISOString(),
@@ -235,12 +236,15 @@ export function chunkCardsTools(): { [key: string]: any } {
               complexity_score: calculateComplexity(sourceContent)
             }
           };
+
+          // Validate with schema
+          const validatedCard = ChunkCardSchema.parse(chunkCard);
           
           // Save chunk card
-          await fs.writeFile(cardPath, JSON.stringify(chunkCard, null, 2));
+          await safeWriteArtifact(cardPath, JSON.stringify(validatedCard, null, 2));
           
           // Sync to SQLite Index
-          getDb().ingestChunkCard(chunkCard);
+          getDb().ingestChunkCard(validatedCard);
           
           return JSON.stringify({
             status: "SUCCESS",
@@ -598,6 +602,35 @@ ${extractPerformanceConsiderations(content)}
 ${extractSecurityConsiderations(content)}`;
   
   return invariant;
+}
+
+async function detectVerificationHooks(filePath: string): Promise<any[]> {
+    const hooks: any[] = [];
+    const basename = path.basename(filePath, path.extname(filePath));
+    const dir = path.dirname(filePath);
+    
+    // Look for sibling test files
+    const testPatterns = [
+        `${basename}.test.ts`, `${basename}.test.js`, `${basename}.spec.ts`,
+        `test_${basename}.py`, `${basename}_test.go`
+    ];
+
+    for (const pattern of testPatterns) {
+        const testPath = path.join(dir, pattern);
+        if (fsSync.existsSync(testPath)) {
+            hooks.push({
+                command: `npm test ${testPath}`,
+                description: `Verify changes with sibling test: ${pattern}`
+            });
+        }
+    }
+
+    // Generic project-level hooks
+    if (fsSync.existsSync(path.join(PROJECT_ROOT, "package.json"))) {
+        hooks.push({ command: "npm run build", description: "Verify project builds without errors" });
+    }
+
+    return hooks;
 }
 
 // =============================================================================
